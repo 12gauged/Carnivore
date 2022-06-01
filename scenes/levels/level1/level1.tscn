@@ -1,0 +1,186 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://system/parts/level/part_camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=4]
+[ext_resource path="res://system/parts/level/part_arena.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=7]
+[ext_resource path="res://system/parts/entity/part_camera_control.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/frog/frog_arena_data.tres" type="Resource" id=9]
+[ext_resource path="res://entities/worm/worm_arena_data.tres" type="Resource" id=10]
+[ext_resource path="res://system/data/level_data.gd" type="Script" id=11]
+[ext_resource path="res://world/level1/houses/mushroom_house_short.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world/level1/houses/mushroom_house_tall.tscn" type="PackedScene" id=13]
+
+[node name="level1" type="Node2D"]
+script = ExtResource( 11 )
+level_name = "level1"
+
+[node name="level1_tilemap" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -131069, 0, 0, -131066, 0, 0, -131062, 0, 0, -65535, 3, 0, -65532, 0, 0, -65531, 0, 0, -65527, 0, 0, -65525, 0, 0, -65522, 0, 0, 0, 3, 0, 2, 0, 0, 3, 3, 0, 4, 1, 0, 5, 0, 0, 6, 3, 0, 8, 0, 0, 10, 3, 0, 12, 0, 0, 15, 1, 0, 131071, 0, 0, 65536, 2, 0, 65537, 0, 0, 65538, 2, 0, 65539, 0, 0, 65543, 0, 0, 65544, 1, 0, 65546, 2, 0, 65547, 1, 0, 65549, 0, 0, 65550, 1, 0, 65551, 3, 0, 196607, 1, 0, 131075, 1, 0, 131076, 0, 0, 131077, 2, 0, 131086, 0, 0, 131088, 1, 0, 262142, 3, 0, 262143, 0, 0, 196608, 3, 0, 196610, 2, 0, 196611, 0, 0, 196612, 3, 0, 196615, 0, 0, 196617, 3, 0, 196618, 0, 0, 196620, 0, 0, 196621, 3, 0, 196623, 0, 0, 327678, 3, 0, 262147, 2, 0, 262150, 0, 0, 262152, 2, 0, 262153, 0, 0, 262154, 0, 0, 262155, 2, 0, 262157, 2, 0, 262160, 0, 0, 393215, 3, 0, 327680, 3, 0, 327681, 1, 0, 327682, 2, 0, 327684, 1, 0, 327690, 1, 0, 327695, 0, 0, 458750, 0, 0, 393219, 3, 0, 393221, 2, 0, 393228, 2, 0, 393230, 3, 0, 393232, 1, 0, 524287, 0, 0, 458752, 3, 0, 458753, 2, 0, 458755, 2, 0, 458758, 2, 0, 458759, 1, 0, 458760, 0, 0, 458765, 0, 0, 458766, 2, 0, 458767, 0, 0, 524288, 1, 0, 524289, 0, 0, 524290, 1, 0, 524291, 3, 0, 524292, 0, 0, 524299, 3, 0, 589826, 2, 0, 589829, 0, 0, 589834, 0, 0, 589835, 1, 0, 589836, 2, 0 )
+
+[node name="sound_streams" type="Node2D" parent="." groups=["sound_streams"]]
+
+[node name="objects" type="YSort" parent="."]
+
+[node name="decoration" type="YSort" parent="objects"]
+
+[node name="houses" type="YSort" parent="objects/decoration"]
+
+[node name="mushroom_house_short" parent="objects/decoration/houses" instance=ExtResource( 12 )]
+position = Vector2( 128, -40 )
+
+[node name="mushroom_house_short2" parent="objects/decoration/houses" instance=ExtResource( 12 )]
+position = Vector2( -24, 144 )
+
+[node name="mushroom_house_short3" parent="objects/decoration/houses" instance=ExtResource( 12 )]
+position = Vector2( 128, 184 )
+
+[node name="mushroom_house_short4" parent="objects/decoration/houses" instance=ExtResource( 12 )]
+position = Vector2( 264, -16 )
+
+[node name="mushroom_house_tall" parent="objects/decoration/houses" instance=ExtResource( 13 )]
+position = Vector2( -16, -16 )
+
+[node name="mushroom_house_tall2" parent="objects/decoration/houses" instance=ExtResource( 13 )]
+position = Vector2( 272, 144 )
+
+[node name="entities" type="YSort" parent="objects"]
+
+[node name="player" parent="objects/entities" instance=ExtResource( 1 )]
+position = Vector2( 120, 128 )
+
+[node name="part_camera_control" parent="objects/entities/player" instance=ExtResource( 8 )]
+
+[node name="part_level_groups" parent="objects/entities" instance=ExtResource( 4 )]
+
+[node name="rock_spawners" type="YSort" parent="objects"]
+
+[node name="part_entity_spawner0" parent="objects/rock_spawners" instance=ExtResource( 2 )]
+position = Vector2( 40, 30 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner1" parent="objects/rock_spawners" instance=ExtResource( 2 )]
+position = Vector2( 193, 27 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner2" parent="objects/rock_spawners" instance=ExtResource( 2 )]
+position = Vector2( 37, 122 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner3" parent="objects/rock_spawners" instance=ExtResource( 2 )]
+position = Vector2( 201, 118 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner4" parent="objects/rock_spawners" instance=ExtResource( 2 )]
+position = Vector2( 122, 6 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner5" parent="objects/rock_spawners" instance=ExtResource( 2 )]
+position = Vector2( 115, 128 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner6" parent="objects/rock_spawners" instance=ExtResource( 2 )]
+position = Vector2( 106, 77 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_arena" parent="objects" groups=["arena"] instance=ExtResource( 5 )]
+FILLER_ENEMY = "ant"
+enemy_spawn_data = [ ExtResource( 10 ), ExtResource( 9 ) ]
+number_of_waves = 15
+max_enemy_number = 3
+max_enemy_counter_modifier = 0.25
+enemies_per_wave = 20
+time_between_waves = 4
+
+[node name="spawners" type="Node2D" parent="objects/part_arena"]
+
+[node name="part_entity_spawner" parent="objects/part_arena/spawners" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 20, 20 )
+
+[node name="part_entity_spawner2" parent="objects/part_arena/spawners" instance=ExtResource( 2 )]
+position = Vector2( 32, 64 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 20, 20 )
+
+[node name="part_entity_spawner3" parent="objects/part_arena/spawners" instance=ExtResource( 2 )]
+position = Vector2( 216, 64 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 20, 20 )
+
+[node name="part_entity_spawner4" parent="objects/part_arena/spawners" instance=ExtResource( 2 )]
+position = Vector2( 128, 128 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 20, 20 )
+
+[node name="end_level_method" parent="objects/part_arena" instance=ExtResource( 7 )]
+method = {
+"args": [ "change_scene_request", "village_saved_screen" ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="village_savior_archievement" parent="objects/part_arena" instance=ExtResource( 7 )]
+method = {
+"args": [ "archievement_made", "village_savior" ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
+[node name="arena_start_delay" type="Timer" parent="objects/part_arena"]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="part_camera" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 120, 128 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/end_level_method" method="call_method"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/village_savior_archievement" method="call_method"]
+[connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]

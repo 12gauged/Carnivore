@@ -1,0 +1,250 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=1]
+[ext_resource path="res://entities/shadow.png" type="Texture" id=2]
+[ext_resource path="res://system/components/interactives/comp_interactable.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/hud/icons/speech_bubble.png" type="Texture" id=4]
+[ext_resource path="res://system/parts/part_camera_focus.tscn" type="PackedScene" id=5]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/ant_soldier/ant_soldier.gd" type="Script" id=7]
+[ext_resource path="res://system/components/callers/comp_arena_starter.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("comp_interactable/player_sensor/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("collision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("shadow:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "float"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ), Vector2( 0, 1 ), Vector2( 0, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "fly_away"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.47, 0.71 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 2 ), Vector2( 0, -100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.57, 0.71 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("comp_interactable/player_sensor/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("collision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("shadow:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.47, 0.71 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 34.0147
+
+[node name="ant_soldier" type="StaticBody2D"]
+script = ExtResource( 7 )
+
+[node name="shadow" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( -0.5, 0 )
+
+[node name="texture" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -10 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 0 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="animation_player" type="AnimationPlayer" parent="."]
+autoplay = "float"
+anims/RESET = SubResource( 7 )
+anims/float = SubResource( 4 )
+anims/fly_away = SubResource( 8 )
+
+[node name="comp_interactable" parent="." instance=ExtResource( 3 )]
+input_action = "ui_accept"
+
+[node name="player_sensor" type="Area2D" parent="comp_interactable"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="comp_interactable/player_sensor"]
+shape = SubResource( 6 )
+
+[node name="speech_bubble" type="Sprite" parent="comp_interactable"]
+position = Vector2( 1, -24 )
+texture = ExtResource( 4 )
+
+[node name="comp_method_caller" parent="." instance=ExtResource( 6 )]
+method = {
+"args": [ "text_box_request", [ "You're finally here", "We've been waiting for you", "You are going to be dead soon." ] ],
+"caller": "gui_events",
+"method": "emit_signal"
+}
+
+[node name="comp_arena_starter" parent="." instance=ExtResource( 8 )]
+
+[node name="part_camera_focus" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -8 )
+smoothing_speed = 2.0
+
+[node name="camera_control" type="RemoteTransform2D" parent="part_camera_focus"]
+
+[connection signal="animation_finished" from="animation_player" to="." method="_on_animation_player_animation_finished"]
+[connection signal="interacted" from="comp_interactable" to="." method="_on_comp_interactable_interacted"]
+[connection signal="interacted" from="comp_interactable" to="comp_interactable" method="disable_interactions"]
+[connection signal="interacted" from="comp_interactable" to="part_camera_focus" method="focus"]
+[connection signal="body_entered" from="comp_interactable/player_sensor" to="comp_interactable" method="_on_owner_area_entered"]
+[connection signal="body_exited" from="comp_interactable/player_sensor" to="comp_interactable" method="_on_owner_area_exited"]
+[connection signal="focused" from="part_camera_focus" to="comp_method_caller" method="call_method"]

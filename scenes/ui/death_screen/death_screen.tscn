@@ -1,0 +1,220 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=2]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/player/player_dead.png" type="Texture" id=4]
+[ext_resource path="res://sounds/entity/player/player_hit.wav" type="AudioStream" id=5]
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("center_container/grid_container/game_over_text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("center_container/grid_container/sprite_holder/Sprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("center_container/grid_container/button_holder:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "start"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("center_container/grid_container/game_over_text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("center_container/grid_container/sprite_holder/Sprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -10, 0 ), Vector2( 10, 0 ), Vector2( -5, 0 ), Vector2( 5, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("center_container/grid_container/button_holder:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.1, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="death_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="center_container" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="grid_container" type="GridContainer" parent="center_container"]
+margin_left = 98.0
+margin_top = 27.0
+margin_right = 142.0
+margin_bottom = 107.0
+custom_constants/vseparation = 0
+
+[node name="game_over_text" type="Label" parent="center_container/grid_container"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 44.0
+margin_bottom = 10.0
+rect_pivot_offset = Vector2( 0, 10 )
+theme = ExtResource( 1 )
+text = "GAME OVER"
+align = 1
+
+[node name="margin0" type="MarginContainer" parent="center_container/grid_container"]
+margin_top = 10.0
+margin_right = 44.0
+margin_bottom = 35.0
+custom_constants/margin_top = 25
+
+[node name="sprite_holder" type="Control" parent="center_container/grid_container"]
+margin_left = 22.0
+margin_top = 35.0
+margin_right = 22.0
+margin_bottom = 35.0
+size_flags_horizontal = 4
+
+[node name="Sprite" type="Sprite" parent="center_container/grid_container/sprite_holder"]
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+offset = Vector2( -10, 0 )
+
+[node name="margin1" type="MarginContainer" parent="center_container/grid_container"]
+margin_top = 35.0
+margin_right = 44.0
+margin_bottom = 60.0
+custom_constants/margin_top = 25
+
+[node name="button_holder" type="GridContainer" parent="center_container/grid_container"]
+margin_top = 60.0
+margin_right = 44.0
+margin_bottom = 80.0
+columns = 2
+
+[node name="main_menu_button" parent="center_container/grid_container/button_holder" instance=ExtResource( 6 )]
+size_flags_horizontal = 4
+stretch_mode = 3
+
+[node name="icon" parent="center_container/grid_container/button_holder/main_menu_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 2 )
+
+[node name="comp_method_caller" parent="center_container/grid_container/button_holder/main_menu_button" instance=ExtResource( 3 )]
+method = {
+"args": [ "change_scene_request", "main_menu" ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="restart_button" parent="center_container/grid_container/button_holder" instance=ExtResource( 6 )]
+margin_left = 24.0
+margin_right = 44.0
+size_flags_horizontal = 4
+stretch_mode = 3
+
+[node name="icon" parent="center_container/grid_container/button_holder/restart_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 7 )
+
+[node name="comp_method_caller" parent="center_container/grid_container/button_holder/restart_button" instance=ExtResource( 3 )]
+method = {
+"args": [ "change_scene_request", "var.game_data.current_level" ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+mix_target = 2
+bus = "entity_sounds"
+
+[node name="animation_player" type="AnimationPlayer" parent="."]
+autoplay = "start"
+anims/RESET = SubResource( 4 )
+anims/start = SubResource( 5 )
+
+[connection signal="pressed" from="center_container/grid_container/button_holder/main_menu_button" to="center_container/grid_container/button_holder/main_menu_button/comp_method_caller" method="call_method"]
+[connection signal="pressed" from="center_container/grid_container/button_holder/restart_button" to="center_container/grid_container/button_holder/restart_button/comp_method_caller" method="call_method"]
+
+[editable path="center_container/grid_container/button_holder/main_menu_button"]
+[editable path="center_container/grid_container/button_holder/restart_button"]

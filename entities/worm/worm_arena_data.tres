@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://system/data/entity_arena_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+entity_name = "worm"
+wave_requirement = 5
+max_number_per_wave = 3
+spawn_chance = 30

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entities/drops/meat/meat.png" type="Texture" id=1]
+[ext_resource path="res://system/components/interactives/comp_interactable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/drops/drop.gd" type="Script" id=3]
+[ext_resource path="res://entities/drops/drop_animation.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[node name="meat" type="Area2D"]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource( 3 )
+
+[node name="texture" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="comp_interactable" parent="." instance=ExtResource( 2 )]
+method_to_execute = {
+"args": [ "meat_consumed" ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
+[node name="drop_animation" parent="." instance=ExtResource( 4 )]
+
+[node name="lifetime_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="." to="comp_interactable" method="_on_owner_area_entered"]
+[connection signal="interacted" from="comp_interactable" to="." method="_on_interacted"]
+[connection signal="timeout" from="lifetime_timer" to="." method="_on_lifetime_timer_timeout"]

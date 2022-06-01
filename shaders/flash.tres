@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+uniform bool active = true;
+
+void fragment() {
+	vec4 final_color = texture(TEXTURE, UV);
+	
+	if (active && final_color.a > 0f && final_color.rgb != vec3(0f)) {
+		float color_value = min(0.8, 0.8 + sin(TIME * 40f));
+		final_color = vec4(color_value, color_value, color_value, 1f);
+	}
+	
+	COLOR = final_color;
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 9 )
+shader_param/active = false

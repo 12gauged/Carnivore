@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/ui/archievements_screen/archivement_text.gd" type="Script" id=2]
+[ext_resource path="res://ui/gui/text_box/archivement_text_box.png" type="Texture" id=3]
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=4]
+
+[node name="archievements_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="center_container" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="v_box_container" type="VBoxContainer" parent="center_container"]
+margin_left = 60.0
+margin_top = 15.0
+margin_right = 180.0
+margin_bottom = 119.0
+
+[node name="archievements_text" type="Label" parent="center_container/v_box_container"]
+margin_right = 120.0
+margin_bottom = 10.0
+theme = ExtResource( 1 )
+text = "ui.main_menu.archievements"
+align = 1
+
+[node name="margin" type="MarginContainer" parent="center_container/v_box_container"]
+margin_top = 14.0
+margin_right = 120.0
+margin_bottom = 18.0
+custom_constants/margin_top = 4
+
+[node name="h_grid_container" type="GridContainer" parent="center_container/v_box_container"]
+margin_left = 17.0
+margin_top = 22.0
+margin_right = 102.0
+margin_bottom = 72.0
+size_flags_horizontal = 4
+columns = 3
+
+[node name="archievement_tab0" type="TextureRect" parent="center_container/v_box_container/h_grid_container"]
+margin_right = 85.0
+margin_bottom = 50.0
+texture = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="title" type="Label" parent="center_container/v_box_container/h_grid_container/archievement_tab0"]
+anchor_right = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = 36.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "ui.archievements.village_savior.title"
+align = 1
+autowrap = true
+
+[node name="description" type="Label" parent="center_container/v_box_container/h_grid_container/archievement_tab0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 15.0
+margin_right = -1.0
+margin_bottom = -1.0
+theme = ExtResource( 1 )
+text = "ui.archievements.village_savior.description"
+align = 1
+autowrap = true
+
+[node name="margin2" type="MarginContainer" parent="center_container/v_box_container"]
+margin_top = 76.0
+margin_right = 120.0
+margin_bottom = 80.0
+custom_constants/margin_top = 4
+
+[node name="button_grid_container" type="GridContainer" parent="center_container/v_box_container"]
+margin_left = 50.0
+margin_top = 84.0
+margin_right = 70.0
+margin_bottom = 104.0
+size_flags_horizontal = 4
+
+[node name="home_button" parent="center_container/v_box_container/button_grid_container" instance=ExtResource( 4 )]

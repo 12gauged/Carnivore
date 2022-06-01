@@ -1,0 +1,214 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://ui/hud/status_bars/energy_bar/energy_bar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/hud/status_bars/hunger_bar/hunger_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/hud/status_bars/health_bar/health_bar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/gui/text_box/text_box.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=5]
+[ext_resource path="res://ui/hud/hud_control.gd" type="Script" id=6]
+[ext_resource path="res://ui/hud/notifications/wave_notification.gd" type="Script" id=7]
+[ext_resource path="res://ui/hud/input_hints/desktop/input_hint_desktop0.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/ui/pause_screen/pause_screen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/hud/overlay.gd" type="Script" id=10]
+[ext_resource path="res://ui/hud/wave_time_clock.gd" type="Script" id=11]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float gray_amount = 4f;
+
+
+void fragment() {
+	vec4 final_color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	
+	final_color.rgb /= gray_amount;
+	
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/gray_amount = 4.0
+
+[node name="hud" type="CanvasLayer"]
+
+[node name="root" type="Control" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[node name="top_elements" type="VBoxContainer" parent="root"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -120.0
+margin_right = 120.0
+margin_bottom = 35.0
+
+[node name="top_margin" type="MarginContainer" parent="root/top_elements"]
+margin_right = 240.0
+
+[node name="status_bars" type="CenterContainer" parent="root/top_elements"]
+margin_top = 4.0
+margin_right = 240.0
+margin_bottom = 14.0
+
+[node name="horizontal_margin" type="GridContainer" parent="root/top_elements/status_bars"]
+margin_left = 68.0
+margin_right = 172.0
+margin_bottom = 10.0
+custom_constants/hseparation = 40
+columns = 3
+
+[node name="hunger_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 0.0
+margin_right = 0.0
+margin_bottom = 10.0
+
+[node name="wave_time_clock" type="Label" parent="root/top_elements/status_bars/horizontal_margin"]
+margin_left = 40.0
+margin_right = 64.0
+margin_bottom = 10.0
+text = "00:00"
+align = 1
+script = ExtResource( 11 )
+
+[node name="energy_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_left = 104.0
+margin_right = 104.0
+margin_bottom = 10.0
+
+[node name="wave_text_margin" type="MarginContainer" parent="root/top_elements"]
+margin_top = 18.0
+margin_right = 240.0
+margin_bottom = 31.0
+custom_constants/margin_top = 13
+
+[node name="wave_notification" type="Label" parent="root/top_elements"]
+margin_top = 35.0
+margin_right = 240.0
+margin_bottom = 45.0
+theme = ExtResource( 5 )
+text = "hud.wave_indicator"
+align = 1
+uppercase = true
+script = ExtResource( 7 )
+
+[node name="notification_disappear_delay" type="Timer" parent="root/top_elements/wave_notification"]
+wait_time = 3.0
+
+[node name="bottom_elements" type="VBoxContainer" parent="root"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+alignment = 2
+
+[node name="center_container" type="CenterContainer" parent="root/bottom_elements"]
+margin_right = 240.0
+margin_bottom = 3.0
+
+[node name="v_grid_container" type="GridContainer" parent="root/bottom_elements/center_container"]
+margin_left = 120.0
+margin_right = 120.0
+margin_bottom = 3.0
+size_flags_horizontal = 4
+custom_constants/vseparation = 0
+
+[node name="h_grid_container" type="GridContainer" parent="root/bottom_elements/center_container/v_grid_container"]
+custom_constants/hseparation = 32
+columns = 2
+
+[node name="health_bar" parent="root/bottom_elements/center_container/v_grid_container/h_grid_container" instance=ExtResource( 3 )]
+anchor_right = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="root/bottom_elements/center_container/v_grid_container"]
+margin_bottom = 3.0
+custom_constants/margin_top = 3
+
+[node name="left_elements" type="VBoxContainer" parent="root"]
+anchor_bottom = 1.0
+margin_right = 58.0
+alignment = 1
+
+[node name="h_grid_container" type="GridContainer" parent="root/left_elements"]
+margin_top = 67.0
+margin_right = 58.0
+margin_bottom = 67.0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="root/left_elements/h_grid_container"]
+margin_right = 3.0
+custom_constants/margin_left = 3
+
+[node name="center_elements" type="CenterContainer" parent="root"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="input_hint_container" type="GridContainer" parent="root/center_elements"]
+margin_left = 120.0
+margin_top = 25.0
+margin_right = 120.0
+margin_bottom = 109.0
+
+[node name="MarginContainer" type="MarginContainer" parent="root/center_elements/input_hint_container"]
+margin_bottom = 80.0
+custom_constants/margin_top = 80
+
+[node name="input_hint_desktop0" parent="root/center_elements/input_hint_container" instance=ExtResource( 8 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 84.0
+margin_right = 0.0
+margin_bottom = 84.0
+id = "interact"
+key_label_text = "E"
+
+[node name="text_box_container" type="VBoxContainer" parent="root"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -3.0
+margin_right = 120.0
+margin_bottom = 3.0
+
+[node name="MarginContainer" type="MarginContainer" parent="root/text_box_container"]
+margin_right = 240.0
+margin_bottom = 5.0
+custom_constants/margin_top = 5
+
+[node name="text_box" parent="root/text_box_container" instance=ExtResource( 4 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 9.0
+margin_right = 240.0
+margin_bottom = 9.0
+
+[node name="darker_colors" type="ColorRect" parent="root"]
+pause_mode = 2
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 10 )
+
+[node name="pause_screen" parent="root" instance=ExtResource( 9 )]
+visible = false
+
+[connection signal="timeout" from="root/top_elements/wave_notification/notification_disappear_delay" to="root/top_elements/wave_notification" method="_on_notification_disappear_delay_timeout"]
+[connection signal="paused" from="root/pause_screen" to="root/darker_colors" method="show"]
+[connection signal="resumed" from="root/pause_screen" to="root/darker_colors" method="hide"]

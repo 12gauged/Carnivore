@@ -1,0 +1,301 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://entities/ant/ant.gd" type="Script" id=1]
+[ext_resource path="res://entities/ant/ant.png" type="Texture" id=2]
+[ext_resource path="res://system/components/movement/comp_movement_track_target.tscn" type="PackedScene" id=3]
+[ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/state.gd" type="Script" id=5]
+[ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=6]
+[ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://system/parts/entity/part_hurtbox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sounds/entity/enemy/enemy_hit.wav" type="AudioStream" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="Animation" id=5]
+resource_name = "ATTACK"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("../part_state_handler/ATTACK/part_entity_spawner")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_entity"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "DEFAULT"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 2 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "DIG"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../texture:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../part_hurtbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "SPAWN"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.5, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10, 11, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../texture:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../part_hurtbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../collision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 4.0
+height = 8.0
+
+[node name="ant" type="KinematicBody2D"]
+script = ExtResource( 1 )
+MAX_HEALTH = 2
+MAX_SPEED = 30
+ID = "ant"
+DEFAULT_STATE = "DEFAULT"
+STARTING_STATE = "SPAWN"
+CONSTANT_STATES = [ "DIG", "ATTACK" ]
+state_execution_pattern = [ "DEFAULT", "DIG", "ATTACK" ]
+
+[node name="texture" type="Sprite" parent="."]
+position = Vector2( 0, -5 )
+texture = ExtResource( 2 )
+offset = Vector2( 0.5, 0 )
+hframes = 6
+vframes = 2
+frame = 1
+
+[node name="collision" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
+disabled = true
+
+[node name="part_state_handler" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="SPAWN" type="Node2D" parent="part_state_handler"]
+script = ExtResource( 5 )
+
+[node name="state_change_timer" type="Timer" parent="part_state_handler/SPAWN"]
+wait_time = 1.1
+one_shot = true
+autostart = true
+
+[node name="DEFAULT" type="Node2D" parent="part_state_handler"]
+script = ExtResource( 5 )
+
+[node name="comp_movement_track_target" parent="part_state_handler/DEFAULT" instance=ExtResource( 3 )]
+auto_execute = false
+
+[node name="state_change_timer" type="Timer" parent="part_state_handler/DEFAULT"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="DIG" type="Node2D" parent="part_state_handler"]
+script = ExtResource( 5 )
+
+[node name="state_change_timer" type="Timer" parent="part_state_handler/DIG"]
+wait_time = 2.0
+one_shot = true
+
+[node name="ATTACK" type="Node2D" parent="part_state_handler"]
+script = ExtResource( 5 )
+
+[node name="part_entity_spawner" parent="part_state_handler/ATTACK" instance=ExtResource( 7 )]
+position = Vector2( 0, -10.5 )
+entity_name = "stone_projectile"
+entity_group = "projectiles"
+
+[node name="state_change_timer" type="Timer" parent="part_state_handler/ATTACK"]
+wait_time = 0.6
+one_shot = true
+
+[node name="part_state_anim_handler" parent="." instance=ExtResource( 6 )]
+
+[node name="animation_player" type="AnimationPlayer" parent="part_state_anim_handler"]
+anims/ATTACK = SubResource( 5 )
+anims/DEFAULT = SubResource( 2 )
+anims/DIG = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+anims/SPAWN = SubResource( 7 )
+
+[node name="death_loot_spawner" parent="." instance=ExtResource( 7 )]
+entity_name = "meat_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+spawn_chance = 35
+
+[node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
+IGNORE_TAGS = [ "ENEMY_PROJECTILE" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="part_hurtbox"]
+position = Vector2( 0, -5 )
+shape = SubResource( 6 )
+disabled = true
+
+[node name="hit_sound_effect" parent="part_hurtbox" instance=ExtResource( 9 )]
+scale = Vector2( 0.998317, 0.99272 )
+stream = ExtResource( 10 )
+bus = "entity_sounds"
+
+[connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
+[connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
+[connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler" method="start_state_pattern"]
+[connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler/DEFAULT/comp_movement_track_target" method="stop_moving"]
+[connection signal="component_value_update" from="part_state_handler/DEFAULT/comp_movement_track_target" to="." method="set_movement_direction"]
+[connection signal="timeout" from="part_state_handler/DEFAULT/state_change_timer" to="part_state_handler" method="go_to_next_state"]
+[connection signal="timeout" from="part_state_handler/DEFAULT/state_change_timer" to="part_state_handler/DEFAULT/comp_movement_track_target" method="stop_moving"]
+[connection signal="timeout" from="part_state_handler/DIG/state_change_timer" to="part_state_handler" method="go_to_next_state"]
+[connection signal="entity_spawned" from="part_state_handler/ATTACK/part_entity_spawner" to="." method="_on_rock_spawned"]
+[connection signal="timeout" from="part_state_handler/ATTACK/state_change_timer" to="part_state_handler" method="go_to_next_state"]
+[connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]

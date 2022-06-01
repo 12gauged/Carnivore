@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://system/parts/part_tag_detector.gd" type="Script" id=1]
+
+[node name="part_tag_detector" type="Area2D"]
+script = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_part_tag_detector_body_entered"]

@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/main_menu/screens/menu_screen.gd" type="Script" id=4]
+[ext_resource path="res://ui/gui/logo/firewatcher.png" type="Texture" id=8]
+
+[node name="credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="center_container" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="v_grid_container" type="GridContainer" parent="center_container"]
+margin_left = 13.0
+margin_top = 16.0
+margin_right = 227.0
+margin_bottom = 119.0
+
+[node name="fire_watcher_logo" type="TextureRect" parent="center_container/v_grid_container"]
+margin_left = 73.0
+margin_right = 141.0
+margin_bottom = 21.0
+size_flags_horizontal = 4
+texture = ExtResource( 8 )
+
+[node name="margin_top" type="MarginContainer" parent="center_container/v_grid_container"]
+margin_top = 25.0
+margin_right = 214.0
+margin_bottom = 33.0
+custom_constants/margin_top = 8
+
+[node name="h_grid_container" type="GridContainer" parent="center_container/v_grid_container"]
+margin_top = 37.0
+margin_right = 214.0
+margin_bottom = 59.0
+custom_constants/vseparation = 2
+columns = 2
+
+[node name="description_creator" type="Label" parent="center_container/v_grid_container/h_grid_container"]
+margin_right = 140.0
+margin_bottom = 10.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.498039, 0.498039, 0.498039, 1 )
+text = "ui.main_menu.credits.dev"
+align = 2
+
+[node name="creator_name" type="Label" parent="center_container/v_grid_container/h_grid_container"]
+margin_left = 144.0
+margin_right = 214.0
+margin_bottom = 10.0
+theme = ExtResource( 1 )
+text = "FELIPE DE SOUZA"
+
+[node name="translator" type="Label" parent="center_container/v_grid_container/h_grid_container"]
+margin_top = 12.0
+margin_right = 140.0
+margin_bottom = 22.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.498039, 0.498039, 0.498039, 1 )
+text = "ui.main_menu.credits.translator"
+align = 2
+
+[node name="translator_name" type="Label" parent="center_container/v_grid_container/h_grid_container"]
+margin_left = 144.0
+margin_top = 12.0
+margin_right = 214.0
+margin_bottom = 22.0
+theme = ExtResource( 1 )
+text = "Evo"
+
+[node name="margin_bottom" type="MarginContainer" parent="center_container/v_grid_container"]
+margin_top = 63.0
+margin_right = 214.0
+margin_bottom = 79.0
+custom_constants/margin_bottom = 16
+
+[node name="home_button" parent="center_container/v_grid_container" instance=ExtResource( 2 )]
+margin_left = 97.0
+margin_top = 83.0
+margin_right = 117.0
+margin_bottom = 103.0
+size_flags_horizontal = 4
+id = "main_screen"
+
+[node name="icon" parent="center_container/v_grid_container/home_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 3 )
+
+[connection signal="button_pressed" from="center_container/v_grid_container/home_button" to="." method="_on_button_pressed"]
+
+[editable path="center_container/v_grid_container/home_button"]

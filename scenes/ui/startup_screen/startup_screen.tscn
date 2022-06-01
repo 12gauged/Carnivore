@@ -1,0 +1,121 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/gui/logo/firewatcher.png" type="Texture" id=3]
+[ext_resource path="res://system/parts/part_input_detector.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("center_container/fire_watcher_logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("center_container/warning:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "start"
+length = 5.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("center_container/fire_watcher_logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("center_container/warning:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("comp_method_caller")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "call_method"
+} ]
+}
+
+[node name="startup_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="center_container" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="fire_watcher_logo" type="TextureRect" parent="center_container"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 86.0
+margin_top = 57.0
+margin_right = 154.0
+margin_bottom = 78.0
+texture = ExtResource( 3 )
+
+[node name="warning" type="Label" parent="center_container"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 62.0
+margin_top = 49.0
+margin_right = 178.0
+margin_bottom = 85.0
+theme = ExtResource( 1 )
+text = "WARNING!
+this game contains flashing
+lights"
+align = 1
+
+[node name="comp_method_caller" parent="." instance=ExtResource( 2 )]
+method = {
+"args": [ "change_scene_request", "main_menu", true, 0.2 ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="part_input_detector" parent="." instance=ExtResource( 4 )]
+input_to_detect = "mouse_left"
+
+[node name="animation_player" type="AnimationPlayer" parent="."]
+autoplay = "start"
+anims/RESET = SubResource( 1 )
+anims/start = SubResource( 2 )
+
+[connection signal="detected" from="part_input_detector" to="comp_method_caller" method="call_method"]

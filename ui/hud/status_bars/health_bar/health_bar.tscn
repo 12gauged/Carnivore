@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/hud/status_bars/health_bar/health_icon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/hud/status_bars/status_bar.gd" type="Script" id=2]
+[ext_resource path="res://ui/hud/status_bars/status_bar_empty.png" type="Texture" id=3]
+
+[node name="health_bar" type="Control"]
+anchor_right = 1.0
+script = ExtResource( 2 )
+tracked_stat_id = "health"
+
+[node name="empty_bar" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -23.5
+margin_top = -10.0
+margin_right = 23.5
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="icons" type="GridContainer" parent="empty_bar"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+margin_right = 48.0
+custom_constants/hseparation = 0
+columns = 6
+
+[node name="health_icon0" parent="empty_bar/icons" instance=ExtResource( 1 )]
+
+[node name="health_icon1" parent="empty_bar/icons" instance=ExtResource( 1 )]
+margin_left = 8.0
+margin_right = 16.0
+
+[node name="health_icon2" parent="empty_bar/icons" instance=ExtResource( 1 )]
+margin_left = 16.0
+margin_right = 24.0
+
+[node name="health_icon3" parent="empty_bar/icons" instance=ExtResource( 1 )]
+margin_left = 24.0
+margin_right = 32.0
+
+[node name="health_icon4" parent="empty_bar/icons" instance=ExtResource( 1 )]
+margin_left = 32.0
+margin_right = 40.0
+
+[node name="health_icon5" parent="empty_bar/icons" instance=ExtResource( 1 )]
+margin_left = 40.0
+margin_right = 48.0

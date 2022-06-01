@@ -1,0 +1,20 @@
+extends Enemy
+
+onready var DeathLootSpawner = $death_loot_spawner
+
+
+func _ready():
+	# warning-ignore:return_value_discarded
+	player_events.connect("status_value_update", self, "_on_player_status_value_update")
+
+
+func _on_rock_spawned(InstancedEntity):
+	if !is_instance_valid(AI_TARGET): return
+	InstancedEntity.direction = global_position.direction_to(AI_TARGET.global_position)
+	InstancedEntity.set_hitbox_tags(["ENEMY_PROJECTILE"])
+	
+	
+func _on_player_status_value_update(id, value):
+	if id != "hunger": return
+	if value < 0:
+		DeathLootSpawner.set_spawn_chance(80)
