@@ -61,6 +61,8 @@ func set_custom_values(Instance):
 	for value in values_to_set:
 		Instance[value[0]] = value[1]
 		
+func set_spawn_chance(value: int):
+	spawn_chance = value
 		
 		
 func _on_instanced_entity_deleted():

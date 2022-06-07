@@ -16,5 +16,8 @@ func _on_rock_spawned(InstancedEntity):
 	
 func _on_player_status_value_update(id, value):
 	if id != "hunger": return
-	if value < 0:
-		DeathLootSpawner.set_spawn_chance(80)
+	
+	if value < 2: DeathLootSpawner.set_spawn_chance(80)
+	elif value > 4: DeathLootSpawner.set_spawn_chance(30)
+	else: DeathLootSpawner.set_spawn_chance(60)
+		

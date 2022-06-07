@@ -92,7 +92,7 @@ anchor_bottom = 1.0
 margin_left = -240.0
 margin_top = -14.0
 theme = ExtResource( 2 )
-text = "v1.1.7"
+text = "v1.1.8"
 align = 2
 valign = 2
 
