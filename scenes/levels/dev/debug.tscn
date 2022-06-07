@@ -33,6 +33,7 @@ position = Vector2( 187, 77 )
 entity_name = "frog"
 entity_group = "enemies"
 deletion_signal = "deleted"
+auto_spawn = true
 
 [node name="part_entity_spawner2" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 38, 96 )

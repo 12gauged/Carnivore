@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://sounds/entity/enemy/frog/frog_land.wav" type="AudioStream" id=14]
 [ext_resource path="res://sounds/entity/enemy/frog/frog_croak.wav" type="AudioStream" id=15]
 [ext_resource path="res://sounds/entity/enemy/frog/frog_spawn.wav" type="AudioStream" id=16]
+[ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 3.0
@@ -263,7 +264,7 @@ tracks/8/keys = {
 
 [node name="frog" type="KinematicBody2D"]
 script = ExtResource( 4 )
-MAX_HEALTH = 12
+MAX_HEALTH = 6
 MAX_SPEED = 300
 ID = "frog"
 TAGS = [ "COMP_EXECUTER", "ENTITY", "FROG" ]
@@ -305,6 +306,20 @@ damage = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hitbox"]
 rotation = 1.5708
 shape = SubResource( 7 )
+
+[node name="death_loot_spawner" parent="." instance=ExtResource( 17 )]
+position = Vector2( -2, 0 )
+entity_name = "meat_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn_radius = Vector2( 2, 2 )
+
+[node name="death_loot_spawner2" parent="." instance=ExtResource( 17 )]
+position = Vector2( 2, 0 )
+entity_name = "meat_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn_radius = Vector2( 2, 2 )
 
 [node name="part_state_handler" parent="." instance=ExtResource( 1 )]
 
@@ -356,6 +371,8 @@ particle_id = "entity_ground_slam"
 duration = 0.2
 intensity = 0.8
 
+[connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
+[connection signal="deleted" from="." to="death_loot_spawner2" method="spawn_entity"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="timeout" from="part_state_handler/IDLE/change_state_timer" to="part_state_handler" method="go_to_next_state"]
