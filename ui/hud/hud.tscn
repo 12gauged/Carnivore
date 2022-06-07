@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://ui/hud/status_bars/energy_bar/energy_bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/hud/status_bars/hunger_bar/hunger_bar.tscn" type="PackedScene" id=2]
@@ -11,6 +11,14 @@
 [ext_resource path="res://scenes/ui/pause_screen/pause_screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=10]
 [ext_resource path="res://ui/hud/wave_time_clock.gd" type="Script" id=11]
+[ext_resource path="res://ui/gui/button/joystick/mobile_joystick.tscn" type="PackedScene" id=12]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/gui/button/joystick/shoot/joystick_button_shoot.png" type="Texture" id=14]
+[ext_resource path="res://ui/gui/button/small/button_small_pressed.png" type="Texture" id=15]
+[ext_resource path="res://ui/gui/button/small/button_small_normal.png" type="Texture" id=16]
+[ext_resource path="res://ui/gui/icons/special_attack_icon.png" type="Texture" id=17]
+[ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=18]
+[ext_resource path="res://ui/gui/icons/pause_icon.png" type="Texture" id=19]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -36,6 +44,7 @@ shader_param/gray_amount = 4.0
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 5 )
 script = ExtResource( 6 )
 
@@ -101,34 +110,177 @@ script = ExtResource( 7 )
 [node name="notification_disappear_delay" type="Timer" parent="root/top_elements/wave_notification"]
 wait_time = 3.0
 
-[node name="bottom_elements" type="VBoxContainer" parent="root"]
+[node name="top_right_elements" type="VBoxContainer" parent="root"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+
+[node name="pause_button_holder" type="Control" parent="root/top_right_elements"]
+margin_right = 40.0
+
+[node name="pause_button" type="TouchScreenButton" parent="root/top_right_elements/pause_button_holder"]
+position = Vector2( 18, 2 )
+normal = ExtResource( 16 )
+pressed = ExtResource( 15 )
+script = ExtResource( 18 )
+
+[node name="Control" type="Control" parent="root/top_right_elements/pause_button_holder/pause_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="root/top_right_elements/pause_button_holder/pause_button/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="root/top_right_elements/pause_button_holder/pause_button/Control/CenterContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 19 )
+
+[node name="center_bottom_elements" type="VBoxContainer" parent="root"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 alignment = 2
 
-[node name="center_container" type="CenterContainer" parent="root/bottom_elements"]
+[node name="center_container" type="CenterContainer" parent="root/center_bottom_elements"]
 margin_right = 240.0
 margin_bottom = 3.0
 
-[node name="v_grid_container" type="GridContainer" parent="root/bottom_elements/center_container"]
+[node name="v_grid_container" type="GridContainer" parent="root/center_bottom_elements/center_container"]
 margin_left = 120.0
 margin_right = 120.0
 margin_bottom = 3.0
 size_flags_horizontal = 4
 custom_constants/vseparation = 0
 
-[node name="h_grid_container" type="GridContainer" parent="root/bottom_elements/center_container/v_grid_container"]
+[node name="h_grid_container" type="GridContainer" parent="root/center_bottom_elements/center_container/v_grid_container"]
 custom_constants/hseparation = 32
 columns = 2
 
-[node name="health_bar" parent="root/bottom_elements/center_container/v_grid_container/h_grid_container" instance=ExtResource( 3 )]
+[node name="health_bar" parent="root/center_bottom_elements/center_container/v_grid_container/h_grid_container" instance=ExtResource( 3 )]
 anchor_right = 0.0
 
-[node name="MarginContainer" type="MarginContainer" parent="root/bottom_elements/center_container/v_grid_container"]
+[node name="MarginContainer" type="MarginContainer" parent="root/center_bottom_elements/center_container/v_grid_container"]
 margin_bottom = 3.0
 custom_constants/margin_top = 3
+
+[node name="bottom_left_elements" type="VBoxContainer" parent="root"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_right = 240.0
+margin_bottom = -32.0
+grow_vertical = 0
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="h_box_container" type="HBoxContainer" parent="root/bottom_left_elements"]
+margin_right = 240.0
+
+[node name="left_margin" type="MarginContainer" parent="root/bottom_left_elements/h_box_container"]
+margin_right = 16.0
+custom_constants/margin_left = 16
+
+[node name="movement_joystick" parent="root/bottom_left_elements/h_box_container" instance=ExtResource( 12 )]
+margin_left = 20.0
+margin_right = 20.0
+
+[node name="bottom_margin" type="MarginContainer" parent="root/bottom_left_elements"]
+margin_top = 4.0
+margin_right = 240.0
+margin_bottom = 8.0
+custom_constants/margin_bottom = 4
+
+[node name="bottom_right_elements" type="VBoxContainer" parent="root"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -208.0
+margin_top = -4.0
+margin_right = -32.0
+margin_bottom = -32.0
+grow_vertical = 0
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
+
+[node name="h_box_container" type="HBoxContainer" parent="root/bottom_right_elements"]
+margin_right = 176.0
+alignment = 2
+
+[node name="shooting_joystick" parent="root/bottom_right_elements/h_box_container" instance=ExtResource( 12 )]
+margin_left = 148.0
+margin_right = 148.0
+
+[node name="TouchScreenButton" parent="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot" index="0"]
+normal = ExtResource( 14 )
+input_event = "player_shooting_direction_updated"
+read_touches = false
+
+[node name="pressed_method_caller" parent="root/bottom_right_elements/h_box_container/shooting_joystick" instance=ExtResource( 13 )]
+method = {
+"args": [ "player_shooting_joystick_pressed" ],
+"caller": "input_events",
+"method": "emit_signal"
+}
+
+[node name="released_method_caller" parent="root/bottom_right_elements/h_box_container/shooting_joystick" instance=ExtResource( 13 )]
+method = {
+"args": [ "player_shooting_joystick_released" ],
+"caller": "input_events",
+"method": "emit_signal"
+}
+
+[node name="left_margin" type="MarginContainer" parent="root/bottom_right_elements/h_box_container"]
+margin_left = 152.0
+margin_right = 176.0
+custom_constants/margin_left = 24
+
+[node name="special_attack_button" type="TouchScreenButton" parent="root/bottom_right_elements"]
+position = Vector2( 184, 16 )
+normal = ExtResource( 16 )
+pressed = ExtResource( 15 )
+script = ExtResource( 18 )
+
+[node name="special_attack_button" type="Control" parent="root/bottom_right_elements/special_attack_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="root/bottom_right_elements/special_attack_button/special_attack_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="icon" type="TextureRect" parent="root/bottom_right_elements/special_attack_button/special_attack_button/CenterContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 17 )
+
+[node name="comp_method_caller" parent="root/bottom_right_elements/special_attack_button" instance=ExtResource( 13 )]
+method = {
+"args": [ "enter_eat_state_request" ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
+[node name="bottom_margin" type="MarginContainer" parent="root/bottom_right_elements"]
+margin_top = 4.0
+margin_right = 176.0
+margin_bottom = 8.0
+custom_constants/margin_bottom = 4
 
 [node name="left_elements" type="VBoxContainer" parent="root"]
 anchor_bottom = 1.0
@@ -210,5 +362,11 @@ script = ExtResource( 10 )
 visible = false
 
 [connection signal="timeout" from="root/top_elements/wave_notification/notification_disappear_delay" to="root/top_elements/wave_notification" method="_on_notification_disappear_delay_timeout"]
+[connection signal="released" from="root/top_right_elements/pause_button_holder/pause_button" to="root/pause_screen" method="toggle_pause"]
+[connection signal="pressed" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/pressed_method_caller" method="call_method"]
+[connection signal="released" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/released_method_caller" method="call_method"]
+[connection signal="released" from="root/bottom_right_elements/special_attack_button" to="root/bottom_right_elements/special_attack_button/comp_method_caller" method="call_method"]
 [connection signal="paused" from="root/pause_screen" to="root/darker_colors" method="show"]
 [connection signal="resumed" from="root/pause_screen" to="root/darker_colors" method="hide"]
+
+[editable path="root/bottom_right_elements/h_box_container/shooting_joystick"]

@@ -2,7 +2,7 @@ extends Control
 
 onready var HudElements = {
 	"top_elements": $top_elements,
-	"bottom_elements": $bottom_elements
+	"bottom_elements": $center_bottom_elements
 }
 
 

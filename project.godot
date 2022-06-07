@@ -76,6 +76,8 @@ _global_script_class_icons={
 
 config/name="Carnivore"
 run/main_scene="res://main.tscn"
+boot_splash/image="res://black_pixel.png"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -89,6 +91,12 @@ camera_events="*res://system/events/camera_events.tscn"
 game_functions="*res://system/functions/game_functions.gd"
 game_data="*res://system/data/game_data.gd"
 archievement_manager="*res://system/managers/archievement_manager.tscn"
+input_events="*res://system/events/input_events.tscn"
+js_handler="*res://system/js_handler.gd"
+data_manager="*res://system/managers/data_manager.gd"
+device_manager="*res://system/managers/device_manager.gd"
+json_handler="*res://system/json_handler.gd"
+debug_log="*res://scenes/ui/overlays/debug_log/debug_log.tscn"
 
 [display]
 
@@ -204,6 +212,10 @@ ui_return={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [layer_names]
 
 2d_physics/layer_1="world"
@@ -215,7 +227,6 @@ ui_return={
 
 [locale]
 
-test="en"
 translations=PoolStringArray( "res://system/data/lang/lang.en.translation", "res://system/data/lang/lang.fr.translation", "res://system/data/lang/lang.pt.translation" )
 locale_filter=[ 1, [ "en", "fr", "pt" ] ]
 

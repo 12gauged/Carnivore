@@ -101,6 +101,7 @@ texture = ExtResource( 4 )
 [node name="archievements_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]
 margin_left = 60.0
 margin_right = 80.0
+disabled = true
 id = "archievements"
 
 [node name="icon" parent="center_elements/grid_container/button_container/archievements_button/center_container" index="0"]

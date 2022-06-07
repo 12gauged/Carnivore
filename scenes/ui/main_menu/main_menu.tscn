@@ -92,7 +92,7 @@ anchor_bottom = 1.0
 margin_left = -240.0
 margin_top = -14.0
 theme = ExtResource( 2 )
-text = "mvp1_may_2022"
+text = "v1.1.6_2022"
 align = 2
 valign = 2
 

@@ -14,6 +14,8 @@ onready var ThrowSoundEffect = $throw_sound_effect
 
 onready var ProjectileGroup = toolbox.get_node_in_group("projectiles")
 
+var target_direction: Vector2
+var last_shooting_direction: Vector2
 var projectile_type: String = ""
 
 var ProjectileScene
@@ -22,11 +24,25 @@ var ProjectileInstance
 const projectile_speeds: Dictionary = {
 	"stone_projectile": 450
 }
-
-
+		
+func _ready():
+	# warning-ignore:return_value_discarded
+	input_events.connect("player_shooting_joystick_released", self, "_on_player_shooting_joystick_released")
+	# warning-ignore:return_value_discarded
+	input_events.connect("player_shooting_direction_updated", self, "_on_player_shooting_direction_updated")
+	# warning-ignore:return_value_discarded
+	player_events.connect("entered_eat_state", self, "_on_player_entered_eat_state")
+	# warning-ignore:return_value_discarded
+	player_events.connect("exited_eat_state", self, "_on_player_exited_eat_state")
+	# warning-ignore:return_value_discarded
+	player_events.connect("stone_collected", self, "_on_stone_collected")
+	
+	
 func _input(event):
-	if !event is InputEventMouseButton: return
-	if !event.button_index == BUTTON_LEFT or projectile_type.empty(): return
+	if event is InputEventMouseMotion: set_target_direction(global_position.direction_to(get_global_mouse_position()))
+	
+func shoot_projectile():
+	if projectile_type.empty(): return
 	if !ShotDelayTimer.is_stopped(): return
 	
 	ThrowSoundEffect.play()
@@ -36,19 +52,9 @@ func _input(event):
 	Owner.remove_tag("HOLDING_PROJECTILE")
 	spawn_projectile()
 	set_projectile("")
-		
-func _ready():
-	# warning-ignore:return_value_discarded
-	player_events.connect("entered_eat_state", self, "_on_player_entered_eat_state")
-	# warning-ignore:return_value_discarded
-	player_events.connect("exited_eat_state", self, "_on_player_exited_eat_state")
-	# warning-ignore:return_value_discarded
-	player_events.connect("stone_collected", self, "_on_stone_collected")
 	
-	
-	
-func get_target_direction() -> Vector2:
-	return global_position.direction_to(get_global_mouse_position())
+func set_target_direction(value: Vector2): target_direction = value
+func get_target_direction() -> Vector2: return target_direction
 	
 func set_projectile(type: String):
 	if Owner.get_state() in STATES_TO_IGNORE: return
@@ -78,3 +84,12 @@ func _on_projectile_spawner_entity_spawned(ProjectileNode):
 
 func _on_player_entered_eat_state(): self.visible = false
 func _on_player_exited_eat_state(): self.visible = true
+
+func _on_player_shooting_direction_updated(value):
+	if value == Vector2.ZERO and last_shooting_direction != Vector2.ZERO:
+		target_direction = last_shooting_direction
+	if value != last_shooting_direction:
+		last_shooting_direction = value
+
+func _on_player_shooting_joystick_released():
+	shoot_projectile()

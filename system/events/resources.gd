@@ -5,7 +5,9 @@ func get_resource(group, key): return resources[group][key]
 var resources: Dictionary = {
 	"sprites": {
 		"player": preload("res://entities/player/player.png"),
+		"player_dead": preload("res://entities/player/player_dead.png"),
 		"ant": preload("res://entities/ant/ant.png"),
+		"ant_hands_up_overlay": preload("res://entities/ant/ant_hands_up_overlay.png"),
 		"frog": preload("res://entities/frog/frog.png"),
 		
 		"meat_drop": preload("res://entities/drops/meat/meat.png"),

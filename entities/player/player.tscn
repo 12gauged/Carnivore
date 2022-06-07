@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://system/components/movement/comp_movement_keyboard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -20,6 +20,11 @@
 [ext_resource path="res://sounds/entity/player/player_bite.wav" type="AudioStream" id=18]
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=19]
 [ext_resource path="res://shaders/flash.tres" type="Material" id=20]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=21]
+[ext_resource path="res://system/parts/part_input_detector.tscn" type="PackedScene" id=22]
+[ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=23]
+[ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.png" type="Texture" id=24]
+[ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.gd" type="Script" id=25]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.0
@@ -199,6 +204,7 @@ script = ExtResource( 6 )
 
 [node name="comp_movement_keyboard" parent="part_state_handler/*" instance=ExtResource( 1 )]
 auto_execute = false
+platform = "desktop"
 
 [node name="comp_reset_look_at" parent="part_state_handler/*" instance=ExtResource( 8 )]
 auto_execute = false
@@ -209,6 +215,7 @@ script = ExtResource( 9 )
 
 [node name="comp_movement_track_mouse" parent="part_state_handler/EAT" instance=ExtResource( 7 )]
 auto_execute = false
+platform = "desktop"
 
 [node name="comp_look_at" parent="part_state_handler/EAT" instance=ExtResource( 8 )]
 auto_execute = false
@@ -233,7 +240,19 @@ position = Vector2( 0, -7 )
 script = ExtResource( 12 )
 STATES_TO_IGNORE = [ "EAT" ]
 
+[node name="direction_indicator" type="Node2D" parent="part_player_projectile_handler"]
+script = ExtResource( 23 )
+
+[node name="pivot" type="Position2D" parent="part_player_projectile_handler/direction_indicator"]
+script = ExtResource( 25 )
+
+[node name="texture" type="Sprite" parent="part_player_projectile_handler/direction_indicator/pivot"]
+position = Vector2( 10, 0 )
+texture = ExtResource( 24 )
+offset = Vector2( 8, 0 )
+
 [node name="hands_overlay" type="Sprite" parent="part_player_projectile_handler"]
+material = ExtResource( 20 )
 texture = ExtResource( 15 )
 script = ExtResource( 16 )
 
@@ -249,9 +268,20 @@ entity_group = "projectiles"
 stream = ExtResource( 14 )
 bus = "player_sounds"
 
+[node name="part_input_detector" parent="part_player_projectile_handler" instance=ExtResource( 22 )]
+platform = "desktop"
+input_to_detect = "mouse_left"
+
 [node name="shot_delay_timer" type="Timer" parent="part_player_projectile_handler"]
 wait_time = 0.4
 one_shot = true
+
+[node name="change_to_death_screen" parent="." instance=ExtResource( 21 )]
+method = {
+"args": [ "change_scene_request", "death_screen", false ],
+"caller": "game_events",
+"method": "emit_signal"
+}
 
 [node name="part_mouth_hitbox" parent="." instance=ExtResource( 10 )]
 TAGS = [ "PLAYER_MOUTH" ]
@@ -288,14 +318,15 @@ wait_time = 4.0
 wait_time = 1.2
 one_shot = true
 
+[connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="executing" from="part_state_handler/*" to="part_mouth_hitbox" method="_disable_request"]
-[connection signal="component_value_update" from="part_state_handler/*/comp_movement_keyboard" to="." method="set_movement_direction"]
 [connection signal="executing" from="part_state_handler/EAT" to="part_mouth_hitbox" method="_enable_request"]
 [connection signal="component_value_update" from="part_state_handler/EAT/comp_movement_track_mouse" to="." method="set_movement_direction"]
 [connection signal="projectile_collected" from="part_player_projectile_handler" to="part_player_projectile_handler/hands_overlay" method="_on_projectile_collected"]
 [connection signal="projectile_thrown" from="part_player_projectile_handler" to="part_player_projectile_handler/hands_overlay" method="_on_projectile_thrown"]
 [connection signal="entity_spawned" from="part_player_projectile_handler/projectile_spawner" to="part_player_projectile_handler" method="_on_projectile_spawner_entity_spawned"]
+[connection signal="detected" from="part_player_projectile_handler/part_input_detector" to="part_player_projectile_handler" method="shoot_projectile"]
 [connection signal="hit_detected" from="part_mouth_hitbox" to="." method="consume_enemy"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="timeout" from="hunger_decrease_delay" to="." method="_on_hunger_decrease_delay_timeout"]

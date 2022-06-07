@@ -13,7 +13,7 @@ func _execute(_delta):
 	
 	input_vector.x = input_strengths.right - input_strengths.left
 	input_vector.y = input_strengths.down - input_strengths.up
-	
 	input_vector = input_vector.normalized()
 	
 	emit_signal("component_value_update", input_vector)
+	input_events.emit_signal("player_movement_direction_updated", input_vector)

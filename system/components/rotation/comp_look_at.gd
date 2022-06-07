@@ -10,7 +10,7 @@ func _execute(_delta):
 		return
 	look_at_target()
 
-func look_at_target(): 
+func look_at_target():
 	Owner.look_at(target_position)
 func set_target_position(value: Vector2):
 	target_position = value

@@ -273,7 +273,7 @@ anims/SPAWN = SubResource( 7 )
 entity_name = "meat_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
-spawn_chance = 35
+spawn_chance = 70
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
 IGNORE_TAGS = [ "ENEMY_PROJECTILE" ]

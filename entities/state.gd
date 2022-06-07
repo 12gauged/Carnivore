@@ -36,8 +36,10 @@ func execute_components(delta):
 	# without using a for loop.
 	component_id = component_id + 1 if component_id < len(Components) - 1 else 0
 	var CurrentComponent = Components[component_id]
-	if CurrentComponent.has_method("_execute"):
-		CurrentComponent._execute(delta)
+	
+	if !CurrentComponent.has_method("_execute"): return
+	if !CurrentComponent.can_execute(): return
+	CurrentComponent._execute(delta)
 
 func update_execution_step():
 	match execution_step:

@@ -23,14 +23,13 @@ func get_node_in_group(group_name: String):
 	
 onready var callers: Dictionary = {
 	"toolbox": toolbox,
-	
 	"game_events": game_events,
 	"gui_events": gui_events,
 	"player_events": player_events,
-	
+	"input_events": input_events,
 	"game_functions": game_functions,
-	
-	"game_data": game_data
+	"game_data": game_data,
+	"data_manager": data_manager
 }
 func call_global_method(method: Dictionary):
 	if !method.has("args"): 

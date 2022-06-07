@@ -137,8 +137,15 @@ method = {
 "method": "emit_signal"
 }
 
+[node name="save_game" parent="." instance=ExtResource( 3 )]
+method = {
+"caller": "data_manager",
+"method": "save_game"
+}
+
 [connection signal="pressed" from="center_container/v_grid_container/h_button_container/home_button" to="center_container/v_grid_container/h_button_container/home_button/comp_method_caller" method="call_method"]
 [connection signal="pressed" from="center_container/v_grid_container/h_button_container/restart_button" to="center_container/v_grid_container/h_button_container/restart_button/comp_method_caller" method="call_method"]
+[connection signal="ready" from="save_game" to="save_game" method="call_method"]
 
 [editable path="center_container/v_grid_container/h_button_container/home_button"]
 [editable path="center_container/v_grid_container/h_button_container/archievements_button"]

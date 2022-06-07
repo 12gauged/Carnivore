@@ -1,4 +1,6 @@
 id,en,pt,fr
+ui.startup.warning.title,warning!,aviso!,untranslated
+ui.startup.warning.description,this game contains flashing lights,este jogo apresenta luzes piscantes,untranslated
 ui.main_menu.play,play,jogar,untranslated
 ui.main_menu.archievements,archievements,conquistas,untranslated
 ui.main_menu.credits.dev,developer,desenvolvedor,untranslated

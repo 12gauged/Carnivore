@@ -125,9 +125,8 @@ respawn_radius = Vector2( 40, 40 )
 FILLER_ENEMY = "ant"
 enemy_spawn_data = [ ExtResource( 10 ), ExtResource( 9 ) ]
 number_of_waves = 15
-max_enemy_number = 3
-max_enemy_counter_modifier = 0.25
-enemies_per_wave = 20
+max_enemy_counter_modifier = 0.45
+enemies_per_wave = 5
 time_between_waves = 4
 
 [node name="spawners" type="Node2D" parent="objects/part_arena"]

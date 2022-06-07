@@ -11,23 +11,41 @@ var player_data = {
 		},
 		"generation1": {
 			"gotcha": false,
-			"not_so_wet": false,
-			"accidental_punch": false
+			"accidental_punch": false,
+			"friendly_fire": false
 		},
 		"generation2": {
-			"secret_weapon": false,
 			"ant_on_a_stick": false,
-			"friendly_fire": false
+			"not_so_wet": false,
+			"secret_weapon": false,
 		}
 	}
 }
 
+var game_settings: Dictionary = {
+	"audio": {
+		"main": 1.0,
+		"enemies": 1.0,
+		"player": 1.0,
+		"sfx": 1.0,
+		"environment": 1.0,
+		"ui": 1.0,
+	},
+	"video": {
+		"camera_shake": true,
+		"fullscreen": true,
+		"language": "en"
+	}
+}
+
+var current_platform: String = "desktop" setget set_current_platform, get_current_platform # TEMP
 var current_level: String = "" setget set_current_level, get_current_level
+
+func set_current_platform(platform_name: String): current_platform = platform_name
+func get_current_platform() -> String: return current_platform
 
 func set_current_level(level_name: String): current_level = level_name
 func get_current_level() -> String: return current_level
 
-func set_player_data(key, value): 
-	player_data[key] = value
-func get_player_data(key): 
-	return player_data[key]
+func set_player_data(key, value): player_data[key] = value
+func get_player_data(key): return player_data[key]
