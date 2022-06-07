@@ -2,8 +2,10 @@ extends Component
 
 signal jump_finished
 
-const JUMP_HEIGHT: int = 2
+const JUMP_HEIGHT: int = 6
 const GRAVITY: int = 8
+
+export(int) var jump_force = 80
 
 var Target
 
@@ -20,6 +22,10 @@ func _execute(_delta):
 	# IF YOU TOUCH IT I'M GOING TO REVOKE YOUR
 	# COCK PERMISSIONS
 	#               - past felipe
+	
+	# just touched this.
+	# my cock has been revoked.
+	#				- present felipe
 	
 	if !is_instance_valid(Target): 
 		emit_signal("component_value_update", Vector2.ZERO)
@@ -45,11 +51,12 @@ func start_jump():
 	target_position = Target.global_position
 	
 	var distance_to_target = Owner.global_position.distance_to(target_position)
-	force = distance_to_target
+	print(distance_to_target)
+	force = distance_to_target * 0.5 if distance_to_target > 100 else distance_to_target
 	
 	jump_position = Vector2(
-		target_position.x,
-		target_position.y - force
+		Owner.global_position.x + Owner.global_position.direction_to(target_position).x * jump_force,
+		Owner.global_position.y + Owner.global_position.direction_to(target_position).y * jump_force - force
 	)
 	
 func set_target(value: Vector2):
