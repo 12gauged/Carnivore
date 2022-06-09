@@ -14,9 +14,10 @@ func _ready():
 	add_tag("PLAYER")
 	
 	# creating new stats
-	stats["hunger"] = MAX_HUNGER
+	stats["hunger"] = MAX_HUNGER / 2
 	stats["can_get_hungry"] = false
 	stats["energy"] = 0
+	call_deferred("update_stat", "hunger", get_stat("hunger"), false)
 	
 	# warning-ignore:return_value_discarded
 	input_events.connect("player_movement_direction_updated", self, "_on_player_movement_direction_updated")
@@ -47,9 +48,9 @@ func process_inconstant_state():
 	if get_state() != "EAT":
 		set_state("IDLE" if movement_direction == Vector2.ZERO else "MOVE")
 
-func update_stat(id: String, value: int):
+func update_stat(id: String, value: int, animate: bool = true):
 	set_stat(id, value)
-	player_events.emit_signal("status_value_update", id, get_stat(id))
+	player_events.emit_signal("status_value_update", id, get_stat(id), animate)
 	
 	if id != "can_get_hungry": return
 	
@@ -67,7 +68,6 @@ func stop_invincibility():
 
 func enter_eat_state():
 	if get_state() == "EAT" or get_stat("energy") < 5: return
-	
 	add_tag("EAT")
 	set_state("EAT")
 	InvincibilityTimer.stop()
@@ -75,13 +75,11 @@ func enter_eat_state():
 	player_events.emit_signal("entered_eat_state")
 	# yeah i use the same timer for both hunger and energy, deal with it
 	reset_stat_decrease_timer("energy")
-	
 	set_movement_direction(Vector2.LEFT)
 	input_events.emit_signal("player_movement_direction_updated", Vector2.LEFT)
 	
 func exit_eat_state():
 	start_invincibility()
-	
 	remove_tag("EAT")
 	set_state("IDLE")
 	set_stat("invincible", false)

@@ -4,7 +4,7 @@ extends Node
 signal meat_consumed
 
 # warning-ignore:unused_signal
-signal status_value_update(stat_id, value)
+signal status_value_update(stat_id, value, animate)
 # warning-ignore:unused_signal
 signal set_stat_value(stat_id, value)
 

@@ -39,8 +39,6 @@ var SpawnedEnemies: Array = []
 var AvailableSpawners: Array = []
 var ChosenSpawner = null
 
-var current_wave: int = 1
-
 
 func _input(event):
 	if !OS.is_debug_build(): return
@@ -74,7 +72,7 @@ func process_enemy_deaths():
 	for enemy in dead_enemies:
 		enemy_kill_count += 1
 		if enemy_kill_count > enemies_per_wave:
-			var method = "end_wave" if current_wave < number_of_waves else "end_arena"
+			var method = "end_wave" if game_data.current_arena_wave < number_of_waves else "end_arena"
 			call(method)
 		elif enemy_id <= enemies_per_wave:
 			spawn_new_enemy()
@@ -131,7 +129,7 @@ func get_random_enemy() -> String:
 		
 func check_enemy_conditions(data: EntityArenaData) -> String:
 	
-	if !current_wave >= data.wave_requirement: return ""
+	if !game_data.current_arena_wave >= data.wave_requirement: return ""
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
 	
@@ -159,15 +157,15 @@ func start_wave():
 	game_events.emit_signal("start_wave_time_tracker")
 
 func end_wave():
-	if current_wave == number_of_waves:
+	if game_data.current_arena_wave == number_of_waves:
 		end_arena()
 		return
 	
 	enemy_kill_count = 0
-	current_wave += 1
+	game_data.current_arena_wave += 1
 	enemy_id = 0
-	enemies_per_wave = int(initial_enemies_per_wave_value + enemies_per_wave_modifier * current_wave)
-	max_enemy_number = int(initial_max_enemy_number + max_enemy_counter_modifier * current_wave)
+	enemies_per_wave = int(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
+	max_enemy_number = int(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
 	player_events.emit_signal("force_exit_from_eat_state")
 	game_events.emit_signal("wave_finished")

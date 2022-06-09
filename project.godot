@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "TextureButton",
 "class": "GenericButton",
 "language": "GDScript",
-"path": "res://button_generic.gd"
+"path": "res://ui/gui/button/button_generic.gd"
 }, {
 "base": "Control",
 "class": "InputHint",

@@ -43,12 +43,12 @@ margin_left = 24.0
 margin_right = 32.0
 
 [node name="hunger_icon4" parent="empty_bar/icons" instance=ExtResource( 1 )]
-margin_left = 32.0
-margin_right = 40.0
+margin_left = 24.0
+margin_right = 32.0
 
 [node name="hunger_icon5" parent="empty_bar/icons" instance=ExtResource( 1 )]
-margin_left = 40.0
-margin_right = 48.0
+margin_left = 24.0
+margin_right = 32.0
 
 [node name="increase_sound_effect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
