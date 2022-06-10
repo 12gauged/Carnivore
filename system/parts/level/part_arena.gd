@@ -51,6 +51,8 @@ func _input(event):
 		free_all_enemies()
 
 func _ready():
+	game_data.current_arena_wave = 0
+	
 	initial_max_enemy_number = max_enemy_number
 	initial_enemies_per_wave_value = enemies_per_wave
 	

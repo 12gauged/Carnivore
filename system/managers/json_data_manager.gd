@@ -17,12 +17,10 @@ func _ready():
 
 
 
-func save_game(): 
-	print("game saved")
+func save_game():
 	js_handler.save_value("player_data", json_handler.to_json_string(game_data.player_data))
 func load_game(): game_data.player_data = json_handler.load_json_from_browser(js_handler.load_value("player_data"))
 
 func save_settings(): 
-	print("settings saved")
 	js_handler.save_value("game_settings", json_handler.to_json_string(game_data.game_settings))
 func load_settings(): game_data.game_settings = json_handler.load_json_from_browser(js_handler.load_value("game_settings"))

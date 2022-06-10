@@ -29,7 +29,7 @@ onready var callers: Dictionary = {
 	"input_events": input_events,
 	"game_functions": game_functions,
 	"game_data": game_data,
-	"data_manager": data_manager
+	"json_data_manager": json_data_manager
 }
 func call_global_method(method: Dictionary):
 	if !method.has("args"): 
@@ -70,12 +70,26 @@ func format_args(args: Array) -> Array:
 	return formatted_args
 	
 	
+func convert_time_to_text(minutes: int, seconds: int):
+	var base_string = "%s:%s"
+	var result
+
+	if minutes < 10 and seconds < 10: base_string = "0%s:0%s"
+	elif minutes >= 10 and seconds < 10: base_string = "%s:0%s"
+	elif minutes >= 10 and seconds >= 10: base_string = "%s:%s"
+	elif minutes < 10 and seconds >= 10: base_string = "0%s:%s"
+	
+	result = base_string % [minutes, seconds]
+	return result
+	
+func minutes_to_seconds(minutes, seconds: int = 0) -> int:
+	return seconds + minutes * 60
+	
+	
 func vector_values_to_int(Vector: Vector2) -> Vector2: 
 	return Vector2(int(Vector.x), int(Vector.y))
 func stepify_vector(Vector: Vector2, step: int) -> Vector2: 
 	return Vector2(stepify(Vector.x, step), stepify(Vector.y, step))
 func mirror_ceil(value: float):
-	if value > 0:
-		return ceil(value)
-	else:
-		return floor(value)
+	if value > 0: return ceil(value)
+	else: return floor(value)

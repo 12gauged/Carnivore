@@ -45,5 +45,4 @@ func set_status(value: int, animate: bool = true):
 		
 func _on_status_value_update(stat_id: String, new_value: int, animate: bool = true):
 	if stat_id != tracked_stat_id: return
-	print(stat_id, ": ", animate)
 	set_status(new_value, animate)
