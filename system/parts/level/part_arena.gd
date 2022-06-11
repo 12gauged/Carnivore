@@ -55,13 +55,9 @@ func _ready():
 	
 	initial_max_enemy_number = max_enemy_number
 	initial_enemies_per_wave_value = enemies_per_wave
-	
 	enemy_counter[FILLER_ENEMY] = 0
 	
-	for child in get_children():
-		if child.name == "spawners": 
-			Spawners = child.get_children()
-			break
+	Spawners = get_node("spawners").get_children()
 			
 func _process(_delta): 
 	if arena_state != RUNNING: return
@@ -71,14 +67,14 @@ func _process(_delta):
 
 func process_enemy_deaths():
 	if dead_enemies.empty(): return
-	for enemy in dead_enemies:
-		enemy_kill_count += 1
-		if enemy_kill_count > enemies_per_wave:
-			var method = "end_wave" if game_data.current_arena_wave < number_of_waves else "end_arena"
-			call(method)
-		elif enemy_id <= enemies_per_wave:
-			spawn_new_enemy()
-	dead_enemies = []
+	
+	enemy_kill_count += 1
+	if enemy_kill_count > enemies_per_wave:
+		var method = "end_wave" if game_data.current_arena_wave < number_of_waves else "end_arena"
+		call(method)
+	elif enemy_id <= enemies_per_wave:
+		spawn_new_enemy()
+	dead_enemies.pop_back()
 
 func free_all_enemies():
 	for AliveEnemy in SpawnedEnemies:
@@ -164,8 +160,8 @@ func end_wave():
 		return
 	
 	enemy_kill_count = 0
-	game_data.current_arena_wave += 1
 	enemy_id = 0
+	game_data.current_arena_wave += 1
 	enemies_per_wave = int(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = int(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)

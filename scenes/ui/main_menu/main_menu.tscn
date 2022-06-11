@@ -78,22 +78,21 @@ anims/fade_in = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
 
 [node name="bottom_right_elements" type="Control" parent="."]
-anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -70.0
 
 [node name="version_label" type="Label" parent="bottom_right_elements"]
-anchor_left = 1.0
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -240.0
+margin_left = -120.0
 margin_top = -14.0
+margin_right = 120.0
 theme = ExtResource( 2 )
-text = "v1.1.9"
-align = 2
+text = "v1.1.10"
+align = 1
 valign = 2
 
 [connection signal="button_pressed" from="menu_screen_controller/main" to="menu_screen_controller" method="_on_button_pressed"]

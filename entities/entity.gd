@@ -32,6 +32,7 @@ var velocity: Vector2 = Vector2.ZERO
 var state: String = "" setget set_state, get_state
 
 
+
 func _ready():
 	STARTING_STATE = DEFAULT_STATE if STARTING_STATE.empty() else STARTING_STATE
 	set_state(STARTING_STATE)
@@ -42,9 +43,8 @@ func _physics_process(delta):
 	if blinking: count_damage_blink_delay()
 	else: stop_blinking()
 	
-	
+	# moves the entity
 	if state in CONSTANT_STATES: return
-	
 	match movement_direction:
 		Vector2.ZERO: stop_moving(delta)
 		_: move(movement_direction, delta)
@@ -52,11 +52,9 @@ func _physics_process(delta):
 
 
 func count_damage_blink_delay():
-	if damage_blink_delay[0] == damage_blink_delay[1]:
-		blinking = false
-		damage_blink_delay[0] = 0
-	else:
-		damage_blink_delay[0] += 1
+	var damage_blink_delay_ended = damage_blink_delay[0] == damage_blink_delay[1]
+	damage_blink_delay[0] = 0 if damage_blink_delay_ended else damage_blink_delay[0] + 1
+	blinking = !damage_blink_delay_ended
 		
 func stop_blinking():
 	var texture = get_texture()
@@ -105,11 +103,10 @@ func remove_tag(tag: String):
 	if !tag in TAGS: return
 	TAGS.remove(TAGS.find(tag))
 
+func get_state() -> String:	return state
 func set_state(value: String):
 	emit_signal("state_changed", value, state)
 	state = value
-func get_state() -> String:	return state
-	
 	
 func get_texture() -> Node:
 	if is_instance_valid(TextureRes): return TextureRes
@@ -120,13 +117,10 @@ func apply_damage(damage: int):
 	set_stat("health", get_stat("health") - damage)
 	start_blinking()
 
+func _on_invincibility_timer_timeout(): stop_invincibility()
 func disable_collision(): Collision.set_deferred("disabled", true)
 func enable_collision(): Collision.set_deferred("disabled", false)
-
 	
 func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true: return
 	apply_damage(Hitbox.damage)
-	
-func _on_invincibility_timer_timeout():
-	stop_invincibility()

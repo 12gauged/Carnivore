@@ -30,13 +30,13 @@ tile_data = PoolIntArray( -131069, 0, 0, -131066, 0, 0, -131062, 0, 0, -65535, 3
 [node name="houses" type="YSort" parent="objects/decoration"]
 
 [node name="mushroom_house_short" parent="objects/decoration/houses" instance=ExtResource( 12 )]
-position = Vector2( 128, -40 )
+position = Vector2( 128, -56 )
 
 [node name="mushroom_house_short2" parent="objects/decoration/houses" instance=ExtResource( 12 )]
 position = Vector2( -24, 144 )
 
 [node name="mushroom_house_short3" parent="objects/decoration/houses" instance=ExtResource( 12 )]
-position = Vector2( 128, 184 )
+position = Vector2( 128, 200 )
 
 [node name="mushroom_house_short4" parent="objects/decoration/houses" instance=ExtResource( 12 )]
 position = Vector2( 264, -16 )
