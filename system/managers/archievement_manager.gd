@@ -23,5 +23,6 @@ func _on_archievement_made(archievement: String):
 	if generation != game_data.get_player_data("generation"): return
 	if generation == -1: return
 	
+	debug_log.dprint("archievement made! %s" % archievement)
 	archievements["generation%s" % generation][archievement] = true
 	json_data_manager.save_game()

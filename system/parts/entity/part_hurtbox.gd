@@ -2,9 +2,6 @@ extends DetectionBox
 
 signal hit_detected(Hitbox)
 
-onready var Owner = get_parent()
-
-
 
 func play_hit_sound(area):
 	if !is_instance_valid($hit_sound_effect): return

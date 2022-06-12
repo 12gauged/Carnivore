@@ -78,6 +78,10 @@ func enter_eat_state():
 	set_movement_direction(Vector2.LEFT)
 	input_events.emit_signal("player_movement_direction_updated", Vector2.LEFT)
 	
+	## Archievement
+	if get_stat("health") <= 2:
+		player_events.emit_signal("archievement_made", "just_in_time")
+	
 func exit_eat_state():
 	start_invincibility()
 	remove_tag("EAT")

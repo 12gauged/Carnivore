@@ -35,7 +35,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	player_events.connect("exited_eat_state", self, "_on_player_exited_eat_state")
 	# warning-ignore:return_value_discarded
-	player_events.connect("stone_collected", self, "_on_stone_collected")
+	player_events.connect("projectile_collected", self, "_on_projectile_collected")
 	
 	
 func _input(event):
@@ -48,6 +48,7 @@ func shoot_projectile():
 	ThrowSoundEffect.play()
 	ShotDelayTimer.start()
 	camera_events.emit_signal("camera_shake_request", 0.2, 0.5)
+	player_events.emit_signal("projectile_thrown")
 	emit_signal("projectile_thrown")
 	Owner.remove_tag("HOLDING_PROJECTILE")
 	spawn_projectile()
@@ -77,7 +78,7 @@ func spawn_projectile():
 	
 
 
-func _on_stone_collected(): set_projectile("stone_projectile")
+func _on_projectile_collected(projectile): set_projectile(projectile)
 	
 func _on_projectile_spawner_entity_spawned(ProjectileNode):
 	ProjectileNode.set_hitbox_tags(["PLAYER_PROJECTILE"])

@@ -9,7 +9,9 @@ signal status_value_update(stat_id, value, animate)
 signal set_stat_value(stat_id, value)
 
 # warning-ignore:unused_signal
-signal stone_collected()
+signal projectile_collected(projectile)
+# warning-ignore:unused_signal
+signal projectile_thrown()
 
 # warning-ignore:unused_signal
 signal entered_eat_state

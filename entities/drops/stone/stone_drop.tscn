@@ -29,7 +29,7 @@ bus = "player_sounds"
 [node name="comp_interactable" parent="." instance=ExtResource( 3 )]
 IGNORE_TAGS = [ "EAT", "HOLDING_PROJECTILE" ]
 method_to_execute = {
-"args": [ "stone_collected" ],
+"args": [ "projectile_collected", "stone_projectile" ],
 "caller": "player_events",
 "method": "emit_signal"
 }
