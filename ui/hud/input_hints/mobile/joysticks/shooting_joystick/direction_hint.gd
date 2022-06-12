@@ -6,7 +6,7 @@ enum {
 	TRUE
 }
 
-var can_show: int = TRUE # GODOT DOESNT SUPPORT FUCKIN BOOL MULTIPLICATION ARGSGFSFASAF
+var can_show: int = FALSE # GODOT DOESNT SUPPORT FUCKIN BOOL MULTIPLICATION ARGSGFSFASAF
 
 func _ready():
 	input_events.connect("player_shooting_direction_updated", self, "_on_player_shooting_direction_updated")
