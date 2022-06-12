@@ -1,5 +1,6 @@
 extends Label
 
+# warning-ignore:unused_signal
 signal best_time_reached
 
 func _ready():

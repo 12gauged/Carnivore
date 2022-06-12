@@ -2,21 +2,20 @@ extends Component
 
 signal jump_finished
 
-const JUMP_HEIGHT: int = 6
-const GRAVITY: int = 8
+const GRAVITY: int = 500
 
-export(int) var jump_force = 80
+export(int) var jump_force = 90
 
 var Target
 
 var jump_position: Vector2
 var target_position: Vector2 setget set_target
 var direction: Vector2
-var force: int = 0
+var force: float = 0
 
 
 
-func _execute(_delta):
+func _execute(delta):
 	
 	# DON'T TOUCH THIS FUCKING CODE FELIPE ISTG
 	# IF YOU TOUCH IT I'M GOING TO REVOKE YOUR
@@ -30,11 +29,11 @@ func _execute(_delta):
 	if !is_instance_valid(Target): 
 		emit_signal("component_value_update", Vector2.ZERO)
 		return
+		
+	jump_position.y += GRAVITY * delta
+	force -= 1500 * delta
 	
-	jump_position.y += GRAVITY
-	force -= 4
-	
-	if force <= 0:
+	if force <= 0.0:
 		emit_signal("component_value_update", Vector2.ZERO)
 		emit_signal("jump_finished")
 		Owner.enable_collision()
@@ -51,12 +50,14 @@ func start_jump():
 	target_position = Target.global_position
 	
 	var distance_to_target = Owner.global_position.distance_to(target_position)
-	print(distance_to_target)
+	
+	var force_multiplier: float = 5.0
 	force = distance_to_target * 0.5 if distance_to_target > 100 else distance_to_target
+	force *= force_multiplier
 	
 	jump_position = Vector2(
 		Owner.global_position.x + Owner.global_position.direction_to(target_position).x * jump_force,
-		Owner.global_position.y + Owner.global_position.direction_to(target_position).y * jump_force - force
+		Owner.global_position.y + Owner.global_position.direction_to(target_position).y * jump_force - force / force_multiplier + 20
 	)
 	
 func set_target(value: Vector2):

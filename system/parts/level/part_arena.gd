@@ -70,8 +70,7 @@ func process_enemy_deaths():
 	
 	enemy_kill_count += 1
 	if enemy_kill_count > enemies_per_wave:
-		var method = "end_wave" if game_data.current_arena_wave < number_of_waves else "end_arena"
-		call(method)
+		end_wave()
 	elif enemy_id <= enemies_per_wave:
 		spawn_new_enemy()
 	dead_enemies.pop_back()
@@ -119,9 +118,12 @@ func spawn_new_enemy():
 	
 func get_random_enemy() -> String:
 	var result: String = FILLER_ENEMY
-	for EnemyData in enemy_spawn_data:
-		var check_results = check_enemy_conditions(EnemyData) 
-		result = check_results if check_results != "" else result
+	
+	toolbox.SystemRNG.randomize()
+	var EnemyData = enemy_spawn_data[toolbox.SystemRNG.randi_range(0, len(enemy_spawn_data) - 1)]
+	var check_results = check_enemy_conditions(EnemyData) 
+	result = check_results if check_results != "" else result
+	
 	return result
 	
 		
@@ -131,8 +133,8 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
 	
-	toolbox.WorldRNG.randomize()
-	if !toolbox.WorldRNG.randi_range(0, 100) <= data.spawn_chance - 1: return ""
+	toolbox.SystemRNG.randomize()
+	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1: return ""
 	
 	return data.entity_name
 	
@@ -155,13 +157,14 @@ func start_wave():
 	game_events.emit_signal("start_wave_time_tracker")
 
 func end_wave():
+	game_data.current_arena_wave += 1
+	
 	if game_data.current_arena_wave == number_of_waves:
 		end_arena()
 		return
 	
 	enemy_kill_count = 0
 	enemy_id = 0
-	game_data.current_arena_wave += 1
 	enemies_per_wave = int(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = int(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)

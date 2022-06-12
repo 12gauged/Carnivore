@@ -243,23 +243,29 @@ margin_left = 152.0
 margin_right = 176.0
 custom_constants/margin_left = 24
 
-[node name="special_attack_button" type="TouchScreenButton" parent="root/bottom_right_elements"]
-position = Vector2( 184, 16 )
-normal = ExtResource( 16 )
-pressed = ExtResource( 15 )
+[node name="special_attack_button_container" type="Control" parent="root/bottom_right_elements"]
+margin_top = 4.0
+margin_right = 176.0
+margin_bottom = 4.0
 script = ExtResource( 18 )
 
-[node name="special_attack_button" type="Control" parent="root/bottom_right_elements/special_attack_button"]
+[node name="special_attack_button" type="TouchScreenButton" parent="root/bottom_right_elements/special_attack_button_container"]
+position = Vector2( 184, 12 )
+normal = ExtResource( 16 )
+pressed = ExtResource( 15 )
+shape_visible = false
+
+[node name="icon_container" type="Control" parent="root/bottom_right_elements/special_attack_button_container/special_attack_button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="root/bottom_right_elements/special_attack_button/special_attack_button"]
+[node name="icon_container_center_container" type="CenterContainer" parent="root/bottom_right_elements/special_attack_button_container/special_attack_button/icon_container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="icon" type="TextureRect" parent="root/bottom_right_elements/special_attack_button/special_attack_button/CenterContainer"]
+[node name="icon" type="TextureRect" parent="root/bottom_right_elements/special_attack_button_container/special_attack_button/icon_container/icon_container_center_container"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
@@ -269,7 +275,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 17 )
 
-[node name="comp_method_caller" parent="root/bottom_right_elements/special_attack_button" instance=ExtResource( 13 )]
+[node name="comp_method_caller" parent="root/bottom_right_elements/special_attack_button_container/special_attack_button" instance=ExtResource( 13 )]
 method = {
 "args": [ "enter_eat_state_request" ],
 "caller": "player_events",
@@ -277,9 +283,9 @@ method = {
 }
 
 [node name="bottom_margin" type="MarginContainer" parent="root/bottom_right_elements"]
-margin_top = 4.0
+margin_top = 8.0
 margin_right = 176.0
-margin_bottom = 8.0
+margin_bottom = 12.0
 custom_constants/margin_bottom = 4
 
 [node name="left_elements" type="VBoxContainer" parent="root"]
@@ -365,7 +371,7 @@ visible = false
 [connection signal="released" from="root/top_right_elements/pause_button_holder/pause_button" to="root/pause_screen" method="toggle_pause"]
 [connection signal="pressed" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="released" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/released_method_caller" method="call_method"]
-[connection signal="released" from="root/bottom_right_elements/special_attack_button" to="root/bottom_right_elements/special_attack_button/comp_method_caller" method="call_method"]
+[connection signal="released" from="root/bottom_right_elements/special_attack_button_container/special_attack_button" to="root/bottom_right_elements/special_attack_button_container/special_attack_button/comp_method_caller" method="call_method"]
 [connection signal="paused" from="root/pause_screen" to="root/darker_colors" method="show"]
 [connection signal="resumed" from="root/pause_screen" to="root/darker_colors" method="hide"]
 
