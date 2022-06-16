@@ -16,6 +16,5 @@ func _ready():
 	var lowest_time_in_seconds = toolbox.minutes_to_seconds(last_lowest_time[0], last_lowest_time[1])
 	var current_time_in_seconds = toolbox.minutes_to_seconds(level_time[0], level_time[1])
 	
-	print("lowest time: %s\ncurrent_time: %s\n" % [lowest_time_in_seconds, current_time_in_seconds])
 	if lowest_time_in_seconds > current_time_in_seconds:
 		call_deferred("emit_signal", "best_time_reached")

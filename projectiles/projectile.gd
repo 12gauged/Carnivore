@@ -4,6 +4,7 @@ class_name Projectile
 export(int) var speed = 10
 export(Array) var TAGS = []
 export(int) var max_lifetime = 60
+export(bool) var face_direction = false
 
 onready var hitbox = $part_hitbox
 var direction: Vector2 = Vector2.ZERO setget set_direction
@@ -11,6 +12,10 @@ var lifetime: int = 0
 
 func _physics_process(delta):
 	global_position += direction * (speed * delta)
+	
+	if face_direction:
+		look_at(self.global_position + direction)
+	
 	if lifetime >= max_lifetime:
 		queue_free()
 	else:

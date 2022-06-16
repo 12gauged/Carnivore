@@ -9,6 +9,7 @@ var resources: Dictionary = {
 		"ant": preload("res://entities/ant/ant.png"),
 		"ant_hands_up_overlay": preload("res://entities/ant/ant_hands_up_overlay.png"),
 		"frog": preload("res://entities/frog/frog.png"),
+		"ant_soldier": preload("res://entities/ant_soldier/ant_soldier.png"),
 		
 		"meat_drop": preload("res://entities/drops/meat/meat.png"),
 		"stone_drop": preload("res://entities/drops/stone/stone_drop.png"),
@@ -42,6 +43,7 @@ var resources: Dictionary = {
 		"ant": preload("res://entities/ant/ant.tscn"),
 		"frog": preload("res://entities/frog/frog.tscn"),
 		"worm": preload("res://entities/worm/worm.tscn"),
+		"ant_soldier": preload("res://entities/ant_soldier/ant_soldier.tscn"),
 		
 		"stone_projectile": preload("res://projectiles/stone/stone_projectile.tscn"),
 		"stone_drop": preload("res://entities/drops/stone/stone_drop.tscn"),
