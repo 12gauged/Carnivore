@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://equipment/weapons/cob_blaster/cob_blaster.png" type="Texture" id=1]
-
-[node name="weapon_cob_blaster" type="Node2D"]
-
-[node name="texture" type="Sprite" parent="."]
-texture = ExtResource( 1 )

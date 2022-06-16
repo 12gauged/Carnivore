@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cob_blaster.png-cee6cae2e10298803d0091a0839f16c3.stex"
+path="res://.import/small_star_icon.png-4a62fa83f62430b802927b27f47e738a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/weapons/cob_blaster/cob_blaster.png"
-dest_files=[ "res://.import/cob_blaster.png-cee6cae2e10298803d0091a0839f16c3.stex" ]
+source_file="res://ui/gui/icons/small_star_icon.png"
+dest_files=[ "res://.import/small_star_icon.png-4a62fa83f62430b802927b27f47e738a.stex" ]
 
 [params]
 

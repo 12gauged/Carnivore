@@ -1,9 +1,23 @@
 extends TextureRect
 
-export(int) var id = 0
+const GRAY: Color = Color(0.25, 0.25, 0.25, 1.0)
+const WHITE: Color = Color.white
+const YELLOW: Color = Color.yellow
 
-onready var description: Label = $description
-var archievements: Dictionary = game_data.get_player_data("archievements")
+onready var Title: Label = $title
+onready var Description: Label = $description
+onready var StarIcon: TextureRect = $star_icon_container/star_icon
 
-func _ready():
-	description.text = description.text
+func set_archievement(title, description):
+	Title.text = title
+	Description.text = description
+	
+func mark_archievement_as_complete():
+	Title.modulate = GRAY
+	Description.modulate = GRAY
+	StarIcon.visible = true
+
+func mark_archievement_as_incomplete():
+	Title.modulate = YELLOW
+	Description.modulate = WHITE
+	StarIcon.visible = false

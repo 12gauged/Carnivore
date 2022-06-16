@@ -1,5 +1,24 @@
 extends Node
 
+const ARCHIEVEMENT_REF: Dictionary = {
+	"generation0": {
+		0: "village_savior",
+		1: "just_in_time",
+		2: "its_raining_frogs"
+	},
+	"generation1": {
+		0: "gotcha",
+		1: "accidental_punch",
+		2: "friendly_fire"
+	},
+	"generation2": {
+		0: "ant_on_a_stick",
+		1: "not_so_wet",
+		2: "secret_weapon"
+	}
+}
+
+
 var player_data = {
 	"lowest_time": [],
 	"generation": 0,

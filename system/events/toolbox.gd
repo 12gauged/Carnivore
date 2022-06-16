@@ -65,7 +65,9 @@ func format_args(args: Array) -> Array:
 					else:
 						argument.append("")
 						id += 1
-				formatted_args[arg_id] = callers[argument[1]][argument[2]] 
+				formatted_args[arg_id] = callers[argument[1]][argument[2]]
+				
+	
 				
 	return formatted_args
 	

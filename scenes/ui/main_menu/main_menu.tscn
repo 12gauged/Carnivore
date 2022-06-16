@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/ui/main_menu/screens/main_screen.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/default_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/main_menu/screens/credits_screen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ui/archievements_screen/archievements_screen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/ui/main_menu/menu_screen_controller.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
@@ -71,32 +71,18 @@ visible = false
 [node name="credits" parent="menu_screen_controller" instance=ExtResource( 4 )]
 visible = false
 
+[node name="archievements_screen" parent="menu_screen_controller" instance=ExtResource( 5 )]
+visible = false
+
 [node name="animation_player" type="AnimationPlayer" parent="menu_screen_controller"]
 autoplay = "RESET"
 anims/RESET = SubResource( 1 )
 anims/fade_in = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
 
-[node name="bottom_right_elements" type="Control" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="version_label" type="Label" parent="bottom_right_elements"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -120.0
-margin_top = -14.0
-margin_right = 120.0
-theme = ExtResource( 2 )
-text = "v1.1.11"
-align = 1
-valign = 2
-
 [connection signal="button_pressed" from="menu_screen_controller/main" to="menu_screen_controller" method="_on_button_pressed"]
 [connection signal="button_pressed" from="menu_screen_controller/credits" to="menu_screen_controller" method="_on_button_pressed"]
+[connection signal="button_pressed" from="menu_screen_controller/archievements_screen" to="menu_screen_controller" method="_on_button_pressed"]
 [connection signal="animation_finished" from="menu_screen_controller/animation_player" to="menu_screen_controller" method="_on_animation_player_animation_finished"]
 
 [editable path="menu_screen_controller/settings"]
