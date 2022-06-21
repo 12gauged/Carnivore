@@ -9,9 +9,15 @@ var logs: Array = []
 
 
 
+func _input(event):
+	if event.is_action_pressed("debug_f5"): clear_log()
+
+
 func _ready(): 
 	LogLabel.visible = OS.is_debug_build()
 	startup_logs()
+
+
 
 func startup_logs():
 	# this function exists because some scripts that used dprint function
@@ -22,6 +28,10 @@ func startup_logs():
 	#dprint(game_data.get_current_platform())
 	pass
 
+func clear_log():
+	logs = []
+	last_log = ""
+	update_label_text()
 
 func dprint(string: String, dict_formatting: bool = false):
 	if !OS.is_debug_build(): return

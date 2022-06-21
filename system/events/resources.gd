@@ -46,6 +46,8 @@ var resources: Dictionary = {
 		"ant_soldier": preload("res://entities/ant_soldier/ant_soldier.tscn"),
 		
 		"stone_projectile": preload("res://projectiles/stone/stone_projectile.tscn"),
+		"spear_projectile": preload("res://projectiles/spear/spear_projectile.tscn"),
+		
 		"stone_drop": preload("res://entities/drops/stone/stone_drop.tscn"),
 		
 		"meat_drop": preload("res://entities/drops/meat/meat.tscn")

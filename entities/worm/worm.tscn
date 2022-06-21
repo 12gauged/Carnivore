@@ -149,7 +149,7 @@ tracks/1/keys = {
 
 [node name="worm" type="KinematicBody2D"]
 script = ExtResource( 4 )
-MAX_HEALTH = 2
+MAX_HEALTH = 4
 MAX_SPEED = 30
 ID = "worm"
 TAGS = [ "COMP_EXECUTER", "ENTITY", "WORM" ]

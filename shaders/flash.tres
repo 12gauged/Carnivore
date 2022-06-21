@@ -7,13 +7,13 @@ uniform bool active = true;
 uniform float flash_speed: hint_range(1f, 40f) = 10f;
 
 void fragment() {
-	vec4 final_color = texture(TEXTURE, UV);
+	vec4 pixel_color = texture(TEXTURE, UV);
+	vec4 final_color = pixel_color;
 	
-	if (active && final_color.a > 0f && final_color.rgb != vec3(0f)) {
-		float color_value = min(0.8, 0.8 + sin(TIME * flash_speed));
+	if (active && pixel_color == vec4(1f, 1f, 1f, 1f) && pixel_color.a > 0f) {
+		float color_value = min(0.8, 0.8 - sin(TIME * flash_speed));
 		final_color = vec4(color_value, color_value, color_value, 1f);
 	}
-	
 	COLOR = final_color;
 }"
 

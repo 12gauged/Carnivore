@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-entity_name = "worm"
-wave_requirement = 3
-max_number_per_wave = 3
-spawn_chance = 60
+entity_name = "ant_soldier"
+wave_requirement = 6
+max_number_per_wave = 2
+spawn_chance = 30

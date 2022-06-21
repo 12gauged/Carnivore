@@ -19,7 +19,7 @@ func _physics_process(delta):
 	if lifetime >= max_lifetime:
 		queue_free()
 	else:
-		lifetime += 1
+		lifetime += 1 * delta
 	
 func set_direction(value: Vector2): direction = value.normalized()
 func set_speed(value: int): speed = value

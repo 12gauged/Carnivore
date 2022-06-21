@@ -129,7 +129,7 @@ func get_random_enemy() -> String:
 		
 func check_enemy_conditions(data: EntityArenaData) -> String:
 	
-	if !game_data.current_arena_wave >= data.wave_requirement: return ""
+	if game_data.current_arena_wave < data.wave_requirement: return ""
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
 	

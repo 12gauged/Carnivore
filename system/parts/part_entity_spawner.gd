@@ -24,7 +24,6 @@ func _ready():
 		spawn_entity()
 
 
-
 func get_spawn_offset() -> Vector2:
 	var result: Vector2 = Vector2.ZERO
 	
@@ -54,7 +53,7 @@ func spawn_entity():
 		InstancedEntity.connect(deletion_signal, self, "_on_instanced_entity_deleted")
 	
 	emit_signal("entity_spawned", InstancedEntity)
-
+	
 	return InstancedEntity
 
 func set_custom_values(Instance):

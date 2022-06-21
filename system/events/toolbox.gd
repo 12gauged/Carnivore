@@ -66,10 +66,23 @@ func format_args(args: Array) -> Array:
 						argument.append("")
 						id += 1
 				formatted_args[arg_id] = callers[argument[1]][argument[2]]
-				
-	
-				
 	return formatted_args
+									   
+func process_variable_request(variable, just_give_this_self):
+	var state: int = 0 # 0 = target node  1 = variable name
+	var variable_name = ""
+	var variable_owner = ""
+	
+	for c in variable:
+		match state:
+			0:
+				if c != ".": variable_owner += c
+				else: state = 1
+			1: variable_name += c
+			
+	if variable_name.empty():
+		return just_give_this_self[variable_owner]
+	return just_give_this_self[variable_owner][variable_name]
 	
 	
 func convert_time_to_text(minutes: int, seconds: int):
