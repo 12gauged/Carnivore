@@ -7,7 +7,8 @@ signal arena_ended
 export(String) var FILLER_ENEMY
 export(Array) var enemy_spawn_data
 
-export(int) var number_of_waves = 2
+export(int) var number_of_waves = 1
+export(int) var number_of_extra_waves_per_gen = 0
 export(int) var max_enemy_number = 1
 export(float) var max_enemy_counter_modifier = 0.3
 export(int) var enemies_per_wave = 1
@@ -52,6 +53,8 @@ func _input(event):
 
 func _ready():
 	game_data.current_arena_wave = 0
+	
+	number_of_waves += number_of_extra_waves_per_gen * game_data.get_player_data("generation")
 	
 	initial_max_enemy_number = max_enemy_number
 	initial_enemies_per_wave_value = enemies_per_wave
@@ -132,6 +135,7 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 	if game_data.current_arena_wave < data.wave_requirement: return ""
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
+	if game_data.get_player_data("generation") < data.min_generation: return ""
 	
 	toolbox.SystemRNG.randomize()
 	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1: return ""

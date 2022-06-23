@@ -59,7 +59,7 @@ func string_as_dict(text: String, dict_formatting: bool = false) -> String:
 	if !dict_formatting: return text
 	
 	var TAB_SIZE = "    "
-	var result: String
+	var result: String = ""
 	var indentation = ""
 	
 	for c in text:

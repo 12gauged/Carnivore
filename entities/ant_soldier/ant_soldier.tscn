@@ -74,6 +74,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 4 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../texture:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "SPAWN"
@@ -102,6 +114,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0.5, -40 ), Vector2( 0.5, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("../texture:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="ant_soldier" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -115,6 +139,7 @@ CONSTANT_STATES = [ "CHARGE", "ATTACK", "SPAWN" ]
 state_execution_pattern = [ "MOVE", "CHARGE", "ATTACK" ]
 
 [node name="texture" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 material = ExtResource( 9 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
@@ -124,6 +149,7 @@ frame = 4
 
 [node name="spear" type="Sprite" parent="texture"]
 visible = false
+use_parent_material = true
 position = Vector2( 6, 0 )
 rotation = -1.20951
 texture = ExtResource( 7 )
@@ -134,7 +160,8 @@ script = ExtResource( 12 )
 
 [node name="hands_holding_spear_overlay" type="Sprite" parent="texture/hands_pivot"]
 visible = false
-position = Vector2( 2, -1 )
+use_parent_material = true
+position = Vector2( 0, -1 )
 texture = ExtResource( 13 )
 script = ExtResource( 14 )
 

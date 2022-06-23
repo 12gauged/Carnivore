@@ -60,13 +60,12 @@ margin_right = 240.0
 [node name="status_bars" type="CenterContainer" parent="root/top_elements"]
 margin_top = 4.0
 margin_right = 240.0
-margin_bottom = 14.0
+margin_bottom = 4.0
 
 [node name="horizontal_margin" type="GridContainer" parent="root/top_elements/status_bars"]
-margin_left = 68.0
-margin_right = 172.0
-margin_bottom = 10.0
-custom_constants/hseparation = 40
+margin_left = 80.0
+margin_right = 160.0
+custom_constants/hseparation = 80
 columns = 3
 
 [node name="hunger_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
@@ -74,11 +73,11 @@ anchor_left = 0.0
 anchor_right = 0.0
 margin_left = 0.0
 margin_right = 0.0
-margin_bottom = 10.0
 
 [node name="wave_time_clock" type="Label" parent="root/top_elements/status_bars/horizontal_margin"]
-margin_left = 40.0
-margin_right = 64.0
+visible = false
+margin_left = 50.0
+margin_right = 74.0
 margin_bottom = 10.0
 text = "00:00"
 align = 1
@@ -86,20 +85,19 @@ script = ExtResource( 11 )
 
 [node name="energy_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_left = 104.0
-margin_right = 104.0
-margin_bottom = 10.0
+margin_left = 80.0
+margin_right = 80.0
 
 [node name="wave_text_margin" type="MarginContainer" parent="root/top_elements"]
-margin_top = 18.0
+margin_top = 8.0
 margin_right = 240.0
-margin_bottom = 31.0
+margin_bottom = 21.0
 custom_constants/margin_top = 13
 
 [node name="wave_notification" type="Label" parent="root/top_elements"]
-margin_top = 35.0
+margin_top = 25.0
 margin_right = 240.0
-margin_bottom = 45.0
+margin_bottom = 35.0
 theme = ExtResource( 5 )
 text = "hud.wave_indicator"
 align = 1

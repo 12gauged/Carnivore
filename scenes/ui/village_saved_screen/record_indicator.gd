@@ -9,8 +9,8 @@ onready var Nodes: Array = [
 
 
 func _on_time_best_time_reached():
-	return # TEMP
+	pass # TEMP
 	
-	for CurrentNode in Nodes:
-		CurrentNode.modulate = Color.yellow
-	Confetti.emitting = true
+#	for CurrentNode in Nodes:
+#		CurrentNode.modulate = Color.yellow
+#	Confetti.emitting = true

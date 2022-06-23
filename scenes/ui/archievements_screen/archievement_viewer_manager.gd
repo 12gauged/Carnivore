@@ -43,6 +43,6 @@ func update_current_panel():
 
 func _on_arrow_button_pressed(id):
 	match id:
-		"arrow_left": current_panel = max(0, current_panel - 1)
-		"arrow_right": current_panel = min(number_of_archievements, current_panel + 1)
+		"arrow_left": current_panel = int(max(0, current_panel - 1))
+		"arrow_right": current_panel = int(min(number_of_archievements, current_panel + 1))
 	update_current_panel()

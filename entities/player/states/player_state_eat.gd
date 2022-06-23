@@ -9,6 +9,7 @@ onready var StateMachine: Node2D = get_parent()
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	input_events.connect("player_movement_direction_updated", self, "_on_player_direction_updated")
 
 func _execute(_delta):

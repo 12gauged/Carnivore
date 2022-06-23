@@ -25,9 +25,11 @@ mouse_filter = 2
 [node name="h_box_container" type="HBoxContainer" parent="main_container"]
 margin_right = 12.0
 margin_bottom = 135.0
+mouse_filter = 2
 
 [node name="v_box_container" type="VBoxContainer" parent="main_container/h_box_container"]
 margin_bottom = 135.0
+mouse_filter = 2
 
 [node name="log" type="Label" parent="main_container/h_box_container/v_box_container"]
 margin_bottom = 7.0

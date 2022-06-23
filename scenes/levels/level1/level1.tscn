@@ -33,6 +33,10 @@ tile_data = PoolIntArray( -131069, 0, 0, -131066, 0, 0, -131062, 0, 0, -65535, 3
 [node name="mushroom_house_short" parent="objects/decoration/houses" instance=ExtResource( 12 )]
 position = Vector2( 128, -56 )
 
+[node name="texture" parent="objects/decoration/houses/mushroom_house_short" index="0"]
+frame = 1
+flip_h = true
+
 [node name="mushroom_house_short2" parent="objects/decoration/houses" instance=ExtResource( 12 )]
 position = Vector2( -24, 144 )
 
@@ -48,10 +52,14 @@ position = Vector2( -16, -16 )
 [node name="mushroom_house_tall2" parent="objects/decoration/houses" instance=ExtResource( 13 )]
 position = Vector2( 272, 144 )
 
+[node name="texture" parent="objects/decoration/houses/mushroom_house_tall2" index="0"]
+frame = 0
+flip_h = true
+
 [node name="entities" type="YSort" parent="objects"]
 
 [node name="player" parent="objects/entities" instance=ExtResource( 1 )]
-position = Vector2( 120, 128 )
+position = Vector2( 128, 64 )
 
 [node name="part_camera_control" parent="objects/entities/player" instance=ExtResource( 8 )]
 
@@ -125,7 +133,8 @@ respawn_radius = Vector2( 40, 40 )
 [node name="part_arena" parent="objects" groups=["arena"] instance=ExtResource( 5 )]
 FILLER_ENEMY = "ant"
 enemy_spawn_data = [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 14 ) ]
-number_of_waves = 15
+number_of_waves = 10
+number_of_extra_waves_per_gen = 2
 max_enemy_counter_modifier = 0.45
 enemies_per_wave = 5
 time_between_waves = 4
@@ -177,10 +186,11 @@ autostart = true
 
 [node name="part_camera" parent="." instance=ExtResource( 3 )]
 visible = false
-position = Vector2( 120, 128 )
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2( 128, 64 )
 
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/end_level_method" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/village_savior_archievement" method="call_method"]
 [connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
+
+[editable path="objects/decoration/houses/mushroom_house_short"]
+[editable path="objects/decoration/houses/mushroom_house_tall2"]

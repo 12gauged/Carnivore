@@ -8,3 +8,4 @@ entity_name = "worm"
 wave_requirement = 3
 max_number_per_wave = 3
 spawn_chance = 60
+min_generation = 0

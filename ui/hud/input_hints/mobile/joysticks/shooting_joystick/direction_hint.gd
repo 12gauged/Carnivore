@@ -9,10 +9,15 @@ enum {
 var can_show: int = FALSE # GODOT DOESNT SUPPORT FUCKIN BOOL MULTIPLICATION ARGSGFSFASAF
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	input_events.connect("player_shooting_direction_updated", self, "_on_player_shooting_direction_updated")
+	# warning-ignore:return_value_discarded
 	input_events.connect("player_shooting_joystick_pressed", self, "_on_player_shooting_joystick_pressed")
+	# warning-ignore:return_value_discarded
 	input_events.connect("player_shooting_joystick_released", self, "_on_player_shooting_joystick_released")
+	# warning-ignore:return_value_discarded
 	player_events.connect("projectile_thrown", self, "_on_player_projectile_thrown")
+	# warning-ignore:return_value_discarded
 	player_events.connect("projectile_collected", self, "_on_player_projectile_collected")
 	self.visible = false
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://ui/gui/icons/small_star_icon.png" type="Texture" id=9]
 [ext_resource path="res://scenes/ui/village_saved_screen/time_tracker.gd" type="Script" id=10]
 [ext_resource path="res://scenes/ui/village_saved_screen/record_indicator.gd" type="Script" id=11]
+[ext_resource path="res://ui/gui/button/wide/button_wide_normal.png" type="Texture" id=12]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.890909 ), 0.0, 0.0, 0, 0, Vector2( 0.669683, 0.790909 ), 0.0, 0.0, 0, 0, Vector2( 0.995475, 0 ), 0.0, 0.0, 0, 0 ]
@@ -25,9 +26,9 @@ anchor_bottom = 1.0
 
 [node name="v_grid_container" type="GridContainer" parent="center_container"]
 margin_left = 78.0
-margin_top = 24.0
+margin_top = 10.0
 margin_right = 161.0
-margin_bottom = 110.0
+margin_bottom = 124.0
 custom_constants/vseparation = 1
 
 [node name="victory_text" type="Label" parent="center_container/v_grid_container"]
@@ -40,10 +41,11 @@ align = 1
 [node name="margin_top" type="MarginContainer" parent="center_container/v_grid_container"]
 margin_top = 11.0
 margin_right = 83.0
-margin_bottom = 27.0
-custom_constants/margin_bottom = 16
+margin_bottom = 21.0
+custom_constants/margin_bottom = 10
 
-[node name="stat_tracker_container" type="GridContainer" parent="center_container/v_grid_container"]
+[node name="time_tracker_container" type="GridContainer" parent="center_container/v_grid_container"]
+visible = false
 margin_left = 22.0
 margin_top = 28.0
 margin_right = 60.0
@@ -53,12 +55,12 @@ custom_constants/vseparation = 0
 columns = 2
 script = ExtResource( 11 )
 
-[node name="clock_icon" type="TextureRect" parent="center_container/v_grid_container/stat_tracker_container"]
+[node name="clock_icon" type="TextureRect" parent="center_container/v_grid_container/time_tracker_container"]
 margin_right = 10.0
 margin_bottom = 10.0
 texture = ExtResource( 7 )
 
-[node name="time" type="Label" parent="center_container/v_grid_container/stat_tracker_container"]
+[node name="time" type="Label" parent="center_container/v_grid_container/time_tracker_container"]
 margin_left = 14.0
 margin_right = 38.0
 margin_bottom = 10.0
@@ -66,14 +68,14 @@ theme = ExtResource( 1 )
 text = "00:00"
 script = ExtResource( 10 )
 
-[node name="star_icon" type="TextureRect" parent="center_container/v_grid_container/stat_tracker_container"]
+[node name="star_icon" type="TextureRect" parent="center_container/v_grid_container/time_tracker_container"]
 modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_top = 10.0
 margin_right = 10.0
 margin_bottom = 20.0
 texture = ExtResource( 9 )
 
-[node name="confetti" type="CPUParticles2D" parent="center_container/v_grid_container/stat_tracker_container/star_icon"]
+[node name="confetti" type="CPUParticles2D" parent="center_container/v_grid_container/time_tracker_container/star_icon"]
 position = Vector2( 20, 8 )
 emitting = false
 amount = 16
@@ -92,7 +94,7 @@ scale_amount_random = 0.44
 scale_amount_curve = SubResource( 1 )
 color = Color( 1, 1, 0, 1 )
 
-[node name="lowest_time" type="Label" parent="center_container/v_grid_container/stat_tracker_container"]
+[node name="lowest_time" type="Label" parent="center_container/v_grid_container/time_tracker_container"]
 modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 14.0
 margin_top = 10.0
@@ -103,17 +105,40 @@ theme = ExtResource( 1 )
 text = "00:00"
 script = ExtResource( 8 )
 
-[node name="margin_bottom" type="MarginContainer" parent="center_container/v_grid_container"]
-margin_top = 49.0
+[node name="archievement_tracker_container" type="VBoxContainer" parent="center_container/v_grid_container"]
+margin_top = 22.0
 margin_right = 83.0
-margin_bottom = 65.0
-custom_constants/margin_bottom = 16
+margin_bottom = 82.0
+custom_constants/separation = 0
+
+[node name="archievement0" type="TextureRect" parent="center_container/v_grid_container/archievement_tracker_container"]
+margin_right = 83.0
+margin_bottom = 20.0
+texture = ExtResource( 12 )
+
+[node name="archievement1" type="TextureRect" parent="center_container/v_grid_container/archievement_tracker_container"]
+margin_top = 20.0
+margin_right = 83.0
+margin_bottom = 40.0
+texture = ExtResource( 12 )
+
+[node name="archievement2" type="TextureRect" parent="center_container/v_grid_container/archievement_tracker_container"]
+margin_top = 40.0
+margin_right = 83.0
+margin_bottom = 60.0
+texture = ExtResource( 12 )
+
+[node name="margin_bottom" type="MarginContainer" parent="center_container/v_grid_container"]
+margin_top = 83.0
+margin_right = 83.0
+margin_bottom = 93.0
+custom_constants/margin_bottom = 10
 
 [node name="h_button_container" type="GridContainer" parent="center_container/v_grid_container"]
 margin_left = 7.0
-margin_top = 66.0
+margin_top = 94.0
 margin_right = 75.0
-margin_bottom = 86.0
+margin_bottom = 114.0
 size_flags_horizontal = 4
 columns = 3
 
@@ -171,7 +196,7 @@ method = {
 
 [node name="reset_game" type="Node2D" parent="."]
 
-[connection signal="best_time_reached" from="center_container/v_grid_container/stat_tracker_container/time" to="center_container/v_grid_container/stat_tracker_container" method="_on_time_best_time_reached"]
+[connection signal="best_time_reached" from="center_container/v_grid_container/time_tracker_container/time" to="center_container/v_grid_container/time_tracker_container" method="_on_time_best_time_reached"]
 [connection signal="pressed" from="center_container/v_grid_container/h_button_container/home_button" to="center_container/v_grid_container/h_button_container/home_button/comp_method_caller" method="call_method"]
 [connection signal="pressed" from="center_container/v_grid_container/h_button_container/restart_button" to="center_container/v_grid_container/h_button_container/restart_button/comp_method_caller" method="call_method"]
 [connection signal="ready" from="save_game" to="save_game" method="call_method"]

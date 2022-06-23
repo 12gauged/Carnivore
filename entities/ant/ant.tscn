@@ -44,10 +44,23 @@ tracks/1/keys = {
 "method": "spawn_entity"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("../dig_particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "DEFAULT"
 length = 0.2
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("../texture:frame")
 tracks/0/interp = 1
@@ -64,6 +77,8 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "DIG"
 length = 0.4
+loop = true
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("../texture:frame")
 tracks/0/interp = 1
@@ -75,6 +90,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 3, 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../dig_particles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../texture:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -139,6 +178,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("../dig_particles:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "SPAWN"
@@ -191,6 +242,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../dig_particles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../texture:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 4.0
@@ -213,6 +288,23 @@ offset = Vector2( 0.5, 0 )
 hframes = 6
 vframes = 2
 frame = 1
+
+[node name="dig_particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 2
+lifetime = 0.4
+explosiveness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 3
+emission_points = PoolVector2Array( -2, 0, 2, 0 )
+emission_colors = PoolColorArray(  )
+direction = Vector2( 0, -1 )
+spread = 60.0
+gravity = Vector2( 0, 96 )
+initial_velocity = 30.0
+damping = 23.31
+scale_amount = 1.5
+scale_amount_random = 1.0
 
 [node name="collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
