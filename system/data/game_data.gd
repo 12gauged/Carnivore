@@ -7,17 +7,16 @@ const ARCHIEVEMENT_REF: Dictionary = {
 		2: "its_raining_frogs"
 	},
 	"generation1": {
-		0: "gotcha",
+		0: "ant_on_a_stick",
 		1: "accidental_punch",
 		2: "friendly_fire"
 	},
 	"generation2": {
-		0: "ant_on_a_stick",
+		0: "gotcha",
 		1: "not_so_wet",
 		2: "secret_weapon"
 	}
 }
-
 
 var player_data = {
 	"lowest_time": [],
@@ -29,14 +28,14 @@ var player_data = {
 			"its_raining_frogs": false
 		},
 		"generation1": {
-			"gotcha": false,
+			"ant_on_a_stick": false,
 			"accidental_punch": false,
-			"friendly_fire": false
+			"secret_weapon": false
 		},
 		"generation2": {
-			"ant_on_a_stick": false,
-			"not_so_wet": false,
-			"secret_weapon": false,
+			"gotcha": false,
+			"friendly_fire": false,
+			"not_so_wet": false
 		}
 	}
 }

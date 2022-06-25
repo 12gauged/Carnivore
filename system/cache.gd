@@ -1,8 +1,9 @@
 extends Node
 
-var cache: Dictionary = {}
-var cache_key: int = -1
+var game_cache: Dictionary = {}
 
-func _add_to_cache() -> int:
-	var generated_key: int = cache_key + 1
-	return generated_key
+func exists_on_cache(key: String): return key in game_cache.keys()
+func add_to_cache(key: String, value): game_cache[key] = value
+func get_from_cache(key: String):
+	if game_cache.keys().has(key): return game_cache[key]
+	else: return null

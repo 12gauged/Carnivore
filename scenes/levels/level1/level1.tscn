@@ -34,7 +34,6 @@ tile_data = PoolIntArray( -131069, 0, 0, -131066, 0, 0, -131062, 0, 0, -65535, 3
 position = Vector2( 128, -56 )
 
 [node name="texture" parent="objects/decoration/houses/mushroom_house_short" index="0"]
-frame = 1
 flip_h = true
 
 [node name="mushroom_house_short2" parent="objects/decoration/houses" instance=ExtResource( 12 )]
@@ -53,7 +52,6 @@ position = Vector2( -16, -16 )
 position = Vector2( 272, 144 )
 
 [node name="texture" parent="objects/decoration/houses/mushroom_house_tall2" index="0"]
-frame = 0
 flip_h = true
 
 [node name="entities" type="YSort" parent="objects"]

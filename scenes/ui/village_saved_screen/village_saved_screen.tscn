@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
@@ -6,187 +6,132 @@
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=5]
 [ext_resource path="res://ui/gui/icons/archievements_icon.png" type="Texture" id=6]
-[ext_resource path="res://ui/gui/icons/clock_icon.png" type="Texture" id=7]
-[ext_resource path="res://scenes/ui/village_saved_screen/lowest_time_tracker.gd" type="Script" id=8]
-[ext_resource path="res://ui/gui/icons/small_star_icon.png" type="Texture" id=9]
-[ext_resource path="res://scenes/ui/village_saved_screen/time_tracker.gd" type="Script" id=10]
-[ext_resource path="res://scenes/ui/village_saved_screen/record_indicator.gd" type="Script" id=11]
-[ext_resource path="res://ui/gui/button/wide/button_wide_normal.png" type="Texture" id=12]
-
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0.890909 ), 0.0, 0.0, 0, 0, Vector2( 0.669683, 0.790909 ), 0.0, 0.0, 0, 0, Vector2( 0.995475, 0 ), 0.0, 0.0, 0, 0 ]
+[ext_resource path="res://scenes/ui/village_saved_screen/archievement_popup/archievement_popup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/ui/village_saved_screen/archievement_tracker_container.gd" type="Script" id=13]
 
 [node name="village_saved_screen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="victory_text_container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -47.5
+margin_right = 47.5
+margin_bottom = 10.0
+
+[node name="margin_top" type="MarginContainer" parent="victory_text_container"]
+margin_right = 95.0
+margin_bottom = 14.0
+custom_constants/margin_bottom = 14
+
+[node name="victory_text" type="Label" parent="victory_text_container"]
+margin_top = 18.0
+margin_right = 95.0
+margin_bottom = 28.0
+theme = ExtResource( 1 )
+text = "the village is safe!"
+align = 1
+uppercase = true
 
 [node name="center_container" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="v_grid_container" type="GridContainer" parent="center_container"]
-margin_left = 78.0
-margin_top = 10.0
-margin_right = 161.0
-margin_bottom = 124.0
+margin_left = 72.0
+margin_top = 37.0
+margin_right = 168.0
+margin_bottom = 97.0
 custom_constants/vseparation = 1
 
-[node name="victory_text" type="Label" parent="center_container/v_grid_container"]
-margin_right = 83.0
-margin_bottom = 10.0
-theme = ExtResource( 1 )
-text = "the village is safe!"
-align = 1
-
-[node name="margin_top" type="MarginContainer" parent="center_container/v_grid_container"]
-margin_top = 11.0
-margin_right = 83.0
-margin_bottom = 21.0
-custom_constants/margin_bottom = 10
-
-[node name="time_tracker_container" type="GridContainer" parent="center_container/v_grid_container"]
-visible = false
-margin_left = 22.0
-margin_top = 28.0
-margin_right = 60.0
-margin_bottom = 48.0
-size_flags_horizontal = 4
-custom_constants/vseparation = 0
-columns = 2
-script = ExtResource( 11 )
-
-[node name="clock_icon" type="TextureRect" parent="center_container/v_grid_container/time_tracker_container"]
-margin_right = 10.0
-margin_bottom = 10.0
-texture = ExtResource( 7 )
-
-[node name="time" type="Label" parent="center_container/v_grid_container/time_tracker_container"]
-margin_left = 14.0
-margin_right = 38.0
-margin_bottom = 10.0
-theme = ExtResource( 1 )
-text = "00:00"
-script = ExtResource( 10 )
-
-[node name="star_icon" type="TextureRect" parent="center_container/v_grid_container/time_tracker_container"]
-modulate = Color( 0.5, 0.5, 0.5, 1 )
-margin_top = 10.0
-margin_right = 10.0
-margin_bottom = 20.0
-texture = ExtResource( 9 )
-
-[node name="confetti" type="CPUParticles2D" parent="center_container/v_grid_container/time_tracker_container/star_icon"]
-position = Vector2( 20, 8 )
-emitting = false
-amount = 16
-one_shot = true
-speed_scale = 1.5
-explosiveness = 1.0
-randomness = 0.11
-direction = Vector2( 0, -1 )
-spread = 44.5
-initial_velocity = 54.39
-initial_velocity_random = 0.44
-angle = 170.6
-angle_random = 0.12
-scale_amount = 2.0
-scale_amount_random = 0.44
-scale_amount_curve = SubResource( 1 )
-color = Color( 1, 1, 0, 1 )
-
-[node name="lowest_time" type="Label" parent="center_container/v_grid_container/time_tracker_container"]
-modulate = Color( 0.5, 0.5, 0.5, 1 )
-margin_left = 14.0
-margin_top = 10.0
-margin_right = 38.0
-margin_bottom = 20.0
-size_flags_horizontal = 4
-theme = ExtResource( 1 )
-text = "00:00"
-script = ExtResource( 8 )
-
 [node name="archievement_tracker_container" type="VBoxContainer" parent="center_container/v_grid_container"]
-margin_top = 22.0
-margin_right = 83.0
-margin_bottom = 82.0
-custom_constants/separation = 0
-
-[node name="archievement0" type="TextureRect" parent="center_container/v_grid_container/archievement_tracker_container"]
-margin_right = 83.0
-margin_bottom = 20.0
-texture = ExtResource( 12 )
-
-[node name="archievement1" type="TextureRect" parent="center_container/v_grid_container/archievement_tracker_container"]
-margin_top = 20.0
-margin_right = 83.0
-margin_bottom = 40.0
-texture = ExtResource( 12 )
-
-[node name="archievement2" type="TextureRect" parent="center_container/v_grid_container/archievement_tracker_container"]
-margin_top = 40.0
-margin_right = 83.0
+margin_right = 96.0
 margin_bottom = 60.0
-texture = ExtResource( 12 )
+custom_constants/separation = 0
+script = ExtResource( 13 )
 
-[node name="margin_bottom" type="MarginContainer" parent="center_container/v_grid_container"]
-margin_top = 83.0
-margin_right = 83.0
-margin_bottom = 93.0
-custom_constants/margin_bottom = 10
+[node name="archievement_popup0" parent="center_container/v_grid_container/archievement_tracker_container" instance=ExtResource( 7 )]
+margin_right = 96.0
 
-[node name="h_button_container" type="GridContainer" parent="center_container/v_grid_container"]
-margin_left = 7.0
-margin_top = 94.0
-margin_right = 75.0
-margin_bottom = 114.0
+[node name="archievement_popup1" parent="center_container/v_grid_container/archievement_tracker_container" instance=ExtResource( 7 )]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 40.0
+
+[node name="archievement_popup2" parent="center_container/v_grid_container/archievement_tracker_container" instance=ExtResource( 7 )]
+margin_top = 40.0
+margin_right = 96.0
+margin_bottom = 60.0
+
+[node name="v_button_container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -34.0
+margin_top = -40.0
+margin_right = 34.0
+alignment = 2
+
+[node name="h_button_container" type="GridContainer" parent="v_button_container"]
+margin_top = 10.0
+margin_right = 68.0
+margin_bottom = 30.0
 size_flags_horizontal = 4
 columns = 3
 
-[node name="home_button" parent="center_container/v_grid_container/h_button_container" instance=ExtResource( 2 )]
+[node name="home_button" parent="v_button_container/h_button_container" instance=ExtResource( 2 )]
 
-[node name="icon" parent="center_container/v_grid_container/h_button_container/home_button/center_container" index="0"]
+[node name="icon" parent="v_button_container/h_button_container/home_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 4 )
 
-[node name="comp_method_caller" parent="center_container/v_grid_container/h_button_container/home_button" instance=ExtResource( 3 )]
+[node name="comp_method_caller" parent="v_button_container/h_button_container/home_button" instance=ExtResource( 3 )]
 method = {
 "args": [ "change_scene_request", "main_menu" ],
 "caller": "game_events",
 "method": "emit_signal"
 }
 
-[node name="archievements_button" parent="center_container/v_grid_container/h_button_container" instance=ExtResource( 2 )]
+[node name="archievements_button" parent="v_button_container/h_button_container" instance=ExtResource( 2 )]
 margin_left = 24.0
 margin_right = 44.0
 disabled = true
 
-[node name="icon" parent="center_container/v_grid_container/h_button_container/archievements_button/center_container" index="0"]
+[node name="icon" parent="v_button_container/h_button_container/archievements_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 6 )
 
-[node name="restart_button" parent="center_container/v_grid_container/h_button_container" instance=ExtResource( 2 )]
+[node name="restart_button" parent="v_button_container/h_button_container" instance=ExtResource( 2 )]
 margin_left = 48.0
 margin_right = 68.0
 
-[node name="icon" parent="center_container/v_grid_container/h_button_container/restart_button/center_container" index="0"]
+[node name="icon" parent="v_button_container/h_button_container/restart_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 5 )
 
-[node name="comp_method_caller" parent="center_container/v_grid_container/h_button_container/restart_button" instance=ExtResource( 3 )]
+[node name="comp_method_caller" parent="v_button_container/h_button_container/restart_button" instance=ExtResource( 3 )]
 method = {
 "args": [ "change_scene_request", "var.game_data.current_level" ],
 "caller": "game_events",
 "method": "emit_signal"
 }
+
+[node name="margin_bottom" type="MarginContainer" parent="v_button_container"]
+margin_top = 34.0
+margin_right = 68.0
+margin_bottom = 40.0
+custom_constants/margin_top = 6
 
 [node name="save_game" parent="." instance=ExtResource( 3 )]
 method = {
@@ -196,11 +141,10 @@ method = {
 
 [node name="reset_game" type="Node2D" parent="."]
 
-[connection signal="best_time_reached" from="center_container/v_grid_container/time_tracker_container/time" to="center_container/v_grid_container/time_tracker_container" method="_on_time_best_time_reached"]
-[connection signal="pressed" from="center_container/v_grid_container/h_button_container/home_button" to="center_container/v_grid_container/h_button_container/home_button/comp_method_caller" method="call_method"]
-[connection signal="pressed" from="center_container/v_grid_container/h_button_container/restart_button" to="center_container/v_grid_container/h_button_container/restart_button/comp_method_caller" method="call_method"]
+[connection signal="pressed" from="v_button_container/h_button_container/home_button" to="v_button_container/h_button_container/home_button/comp_method_caller" method="call_method"]
+[connection signal="pressed" from="v_button_container/h_button_container/restart_button" to="v_button_container/h_button_container/restart_button/comp_method_caller" method="call_method"]
 [connection signal="ready" from="save_game" to="save_game" method="call_method"]
 
-[editable path="center_container/v_grid_container/h_button_container/home_button"]
-[editable path="center_container/v_grid_container/h_button_container/archievements_button"]
-[editable path="center_container/v_grid_container/h_button_container/restart_button"]
+[editable path="v_button_container/h_button_container/home_button"]
+[editable path="v_button_container/h_button_container/archievements_button"]
+[editable path="v_button_container/h_button_container/restart_button"]

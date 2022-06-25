@@ -34,6 +34,7 @@ func _input(event):
 	if OS.is_debug_build():
 		if event.is_action_pressed("debug_f3"): die()
 		if event.is_action_pressed("debug_f4"): update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
+		if event.is_action_pressed("debug_f6"): update_stat("health", int(max(get_stat("health") - 1, 0)))
 	
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 		if event.is_pressed(): enter_eat_state()

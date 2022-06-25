@@ -24,7 +24,6 @@ func startup_logs():
 	# call it before the node is initialized which causing an error, so i
 	# call it here
 	
-	dprint("")
 	#dprint(game_data.get_current_platform())
 	pass
 
