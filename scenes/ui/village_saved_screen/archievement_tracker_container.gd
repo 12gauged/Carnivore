@@ -1,6 +1,9 @@
 extends VBoxContainer
 
 
+signal all_archievements_shown
+
+
 const ARCHIEVEMENT_TITLE_BASE: String = "ui.archievements.%s.title"
 
 
@@ -23,6 +26,7 @@ func _ready():
 		current_archievement.set_text(tr(ARCHIEVEMENT_TITLE_BASE % archievement))
 		current_archievement.animate()
 		yield(get_tree().create_timer(0.8), "timeout")
+	emit_signal("all_archievements_shown")
 	
 	# resets the archievement log
 	cache.add_to_cache("archievement_log", [])
