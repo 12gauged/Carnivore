@@ -24,4 +24,4 @@ signal force_exit_from_eat_state
 signal enter_eat_state_request
 
 # warning-ignore:unused_signal
-signal archievement_made(archievement)
+signal archievement_made(archievement, nofity)

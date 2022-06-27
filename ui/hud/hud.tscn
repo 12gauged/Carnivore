@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://ui/hud/status_bars/energy_bar/energy_bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/hud/status_bars/hunger_bar/hunger_bar.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/hud/hud_control.gd" type="Script" id=6]
 [ext_resource path="res://ui/hud/notifications/wave_notification.gd" type="Script" id=7]
+[ext_resource path="res://ui/hud/notifications/archievement_notification.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/pause_screen/pause_screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=10]
 [ext_resource path="res://ui/hud/wave_time_clock.gd" type="Script" id=11]
@@ -63,9 +64,9 @@ margin_right = 240.0
 margin_bottom = 4.0
 
 [node name="horizontal_margin" type="GridContainer" parent="root/top_elements/status_bars"]
-margin_left = 80.0
-margin_right = 160.0
-custom_constants/hseparation = 80
+margin_left = 91.0
+margin_right = 149.0
+custom_constants/hseparation = 58
 columns = 3
 
 [node name="hunger_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
@@ -85,8 +86,8 @@ script = ExtResource( 11 )
 
 [node name="energy_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_left = 80.0
-margin_right = 80.0
+margin_left = 58.0
+margin_right = 58.0
 
 [node name="wave_text_margin" type="MarginContainer" parent="root/top_elements"]
 margin_top = 8.0
@@ -94,17 +95,31 @@ margin_right = 240.0
 margin_bottom = 21.0
 custom_constants/margin_top = 13
 
-[node name="wave_notification" type="Label" parent="root/top_elements"]
+[node name="notifs" type="Control" parent="root/top_elements"]
 margin_top = 25.0
 margin_right = 240.0
-margin_bottom = 35.0
+margin_bottom = 25.0
+
+[node name="CenterContainer" type="CenterContainer" parent="root/top_elements/notifs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="archievement_notification" parent="root/top_elements/notifs/CenterContainer" instance=ExtResource( 8 )]
+margin_left = 88.0
+margin_right = 152.0
+
+[node name="wave_notification" type="Label" parent="root/top_elements/notifs/CenterContainer"]
+margin_left = 74.0
+margin_top = 3.0
+margin_right = 165.0
+margin_bottom = 13.0
 theme = ExtResource( 5 )
 text = "hud.wave_indicator"
 align = 1
 uppercase = true
 script = ExtResource( 7 )
 
-[node name="notification_disappear_delay" type="Timer" parent="root/top_elements/wave_notification"]
+[node name="notification_disappear_delay" type="Timer" parent="root/top_elements/notifs/CenterContainer/wave_notification"]
 wait_time = 3.0
 
 [node name="top_right_elements" type="VBoxContainer" parent="root"]
@@ -137,20 +152,28 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 19 )
 
+[node name="top_left_elements" type="VBoxContainer" parent="root"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 96.0
+margin_bottom = 20.0
+size_flags_stretch_ratio = 0.5
+
 [node name="center_bottom_elements" type="VBoxContainer" parent="root"]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+margin_top = -16.0
 grow_vertical = 0
 alignment = 2
 
 [node name="center_container" type="CenterContainer" parent="root/center_bottom_elements"]
-margin_right = 240.0
-margin_bottom = 3.0
+margin_top = 13.0
+margin_bottom = 16.0
 
 [node name="v_grid_container" type="GridContainer" parent="root/center_bottom_elements/center_container"]
-margin_left = 120.0
-margin_right = 120.0
 margin_bottom = 3.0
 size_flags_horizontal = 4
 custom_constants/vseparation = 0
@@ -335,7 +358,7 @@ script = ExtResource( 10 )
 [node name="pause_screen" parent="root" instance=ExtResource( 9 )]
 visible = false
 
-[connection signal="timeout" from="root/top_elements/wave_notification/notification_disappear_delay" to="root/top_elements/wave_notification" method="_on_notification_disappear_delay_timeout"]
+[connection signal="timeout" from="root/top_elements/notifs/CenterContainer/wave_notification/notification_disappear_delay" to="root/top_elements/notifs/CenterContainer/wave_notification" method="_on_notification_disappear_delay_timeout"]
 [connection signal="released" from="root/top_right_elements/pause_button_holder/pause_button" to="root/pause_screen" method="toggle_pause"]
 [connection signal="pressed" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="released" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/released_method_caller" method="call_method"]

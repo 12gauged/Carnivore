@@ -11,14 +11,8 @@ func _ready():
 	player_events.connect("archievement_made", self, "_on_archievement_made")
 	# warning-ignore:return_value_discarded
 	game_events.connect("level_started", self, "_on_level_started")
-	
 
 
-func get_archievement_generation(archievement) -> int:
-	if archievement in archievements.generation0: return 0
-	elif archievement in archievements.generation1: return 1
-	elif archievement in archievements.generation2: return 2
-	return -1
 	
 func generation_complete():
 	var finish_count: int = 0
@@ -38,19 +32,16 @@ func log_archievement_on_cache(archievement):
 
 	
 	
-func _on_archievement_made(archievement: String):
-	var generation = get_archievement_generation(archievement) 
+func _on_archievement_made(archievement: String, _notify):
+	var archievement_generation = game_functions.get_archievement_generation(archievement) 
 	var player_generation: int = game_data.get_player_data("generation")
-	var requested_archievement_stat = archievements["generation%s" % generation][archievement]
+	var requested_archievement_stat = archievements["generation%s" % archievement_generation][archievement]
 
-	print("r_archievement_stt: %s\narchievement: %s\n" % [requested_archievement_stat, archievement])
-
-	if generation != starting_player_generation: return
-	if requested_archievement_stat == true: return ## returns if the archievement is complete
-	if generation == -1: return
+	if archievement_generation != starting_player_generation: return
+	if !game_functions.validate_archievement(archievement, starting_player_generation): return
 	
 	debug_log.dprint("archievement made! %s" % archievement)
-	archievements["generation%s" % generation][archievement] = true # can't use the variable here for some reason..
+	archievements["generation%s" % archievement_generation][archievement] = true # can't use the variable here for some reason..
 	log_archievement_on_cache(archievement)
 	
 	game_data.set_player_data("archievements", archievements)

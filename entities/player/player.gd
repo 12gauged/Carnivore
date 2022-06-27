@@ -81,7 +81,7 @@ func enter_eat_state():
 	
 	## Archievement
 	if get_stat("health") <= 2:
-		player_events.emit_signal("archievement_made", "just_in_time")
+		player_events.emit_signal("archievement_made", "just_in_time", true)
 	
 func exit_eat_state():
 	start_invincibility()
