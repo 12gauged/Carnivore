@@ -38,7 +38,8 @@ func execute_components(delta):
 	var CurrentComponent = Components[component_id]
 	
 	if !CurrentComponent.has_method("_execute"): return
-	if !CurrentComponent.can_execute(): return
+	if !CurrentComponent.can_execute: return
+	
 	CurrentComponent._execute(delta)
 
 func update_execution_step():

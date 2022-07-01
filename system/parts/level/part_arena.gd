@@ -35,10 +35,11 @@ var initial_max_enemy_number: int = 0
 var initial_enemies_per_wave_value: int = 0
 var SpawnedEnemy: Enemy
 var Spawners: Array = []
-var dead_enemies: Array = []
+var dead_enemies: int = 0
 var SpawnedEnemies: Array = []
 var AvailableSpawners: Array = []
 var ChosenSpawner = null
+var ENEMY_SPAWN_DATA_LEN: int = 0
 
 
 func _input(event):
@@ -59,6 +60,7 @@ func _ready():
 	initial_max_enemy_number = max_enemy_number
 	initial_enemies_per_wave_value = enemies_per_wave
 	enemy_counter[FILLER_ENEMY] = 0
+	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
 	
 	Spawners = get_node("spawners").get_children()
 			
@@ -69,14 +71,14 @@ func _process(_delta):
 	
 
 func process_enemy_deaths():
-	if dead_enemies.empty(): return
+	if dead_enemies == 0: return
 	
 	enemy_kill_count += 1
 	if enemy_kill_count > enemies_per_wave:
 		end_wave()
 	elif enemy_id <= enemies_per_wave:
 		spawn_new_enemy()
-	dead_enemies.pop_back()
+	dead_enemies -= 1
 
 func free_all_enemies():
 	for AliveEnemy in SpawnedEnemies:
@@ -92,6 +94,7 @@ func spawn_first_enemies():
 	last_max_enemy_number = max_enemy_number
 
 func spawn_new_enemy():
+	toolbox.SystemRNG.randomize()
 	enemy_name = get_random_enemy()
 	
 	if AvailableSpawners.empty(): 
@@ -99,15 +102,13 @@ func spawn_new_enemy():
 		if is_instance_valid(ChosenSpawner): AvailableSpawners.remove(AvailableSpawners.find(ChosenSpawner))
 	
 	# gets a random spawner
-	toolbox.WorldRNG.randomize()
-	enemy_spawner_id = toolbox.WorldRNG.randi_range(0, len(AvailableSpawners) - 1)
-	
+	enemy_spawner_id = toolbox.SystemRNG.randi_range(0, len(AvailableSpawners) - 1)
 	# Picks up the spawner from the array
 	ChosenSpawner = AvailableSpawners[enemy_spawner_id]
 	# configures the spawner and spawns the entity
 	ChosenSpawner.set_entity(enemy_name)
 	SpawnedEnemy = ChosenSpawner.spawn_entity()
-	SpawnedEnemies.append(SpawnedEnemy)
+	#SpawnedEnemies.append(SpawnedEnemy)
 	# discards the used spawner
 	AvailableSpawners.remove(enemy_spawner_id)
 	
@@ -121,23 +122,18 @@ func spawn_new_enemy():
 	
 func get_random_enemy() -> String:
 	var result: String = FILLER_ENEMY
-	
-	toolbox.SystemRNG.randomize()
-	var EnemyData = enemy_spawn_data[toolbox.SystemRNG.randi_range(0, len(enemy_spawn_data) - 1)]
+	var EnemyData = enemy_spawn_data[toolbox.SystemRNG.randi_range(0, ENEMY_SPAWN_DATA_LEN)]
 	var check_results = check_enemy_conditions(EnemyData) 
-	result = check_results if check_results != "" else result
 	
+	result = check_results if check_results != "" else result
 	return result
 	
 		
 func check_enemy_conditions(data: EntityArenaData) -> String:
-	
 	if game_data.current_arena_wave < data.wave_requirement: return ""
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
 	if game_data.get_player_data("generation") < data.min_generation: return ""
-	
-	toolbox.SystemRNG.randomize()
 	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1: return ""
 	
 	return data.entity_name
@@ -186,16 +182,16 @@ func end_arena():
 	
 	
 func _on_enemy_killed(id): 
-	dead_enemies.append("enemy")
+	dead_enemies += 1
 	enemy_counter[id] -= 1
 	
-func _on_enemy_entered_scene():
-	if last_max_enemy_number != max_enemy_number:
-		# Doesn't count the enemy that emitted the signal
-		#                            v
-		for _i in max_enemy_number - 1:
-			spawn_new_enemy()
-		last_max_enemy_number = max_enemy_number
+func _on_enemy_entered_scene(): pass
+#	if last_max_enemy_number != max_enemy_number:
+#		# Doesn't count the enemy that emitted the signal
+#		#                            v
+#		for _i in max_enemy_number - 1:
+#			spawn_new_enemy()
+#		last_max_enemy_number = max_enemy_number
 
 func _on_arena_start_request(): 
 	start_wave()

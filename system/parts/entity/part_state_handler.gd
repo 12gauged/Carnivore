@@ -5,6 +5,7 @@ var existing_state_nodes: Array = []
 var current_state: String = ""
 
 
+
 func _ready():
 	Owner.connect("state_changed", self, "_on_state_changed")
 	for state in get_children():
@@ -21,8 +22,7 @@ func _process(delta):
 		
 	
 	
-func go_to_next_state(): 
-	Owner.go_to_next_state()
+func go_to_next_state(): Owner.go_to_next_state()
 func start_state_pattern(): Owner.start_state_pattern()
 
 

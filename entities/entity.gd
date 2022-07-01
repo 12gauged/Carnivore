@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Entity
 
+
+
 signal state_changed(new_state, old_state)
 signal dead(id)
 signal deleted()
@@ -11,7 +13,6 @@ export(int) var ACCELERATION = 700
 export(int) var FRICTION = 600
 
 onready var stats = {"health": MAX_HEALTH, "invincible": false}
-
 onready var Collision: CollisionShape2D = $collision
 onready var TextureRes = $texture
 onready var DeathParticle = resources.get_resource("particles", "entity_death")
@@ -25,10 +26,8 @@ export(Array) var CONSTANT_STATES = []
 
 var damage_blink_delay = [0, 20]
 var blinking
-
 var movement_direction: Vector2 = Vector2.ZERO setget set_movement_direction
 var velocity: Vector2 = Vector2.ZERO
-
 var state: String = "" setget set_state, get_state
 
 
@@ -36,6 +35,7 @@ var state: String = "" setget set_state, get_state
 func _ready():
 	STARTING_STATE = DEFAULT_STATE if STARTING_STATE.empty() else STARTING_STATE
 	set_state(STARTING_STATE)
+	
 
 func _physics_process(delta):
 	if dead(): die()

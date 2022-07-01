@@ -4,7 +4,7 @@ signal detected
 export(String) var input_to_detect = ""
 
 func _input(event):
-	if !can_execute(): return
+	if !can_execute: return
 	
 	match input_to_detect:
 		"mouse_left": 
