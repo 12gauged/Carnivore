@@ -2,8 +2,8 @@ extends Component
 
 signal projectile_collected
 signal projectile_thrown 
-
-export(Array) var STATES_TO_IGNORE = []
+signal add_tag_request(tag)
+signal remove_tag_request(tag)
 
 onready var ShotDelayTimer: Timer = $shot_delay_timer
 onready var ProjectileTexture: Sprite = $projectile_holder/projectile_texture
@@ -17,6 +17,8 @@ onready var ProjectileGroup = toolbox.get_node_in_group("projectiles")
 var target_direction: Vector2
 var last_shooting_direction: Vector2
 var projectile_type: String = ""
+
+var on_eat_state: bool = false
 
 var ProjectileScene
 var ProjectileInstance
@@ -50,7 +52,7 @@ func shoot_projectile():
 	camera_events.emit_signal("camera_shake_request", 0.2, 0.5)
 	player_events.emit_signal("projectile_thrown")
 	emit_signal("projectile_thrown")
-	Owner.remove_tag("HOLDING_PROJECTILE")
+	emit_signal("remove_tag_request", "HOLDING_PROJECTILE")
 	spawn_projectile()
 	set_projectile("")
 	
@@ -58,7 +60,7 @@ func set_target_direction(value: Vector2): target_direction = value
 func get_target_direction() -> Vector2: return target_direction
 	
 func set_projectile(type: String):
-	if Owner.get_state() in STATES_TO_IGNORE: return
+	if on_eat_state: return
 	
 	projectile_type = type
 	
@@ -67,7 +69,7 @@ func set_projectile(type: String):
 	
 	if projectile_type != "": 
 		emit_signal("projectile_collected")
-		Owner.add_tag("HOLDING_PROJECTILE")
+		emit_signal("add_tag_request", "HOLDING_PROJECTILE")
 
 func spawn_projectile():
 	ProjectileSpawner.entity_name = projectile_type
@@ -83,8 +85,12 @@ func _on_projectile_collected(projectile): set_projectile(projectile)
 func _on_projectile_spawner_entity_spawned(ProjectileNode):
 	ProjectileNode.set_hitbox_tags(["PLAYER_PROJECTILE"])
 
-func _on_player_entered_eat_state(): self.visible = false
-func _on_player_exited_eat_state(): self.visible = true
+func _on_player_entered_eat_state():
+	self.visible = false
+	on_eat_state = true
+func _on_player_exited_eat_state():
+	self.visible = true
+	on_eat_state = false
 
 func _on_player_shooting_direction_updated(value):
 	if value == Vector2.ZERO and last_shooting_direction != Vector2.ZERO:

@@ -6,6 +6,7 @@ class_name Entity
 signal state_changed(new_state, old_state)
 signal dead(id)
 signal deleted()
+signal self_give(node)
 
 export(int) var MAX_HEALTH = 1
 export(int) var MAX_SPEED = 70
@@ -33,6 +34,7 @@ var state: String = "" setget set_state, get_state
 
 
 func _ready():
+	emit_signal("self_give", self)
 	STARTING_STATE = DEFAULT_STATE if STARTING_STATE.empty() else STARTING_STATE
 	set_state(STARTING_STATE)
 	
@@ -81,6 +83,8 @@ func stop_moving(delta):
 	
 func set_movement_direction(value: Vector2):
 	movement_direction = value
+	
+func set_rotation_degrees(value: float): rotation_degrees = value
 	
 func start_invincibility(): set_stat("invincible", true)
 func stop_invincibility(): set_stat("invincible", false)

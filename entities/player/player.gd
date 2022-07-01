@@ -42,6 +42,7 @@ func _input(event):
 func _process(_delta):
 	if get_state() in CONSTANT_STATES: process_constant_state()
 	else: process_inconstant_state()
+	TextureRes.flip_v = rotation_degrees > 90 and rotation_degrees < -90
 	
 func process_constant_state(): pass
 
@@ -90,6 +91,7 @@ func exit_eat_state():
 	set_stat("invincible", false)
 	reset_stat_decrease_timer("hunger")
 	player_events.emit_signal("exited_eat_state")
+	set_rotation_degrees(0.0)
 	set_movement_direction(Vector2.ZERO)
 
 func consume_meat():

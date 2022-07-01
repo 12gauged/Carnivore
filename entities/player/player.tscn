@@ -208,7 +208,6 @@ platform = "desktop"
 
 [node name="comp_reset_look_at" parent="part_state_handler/*" instance=ExtResource( 8 )]
 auto_execute = false
-reset = true
 
 [node name="EAT" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 9 )
@@ -238,7 +237,6 @@ anims/RESET = SubResource( 2 )
 [node name="part_player_projectile_handler" type="Node2D" parent="."]
 position = Vector2( 0, -7 )
 script = ExtResource( 12 )
-STATES_TO_IGNORE = [ "EAT" ]
 
 [node name="direction_indicator" type="Node2D" parent="part_player_projectile_handler"]
 script = ExtResource( 23 )
@@ -319,12 +317,17 @@ wait_time = 1.2
 one_shot = true
 
 [connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
+[connection signal="self_give" from="." to="part_state_handler/EAT/comp_look_at" method="target_node_receiver"]
+[connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
+[connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="executing" from="part_state_handler/*" to="part_mouth_hitbox" method="_disable_request"]
 [connection signal="executing" from="part_state_handler/EAT" to="part_mouth_hitbox" method="_enable_request"]
 [connection signal="component_value_update" from="part_state_handler/EAT/comp_movement_track_mouse" to="." method="set_movement_direction"]
+[connection signal="add_tag_request" from="part_player_projectile_handler" to="." method="add_tag"]
 [connection signal="projectile_collected" from="part_player_projectile_handler" to="part_player_projectile_handler/hands_overlay" method="_on_projectile_collected"]
 [connection signal="projectile_thrown" from="part_player_projectile_handler" to="part_player_projectile_handler/hands_overlay" method="_on_projectile_thrown"]
+[connection signal="remove_tag_request" from="part_player_projectile_handler" to="." method="remove_tag"]
 [connection signal="entity_spawned" from="part_player_projectile_handler/projectile_spawner" to="part_player_projectile_handler" method="_on_projectile_spawner_entity_spawned"]
 [connection signal="detected" from="part_player_projectile_handler/part_input_detector" to="part_player_projectile_handler" method="shoot_projectile"]
 [connection signal="hit_detected" from="part_mouth_hitbox" to="." method="consume_enemy"]

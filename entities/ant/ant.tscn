@@ -381,6 +381,7 @@ stream = ExtResource( 10 )
 bus = "entity_sounds"
 
 [connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
+[connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler" method="start_state_pattern"]
 [connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler/DEFAULT/comp_movement_track_target" method="stop_moving"]

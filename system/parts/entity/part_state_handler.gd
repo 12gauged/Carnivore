@@ -1,5 +1,9 @@
 extends Component
 
+signal go_to_next_state_request
+signal start_state_pattern_request
+
+
 var state_executers: Dictionary = {}
 var existing_state_nodes: Array = []
 var current_state: String = ""
@@ -7,7 +11,6 @@ var current_state: String = ""
 
 
 func _ready():
-	Owner.connect("state_changed", self, "_on_state_changed")
 	for state in get_children():
 		state_executers[state.name] = state
 		existing_state_nodes.append(state.name)
@@ -22,8 +25,8 @@ func _process(delta):
 		
 	
 	
-func go_to_next_state(): Owner.go_to_next_state()
-func start_state_pattern(): Owner.start_state_pattern()
+func go_to_next_state(): emit_signal("go_to_next_state_request")
+func start_state_pattern(): emit_signal("start_state_pattern_request")
 
 
 

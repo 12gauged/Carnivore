@@ -1,16 +1,17 @@
 extends Component
 
-export(bool) var reset
 var target_position: Vector2
+var TargetNode
 
 func _execute(_delta):
-	if reset:
-		Owner.get_texture().flip_v = false
-		Owner.rotation_degrees = 0
-		return
 	look_at_target()
 
 func look_at_target():
-	Owner.look_at(target_position)
+	if !is_instance_valid(TargetNode): return
+	TargetNode.look_at(target_position)
 func set_target_position(value: Vector2):
 	target_position = value
+
+
+func target_node_receiver(node):
+	TargetNode = node

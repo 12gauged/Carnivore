@@ -7,7 +7,7 @@ signal component_value_update(value)
 export(bool) var auto_execute = true
 export(String, "all", "desktop", "mobile") var platform = "all"
 
-onready var Owner = get_owner()
+onready var Owner = null
 var ParentState
 var can_execute: bool = true
 
@@ -26,6 +26,9 @@ func _process(delta):
 	
 func _execute(_delta): pass
 
+
+func set_owner(OwnerNode):
+	Owner = OwnerNode
 
 
 func get_owner():
