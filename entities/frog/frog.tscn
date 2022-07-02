@@ -267,6 +267,7 @@ tracks/8/keys = {
 script = ExtResource( 4 )
 MAX_HEALTH = 6
 MAX_SPEED = 300
+FRICTION = 10000
 ID = "frog"
 TAGS = [ "COMP_EXECUTER", "ENTITY", "FROG" ]
 DEFAULT_STATE = "IDLE"
@@ -354,6 +355,7 @@ script = ExtResource( 3 )
 
 [node name="comp_movement_jump" parent="part_state_handler/JUMP" instance=ExtResource( 6 )]
 auto_execute = false
+target_node_group = "player"
 
 [node name="land_sound_effect" parent="part_state_handler/JUMP" instance=ExtResource( 9 )]
 stream = ExtResource( 14 )
@@ -378,9 +380,13 @@ intensity = 0.8
 
 [connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
 [connection signal="deleted" from="." to="death_loot_spawner2" method="spawn_entity"]
+[connection signal="self_give" from="." to="part_state_handler/JUMP/comp_movement_jump" method="set_owner"]
+[connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="hit_detected" from="part_hitbox" to="part_hitbox/its_raining_frogs_archievement_sensor" method="_on_part_hitbox_hit_detected"]
+[connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
+[connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="timeout" from="part_state_handler/IDLE/change_state_timer" to="part_state_handler" method="go_to_next_state"]
 [connection signal="state_entered" from="part_state_handler/JUMP" to="part_state_handler/SPAWN/spawn_sound_effect" method="play"]
 [connection signal="component_value_update" from="part_state_handler/JUMP/comp_movement_jump" to="." method="set_movement_direction"]

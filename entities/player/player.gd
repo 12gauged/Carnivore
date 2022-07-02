@@ -3,6 +3,10 @@ extends Entity
 const HUNGER_DECREASE_DELAY = 3.0
 const ENERGY_DECREASE_DELAY = 0.8
 
+const HUNGER_DAMAGE = 1
+const DAMAGE_CAMERA_SHAKE_DURATION = 0.3
+const DAMAGE_CAMERA_SHAKE_INTENSITY = 0.8
+
 export(int) var MAX_HUNGER = 6
 export(int) var MAX_ENERGY = 6
 
@@ -128,18 +132,22 @@ func apply_damage(damage: int):
 	update_stat("health", get_stat("health") - damage)
 	start_invincibility()
 	start_blinking()
-	camera_events.emit_signal("camera_shake_request", 0.3, 0.8)
+	camera_events.emit_signal("camera_shake_request", DAMAGE_CAMERA_SHAKE_DURATION, DAMAGE_CAMERA_SHAKE_INTENSITY)
 		
 		
 
 func _on_hunger_decrease_delay_timeout():
 	match get_state():
 		"EAT":
+			if get_stat("energy") <= 0: 
+				exit_eat_state()
+				return
 			update_stat("energy", int(max(get_stat("energy") - 1, 0)))
-			if get_stat("energy") <= 0: exit_eat_state()
 		_:
+			if get_stat("hunger") <= 0: 
+				apply_damage(1)
+				return
 			update_stat("hunger", int(max(get_stat("hunger") - 1, 0)))
-			if get_stat("hunger") <= 0: update_stat("health", get_stat("health") - 1)
 			
 func _on_exit_from_eat_state_forced(): exit_eat_state()
 func _on_player_movement_direction_updated(value): 

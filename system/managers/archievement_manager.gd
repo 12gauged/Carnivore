@@ -35,13 +35,12 @@ func log_archievement_on_cache(archievement):
 func _on_archievement_made(archievement: String, _notify):
 	var archievement_generation = game_functions.get_archievement_generation(archievement) 
 	var player_generation: int = game_data.get_player_data("generation")
-	var requested_archievement_stat = archievements["generation%s" % archievement_generation][archievement]
 
 	if archievement_generation != starting_player_generation: return
 	if !game_functions.validate_archievement(archievement, starting_player_generation): return
 	
 	debug_log.dprint("archievement made! %s" % archievement)
-	archievements["generation%s" % archievement_generation][archievement] = true # can't use the variable here for some reason..
+	archievements["generation%s" % archievement_generation][archievement] = true
 	log_archievement_on_cache(archievement)
 	
 	game_data.set_player_data("archievements", archievements)

@@ -87,6 +87,8 @@ margin_right = 8.0
 margin_bottom = 8.0
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+status_id = "health"
+initial_value = 6
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )

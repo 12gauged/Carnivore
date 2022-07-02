@@ -295,12 +295,13 @@ amount = 2
 lifetime = 0.4
 explosiveness = 1.0
 lifetime_randomness = 1.0
+fixed_fps = 5
 emission_shape = 3
 emission_points = PoolVector2Array( -2, 0, 2, 0 )
 emission_colors = PoolColorArray(  )
 direction = Vector2( 0, -1 )
 spread = 60.0
-gravity = Vector2( 0, 96 )
+gravity = Vector2( 0, 108 )
 initial_velocity = 30.0
 damping = 23.31
 scale_amount = 1.5
@@ -312,7 +313,6 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="part_state_handler" parent="." instance=ExtResource( 4 )]
-visible = false
 
 [node name="SPAWN" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 5 )
@@ -327,6 +327,7 @@ script = ExtResource( 5 )
 
 [node name="comp_movement_track_target" parent="part_state_handler/DEFAULT" instance=ExtResource( 3 )]
 auto_execute = false
+target_node_group = "player"
 
 [node name="state_change_timer" type="Timer" parent="part_state_handler/DEFAULT"]
 wait_time = 2.0
@@ -383,6 +384,8 @@ bus = "entity_sounds"
 [connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
+[connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
+[connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler" method="start_state_pattern"]
 [connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler/DEFAULT/comp_movement_track_target" method="stop_moving"]
 [connection signal="component_value_update" from="part_state_handler/DEFAULT/comp_movement_track_target" to="." method="set_movement_direction"]

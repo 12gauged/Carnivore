@@ -9,12 +9,14 @@ onready var TitleLabel: Label = $HBoxContainer/Label
 
 func _ready():
 	self.visible = false
+	# warning-ignore:return_value_discarded
 	player_events.connect("archievement_made", self, "_on_archievement_made")
 	
 
 
 func animate():
 	self.modulate = Color.yellow
+	# warning-ignore:return_value_discarded
 	ColorTween.interpolate_property(
 		self,
 		"modulate",
@@ -23,6 +25,7 @@ func animate():
 		Tween.TRANS_LINEAR, Tween.EASE_OUT,
 		1.5
 	)
+	# warning-ignore:return_value_discarded
 	ColorTween.start()
 
 

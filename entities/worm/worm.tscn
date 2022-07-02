@@ -202,6 +202,7 @@ script = ExtResource( 3 )
 
 [node name="comp_movement_track_target" parent="part_state_handler/MOVE" instance=ExtResource( 6 )]
 auto_execute = false
+target_node_group = "player"
 flip_texture = true
 
 [node name="part_tag_detector" parent="part_state_handler/MOVE" instance=ExtResource( 7 )]
@@ -236,8 +237,12 @@ deletion_signal = "interacted"
 spawn_chance = 60
 
 [connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
+[connection signal="self_give" from="." to="part_state_handler/MOVE/comp_movement_track_target" method="set_texture_to_flip"]
+[connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
+[connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
+[connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
-[connection signal="tag_detected" from="part_state_handler/MOVE/part_tag_detector" to="part_state_handler" method="go_to_next_state"]
-[connection signal="timeout" from="part_state_handler/ATTACK/state_change_timer" to="part_state_handler" method="go_to_next_state"]
+[connection signal="tag_detected" from="part_state_handler/MOVE/part_tag_detector" to="." method="go_to_next_state"]
+[connection signal="timeout" from="part_state_handler/ATTACK/state_change_timer" to="." method="go_to_next_state"]

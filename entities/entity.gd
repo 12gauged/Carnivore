@@ -50,6 +50,7 @@ func _physics_process(delta):
 	match movement_direction:
 		Vector2.ZERO: stop_moving(delta)
 		_: move(movement_direction, delta)
+	velocity = move_and_slide(velocity)
 		
 
 
@@ -77,7 +78,6 @@ func emit_particle(Particle):
 
 func move(direction, delta):
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-	velocity = move_and_slide(velocity)
 func stop_moving(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	

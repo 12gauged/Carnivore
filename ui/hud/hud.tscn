@@ -64,9 +64,9 @@ margin_right = 240.0
 margin_bottom = 4.0
 
 [node name="horizontal_margin" type="GridContainer" parent="root/top_elements/status_bars"]
-margin_left = 91.0
-margin_right = 149.0
-custom_constants/hseparation = 58
+margin_left = 75.0
+margin_right = 165.0
+custom_constants/hseparation = 90
 columns = 3
 
 [node name="hunger_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
@@ -86,8 +86,8 @@ script = ExtResource( 11 )
 
 [node name="energy_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_left = 58.0
-margin_right = 58.0
+margin_left = 90.0
+margin_right = 90.0
 
 [node name="wave_text_margin" type="MarginContainer" parent="root/top_elements"]
 margin_top = 8.0
@@ -105,8 +105,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="archievement_notification" parent="root/top_elements/notifs/CenterContainer" instance=ExtResource( 8 )]
-margin_left = 88.0
-margin_right = 152.0
+margin_left = 82.0
+margin_right = 158.0
 
 [node name="wave_notification" type="Label" parent="root/top_elements/notifs/CenterContainer"]
 margin_left = 74.0

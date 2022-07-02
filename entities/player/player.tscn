@@ -317,6 +317,7 @@ wait_time = 1.2
 one_shot = true
 
 [connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
+[connection signal="self_give" from="." to="part_state_handler" method="set_owner"]
 [connection signal="self_give" from="." to="part_state_handler/EAT/comp_look_at" method="target_node_receiver"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]

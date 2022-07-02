@@ -49,7 +49,7 @@ func shoot_projectile():
 	
 	ThrowSoundEffect.play()
 	ShotDelayTimer.start()
-	camera_events.emit_signal("camera_shake_request", 0.2, 0.5)
+	camera_events.emit_signal("camera_shake_request", 0.2, 1)
 	player_events.emit_signal("projectile_thrown")
 	emit_signal("projectile_thrown")
 	emit_signal("remove_tag_request", "HOLDING_PROJECTILE")
