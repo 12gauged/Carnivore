@@ -95,32 +95,29 @@ margin_right = 240.0
 margin_bottom = 21.0
 custom_constants/margin_top = 13
 
-[node name="notifs" type="Control" parent="root/top_elements"]
+[node name="notifs" type="VBoxContainer" parent="root/top_elements"]
 margin_top = 25.0
 margin_right = 240.0
 margin_bottom = 25.0
 
-[node name="CenterContainer" type="CenterContainer" parent="root/top_elements/notifs"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="archievement_notification" parent="root/top_elements/notifs/CenterContainer" instance=ExtResource( 8 )]
-margin_left = 82.0
-margin_right = 158.0
-
-[node name="wave_notification" type="Label" parent="root/top_elements/notifs/CenterContainer"]
-margin_left = 74.0
-margin_top = 3.0
-margin_right = 165.0
-margin_bottom = 13.0
+[node name="wave_notification" type="Label" parent="root/top_elements/notifs"]
+visible = false
+margin_right = 240.0
+margin_bottom = 10.0
 theme = ExtResource( 5 )
 text = "hud.wave_indicator"
 align = 1
 uppercase = true
 script = ExtResource( 7 )
 
-[node name="notification_disappear_delay" type="Timer" parent="root/top_elements/notifs/CenterContainer/wave_notification"]
+[node name="notification_disappear_delay" type="Timer" parent="root/top_elements/notifs/wave_notification"]
 wait_time = 3.0
+
+[node name="archievement_notification" parent="root/top_elements/notifs" instance=ExtResource( 8 )]
+visible = false
+margin_left = 82.0
+margin_right = 158.0
+size_flags_horizontal = 4
 
 [node name="top_right_elements" type="VBoxContainer" parent="root"]
 anchor_left = 1.0
@@ -358,7 +355,7 @@ script = ExtResource( 10 )
 [node name="pause_screen" parent="root" instance=ExtResource( 9 )]
 visible = false
 
-[connection signal="timeout" from="root/top_elements/notifs/CenterContainer/wave_notification/notification_disappear_delay" to="root/top_elements/notifs/CenterContainer/wave_notification" method="_on_notification_disappear_delay_timeout"]
+[connection signal="timeout" from="root/top_elements/notifs/wave_notification/notification_disappear_delay" to="root/top_elements/notifs/wave_notification" method="_on_notification_disappear_delay_timeout"]
 [connection signal="released" from="root/top_right_elements/pause_button_holder/pause_button" to="root/pause_screen" method="toggle_pause"]
 [connection signal="pressed" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="released" from="root/bottom_right_elements/h_box_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="root/bottom_right_elements/h_box_container/shooting_joystick/released_method_caller" method="call_method"]

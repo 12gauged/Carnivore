@@ -18,7 +18,9 @@ func _ready():
 	var archievement_log = cache.get_from_cache("archievement_log")
 	var current_archievement
 	
-	if archievement_log == null: return
+	if archievement_log == null: 
+		emit_signal("all_archievements_shown")
+		return
 	
 	for archievement in archievement_log:
 		current_archievement = archievement_icons[archievement_log.find(archievement)]

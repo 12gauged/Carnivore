@@ -25,3 +25,5 @@ signal enter_eat_state_request
 
 # warning-ignore:unused_signal
 signal archievement_made(archievement, nofity)
+# warning-ignore:unused_signal
+signal notify_archievement(archievement)

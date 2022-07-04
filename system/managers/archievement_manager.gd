@@ -42,6 +42,7 @@ func _on_archievement_made(archievement: String, _notify):
 	debug_log.dprint("archievement made! %s" % archievement)
 	archievements["generation%s" % archievement_generation][archievement] = true
 	log_archievement_on_cache(archievement)
+	player_events.emit_signal("notify_archievement", archievement)
 	
 	game_data.set_player_data("archievements", archievements)
 	
