@@ -10,7 +10,7 @@ onready var TitleLabel: Label = $HBoxContainer/Label
 func _ready():
 	self.visible = false
 	# warning-ignore:return_value_discarded
-	player_events.connect("notify_archievement", self, "_on_archievement_notify_request")
+	gui_events.connect("notify_archievement", self, "_on_archievement_notify_request")
 	
 
 
@@ -30,9 +30,10 @@ func animate():
 
 
 	
-func _on_archievement_notify_request(archievement: String):	
+func _on_archievement_notify_request(archievement: String, notify: bool):
+	if !notify: return	
 	self.visible = true
-	TitleLabel.text = archievement
+	TitleLabel.text = tr(ARCHIEVEMENT_TITLE_TEXT % archievement)
 	animate()
 
 func _on_Tween_tween_all_completed():

@@ -1,15 +1,15 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ui/archievements_screen/archivement_text.gd" type="Script" id=2]
 [ext_resource path="res://ui/gui/text_box/archivement_text_box.png" type="Texture" id=3]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ui/gui/button/arrow/right/arrow_right_hover.png" type="Texture" id=5]
-[ext_resource path="res://ui/gui/button/arrow/left/arrow_left_hover.png" type="Texture" id=6]
-[ext_resource path="res://ui/gui/button/arrow/left/arrow_left_normal.png" type="Texture" id=7]
-[ext_resource path="res://ui/gui/button/arrow/left/arrow_left_pressed.png" type="Texture" id=8]
-[ext_resource path="res://ui/gui/button/arrow/right/arrow_right_normal.png" type="Texture" id=9]
-[ext_resource path="res://ui/gui/button/arrow/right/arrow_right_pressed.png" type="Texture" id=10]
+[ext_resource path="res://ui/gui/button/arrow/down/arrow_down_normal.png" type="Texture" id=5]
+[ext_resource path="res://ui/gui/button/arrow/up/arrow_up_normal.png" type="Texture" id=6]
+[ext_resource path="res://ui/gui/button/arrow/up/arrow_up_pressed.png" type="Texture" id=7]
+[ext_resource path="res://ui/gui/button/arrow/down/arrow_down_hover.png" type="Texture" id=8]
+[ext_resource path="res://ui/gui/button/arrow/up/arrow_up_hover.png" type="Texture" id=9]
+[ext_resource path="res://ui/gui/button/arrow/down/arrow_down_pressed.png" type="Texture" id=10]
 [ext_resource path="res://ui/gui/button/button_generic.gd" type="Script" id=11]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=12]
 [ext_resource path="res://system/random_scripts/audio_stream_player_signal_support.gd" type="Script" id=13]
@@ -19,189 +19,300 @@
 [ext_resource path="res://ui/gui/button/arrow/arrow_disabled.png" type="Texture" id=17]
 [ext_resource path="res://scenes/ui/archievements_screen/archievement_viewer_manager.gd" type="Script" id=18]
 [ext_resource path="res://ui/gui/icons/star_icon.png" type="Texture" id=19]
+[ext_resource path="res://entities/player/player.png" type="Texture" id=20]
+[ext_resource path="res://ui/gui/squares/player_square_challenges_screen.png" type="Texture" id=21]
 
 [node name="archievements_screen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 18 )
 
-[node name="tabs_out_of_focus" type="Control" parent="."]
+[node name="archievement_title_container" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -120.0
-margin_right = 120.0
+margin_top = -67.5
+margin_right = 20.0
+margin_bottom = -49.5
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
-[node name="right" type="HBoxContainer" parent="tabs_out_of_focus"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 53.0
-margin_top = -25.5
-margin_right = 93.0
-margin_bottom = 24.5
-alignment = 2
+[node name="MarginContainer" type="MarginContainer" parent="archievement_title_container"]
+margin_right = 140.0
+margin_bottom = 4.0
+mouse_filter = 2
+custom_constants/margin_top = 4
 
-[node name="TextureRect" type="TextureRect" parent="tabs_out_of_focus/right"]
-margin_left = 1.0
-margin_right = 40.0
-margin_bottom = 50.0
-size_flags_vertical = 4
-texture = ExtResource( 15 )
-
-[node name="left" type="HBoxContainer" parent="tabs_out_of_focus"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -94.0
-margin_top = -26.5
-margin_right = -55.0
-margin_bottom = 23.5
-
-[node name="TextureRect" type="TextureRect" parent="tabs_out_of_focus/left"]
-margin_right = 39.0
-margin_bottom = 50.0
-size_flags_vertical = 4
-texture = ExtResource( 16 )
-
-[node name="archievement_viewer_manager" type="VBoxContainer" parent="."]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -51.5
-margin_bottom = 56.5
-
-[node name="archievements_text" type="Label" parent="archievement_viewer_manager"]
-margin_right = 240.0
-margin_bottom = 10.0
+[node name="archievements_text" type="Label" parent="archievement_title_container"]
+margin_top = 8.0
+margin_right = 140.0
+margin_bottom = 18.0
 theme = ExtResource( 1 )
-text = "ui.main_menu.archievements"
+text = "ui.challenges.title"
 align = 1
 uppercase = true
 
-[node name="margin" type="MarginContainer" parent="archievement_viewer_manager"]
-margin_top = 14.0
-margin_right = 240.0
-margin_bottom = 22.0
-custom_constants/margin_top = 8
+[node name="archievement_viewer_manager" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -67.5
+margin_right = -116.0
+margin_bottom = 67.5
+mouse_filter = 2
 
-[node name="archievement_container" type="GridContainer" parent="archievement_viewer_manager"]
-margin_left = 49.0
-margin_top = 26.0
-margin_right = 190.0
-margin_bottom = 76.0
+[node name="MarginContainer" type="MarginContainer" parent="archievement_viewer_manager"]
+margin_right = 6.0
+margin_bottom = 135.0
+mouse_filter = 2
+custom_constants/margin_right = 6
+custom_constants/margin_left = 0
+
+[node name="CenterContainer" type="Control" parent="archievement_viewer_manager"]
+margin_left = 10.0
+margin_right = 10.0
+margin_bottom = 135.0
+mouse_filter = 2
+
+[node name="tab_top_container" type="Control" parent="archievement_viewer_manager/CenterContainer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -67.5
+margin_right = 134.0
+margin_bottom = 67.5
+mouse_filter = 2
+size_flags_horizontal = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tab_top" type="TextureRect" parent="archievement_viewer_manager/CenterContainer/tab_top_container"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = -67.5
+margin_right = 129.0
+margin_bottom = 67.5
+mouse_filter = 2
+size_flags_horizontal = 5
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tab_bottom_container" type="Control" parent="archievement_viewer_manager/CenterContainer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -65.5
+margin_bottom = 69.5
+mouse_filter = 2
+
+[node name="tab_bottom" type="TextureRect" parent="archievement_viewer_manager/CenterContainer/tab_bottom_container"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = 25.5
+margin_right = 129.0
+margin_bottom = 64.5
+mouse_filter = 2
 size_flags_horizontal = 4
-columns = 3
-
-[node name="arrow_left" type="TextureButton" parent="archievement_viewer_manager/archievement_container"]
-margin_top = 17.0
-margin_right = 16.0
-margin_bottom = 33.0
 size_flags_vertical = 4
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
+texture = ExtResource( 16 )
+
+[node name="archievement_container" type="VBoxContainer" parent="archievement_viewer_manager/CenterContainer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -67.5
+margin_right = 133.0
+margin_bottom = 67.5
+mouse_filter = 2
+size_flags_horizontal = 4
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="arrow_up" type="TextureButton" parent="archievement_viewer_manager/CenterContainer/archievement_container"]
+margin_left = 58.0
+margin_top = 22.0
+margin_right = 74.0
+margin_bottom = 38.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 17 )
 script = ExtResource( 11 )
-id = "arrow_left"
+id = "arrow_up"
 
-[node name="click_sound" type="AudioStreamPlayer" parent="archievement_viewer_manager/archievement_container/arrow_left"]
+[node name="click_sound" type="AudioStreamPlayer" parent="archievement_viewer_manager/CenterContainer/archievement_container/arrow_up"]
 stream = ExtResource( 14 )
 script = ExtResource( 13 )
 
-[node name="current_archievement" type="TextureRect" parent="archievement_viewer_manager/archievement_container"]
-margin_left = 20.0
-margin_right = 121.0
-margin_bottom = 50.0
+[node name="current_archievement" type="TextureRect" parent="archievement_viewer_manager/CenterContainer/archievement_container"]
+margin_top = 42.0
+margin_right = 133.0
+margin_bottom = 92.0
 texture = ExtResource( 3 )
 script = ExtResource( 2 )
 
-[node name="title" type="Label" parent="archievement_viewer_manager/archievement_container/current_archievement"]
+[node name="title" type="Label" parent="archievement_viewer_manager/CenterContainer/archievement_container/current_archievement"]
 modulate = Color( 1, 1, 0, 1 )
 anchor_right = 1.0
-margin_left = 1.0
-margin_top = 1.0
-margin_right = -1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
 margin_bottom = 36.0
 theme = ExtResource( 1 )
 text = "ui.archievements.village_savior.title"
 align = 1
 autowrap = true
 
-[node name="description" type="Label" parent="archievement_viewer_manager/archievement_container/current_archievement"]
+[node name="description" type="Label" parent="archievement_viewer_manager/CenterContainer/archievement_container/current_archievement"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.0
+margin_left = 3.0
 margin_top = 15.0
-margin_right = -1.0
-margin_bottom = -1.0
+margin_right = -3.0
+margin_bottom = -2.0
 theme = ExtResource( 1 )
 custom_constants/line_spacing = 1
 text = "ui.archievements.village_savior.description"
 align = 1
 autowrap = true
 
-[node name="star_icon_container" type="CenterContainer" parent="archievement_viewer_manager/archievement_container/current_archievement"]
+[node name="star_icon_container" type="CenterContainer" parent="archievement_viewer_manager/CenterContainer/archievement_container/current_archievement"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="star_icon" type="TextureRect" parent="archievement_viewer_manager/archievement_container/current_archievement/star_icon_container"]
+[node name="star_icon" type="TextureRect" parent="archievement_viewer_manager/CenterContainer/archievement_container/current_archievement/star_icon_container"]
 visible = false
 modulate = Color( 1, 1, 0, 1 )
-margin_left = 42.0
+margin_left = 58.0
 margin_top = 17.0
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 33.0
 texture = ExtResource( 19 )
 
-[node name="arrow_right" type="TextureButton" parent="archievement_viewer_manager/archievement_container"]
-margin_left = 125.0
-margin_top = 17.0
-margin_right = 141.0
-margin_bottom = 33.0
-size_flags_vertical = 4
-texture_normal = ExtResource( 9 )
+[node name="arrow_down" type="TextureButton" parent="archievement_viewer_manager/CenterContainer/archievement_container"]
+margin_left = 58.0
+margin_top = 96.0
+margin_right = 74.0
+margin_bottom = 112.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 10 )
-texture_hover = ExtResource( 5 )
+texture_hover = ExtResource( 8 )
 texture_disabled = ExtResource( 17 )
 script = ExtResource( 11 )
-id = "arrow_right"
+id = "arrow_down"
 
-[node name="click_sound" type="AudioStreamPlayer" parent="archievement_viewer_manager/archievement_container/arrow_right"]
+[node name="click_sound" type="AudioStreamPlayer" parent="archievement_viewer_manager/CenterContainer/archievement_container/arrow_down"]
 stream = ExtResource( 14 )
 script = ExtResource( 13 )
 
-[node name="margin2" type="MarginContainer" parent="archievement_viewer_manager"]
-margin_top = 80.0
-margin_right = 240.0
-margin_bottom = 84.0
-custom_constants/margin_top = 4
+[node name="button_container" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -33.0
+margin_right = 20.0
+mouse_filter = 2
 
-[node name="button_grid_container" type="GridContainer" parent="archievement_viewer_manager"]
-margin_left = 110.0
-margin_top = 88.0
-margin_right = 130.0
-margin_bottom = 108.0
-size_flags_horizontal = 4
+[node name="CenterContainer" type="CenterContainer" parent="button_container"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
 
-[node name="home_button" parent="archievement_viewer_manager/button_grid_container" instance=ExtResource( 4 )]
+[node name="home_button" parent="button_container/CenterContainer" instance=ExtResource( 4 )]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 30.0
+margin_bottom = 30.0
 id = "main_screen"
 
-[node name="icon" parent="archievement_viewer_manager/button_grid_container/home_button/center_container" index="0"]
+[node name="icon" parent="button_container/CenterContainer/home_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 12 )
 
-[connection signal="button_pressed" from="archievement_viewer_manager/archievement_container/arrow_left" to="." method="_on_arrow_button_pressed"]
-[connection signal="pressed" from="archievement_viewer_manager/archievement_container/arrow_left" to="archievement_viewer_manager/archievement_container/arrow_left/click_sound" method="play"]
-[connection signal="button_pressed" from="archievement_viewer_manager/archievement_container/arrow_right" to="." method="_on_arrow_button_pressed"]
-[connection signal="pressed" from="archievement_viewer_manager/archievement_container/arrow_right" to="archievement_viewer_manager/archievement_container/arrow_right/click_sound" method="play"]
-[connection signal="button_pressed" from="archievement_viewer_manager/button_grid_container/home_button" to="." method="_on_button_pressed"]
+[node name="progress_title_container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 23.0
+margin_top = -67.5
+margin_right = 120.0
+margin_bottom = 67.5
 
-[editable path="archievement_viewer_manager/button_grid_container/home_button"]
+[node name="MarginContainer" type="MarginContainer" parent="progress_title_container"]
+margin_right = 97.0
+margin_bottom = 4.0
+mouse_filter = 2
+custom_constants/margin_top = 4
+
+[node name="Label" type="Label" parent="progress_title_container"]
+margin_top = 8.0
+margin_right = 97.0
+margin_bottom = 31.0
+theme = ExtResource( 1 )
+text = "ui.challenges.progress.title"
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="player_generation_container" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 23.0
+margin_top = -67.5
+margin_right = 120.0
+margin_bottom = 67.5
+mouse_filter = 2
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="player_generation_container"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 135.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="player_generation_container/CenterContainer"]
+margin_top = 26.0
+margin_right = 64.0
+margin_bottom = 109.0
+mouse_filter = 2
+texture = ExtResource( 21 )
+
+[node name="player_gen0" type="Control" parent="player_generation_container/CenterContainer"]
+margin_left = 32.0
+margin_top = 67.0
+margin_right = 32.0
+margin_bottom = 67.0
+mouse_filter = 2
+
+[node name="Sprite" type="Sprite" parent="player_generation_container/CenterContainer/player_gen0"]
+texture = ExtResource( 20 )
+hframes = 5
+
+[connection signal="button_pressed" from="archievement_viewer_manager/CenterContainer/archievement_container/arrow_up" to="." method="_on_arrow_button_pressed"]
+[connection signal="pressed" from="archievement_viewer_manager/CenterContainer/archievement_container/arrow_up" to="archievement_viewer_manager/CenterContainer/archievement_container/arrow_up/click_sound" method="play"]
+[connection signal="button_pressed" from="archievement_viewer_manager/CenterContainer/archievement_container/arrow_down" to="." method="_on_arrow_button_pressed"]
+[connection signal="pressed" from="archievement_viewer_manager/CenterContainer/archievement_container/arrow_down" to="archievement_viewer_manager/CenterContainer/archievement_container/arrow_down/click_sound" method="play"]
+[connection signal="button_pressed" from="button_container/CenterContainer/home_button" to="." method="_on_button_pressed"]
+
+[editable path="button_container/CenterContainer/home_button"]

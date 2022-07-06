@@ -3,11 +3,11 @@ extends MenuScreen
 const ARCHIEVEMENT_TITLE_BASE: String = "ui.archievements.%s.title"
 const ARCHIEVEMENT_DESCRIPTION_BASE: String = "ui.archievements.%s.description"
 
-onready var CurrentArchievement = $archievement_viewer_manager/archievement_container/current_archievement
-onready var ArrowLeft = $archievement_viewer_manager/archievement_container/arrow_left
-onready var ArrowRight = $archievement_viewer_manager/archievement_container/arrow_right
-onready var TabOutOfFocusRight = $tabs_out_of_focus/right
-onready var TabOutOfFocusLeft = $tabs_out_of_focus/left
+onready var CurrentArchievement = $archievement_viewer_manager/CenterContainer/archievement_container/current_archievement
+onready var ArrowDown = $archievement_viewer_manager/CenterContainer/archievement_container/arrow_down
+onready var ArrowUp = $archievement_viewer_manager/CenterContainer/archievement_container/arrow_up
+onready var TabOutOfFocusTop = $archievement_viewer_manager/CenterContainer/tab_top_container/tab_top
+onready var TabOutOfFocusBottom = $archievement_viewer_manager/CenterContainer/tab_bottom_container/tab_bottom
 
 
 export(int) var number_of_archievements = 3
@@ -23,7 +23,6 @@ func _ready():
 
 
 func update_current_panel():
-	
 	var archievement = game_data.ARCHIEVEMENT_REF[current_generation][current_panel]
 	var archievement_title = ARCHIEVEMENT_TITLE_BASE % archievement
 	var archievement_description = ARCHIEVEMENT_DESCRIPTION_BASE % archievement
@@ -34,15 +33,15 @@ func update_current_panel():
 		CurrentArchievement.mark_archievement_as_complete()
 	else: CurrentArchievement.mark_archievement_as_incomplete()
 	
-	ArrowLeft.disabled = current_panel == 0
-	ArrowRight.disabled = current_panel == number_of_archievements
+	ArrowUp.disabled = current_panel == 0
+	ArrowDown.disabled = current_panel == number_of_archievements
 	
-	TabOutOfFocusRight.visible = current_panel < number_of_archievements
-	TabOutOfFocusLeft.visible = current_panel > 0
+	TabOutOfFocusTop.visible = current_panel > 0
+	TabOutOfFocusBottom.visible = current_panel < number_of_archievements
 
 
 func _on_arrow_button_pressed(id):
 	match id:
-		"arrow_left": current_panel = int(max(0, current_panel - 1))
-		"arrow_right": current_panel = int(min(number_of_archievements, current_panel + 1))
+		"arrow_up": current_panel = int(max(0, current_panel - 1))
+		"arrow_down": current_panel = int(min(number_of_archievements, current_panel + 1))
 	update_current_panel()

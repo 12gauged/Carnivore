@@ -32,7 +32,7 @@ func log_archievement_on_cache(archievement):
 
 	
 	
-func _on_archievement_made(archievement: String, _notify):
+func _on_archievement_made(archievement: String, notify):
 	var archievement_generation = game_functions.get_archievement_generation(archievement) 
 	var player_generation: int = game_data.get_player_data("generation")
 
@@ -42,7 +42,7 @@ func _on_archievement_made(archievement: String, _notify):
 	debug_log.dprint("archievement made! %s" % archievement)
 	archievements["generation%s" % archievement_generation][archievement] = true
 	log_archievement_on_cache(archievement)
-	player_events.emit_signal("notify_archievement", archievement)
+	gui_events.emit_signal("notify_archievement", archievement, notify)
 	
 	game_data.set_player_data("archievements", archievements)
 	

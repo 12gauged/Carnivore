@@ -5,7 +5,7 @@
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/gui/icons/info_icon.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/icons/settings_icon.png" type="Texture" id=5]
-[ext_resource path="res://ui/gui/icons/archievements_icon.png" type="Texture" id=6]
+[ext_resource path="res://ui/gui/icons/small_star_icon.png" type="Texture" id=6]
 [ext_resource path="res://scenes/ui/main_menu/screens/menu_screen.gd" type="Script" id=7]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=8]
 [ext_resource path="res://ui/gui/logo/carnivore.png" type="Texture" id=15]
@@ -93,10 +93,10 @@ margin_right = 50.0
 id = "archievements_screen"
 
 [node name="icon" parent="center_elements/grid_container/button_container/archievements_button/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 15.0
+margin_bottom = 15.0
 texture = ExtResource( 6 )
 
 [node name="credits_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]

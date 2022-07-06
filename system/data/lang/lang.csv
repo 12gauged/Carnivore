@@ -2,13 +2,15 @@ id,en,pt,fr
 ui.startup.warning.title,warning!,aviso!,alerte!
 ui.startup.warning.description,this game contains flashing lights,este jogo apresenta luzes piscantes,ce jeu contient des lumières clignotantes
 ui.main_menu.play,play,jogar,jouer
-ui.main_menu.archievements,archievements,conquistas,réalisations
 ui.main_menu.credits.dev,developer,desenvolvedor(a),développeur(développeuse)
 ui.main_menu.credits.translator,translator,tradutor(a),traducteur(traductrice)
 ui.pause_screen.paused,paused,em pausa,en pause
 ui.pause_screen.resume,resume,continuar,reprendre
 ui.death_screen.game_over,game over,fim de jogo,game over
 ui.victory_screen.village_safe,the village is safe,a vila foi salva,le village est en sécurité
+ui.challenges.title,challenges,desafios,untranslated
+ui.challenges.progress.title,progress,progresso,untranslated
+ui.challenges.progress.challenges_incomplete,complete the challenges to level up,complete os desafios para subir de nível,untranslated
 ui.archievements.village_savior.title,village savior,salvador de vilas,sauveur du village
 ui.archievements.village_savior.description,save the village,salve a vila, sovez le village
 ui.archievements.just_in_time.title,just in time,por um triz,juste à temps

@@ -14,3 +14,6 @@ signal text_box_skipped
 signal show_input_hint(input_hint_id)
 # warning-ignore:unused_signal
 signal hide_input_hint(input_hint_id)
+
+# warning-ignore:unused_signal
+signal notify_archievement(archievement, notify)
