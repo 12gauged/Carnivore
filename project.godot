@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://system/data/entity_arena_data.gd"
 }, {
+"base": "Node2D",
+"class": "ExistenceController",
+"language": "GDScript",
+"path": "res://system/random_scripts/node_existence_controller.gd"
+}, {
 "base": "TextureButton",
 "class": "GenericButton",
 "language": "GDScript",
@@ -70,6 +75,7 @@ _global_script_class_icons={
 "Enemy": "",
 "Entity": "",
 "EntityArenaData": "",
+"ExistenceController": "",
 "GenericButton": "",
 "InputHint": "",
 "MenuScreen": "",

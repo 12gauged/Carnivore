@@ -1,34 +1,142 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://entities/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/state.gd" type="Script" id=2]
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=3]
 [ext_resource path="res://system/components/movement/comp_movement_track_target.tscn" type="PackedScene" id=4]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://system/parts/entity/part_detectionbox.gd" type="Script" id=6]
+[ext_resource path="res://system/parts/part_tag_detector.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/fire_ant/fire_ant.png" type="Texture" id=7]
+[ext_resource path="res://entities/fire_ant/fire_overlay.png" type="Texture" id=8]
+[ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=9]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 8 )
+region = Rect2( 7, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 8 )
+region = Rect2( 14, 0, 7, 10 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
 height = 2.0
 
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.0
+
+[sub_resource type="Animation" id=10]
+resource_name = "ATTACK"
+length = 0.1
+
+[sub_resource type="Animation" id=7]
+resource_name = "CHARGE"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../texture/fire_overlay:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.3, 0.4, 0.5, 0.55, 0.65, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "MOVE"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 2 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../texture/fire_overlay:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
 [node name="fire_ant" type="KinematicBody2D"]
 script = ExtResource( 1 )
-MAX_SPEED = 100
+MAX_SPEED = 90
 ID = "FIRE_ANT"
 TAGS = [ "COMP_EXECUTER", "ENTITY", "FIRE_ANT" ]
 DEFAULT_STATE = "MOVE"
 STARTING_STATE = "MOVE"
-state_execution_pattern = [ "MOVE", "CHARGE_FIRE", "USE_FIRE" ]
+state_execution_pattern = [ "MOVE", "CHARGE", "ATTACK" ]
 
 [node name="texture" type="Sprite" parent="."]
 position = Vector2( 0, -5 )
 texture = ExtResource( 7 )
 offset = Vector2( 0.5, 0 )
 hframes = 3
-vframes = 2
+frame = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="fire_overlay" type="AnimatedSprite" parent="texture"]
+position = Vector2( 0, -6 )
+frames = SubResource( 6 )
+frame = 2
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -41,22 +149,43 @@ script = ExtResource( 2 )
 auto_execute = false
 target_node_group = "player"
 
-[node name="player_detection_box" type="Area2D" parent="part_state_handler/MOVE"]
-script = ExtResource( 6 )
+[node name="player_tag_detector" parent="part_state_handler/MOVE" instance=ExtResource( 6 )]
+TAGS = [ "FIRE_ANT_PLAYER_SENSOR" ]
 ACCEPT_TAGS = [ "PLAYER" ]
 
-[node name="CHARGE_FIRE" type="Node2D" parent="part_state_handler"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="part_state_handler/MOVE/player_tag_detector"]
+shape = SubResource( 2 )
+
+[node name="CHARGE" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 2 )
 
-[node name="charge_timer" type="Timer" parent="part_state_handler/CHARGE_FIRE"]
+[node name="charge_timer" type="Timer" parent="part_state_handler/CHARGE"]
+wait_time = 0.75
 one_shot = true
 
-[node name="USE_FIRE" type="Node2D" parent="part_state_handler"]
+[node name="ATTACK" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 2 )
 
-[node name="fire_spawner" parent="part_state_handler/USE_FIRE" instance=ExtResource( 5 )]
-entity_name = "fire"
+[node name="fire_spawner" parent="part_state_handler/ATTACK" instance=ExtResource( 5 )]
+entity_name = "fire_area"
 entity_group = "enemies"
 deletion_signal = "finished"
 
-[connection signal="timeout" from="part_state_handler/CHARGE_FIRE/charge_timer" to="part_state_handler" method="go_to_next_state"]
+[node name="part_state_anim_handler" parent="." instance=ExtResource( 9 )]
+states = [ "MOVE", "CHARGE", "ATTACK" ]
+
+[node name="animation_player" type="AnimationPlayer" parent="part_state_anim_handler"]
+anims/ATTACK = SubResource( 10 )
+anims/CHARGE = SubResource( 7 )
+anims/MOVE = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
+[connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
+[connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
+[connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
+[connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
+[connection signal="tag_detected" from="part_state_handler/MOVE/player_tag_detector" to="part_state_handler" method="go_to_next_state"]
+[connection signal="timeout" from="part_state_handler/CHARGE/charge_timer" to="part_state_handler" method="go_to_next_state"]
+[connection signal="state_entered" from="part_state_handler/ATTACK" to="." method="queue_free"]
+[connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/fire_spawner" method="spawn_entity"]

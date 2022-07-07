@@ -14,6 +14,13 @@ onready var last_screen = screens.main
 var target_screen: String = ""
 
 
+func _input(event):
+	if !OS.is_debug_build(): return
+	
+	if event.is_action_pressed("debug_f1"):
+		game_events.emit_signal("change_scene_request", "debug")
+
+
 func _ready():
 	screens.main.visible = true
 	screens.settings.visible = false

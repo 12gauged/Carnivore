@@ -279,9 +279,7 @@ state_execution_pattern = [ "IDLE", "CROAK", "JUMP" ]
 material = ExtResource( 7 )
 position = Vector2( 0, -3 )
 texture = ExtResource( 5 )
-offset = Vector2( 0, -80 )
 hframes = 4
-frame = 3
 
 [node name="collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -376,7 +374,7 @@ particle_id = "entity_ground_slam"
 
 [node name="part_camera_shaker" parent="." instance=ExtResource( 13 )]
 duration = 0.2
-intensity = 0.8
+intensity = 1.2
 
 [connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
 [connection signal="deleted" from="." to="death_loot_spawner2" method="spawn_entity"]

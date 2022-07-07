@@ -126,5 +126,5 @@ func disable_collision(): Collision.set_deferred("disabled", true)
 func enable_collision(): Collision.set_deferred("disabled", false)
 	
 func _on_damage_received(Hitbox: DetectionBox):
-	if get_stat("invincible") == true: return
+	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
 	apply_damage(Hitbox.damage)

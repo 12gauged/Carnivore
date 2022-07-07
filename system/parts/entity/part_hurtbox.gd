@@ -1,22 +1,17 @@
 extends DetectionBox
 
 signal hit_detected(Hitbox)
+signal play_hit_sound_request()
+
+onready var HitSoundEffect = $hit_sound_effect
 
 
-func play_hit_sound(area):
-	if !is_instance_valid($hit_sound_effect): return
-	if !"damage" in area and !area.damage > 0: return
-	if Owner is Entity and "invincible" in Owner.stats and Owner.stats.invincible: return
-	$hit_sound_effect.play()
-
-
+func _ready(): connect("play_hit_sound_request", HitSoundEffect, "play")
+	
 
 func _on_part_hurtbox_area_entered(area):
 	if !area is DetectionBox: return
-	
-	for tag in area.TAGS:
-		if tag in IGNORE_TAGS:
-			return
+	if !is_area_valid(area): return
 			
-	play_hit_sound(area)
+	emit_signal("play_hit_sound_request")
 	emit_signal("hit_detected", area)
