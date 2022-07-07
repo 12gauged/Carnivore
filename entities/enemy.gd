@@ -8,6 +8,7 @@ onready var Player = toolbox.get_node_in_group("player")
 onready var AI_TARGET = Player
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	connect("deleted", self, "_on_deleted")
 
 

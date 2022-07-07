@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://entities/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/state.gd" type="Script" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://entities/fire_ant/fire_ant.png" type="Texture" id=7]
 [ext_resource path="res://entities/fire_ant/fire_overlay.png" type="Texture" id=8]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=9]
+[ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sounds/entity/enemy/fire_ant/charge.wav" type="AudioStream" id=11]
+[ext_resource path="res://system/parts/entity/part_hurtbox.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sounds/entity/enemy/enemy_hit.wav" type="AudioStream" id=13]
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 8 )
@@ -34,8 +38,12 @@ animations = [ {
 radius = 2.0
 height = 2.0
 
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 5.0
+height = 4.0
+
 [sub_resource type="CircleShape2D" id=2]
-radius = 32.0
+radius = 46.0
 
 [sub_resource type="Animation" id=10]
 resource_name = "ATTACK"
@@ -43,7 +51,8 @@ length = 0.1
 
 [sub_resource type="Animation" id=7]
 resource_name = "CHARGE"
-length = 0.75
+length = 0.9
+loop = true
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("../texture:frame")
@@ -64,10 +73,24 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.3, 0.4, 0.5, 0.55, 0.65, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.3, 0.4, 0.45, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("../part_state_handler/CHARGE/charge_sound_player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+} ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -132,13 +155,24 @@ frame = 1
 [node name="fire_overlay" type="AnimatedSprite" parent="texture"]
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
-frame = 2
 playing = true
 offset = Vector2( 0, -3 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="part_hurtbox" parent="." instance=ExtResource( 12 )]
+TAGS = [ "FIRE_ANT" ]
+IGNORE_TAGS = [ "ENEMY_PROJECTILE" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="part_hurtbox"]
+position = Vector2( 0, -5 )
+shape = SubResource( 11 )
+
+[node name="hit_sound_effect" parent="part_hurtbox" instance=ExtResource( 10 )]
+stream = ExtResource( 13 )
+bus = "entity_sounds"
 
 [node name="part_state_handler" parent="." instance=ExtResource( 3 )]
 
@@ -160,8 +194,12 @@ shape = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="charge_timer" type="Timer" parent="part_state_handler/CHARGE"]
-wait_time = 0.75
+wait_time = 0.9
 one_shot = true
+
+[node name="charge_sound_player" parent="part_state_handler/CHARGE" instance=ExtResource( 10 )]
+stream = ExtResource( 11 )
+bus = "entity_sounds"
 
 [node name="ATTACK" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 2 )
@@ -169,7 +207,6 @@ script = ExtResource( 2 )
 [node name="fire_spawner" parent="part_state_handler/ATTACK" instance=ExtResource( 5 )]
 entity_name = "fire_area"
 entity_group = "enemies"
-deletion_signal = "finished"
 
 [node name="part_state_anim_handler" parent="." instance=ExtResource( 9 )]
 states = [ "MOVE", "CHARGE", "ATTACK" ]
@@ -182,6 +219,7 @@ anims/RESET = SubResource( 9 )
 
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
+[connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
