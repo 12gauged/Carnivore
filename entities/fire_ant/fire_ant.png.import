@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/firewatcher.png-2805b3d37fbee9405cd390864432033e.stex"
+path="res://.import/fire_ant.png-52d03f0786f94eeac97fef3699678be6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/gui/logo/firewatcher.png"
-dest_files=[ "res://.import/firewatcher.png-2805b3d37fbee9405cd390864432033e.stex" ]
+source_file="res://entities/fire_ant/fire_ant.png"
+dest_files=[ "res://.import/fire_ant.png-52d03f0786f94eeac97fef3699678be6.stex" ]
 
 [params]
 

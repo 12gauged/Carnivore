@@ -1,6 +1,8 @@
 id,en,pt,fr
-ui.startup.warning.title,warning!,aviso!,alerte!
-ui.startup.warning.description,this game contains flashing lights,este jogo apresenta luzes piscantes,ce jeu contient des lumières clignotantes
+ui.startup.warning.lights.title,warning!,aviso!,alerte!
+ui.startup.warning.lights.description,this game contains flashing lights,este jogo apresenta luzes piscantes,ce jeu contient des lumières clignotantes
+ui.startup.warning.hardware_accel.title,performance warning!,aviso de desempenho!,untranslated
+ui.startup.warning.hardware_accel.description,this game requires you to have hardware acceleration activated for the best performance,este jogo requer que você tenha aceleração de hardware ativada para a melhor performance,untranslated
 ui.main_menu.play,play,jogar,jouer
 ui.main_menu.credits.dev,developer,desenvolvedor(a),développeur(développeuse)
 ui.main_menu.credits.translator,translator,tradutor(a),traducteur(traductrice)
