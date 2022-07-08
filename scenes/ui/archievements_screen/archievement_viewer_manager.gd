@@ -1,7 +1,7 @@
 extends MenuScreen
 
-const ARCHIEVEMENT_TITLE_BASE: String = "ui.archievements.%s.title"
-const ARCHIEVEMENT_DESCRIPTION_BASE: String = "ui.archievements.%s.description"
+const ARCHIEVEMENT_TITLE_BASE: String = "ui.challenges.%s.title"
+const ARCHIEVEMENT_DESCRIPTION_BASE: String = "ui.challenges.%s.description"
 
 onready var CurrentArchievement = $archievement_viewer_manager/CenterContainer/archievement_container/current_archievement
 onready var ArrowDown = $archievement_viewer_manager/CenterContainer/archievement_container/arrow_down

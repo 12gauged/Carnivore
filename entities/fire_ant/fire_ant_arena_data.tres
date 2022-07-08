@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://system/data/entity_arena_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+entity_name = "fire_ant"
+wave_requirement = 12
+max_number_per_wave = 3
+spawn_chance = 30
+min_generation = 2

@@ -2,40 +2,40 @@ extends Node
 
 const ARCHIEVEMENT_REF: Dictionary = {
 	"generation0": {
-		0: "village_savior",
-		1: "just_in_time",
-		2: "its_raining_frogs"
+		0: "village_savior", ## Save the village
+		1: "full_belly", ## Eat 5 or more enemies on a row 
+		2: "triple_kill" ## Kill 3 enemies with a single shot
 	},
 	"generation1": {
-		0: "ant_on_a_stick",
-		1: "accidental_punch",
-		2: "friendly_fire"
+		0: "ant_on_a_stick", # Make an ant soldier impale 3 or more enemies
+		1: "accidental_punch", ## Make a worm kill another enemy
+		2: "friendly_fire" ## Make a frog kill an ant soldier
 	},
 	"generation2": {
-		0: "gotcha",
-		1: "not_so_wet",
-		2: "secret_weapon"
+		0: "gotcha", # Kill a fire ant before it explodes
+		1: "not_so_wet", # Use fire to kill a frog
+		2: "secret_weapon" # Use a frog to kill all enemies in a wave
 	}
 }
 
 var player_data = {
 	"lowest_time": [],
-	"generation": 0,
+	"generation": 1,
 	"archievements": {
 		"generation0": {
 			"village_savior": false,
-			"just_in_time": false,
-			"its_raining_frogs": false
+			"full_belly": false,
+			"triple_kill": false
 		},
 		"generation1": {
 			"ant_on_a_stick": false,
 			"accidental_punch": false,
-			"secret_weapon": false
+			"friendly_fire": false
 		},
 		"generation2": {
 			"gotcha": false,
-			"friendly_fire": false,
-			"not_so_wet": false
+			"not_so_wet": false,
+			"secret_weapon": false
 		}
 	}
 }

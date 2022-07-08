@@ -18,6 +18,9 @@ func _enable_request():
 	Collision.set_deferred("disabled", false)
 	
 func is_area_valid(area) -> bool:
+	if IGNORE_TAGS.empty(): return true
+	
 	for tag in area.TAGS:
-		if tag in IGNORE_TAGS: return false
+		if tag in IGNORE_TAGS: 
+			return false
 	return true

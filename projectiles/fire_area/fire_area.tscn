@@ -7,7 +7,7 @@
 [ext_resource path="res://projectiles/fire_area/fire_area.gd" type="Script" id=5]
 [ext_resource path="res://system/parts/part_camera_shaker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sounds/entity/enemy/fire_ant/explode.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/entity/enemy/fire_ant/fire_ant_explode.wav" type="AudioStream" id=8]
 
 [sub_resource type="CircleShape2D" id=6]
 radius = 48.0

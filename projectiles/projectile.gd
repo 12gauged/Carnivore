@@ -1,6 +1,9 @@
 extends Node2D
 class_name Projectile
 
+signal collided(hurtbox, projectile)
+signal deleted(projectile)
+
 export(int) var speed = 10
 export(Array) var TAGS = []
 export(int) var max_lifetime = 60
@@ -10,19 +13,12 @@ onready var hitbox = $part_hitbox
 onready var LifetimeTimer = $lifetime_timer
 onready var scene_tree = get_tree()
 var direction: Vector2 = Vector2.ZERO setget set_direction
-var lifetime: int = 0
 
 func _ready(): LifetimeTimer.start(max_lifetime)
 
 func _physics_process(delta):
 	global_position += direction * (speed * delta)
-	
 	if face_direction: look_at(self.global_position + direction)
-	
-#	if lifetime >= max_lifetime:
-#		queue_free()
-#	else:
-#		lifetime += 1 * delta
 	
 func set_direction(value: Vector2): direction = value.normalized()
 func set_speed(value: int): speed = value
@@ -32,4 +28,8 @@ func set_hitbox_tags(tags: Array):
 
 
 
-func _on_lifetime_timer_timeout(): queue_free()
+func _on_lifetime_timer_timeout(): 
+	emit_signal("deleted", self)
+	queue_free()
+
+func _on_part_hitbox_hit_detected(Hurtbox): emit_signal("collided", Hurtbox, self)

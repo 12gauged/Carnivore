@@ -14,6 +14,8 @@ onready var HungerDecreaseTimer: Timer = $hunger_decrease_delay
 onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
 
+var enemies_consumed: int = 0
+
 func _ready():
 	add_tag("PLAYER")
 	
@@ -84,10 +86,6 @@ func enter_eat_state():
 	set_movement_direction(Vector2.LEFT)
 	input_events.emit_signal("player_movement_direction_updated", Vector2.LEFT)
 	
-	## Archievement
-	if get_stat("health") <= 2:
-		player_events.emit_signal("archievement_made", "just_in_time", true)
-	
 func exit_eat_state():
 	start_invincibility()
 	remove_tag("EAT")
@@ -97,6 +95,9 @@ func exit_eat_state():
 	player_events.emit_signal("exited_eat_state")
 	set_rotation_degrees(0.0)
 	set_movement_direction(Vector2.ZERO)
+	
+	## Archievement
+	enemies_consumed = 0
 
 func consume_meat():
 	if get_state() == "EAT": return
@@ -109,16 +110,19 @@ func consume_meat():
 	HungerDecreaseTimer.start()
 	
 func consume_enemy(EnemyNode):
-	var shake_intensity: float = 0.3 if "PLAYER" in EnemyNode.TAGS else 1.5
+	var shake_intensity: float = 0.3 if "PLAYER" in EnemyNode.TAGS else 1.5 ## Trick to make the camera constantly shake
 	camera_events.emit_signal("camera_shake_request", 0.15, shake_intensity)
 	
-	if not "PLAYER" in EnemyNode.TAGS:
-		# when in eating mode, the player regenerates health
-		# instead of energy when the hunger is full
-		if get_stat("hunger") < MAX_HUNGER:
-			update_stat("hunger", get_stat("hunger") + 1)
-		elif get_stat("health") < MAX_HEALTH:
-			update_stat("health", get_stat("health") + 1)
+	if "PLAYER" in EnemyNode.TAGS: return
+	
+	# regenerates both hunger and health
+	update_stat("hunger", min(get_stat("hunger") + 1, MAX_HUNGER))
+	update_stat("health", min(get_stat("health") + 1, MAX_HEALTH))
+		
+	enemies_consumed += 1
+	if enemies_consumed >= 5: 
+		player_events.emit_signal("archievement_made", "full_belly", true)
+	print("enemies consumed: %s" % enemies_consumed)
 		
 func reset_stat_decrease_timer(mode: String):
 	HungerDecreaseTimer.stop()

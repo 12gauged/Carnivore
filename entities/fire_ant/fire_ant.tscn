@@ -10,7 +10,7 @@
 [ext_resource path="res://entities/fire_ant/fire_overlay.png" type="Texture" id=8]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=9]
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sounds/entity/enemy/fire_ant/charge.wav" type="AudioStream" id=11]
+[ext_resource path="res://sounds/entity/enemy/fire_ant/fire_ant_charge.wav" type="AudioStream" id=11]
 [ext_resource path="res://system/parts/entity/part_hurtbox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sounds/entity/enemy/enemy_hit.wav" type="AudioStream" id=13]
 
@@ -217,6 +217,13 @@ anims/CHARGE = SubResource( 7 )
 anims/MOVE = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 
+[node name="death_loot_spawner" parent="." instance=ExtResource( 5 )]
+entity_name = "meat_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+spawn_chance = 60
+
+[connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]

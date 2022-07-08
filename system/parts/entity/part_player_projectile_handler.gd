@@ -22,6 +22,7 @@ var on_eat_state: bool = false
 
 var ProjectileScene
 var ProjectileInstance
+var projectile_kill_tracker: Dictionary = {}
 
 const projectile_speeds: Dictionary = {
 	"stone_projectile": 450
@@ -73,17 +74,37 @@ func set_projectile(type: String):
 
 func spawn_projectile():
 	ProjectileSpawner.entity_name = projectile_type
-	var InstancedProjectile = ProjectileSpawner.spawn_entity()
-	
-	InstancedProjectile.set_direction(get_target_direction())
-	InstancedProjectile.set_speed(projectile_speeds[projectile_type])
-	
+	ProjectileSpawner.spawn_entity()
 
 
 func _on_projectile_collected(projectile): set_projectile(projectile)
 	
 func _on_projectile_spawner_entity_spawned(ProjectileNode):
 	ProjectileNode.set_hitbox_tags(["PLAYER_PROJECTILE"])
+	ProjectileNode.set_direction(get_target_direction())
+	ProjectileNode.set_speed(projectile_speeds[projectile_type])
+	
+	if game_data.get_player_data("generation") > 1: return 
+	
+	ProjectileNode.connect("collided", self, "_on_projectile_collided")
+	ProjectileNode.connect("deleted", self, "_on_projectile_deleted")
+	
+func _on_projectile_collided(Hurtbox: DetectionBox, projectile): ## Triple kill archievement
+	if "PLAYER" in Hurtbox.TAGS: return
+	var projectile_id = projectile.name
+	
+	if !projectile_id in projectile_kill_tracker:
+		projectile_kill_tracker[projectile_id] = 1
+		return
+		
+	projectile_kill_tracker[projectile_id] += 1
+	if projectile_kill_tracker[projectile_id] >= 3:
+		player_events.emit_signal("archievement_made", "triple_kill", true)
+		
+func _on_projectile_deleted(projectile):
+	var projectile_id = projectile.name
+	if !projectile_id in projectile_kill_tracker: return
+	projectile_kill_tracker[projectile_id] = 0
 
 func _on_player_entered_eat_state():
 	self.visible = false

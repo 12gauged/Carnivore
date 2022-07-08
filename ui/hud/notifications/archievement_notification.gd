@@ -1,7 +1,7 @@
 extends TextureRect
 
 
-const ARCHIEVEMENT_TITLE_TEXT: String = "ui.archievements.%s.title"
+const ARCHIEVEMENT_TITLE_TEXT: String = "ui.challenges.%s.title"
 onready var ColorTween: Tween = $Tween
 onready var TitleLabel: Label = $HBoxContainer/Label
 

@@ -4,31 +4,31 @@ ui.startup.warning.lights.description,this game contains flashing lights,este jo
 ui.startup.warning.hardware_accel.title,performance warning!,aviso de desempenho!,untranslated
 ui.startup.warning.hardware_accel.description,this game requires you to have hardware acceleration activated for the best performance,este jogo requer que você tenha aceleração de hardware ativada para a melhor performance,untranslated
 ui.main_menu.play,play,jogar,jouer
-ui.main_menu.credits.dev,developer,desenvolvedor(a),développeur(développeuse)
-ui.main_menu.credits.translator,translator,tradutor(a),traducteur(traductrice)
+ui.credits.dev,developer,desenvolvedor(a),développeur(développeuse)
+ui.credits.translators,translators,tradutores(as),untranslated
 ui.pause_screen.paused,paused,em pausa,en pause
 ui.pause_screen.resume,resume,continuar,reprendre
 ui.death_screen.game_over,game over,fim de jogo,game over
 ui.victory_screen.village_safe,the village is safe,a vila foi salva,le village est en sécurité
 ui.challenges.title,challenges,desafios,untranslated
 ui.challenges.progress.title,progress,progresso,untranslated
-ui.challenges.progress.challenges_incomplete,complete the challenges to level up,complete os desafios para subir de nível,untranslated
-ui.archievements.village_savior.title,village savior,salvador de vilas,sauveur du village
-ui.archievements.village_savior.description,save the village,salve a vila, sovez le village
-ui.archievements.just_in_time.title,just in time,por um triz,juste à temps
-ui.archievements.just_in_time.description,enter the eating mode with 2 or less hearts,entre no modo devorador com 2 corações ou menos,entrer dans le mode manger avec 2 cœurs ou moins
-ui.archievements.its_raining_frogs.title,it's raining frogs,chuva de sapos,il pleut des grenouilles
-ui.archievements.its_raining_frogs.description,trick a frog into jumping on an enemy,faça um sapo pular em cima de um inimigo,tromper une grenouille à sauter sur un ennemi
-ui.archievements.gotcha.title,gotcha!,te peguei!,je t'ai eu!
-ui.archievements.gotcha.description,kill a fire ant before it explodes,mate uma formiga de fogo antes que ela exploda,tuer une fourmi de feu avant qu'elle n'explose
-ui.archievements.not_so_wet.title,not so wet,na seca,pas si humide
-ui.archievements.not_so_wet.description,use fire to kill a frog,use fogo para matar um sapo,utiliser le feu pour tuer une grenouille
-ui.archievements.accidental_punch.title,accidental punch,soco acidental,coup de poing accidentel
-ui.archievements.accidental_punch.description,make a worm kill an enemy,faça uma minhoca matar um inimigo,faire un ver de terre tuer un ennemi
-ui.archievements.secret_weapon.title,secret weapon,arma secreta,arme secrète
-ui.archievements.secret_weapon.description,use only a frog to kill all enemies in the wave,use um sapo para matar todos os inimigos da onda,n'utilisez qu'une grenouille pour tuer tous les ennemis d' une vague
-ui.archievements.ant_on_a_stick.title,ant on a stick,espetinho de formiga,fourmi sur un bâton
-ui.archievements.ant_on_a_stick.description,make a soldier ant impale 3 or more ants,faça uma formiga-soldado empalar 3 ou mais formigas,faire un soldat fourmi empaler 3 fourmis ou plus
-ui.archievements.friendly_fire.title,friendly fire,fogo amigo,assult amical
-ui.archievements.friendly_fire.description,kill 4 or more enemies using fire,mate 4 inimigos ou mais usando fogo,tuer 4 ennemis ou plus en utilisant du feu
+ui.challenges.progress.description,complete the challenges to level up,complete os desafios para subir de nível,untranslated
+ui.challenges.village_savior.title,village savior,salvador de vilas,sauveur du village
+ui.challenges.village_savior.description,save the village,salve a vila, sovez le village
+ui.challenges.full_belly.title,full belly,barriga cheia,untranslated
+ui.challenges.full_belly.description,eat 5 or more enemies in a row,devore 5 ou mais inimigos seguidos,untranslated
+ui.challenges.triple_kill.title,triple kill,morte tripla,untranslated
+ui.challenges.triple_kill.description,kill 3 enemies with a single shot,mate 3 inimigos com um só tiro,untranslated
+ui.challenges.ant_on_a_stick.title,ant on a stick,espetinho de formiga,fourmi sur un bâton
+ui.challenges.ant_on_a_stick.description,make a soldier-ant impale 3 or more ants,faça uma formiga-soldado empalar 3 ou mais formigas,faire un soldat fourmi empaler 3 fourmis ou plus
+ui.challenges.accidental_punch.title,accidental punch,soco acidental,coup de poing accidentel
+ui.challenges.accidental_punch.description,make a worm kill an enemy,faça uma minhoca matar um inimigo,faire un ver de terre tuer un ennemi
+ui.challenges.friendly_fire.title,friendly fire,fogo amigo,assult amical
+ui.challenges.friendly_fire.description,make a frog kill a soldier ant,faça um sapo matar uma formiga-soldado,untranslated
+ui.challenges.gotcha.title,gotcha!,te peguei!,je t'ai eu!
+ui.challenges.gotcha.description,kill a fire ant before it explodes,mate uma formiga de fogo antes que ela exploda,tuer une fourmi de feu avant qu'elle n'explose
+ui.challenges.not_so_wet.title,not so wet,na seca,pas si humide
+ui.challenges.not_so_wet.description,use fire to kill a frog,use fogo para matar um sapo,utiliser le feu pour tuer une grenouille
+ui.challenges.secret_weapon.title,secret weapon,arma secreta,arme secrète
+ui.challenges.secret_weapon.description,use a frog to kill all enemies in the wave,use um sapo para matar todos os inimigos da onda,untranslated
 hud.wave_indicator,wave %s!,onda %s!,vague %s
