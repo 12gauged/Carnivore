@@ -286,6 +286,7 @@ shape = SubResource( 5 )
 disabled = true
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
+TAGS = [ "ENEMY" ]
 IGNORE_TAGS = [ "FROG", "ENEMY_PROJECTILE" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hurtbox"]

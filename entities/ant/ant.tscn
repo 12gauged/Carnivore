@@ -369,6 +369,7 @@ deletion_signal = "interacted"
 spawn_chance = 60
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
+TAGS = [ "ENEMY" ]
 IGNORE_TAGS = [ "ENEMY_PROJECTILE" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hurtbox"]

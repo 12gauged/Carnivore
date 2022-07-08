@@ -7,7 +7,7 @@ const ARCHIEVEMENT_REF: Dictionary = {
 		2: "triple_kill" ## Kill 3 enemies with a single shot
 	},
 	"generation1": {
-		0: "ant_on_a_stick", # Make an ant soldier impale 3 or more enemies
+		0: "ant_on_a_stick", ## Make an ant soldier impale 3 or more enemies
 		1: "accidental_punch", ## Make a worm kill another enemy
 		2: "friendly_fire" ## Make a frog kill an ant soldier
 	},
@@ -20,7 +20,7 @@ const ARCHIEVEMENT_REF: Dictionary = {
 
 var player_data = {
 	"lowest_time": [],
-	"generation": 1,
+	"generation": 2,
 	"archievements": {
 		"generation0": {
 			"village_savior": false,

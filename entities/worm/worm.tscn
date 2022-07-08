@@ -173,7 +173,7 @@ shape = SubResource( 4 )
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
 position = Vector2( -1, -4 )
-TAGS = [ "WORM" ]
+TAGS = [ "ENEMY", "WORM" ]
 IGNORE_TAGS = [ "ENEMY_PROJECTILE", "WORM" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hurtbox"]

@@ -28,7 +28,6 @@ func get_archievement_generation(archievement) -> int:
 	return -1
 	
 func validate_archievement(archievement, generation):
-	print("validating archievement %s" % archievement)
 	var archievements: Dictionary = game_data.get_player_data("archievements") 
 	var requested_archievement_stat = archievements["generation%s" % generation][archievement]
 	if requested_archievement_stat == true: return false ## if archievement has been completed
