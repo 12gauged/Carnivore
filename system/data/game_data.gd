@@ -20,7 +20,7 @@ const ARCHIEVEMENT_REF: Dictionary = {
 
 var player_data = {
 	"lowest_time": [],
-	"generation": 2,
+	"generation": 0,
 	"archievements": {
 		"generation0": {
 			"village_savior": false,
@@ -60,7 +60,6 @@ var current_platform: String = "desktop" setget set_current_platform, get_curren
 var current_level: String = "" setget set_current_level, get_current_level
 var current_level_time: Array = [] setget set_current_level_time, get_current_level_time
 var current_arena_wave: int = 1 setget set_current_wave, get_current_wave
-var player_momentum: int = 1
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://entities/ant_soldier/ant_soldier.gd" type="Script" id=1]
 [ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=15]
 [ext_resource path="res://system/archievement_sensors/generation1/friendly_fire_archievement_sensor.gd" type="Script" id=16]
 [ext_resource path="res://system/archievement_sensors/generation1/ant_on_a_stick_archievement_sensor.gd" type="Script" id=17]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=18]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.0
@@ -221,6 +222,7 @@ target_node_group = "player"
 [node name="state_duration_timer" type="Timer" parent="part_state_handler/MOVE"]
 wait_time = 4.0
 one_shot = true
+script = ExtResource( 18 )
 
 [node name="CHARGE" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 4 )
@@ -228,6 +230,7 @@ script = ExtResource( 4 )
 [node name="state_duration_timer" type="Timer" parent="part_state_handler/CHARGE"]
 wait_time = 2.0
 one_shot = true
+script = ExtResource( 18 )
 
 [node name="ATTACK" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 4 )
@@ -243,6 +246,7 @@ script = ExtResource( 17 )
 [node name="state_duration_timer" type="Timer" parent="part_state_handler/ATTACK"]
 wait_time = 0.8
 one_shot = true
+script = ExtResource( 18 )
 
 [node name="part_state_anim_handler" parent="." instance=ExtResource( 15 )]
 states = [ "SPAWN", "MOVE", "CHARGE", "ATTACK" ]
@@ -267,13 +271,16 @@ anims/SPAWN = SubResource( 5 )
 [connection signal="timeout" from="part_state_handler/SPAWN/state_duration_timer" to="part_state_handler" method="start_state_pattern"]
 [connection signal="state_entered" from="part_state_handler/MOVE" to="texture/spear" method="show"]
 [connection signal="state_entered" from="part_state_handler/MOVE" to="texture/hands_pivot/hands_holding_spear_overlay" method="hide"]
+[connection signal="state_entered" from="part_state_handler/MOVE" to="part_state_handler/MOVE/state_duration_timer" method="start_timer"]
 [connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
 [connection signal="timeout" from="part_state_handler/MOVE/state_duration_timer" to="part_state_handler" method="go_to_next_state"]
 [connection signal="state_entered" from="part_state_handler/CHARGE" to="texture/spear" method="hide"]
 [connection signal="state_entered" from="part_state_handler/CHARGE" to="texture/hands_pivot/hands_holding_spear_overlay" method="show"]
+[connection signal="state_entered" from="part_state_handler/CHARGE" to="part_state_handler/CHARGE/state_duration_timer" method="start_timer"]
 [connection signal="timeout" from="part_state_handler/CHARGE/state_duration_timer" to="part_state_handler" method="go_to_next_state"]
 [connection signal="state_entered" from="part_state_handler/ATTACK" to="texture/hands_pivot/hands_holding_spear_overlay" method="hide"]
 [connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/part_entity_spawner" method="spawn_entity"]
+[connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/state_duration_timer" method="start_timer"]
 [connection signal="entity_spawned" from="part_state_handler/ATTACK/part_entity_spawner" to="." method="_on_entity_spawned"]
 [connection signal="entity_spawned" from="part_state_handler/ATTACK/part_entity_spawner" to="part_state_handler/ATTACK/part_entity_spawner/ant_on_a_stick_archievement_sensor" method="_on_part_entity_spawner_entity_spawned"]
 [connection signal="timeout" from="part_state_handler/ATTACK/state_duration_timer" to="part_state_handler" method="go_to_next_state"]

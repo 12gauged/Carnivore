@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://entities/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/state.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://sounds/entity/enemy/fire_ant/fire_ant_charge.wav" type="AudioStream" id=11]
 [ext_resource path="res://system/parts/entity/part_hurtbox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sounds/entity/enemy/enemy_hit.wav" type="AudioStream" id=13]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=14]
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 8 )
@@ -43,7 +44,7 @@ radius = 5.0
 height = 4.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 46.0
+radius = 30.0
 
 [sub_resource type="Animation" id=10]
 resource_name = "ATTACK"
@@ -138,8 +139,8 @@ tracks/1/keys = {
 
 [node name="fire_ant" type="KinematicBody2D"]
 script = ExtResource( 1 )
-MAX_SPEED = 90
-ID = "FIRE_ANT"
+MAX_SPEED = 60
+ID = "fire_ant"
 TAGS = [ "COMP_EXECUTER", "ENTITY", "FIRE_ANT" ]
 DEFAULT_STATE = "MOVE"
 STARTING_STATE = "MOVE"
@@ -155,7 +156,6 @@ frame = 1
 [node name="fire_overlay" type="AnimatedSprite" parent="texture"]
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
-frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -197,6 +197,7 @@ script = ExtResource( 2 )
 [node name="charge_timer" type="Timer" parent="part_state_handler/CHARGE"]
 wait_time = 0.9
 one_shot = true
+script = ExtResource( 14 )
 
 [node name="charge_sound_player" parent="part_state_handler/CHARGE" instance=ExtResource( 10 )]
 stream = ExtResource( 11 )
@@ -232,6 +233,7 @@ spawn_chance = 60
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
 [connection signal="tag_detected" from="part_state_handler/MOVE/player_tag_detector" to="part_state_handler" method="go_to_next_state"]
+[connection signal="state_entered" from="part_state_handler/CHARGE" to="part_state_handler/CHARGE/charge_timer" method="start_timer"]
 [connection signal="timeout" from="part_state_handler/CHARGE/charge_timer" to="part_state_handler" method="go_to_next_state"]
-[connection signal="state_entered" from="part_state_handler/ATTACK" to="." method="queue_free"]
+[connection signal="state_entered" from="part_state_handler/ATTACK" to="." method="die"]
 [connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/fire_spawner" method="spawn_entity"]

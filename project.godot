@@ -240,7 +240,6 @@ pointing/emulate_touch_from_mouse=true
 
 [locale]
 
-test="en"
 translations=PoolStringArray( "res://system/data/lang/lang.en.translation", "res://system/data/lang/lang.fr.translation", "res://system/data/lang/lang.pt.translation" )
 locale_filter=[ 1, [ "en", "fr", "pt" ] ]
 

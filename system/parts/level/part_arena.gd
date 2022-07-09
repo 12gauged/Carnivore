@@ -44,16 +44,13 @@ var ENEMY_SPAWN_DATA_LEN: int = 0
 
 func _input(event):
 	if !OS.is_debug_build(): return
-	
-	if event.is_action_pressed("debug_f1"):
-		_on_arena_start_request()
 		
 	if event.is_action_pressed("debug_f2"):
 		end_wave()
 		free_all_enemies()
 
 func _ready():
-	game_data.current_arena_wave = 0
+	game_data.current_arena_wave = 1
 	
 	number_of_waves += number_of_extra_waves_per_gen * game_data.get_player_data("generation")
 	
@@ -89,11 +86,11 @@ func free_all_enemies():
 	SpawnedEnemies = []
 			
 func spawn_first_enemies():
-	for _i in range(max_enemy_number):
-		spawn_new_enemy()
+	spawn_new_enemy()
 	last_max_enemy_number = max_enemy_number
 
 func spawn_new_enemy():
+	var time_before = OS.get_ticks_msec()
 	toolbox.SystemRNG.randomize()
 	enemy_name = get_random_enemy()
 	
@@ -119,6 +116,8 @@ func spawn_new_enemy():
 	
 	enemy_id += 1
 	enemy_counter[enemy_name] += 1
+	
+	print("spawning took: %sms" % str(OS.get_ticks_msec() - time_before))
 	
 func get_random_enemy() -> String:
 	var result: String = FILLER_ENEMY
@@ -184,14 +183,6 @@ func end_arena():
 func _on_enemy_killed(id): 
 	dead_enemies += 1
 	enemy_counter[id] -= 1
-	
-func _on_enemy_entered_scene(): pass
-#	if last_max_enemy_number != max_enemy_number:
-#		# Doesn't count the enemy that emitted the signal
-#		#                            v
-#		for _i in max_enemy_number - 1:
-#			spawn_new_enemy()
-#		last_max_enemy_number = max_enemy_number
 
 func _on_arena_start_request(): 
 	start_wave()

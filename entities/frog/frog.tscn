@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://sounds/entity/enemy/frog/frog_croak.wav" type="AudioStream" id=15]
 [ext_resource path="res://sounds/entity/enemy/frog/frog_spawn.wav" type="AudioStream" id=16]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=17]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=18]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 3.0
@@ -336,6 +337,7 @@ script = ExtResource( 3 )
 [node name="change_state_timer" type="Timer" parent="part_state_handler/IDLE"]
 wait_time = 0.6
 one_shot = true
+script = ExtResource( 18 )
 
 [node name="CROAK" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 3 )
@@ -380,6 +382,7 @@ intensity = 1.2
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
+[connection signal="state_entered" from="part_state_handler/IDLE" to="part_state_handler/IDLE/change_state_timer" method="start_timer"]
 [connection signal="timeout" from="part_state_handler/IDLE/change_state_timer" to="part_state_handler" method="go_to_next_state"]
 [connection signal="state_entered" from="part_state_handler/JUMP" to="part_state_handler/SPAWN/spawn_sound_effect" method="play"]
 [connection signal="component_value_update" from="part_state_handler/JUMP/comp_movement_jump" to="." method="set_movement_direction"]

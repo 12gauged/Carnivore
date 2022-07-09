@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://shaders/flash.tres" type="Material" id=13]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 1.0
@@ -220,6 +221,7 @@ script = ExtResource( 3 )
 [node name="state_change_timer" type="Timer" parent="part_state_handler/ATTACK"]
 wait_time = 0.7
 one_shot = true
+script = ExtResource( 14 )
 
 [node name="part_state_anim_handler" parent="." instance=ExtResource( 1 )]
 states = [ "MOVE", "ATTACK" ]
@@ -245,4 +247,5 @@ spawn_chance = 60
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
 [connection signal="tag_detected" from="part_state_handler/MOVE/part_tag_detector" to="." method="go_to_next_state"]
+[connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/state_change_timer" method="start_timer"]
 [connection signal="timeout" from="part_state_handler/ATTACK/state_change_timer" to="." method="go_to_next_state"]

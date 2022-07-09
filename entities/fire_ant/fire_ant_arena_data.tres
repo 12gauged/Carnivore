@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 entity_name = "fire_ant"
-wave_requirement = 12
+wave_requirement = 10
 max_number_per_wave = 3
 spawn_chance = 30
 min_generation = 2

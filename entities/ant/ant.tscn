@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entities/ant/ant.gd" type="Script" id=1]
 [ext_resource path="res://entities/ant/ant.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://system/parts/entity/part_hurtbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sounds/entity/enemy/enemy_hit.wav" type="AudioStream" id=10]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.0
@@ -333,6 +334,7 @@ target_node_group = "player"
 wait_time = 2.0
 one_shot = true
 autostart = true
+script = ExtResource( 11 )
 
 [node name="DIG" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 5 )
@@ -340,6 +342,7 @@ script = ExtResource( 5 )
 [node name="state_change_timer" type="Timer" parent="part_state_handler/DIG"]
 wait_time = 2.0
 one_shot = true
+script = ExtResource( 11 )
 
 [node name="ATTACK" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 5 )
@@ -352,6 +355,7 @@ entity_group = "projectiles"
 [node name="state_change_timer" type="Timer" parent="part_state_handler/ATTACK"]
 wait_time = 0.6
 one_shot = true
+script = ExtResource( 11 )
 
 [node name="part_state_anim_handler" parent="." instance=ExtResource( 6 )]
 
@@ -389,10 +393,13 @@ bus = "entity_sounds"
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler" method="start_state_pattern"]
 [connection signal="timeout" from="part_state_handler/SPAWN/state_change_timer" to="part_state_handler/DEFAULT/comp_movement_track_target" method="stop_moving"]
+[connection signal="state_entered" from="part_state_handler/DEFAULT" to="part_state_handler/DEFAULT/state_change_timer" method="start_timer"]
 [connection signal="component_value_update" from="part_state_handler/DEFAULT/comp_movement_track_target" to="." method="set_movement_direction"]
 [connection signal="timeout" from="part_state_handler/DEFAULT/state_change_timer" to="part_state_handler" method="go_to_next_state"]
 [connection signal="timeout" from="part_state_handler/DEFAULT/state_change_timer" to="part_state_handler/DEFAULT/comp_movement_track_target" method="stop_moving"]
+[connection signal="state_entered" from="part_state_handler/DIG" to="part_state_handler/DIG/state_change_timer" method="start_timer"]
 [connection signal="timeout" from="part_state_handler/DIG/state_change_timer" to="part_state_handler" method="go_to_next_state"]
+[connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/state_change_timer" method="start_timer"]
 [connection signal="entity_spawned" from="part_state_handler/ATTACK/part_entity_spawner" to="." method="_on_rock_spawned"]
 [connection signal="timeout" from="part_state_handler/ATTACK/state_change_timer" to="part_state_handler" method="go_to_next_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]

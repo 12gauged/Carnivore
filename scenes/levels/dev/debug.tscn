@@ -28,23 +28,16 @@ position = Vector2( 71, 52 )
 
 [node name="part_level_groups" parent="objects/entities" instance=ExtResource( 3 )]
 
-[node name="part_enemy_spawner" parent="objects" instance=ExtResource( 6 )]
-position = Vector2( 230, 113 )
-entity_name = "ant_soldier"
-entity_group = "enemies"
-deletion_signal = "deleted"
-auto_spawn = true
-
 [node name="part_enemy_spawner2" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 155, 77 )
-entity_name = "ant"
+entity_name = "fire_ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
 auto_spawn = true
 
 [node name="part_enemy_spawner3" parent="objects" instance=ExtResource( 6 )]
-position = Vector2( 125, 77 )
-entity_name = "ant"
+position = Vector2( 67, 113 )
+entity_name = "ant_soldier"
 entity_group = "enemies"
 deletion_signal = "deleted"
 auto_spawn = true
@@ -55,30 +48,6 @@ entity_name = "ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
 auto_spawn = true
-
-[node name="part_entity_spawner2" parent="objects" instance=ExtResource( 6 )]
-position = Vector2( 38, 96 )
-entity_name = "stone_drop"
-entity_group = "drops"
-deletion_signal = "interacted"
-auto_spawn = true
-respawn = true
-
-[node name="part_entity_spawner3" parent="objects" instance=ExtResource( 6 )]
-position = Vector2( 43, 52 )
-entity_name = "stone_drop"
-entity_group = "drops"
-deletion_signal = "interacted"
-auto_spawn = true
-respawn = true
-
-[node name="part_entity_spawner4" parent="objects" instance=ExtResource( 6 )]
-position = Vector2( 89, 105 )
-entity_name = "stone_drop"
-entity_group = "drops"
-deletion_signal = "interacted"
-auto_spawn = true
-respawn = true
 
 [node name="part_camera" parent="." instance=ExtResource( 4 )]
 position = Vector2( 71, 52 )

@@ -4,7 +4,7 @@ extends VBoxContainer
 signal all_archievements_shown
 
 
-const ARCHIEVEMENT_TITLE_BASE: String = "ui.archievements.%s.title"
+const ARCHIEVEMENT_TITLE_BASE: String = "ui.challenges.%s.title"
 
 
 onready var archievement_icons: Array = [

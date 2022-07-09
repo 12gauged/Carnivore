@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 entity_name = "ant_soldier"
-wave_requirement = 10
+wave_requirement = 9
 max_number_per_wave = 2
 spawn_chance = 30
 min_generation = 1
