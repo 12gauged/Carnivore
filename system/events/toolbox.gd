@@ -108,3 +108,5 @@ func stepify_vector(Vector: Vector2, step: int) -> Vector2:
 func mirror_ceil(value: float):
 	if value > 0: return ceil(value)
 	else: return floor(value)
+func toggle_bool(value: bool):
+	return value == false

@@ -78,5 +78,10 @@ func get_current_wave() -> int: return current_arena_wave
 func set_player_data(key, value): player_data[key] = value
 func get_player_data(key): return player_data[key]
 
+func set_game_setting(group, key, value): 
+	game_settings[group][key] = value
+	print("setting %s key to: %s" % [key, value])
+func get_game_setting(group, key): return game_settings[group][key]
+
 func set_last_lowest_level_time(value: Array): last_lowest_level_time = value
 func get_last_lowest_level_time() -> Array: return last_lowest_level_time

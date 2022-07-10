@@ -6,6 +6,8 @@ ui.startup.warning.hardware_accel.description,this game requires you to have har
 ui.main_menu.play,play,jogar,jouer,Jouer
 ui.credits.dev,developer,desenvolvedor(a),développeur(développeuse),développeurs
 ui.credits.translators,translators,tradutores(as),untranslated,traducteurs
+ui.settings.title,settings,configurações,untranslated,untranslated
+ui.settings.camera_shake,camera shake,tremor de câmera, untranslated, untranslated
 ui.pause_screen.paused,paused,em pausa,en pause,en pause
 ui.pause_screen.resume,resume,continuar,reprendre,continuer
 ui.death_screen.game_over,game over,fim de jogo,game over,game over

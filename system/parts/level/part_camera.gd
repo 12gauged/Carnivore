@@ -28,8 +28,7 @@ func _physics_process(delta):
 
 
 func execute_camera_shake(delta: float) -> void:
-	#TODO: Game settings
-	#if !Game.get_setting("Video", "CameraShake"): return
+	if !game_data.get_game_setting("video", "camera_shake"): return
 	
 	if shake_duration <= 0:
 		shake_duration = 0
