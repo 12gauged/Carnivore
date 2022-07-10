@@ -1,34 +1,34 @@
-id,en,pt,fr
-ui.startup.warning.lights.title,warning!,aviso!,alerte!
-ui.startup.warning.lights.description,this game contains flashing lights,este jogo apresenta luzes piscantes,ce jeu contient des lumières clignotantes
-ui.startup.warning.hardware_accel.title,performance warning!,aviso de desempenho!,untranslated
-ui.startup.warning.hardware_accel.description,this game requires you to have hardware acceleration activated for the best performance,este jogo requer que você tenha aceleração de hardware ativada para a melhor performance,untranslated
-ui.main_menu.play,play,jogar,jouer
-ui.credits.dev,developer,desenvolvedor(a),développeur(développeuse)
-ui.credits.translators,translators,tradutores(as),untranslated
-ui.pause_screen.paused,paused,em pausa,en pause
-ui.pause_screen.resume,resume,continuar,reprendre
-ui.death_screen.game_over,game over,fim de jogo,game over
-ui.victory_screen.village_safe,the village is safe,a vila foi salva,le village est en sécurité
-ui.challenges.title,challenges,desafios,untranslated
-ui.challenges.progress.title,progress,progresso,untranslated
-ui.challenges.progress.description,complete the challenges to level up,complete os desafios para subir de nível,untranslated
-ui.challenges.village_savior.title,village savior,salvador de vilas,sauveur du village
-ui.challenges.village_savior.description,save the village,salve a vila, sovez le village
-ui.challenges.full_belly.title,full belly,barriga cheia,untranslated
-ui.challenges.full_belly.description,eat 5 or more enemies in a row,devore 5 ou mais inimigos seguidos,untranslated
-ui.challenges.triple_kill.title,triple kill,morte tripla,untranslated
-ui.challenges.triple_kill.description,kill 3 enemies with a single shot,mate 3 inimigos com um só tiro,untranslated
-ui.challenges.ant_on_a_stick.title,ant on a stick,espetinho de formiga,fourmi sur un bâton
-ui.challenges.ant_on_a_stick.description,make a soldier-ant impale 3 or more ants,faça uma formiga-soldado empalar 3 ou mais formigas,faire un soldat fourmi empaler 3 fourmis ou plus
-ui.challenges.accidental_punch.title,accidental punch,soco acidental,coup de poing accidentel
-ui.challenges.accidental_punch.description,make a worm kill an enemy,faça uma minhoca matar um inimigo,faire un ver de terre tuer un ennemi
-ui.challenges.friendly_fire.title,friendly fire,fogo amigo,assult amical
-ui.challenges.friendly_fire.description,make a frog kill a soldier ant,faça um sapo matar uma formiga-soldado,untranslated
-ui.challenges.gotcha.title,gotcha!,te peguei!,je t'ai eu!
-ui.challenges.gotcha.description,kill a fire ant before it explodes,mate uma formiga de fogo antes que ela exploda,tuer une fourmi de feu avant qu'elle n'explose
-ui.challenges.not_so_wet.title,not so wet,na seca,pas si humide
-ui.challenges.not_so_wet.description,use fire to kill a frog,use fogo para matar um sapo,utiliser le feu pour tuer une grenouille
-ui.challenges.secret_weapon.title,secret weapon,arma secreta,arme secrète
-ui.challenges.secret_weapon.description,use a frog to kill all enemies in the wave,use um sapo para matar todos os inimigos da onda,untranslated
-hud.wave_indicator,wave %s!,onda %s!,vague %s
+id,en,pt,fr,fr_CA
+ui.startup.warning.lights.title,warning!,aviso!,alerte!,attention!
+ui.startup.warning.lights.description,this game contains flashing lights,este jogo apresenta luzes piscantes,ce jeu contient des lumières clignotantes,ce jeu contient des lumières clignotantes
+ui.startup.warning.hardware_accel.title,performance warning!,aviso de desempenho!,untranslated,avertissement de performance
+ui.startup.warning.hardware_accel.description,this game requires you to have hardware acceleration activated for the best performance,este jogo requer que você tenha aceleração de hardware ativada para a melhor performance,untranslated,ce jeu nécessite que l'accélération matérielle soit activée pour de meilleures performances
+ui.main_menu.play,play,jogar,jouer,Jouer
+ui.credits.dev,developer,desenvolvedor(a),développeur(développeuse),développeurs
+ui.credits.translators,translators,tradutores(as),untranslated,traducteurs
+ui.pause_screen.paused,paused,em pausa,en pause,en pause
+ui.pause_screen.resume,resume,continuar,reprendre,continuer
+ui.death_screen.game_over,game over,fim de jogo,game over,game over
+ui.victory_screen.village_safe,the village is safe,a vila foi salva,le village est en sécurité,le village est sain et sauf
+ui.challenges.title,challenges,desafios,untranslated,défis
+ui.challenges.progress.title,progress,progresso,untranslated,Progrès
+ui.challenges.progress.description,complete the challenges to level up,complete os desafios para subir de nível,untranslated,compléter les défis pour monter de niveau
+ui.challenges.village_savior.title,village savior,salvador de vilas,sauveur du village,sauveur du village
+ui.challenges.village_savior.description,save the village,salve a vila,sovez le village,sauver le village
+ui.challenges.full_belly.title,full belly,barriga cheia,untranslated,Bedon plein
+ui.challenges.full_belly.description,eat 5 or more enemies in a row,devore 5 ou mais inimigos seguidos,untranslated,manger 5 ennemis ou plus de suite
+ui.challenges.triple_kill.title,triple kill,morte tripla,untranslated,triple KO
+ui.challenges.triple_kill.description,kill 3 enemies with a single shot,mate 3 inimigos com um só tiro,untranslated,tuer 3 ennemis avec une seule balle
+ui.challenges.ant_on_a_stick.title,ant on a stick,espetinho de formiga,fourmi sur un bâton,fourmi sur un bâton
+ui.challenges.ant_on_a_stick.description,make a soldier-ant impale 3 or more ants,faça uma formiga-soldado empalar 3 ou mais formigas,faire un soldat fourmi empaler 3 fourmis ou plus,faire un soldat fourmi empaler 3 fourmis ou plus
+ui.challenges.accidental_punch.title,accidental punch,soco acidental,coup de poing accidentel,coup de poing accidentel
+ui.challenges.accidental_punch.description,make a worm kill an enemy,faça uma minhoca matar um inimigo,faire un ver de terre tuer un ennemi,faire un ver tuer un ennemi
+ui.challenges.friendly_fire.title,friendly fire,fogo amigo,assult amical,tir-ami
+ui.challenges.friendly_fire.description,make a frog kill a soldier ant,faça um sapo matar uma formiga-soldado,untranslated,faire une grenouille tuer un soldat fourmi
+ui.challenges.gotcha.title,gotcha!,te peguei!,je t'ai eu!,chté eu!
+ui.challenges.gotcha.description,kill a fire ant before it explodes,mate uma formiga de fogo antes que ela exploda,tuer une fourmi de feu avant qu'elle n'explose,tuer une fourmi de feu avant qu'elle explose
+ui.challenges.not_so_wet.title,not so wet,na seca,pas si humide,pas très mouillé
+ui.challenges.not_so_wet.description,use fire to kill a frog,use fogo para matar um sapo,utiliser le feu pour tuer une grenouille,Brûlez une grenouille
+ui.challenges.secret_weapon.title,secret weapon,arma secreta,arme secrète,arme secrète
+ui.challenges.secret_weapon.description,use a frog to kill all enemies in the wave,use um sapo para matar todos os inimigos da onda,untranslated,utiliser une grenouille pour tuer tous les ennemis dans une vague
+hud.wave_indicator,wave %s!,onda %s!,vague %s,vague %s!

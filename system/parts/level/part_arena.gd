@@ -20,7 +20,8 @@ onready var wave_start_delay: Timer = $wave_start_delay
 var arena_state: int = STOPPED
 enum {
 	RUNNING,
-	STOPPED
+	STOPPED,
+	IN_BETWEEN_WAVES
 }
 
 var enemy_kill_count: int = 0
@@ -36,6 +37,7 @@ var initial_enemies_per_wave_value: int = 0
 var SpawnedEnemy: Enemy
 var Spawners: Array = []
 var dead_enemies: int = 0
+var living_enemies: int = 0
 var SpawnedEnemies: Array = []
 var AvailableSpawners: Array = []
 var ChosenSpawner = null
@@ -63,7 +65,11 @@ func _ready():
 			
 func _process(_delta): 
 	if arena_state != RUNNING: return
+	
 	process_enemy_deaths()
+	
+	if living_enemies < max_enemy_number:
+		spawn_new_enemy()
 	
 	
 
@@ -73,8 +79,6 @@ func process_enemy_deaths():
 	enemy_kill_count += 1
 	if enemy_kill_count > enemies_per_wave:
 		end_wave()
-	elif enemy_id <= enemies_per_wave:
-		spawn_new_enemy()
 	dead_enemies -= 1
 
 func free_all_enemies():
@@ -90,7 +94,6 @@ func spawn_first_enemies():
 	last_max_enemy_number = max_enemy_number
 
 func spawn_new_enemy():
-	var time_before = OS.get_ticks_msec()
 	toolbox.SystemRNG.randomize()
 	enemy_name = get_random_enemy()
 	
@@ -114,10 +117,9 @@ func spawn_new_enemy():
 	# warning-ignore:return_value_discarded
 	SpawnedEnemy.connect("ready", self, "_on_enemy_entered_scene")
 	
+	living_enemies += 1
 	enemy_id += 1
 	enemy_counter[enemy_name] += 1
-	
-	print("spawning took: %sms" % str(OS.get_ticks_msec() - time_before))
 	
 func get_random_enemy() -> String:
 	var result: String = FILLER_ENEMY
@@ -150,13 +152,15 @@ func start_arena():
 	start_wave()
 
 func start_wave():
-	spawn_first_enemies()
+	#spawn_first_enemies()
+	arena_state = RUNNING
 	emit_signal("wave_started")
 	player_events.emit_signal("set_stat_value", "can_get_hungry", true)
 	game_events.emit_signal("start_wave_time_tracker")
 
 func end_wave():
 	game_data.current_arena_wave += 1
+	arena_state = IN_BETWEEN_WAVES
 	
 	if game_data.current_arena_wave == number_of_waves:
 		end_arena()
@@ -182,6 +186,7 @@ func end_arena():
 	
 func _on_enemy_killed(id): 
 	dead_enemies += 1
+	living_enemies -= 1
 	enemy_counter[id] -= 1
 
 func _on_arena_start_request(): 

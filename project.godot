@@ -240,8 +240,9 @@ pointing/emulate_touch_from_mouse=true
 
 [locale]
 
-translations=PoolStringArray( "res://system/data/lang/lang.en.translation", "res://system/data/lang/lang.fr.translation", "res://system/data/lang/lang.pt.translation" )
-locale_filter=[ 1, [ "en", "fr", "pt" ] ]
+test="fr_CA"
+translations=PoolStringArray( "res://system/data/lang/lang.en.translation", "res://system/data/lang/lang.fr.translation", "res://system/data/lang/lang.pt.translation", "res://system/data/lang/lang.fr_CA.translation" )
+locale_filter=[ 0, [ "en", "fr", "fr_CA", "pt" ] ]
 
 [physics]
 
