@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=2]
@@ -8,7 +8,9 @@
 [ext_resource path="res://ui/gui/icons/video_icon.png" type="Texture" id=6]
 [ext_resource path="res://ui/gui/icons/audio_icon.png" type="Texture" id=7]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=8]
-[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/video_tab.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/video_tab/video_tab.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/audio_tab/audio_tab.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs.gd" type="Script" id=11]
 
 [node name="settings" type="Control"]
 anchor_right = 1.0
@@ -144,24 +146,45 @@ margin_right = 172.0
 margin_bottom = 92.0
 texture = ExtResource( 4 )
 
-[node name="tabs" type="VBoxContainer" parent="elements/main_container/visuals/texture_container/background"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 167.0
-margin_bottom = 85.0
+[node name="ScrollContainer" type="ScrollContainer" parent="elements/main_container/visuals/texture_container/background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 4.0
+margin_right = -2.0
+margin_bottom = -4.0
+theme = ExtResource( 8 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="MarginContainer" type="MarginContainer" parent="elements/main_container/visuals/texture_container/background/tabs"]
-margin_right = 162.0
-custom_constants/margin_left = 20
+[node name="tabs" type="HBoxContainer" parent="elements/main_container/visuals/texture_container/background/ScrollContainer"]
+margin_right = 134.0
+margin_bottom = 126.0
+alignment = 1
+script = ExtResource( 11 )
 
-[node name="video_tab" parent="elements/main_container/visuals/texture_container/background/tabs" instance=ExtResource( 9 )]
+[node name="MarginContainer" type="MarginContainer" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs"]
+margin_bottom = 126.0
+
+[node name="video_tab" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" instance=ExtResource( 9 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 4.0
-margin_right = 162.0
+margin_right = 140.0
 margin_bottom = 24.0
 
+[node name="audio_tab" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" instance=ExtResource( 10 )]
+margin_left = 4.0
+margin_right = 134.0
+margin_bottom = 126.0
+
 [connection signal="button_pressed" from="home_button_container/CenterContainer/small_button" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/video_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/audio_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/locale_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 
 [editable path="home_button_container/CenterContainer/small_button"]
 [editable path="elements/main_container/visuals/tab_buttons/video_settings"]

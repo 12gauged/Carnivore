@@ -16,6 +16,9 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 texture_disabled = ExtResource( 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="center_container" type="CenterContainer" parent="."]
 anchor_right = 1.0

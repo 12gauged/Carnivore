@@ -77,7 +77,6 @@ custom_constants/hseparation = 10
 columns = 5
 
 [node name="settings_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]
-disabled = true
 id = "settings_screen"
 
 [node name="icon" parent="center_elements/grid_container/button_container/settings_button/center_container" index="0"]
