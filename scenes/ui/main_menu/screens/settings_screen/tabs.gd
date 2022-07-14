@@ -1,8 +1,8 @@
 extends HBoxContainer
 
 
-onready var video_tab = $video_tab
-onready var audio_tab = $audio_tab
+onready var video_tab = $VBoxContainer/video_tab
+onready var audio_tab = $VBoxContainer/audio_tab
 
 
 func _on_tab_button_pressed(id):

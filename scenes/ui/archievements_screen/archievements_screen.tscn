@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ui/archievements_screen/archivement_text.gd" type="Script" id=2]
@@ -21,6 +21,14 @@
 [ext_resource path="res://ui/gui/icons/star_icon.png" type="Texture" id=19]
 [ext_resource path="res://entities/player/player.png" type="Texture" id=20]
 [ext_resource path="res://ui/gui/squares/player_square_challenges_screen.png" type="Texture" id=21]
+[ext_resource path="res://shaders/outline.tres" type="Shader" id=22]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 22 )
+shader_param/width = 1.0
+shader_param/outline_color = Color( 1, 1, 1, 1 )
+shader_param/active = true
+shader_param/full_sprite_highlight = false
 
 [node name="archievements_screen" type="Control"]
 anchor_right = 1.0
@@ -195,6 +203,7 @@ mouse_filter = 2
 [node name="star_icon" type="TextureRect" parent="archievement_viewer_manager/CenterContainer/archievement_container/current_archievement/star_icon_container"]
 visible = false
 modulate = Color( 1, 1, 0, 1 )
+material = SubResource( 1 )
 margin_left = 58.0
 margin_top = 17.0
 margin_right = 74.0

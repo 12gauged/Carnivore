@@ -17,6 +17,8 @@ export(int) var time_between_waves = 6
 
 onready var wave_start_delay: Timer = $wave_start_delay
 
+const MAX_HEAVY_ENEMY_SPAWN_CHANCE: int = 60
+
 var arena_state: int = STOPPED
 enum {
 	RUNNING,
@@ -118,6 +120,7 @@ func spawn_new_enemy():
 func get_random_enemy() -> String:
 	var result: String = FILLER_ENEMY
 	var EnemyData = enemy_spawn_data[toolbox.SystemRNG.randi_range(0, ENEMY_SPAWN_DATA_LEN)]
+	
 	var check_results = check_enemy_conditions(EnemyData) 
 	
 	result = check_results if check_results != "" else result
@@ -129,6 +132,14 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
 	if game_data.get_player_data("generation") < data.min_generation: return ""
+	
+	# increases the chance of heavy enemies to spawn by the end of the wave  # quick division by 4
+	print("%s spawn_chance: %s" % [data.entity_name, data.spawn_chance])
+	if data.spawn_chance < MAX_HEAVY_ENEMY_SPAWN_CHANCE: 
+		data.spawn_chance += 5 * int(enemy_id * 0.25) 
+		print("%s modified_spawn_chance: %s" % [data.entity_name, data.spawn_chance])
+		print("multiplier: %s\n" % str(1 + int(enemy_id * 0.25)))
+		
 	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1: return ""
 	
 	return data.entity_name

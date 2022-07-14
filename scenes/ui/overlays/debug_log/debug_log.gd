@@ -14,7 +14,7 @@ func _input(event):
 
 
 func _ready(): 
-	LogLabel.visible = OS.is_debug_build()
+	LogLabel.visible = false #OS.is_debug_build()
 	startup_logs()
 
 

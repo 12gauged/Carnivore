@@ -23,7 +23,7 @@ var player_data = {
 	"generation": 0,
 	"archievements": {
 		"generation0": {
-			"village_savior": false,
+			"village_savior": true,
 			"full_belly": false,
 			"triple_kill": false
 		},
@@ -40,20 +40,21 @@ var player_data = {
 	}
 }
 
+const DEFAULT_VOLUME: float = 1.6
+
 var game_settings: Dictionary = {
 	"audio": {
-		"main": 1.0,
-		"enemies": 1.0,
-		"player": 1.0,
-		"sfx": 1.0,
-		"environment": 1.0,
-		"ui": 1.0,
+		"master_bus": DEFAULT_VOLUME,
+		"music_bus": 1.3, # makes music slightly quieter by default
+		"entity_bus": DEFAULT_VOLUME,
+		"player_bus": DEFAULT_VOLUME,
+		"environment_bus": DEFAULT_VOLUME
 	},
 	"video": {
 		"camera_shake": true,
 		"fullscreen": true,
-		"language": "en"
-	}
+	},
+	"language": "en"
 }
 
 var current_platform: String = "desktop" setget set_current_platform, get_current_platform # TEMP

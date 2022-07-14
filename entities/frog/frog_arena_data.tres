@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 entity_name = "frog"
-wave_requirement = 7
+wave_requirement = 6
 max_number_per_wave = 1
 spawn_chance = 20
 min_generation = 0
