@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=5]
-[ext_resource path="res://ui/gui/icons/archievements_icon.png" type="Texture" id=6]
 [ext_resource path="res://scenes/ui/village_saved_screen/archievement_popup/archievement_popup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=8]
 [ext_resource path="res://scenes/ui/village_saved_screen/archievement_tracker_container.gd" type="Script" id=13]
@@ -66,7 +65,6 @@ margin_right = 96.0
 margin_bottom = 60.0
 
 [node name="v_button_container" type="VBoxContainer" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -78,8 +76,9 @@ alignment = 2
 script = ExtResource( 8 )
 
 [node name="h_button_container" type="GridContainer" parent="v_button_container"]
+margin_left = 12.0
 margin_top = 10.0
-margin_right = 68.0
+margin_right = 56.0
 margin_bottom = 30.0
 size_flags_horizontal = 4
 columns = 3
@@ -100,21 +99,9 @@ method = {
 "method": "emit_signal"
 }
 
-[node name="archievements_button" parent="v_button_container/h_button_container" instance=ExtResource( 2 )]
+[node name="restart_button" parent="v_button_container/h_button_container" instance=ExtResource( 2 )]
 margin_left = 24.0
 margin_right = 44.0
-disabled = true
-
-[node name="icon" parent="v_button_container/h_button_container/archievements_button/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 6 )
-
-[node name="restart_button" parent="v_button_container/h_button_container" instance=ExtResource( 2 )]
-margin_left = 48.0
-margin_right = 68.0
 
 [node name="icon" parent="v_button_container/h_button_container/restart_button/center_container" index="0"]
 margin_left = 2.0
@@ -150,5 +137,4 @@ method = {
 [connection signal="ready" from="save_game" to="save_game" method="call_method"]
 
 [editable path="v_button_container/h_button_container/home_button"]
-[editable path="v_button_container/h_button_container/archievements_button"]
 [editable path="v_button_container/h_button_container/restart_button"]

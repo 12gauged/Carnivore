@@ -33,8 +33,9 @@ func compare_dictionaries(dir1, dir2):
 		match dir2[value] is Dictionary:
 			true:
 				for subvalue in dir2[value].keys():
-					print("%s/%s not present in the loaded values. adding it in..." % [value, subvalue])
-					dir1[value][subvalue] = dir2[value][subvalue]
+					if !subvalue in dir2[value].keys():
+						print("%s/%s not present in the loaded values. adding it in..." % [value, subvalue])
+						dir1[value][subvalue] = dir2[value][subvalue]
 			false:
 				if !value in dir1.keys():
 					print("%s not present in the loaded values. adding it in..." % value)

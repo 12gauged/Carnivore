@@ -9,7 +9,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	game_events.connect("change_scene_request", self, "_on_change_scene_request")
 
-func _on_change_scene_request(new_scene, fading: bool = true, fading_speed: float = 0.3):
+func _on_change_scene_request(new_scene, fading: bool = true, fading_speed: float = 1.0):
 	scene_ref = resources.get_resource("scenes", new_scene)
 	
 	if fading:

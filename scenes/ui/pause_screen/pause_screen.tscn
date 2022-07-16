@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/wide/wide_button.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://ui/gui/icons/settings_icon.png" type="Texture" id=6]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/settings_screen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=10]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -36,11 +38,12 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 4 )
 
-[node name="center_container" type="CenterContainer" parent="."]
+[node name="pause_ui_container" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 10 )
 
-[node name="grid_container" type="GridContainer" parent="center_container"]
+[node name="grid_container" type="GridContainer" parent="pause_ui_container"]
 margin_left = 44.0
 margin_top = 36.0
 margin_right = 195.0
@@ -50,7 +53,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_constants/vseparation = 1
 
-[node name="pause_text" type="Label" parent="center_container/grid_container"]
+[node name="pause_text" type="Label" parent="pause_ui_container/grid_container"]
 margin_right = 151.0
 margin_bottom = 11.0
 theme = ExtResource( 1 )
@@ -59,23 +62,23 @@ text = "ui.pause_screen.paused"
 align = 1
 uppercase = true
 
-[node name="MarginContainer" type="MarginContainer" parent="center_container/grid_container"]
+[node name="MarginContainer" type="MarginContainer" parent="pause_ui_container/grid_container"]
 margin_top = 12.0
 margin_right = 151.0
 margin_bottom = 20.0
 custom_constants/margin_bottom = 8
 
-[node name="resume_button" parent="center_container/grid_container" instance=ExtResource( 2 )]
+[node name="resume_button" parent="pause_ui_container/grid_container" instance=ExtResource( 2 )]
 material = SubResource( 3 )
 margin_left = 35.0
 margin_right = 115.0
 
-[node name="text" parent="center_container/grid_container/resume_button/center_container" index="0"]
+[node name="text" parent="pause_ui_container/grid_container/resume_button/center_container" index="0"]
 margin_left = 0.0
-margin_right = 104.0
+margin_right = 106.0
 text = "ui.pause_screen.resume"
 
-[node name="h_grid_container" type="GridContainer" parent="center_container/grid_container"]
+[node name="h_grid_container" type="GridContainer" parent="pause_ui_container/grid_container"]
 margin_left = 53.0
 margin_top = 42.0
 margin_right = 97.0
@@ -83,36 +86,35 @@ margin_bottom = 62.0
 size_flags_horizontal = 4
 columns = 2
 
-[node name="settings_button" parent="center_container/grid_container/h_grid_container" instance=ExtResource( 7 )]
-disabled = true
+[node name="settings_button" parent="pause_ui_container/grid_container/h_grid_container" instance=ExtResource( 7 )]
 id = "settings_screen"
 
-[node name="icon" parent="center_container/grid_container/h_grid_container/settings_button/center_container" index="0"]
+[node name="icon" parent="pause_ui_container/grid_container/h_grid_container/settings_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 6 )
 
-[node name="home_button" parent="center_container/grid_container/h_grid_container" instance=ExtResource( 7 )]
+[node name="home_button" parent="pause_ui_container/grid_container/h_grid_container" instance=ExtResource( 7 )]
 margin_left = 24.0
 margin_right = 44.0
 
-[node name="icon" parent="center_container/grid_container/h_grid_container/home_button/center_container" index="0"]
+[node name="icon" parent="pause_ui_container/grid_container/h_grid_container/home_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 8 )
 
-[node name="unpause_method_caller" parent="center_container/grid_container/h_grid_container/home_button" instance=ExtResource( 5 )]
+[node name="unpause_method_caller" parent="pause_ui_container/grid_container/h_grid_container/home_button" instance=ExtResource( 5 )]
 position = Vector2( -42, 21 )
 method = {
 "caller": "game_functions",
 "method": "resume_game"
 }
 
-[node name="go_to_main_menu_method_caller" parent="center_container/grid_container/h_grid_container/home_button" instance=ExtResource( 5 )]
+[node name="go_to_main_menu_method_caller" parent="pause_ui_container/grid_container/h_grid_container/home_button" instance=ExtResource( 5 )]
 position = Vector2( -42, 21 )
 method = {
 "args": [ "change_scene_request", "main_menu" ],
@@ -120,10 +122,30 @@ method = {
 "method": "emit_signal"
 }
 
-[connection signal="pressed" from="center_container/grid_container/resume_button" to="." method="toggle_pause"]
-[connection signal="pressed" from="center_container/grid_container/h_grid_container/home_button" to="center_container/grid_container/h_grid_container/home_button/unpause_method_caller" method="call_method"]
-[connection signal="pressed" from="center_container/grid_container/h_grid_container/home_button" to="center_container/grid_container/h_grid_container/home_button/go_to_main_menu_method_caller" method="call_method"]
+[node name="settings_ui_container" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 10 )
 
-[editable path="center_container/grid_container/resume_button"]
-[editable path="center_container/grid_container/h_grid_container/settings_button"]
-[editable path="center_container/grid_container/h_grid_container/home_button"]
+[node name="settings" parent="settings_ui_container" instance=ExtResource( 9 )]
+mouse_filter = 1
+
+[connection signal="paused" from="." to="pause_ui_container" method="show"]
+[connection signal="paused" from="." to="settings_ui_container" method="hide"]
+[connection signal="pressed" from="pause_ui_container/grid_container/resume_button" to="." method="toggle_pause"]
+[connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/settings_button" to="pause_ui_container" method="hide"]
+[connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/settings_button" to="settings_ui_container" method="show"]
+[connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/home_button" to="pause_ui_container/grid_container/h_grid_container/home_button/unpause_method_caller" method="call_method"]
+[connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/home_button" to="pause_ui_container/grid_container/h_grid_container/home_button/go_to_main_menu_method_caller" method="call_method"]
+[connection signal="pressed" from="settings_ui_container/settings/home_button_container/CenterContainer/small_button" to="pause_ui_container" method="show"]
+[connection signal="pressed" from="settings_ui_container/settings/home_button_container/CenterContainer/small_button" to="settings_ui_container" method="hide"]
+
+[editable path="pause_ui_container/grid_container/resume_button"]
+[editable path="pause_ui_container/grid_container/h_grid_container/settings_button"]
+[editable path="pause_ui_container/grid_container/h_grid_container/home_button"]
+[editable path="settings_ui_container/settings"]
+[editable path="settings_ui_container/settings/home_button_container/CenterContainer/small_button"]
+[editable path="settings_ui_container/settings/elements/main_container/visuals/tab_buttons/video_settings"]
+[editable path="settings_ui_container/settings/elements/main_container/visuals/tab_buttons/audio_settings"]
+[editable path="settings_ui_container/settings/elements/main_container/visuals/tab_buttons/locale_settings"]

@@ -157,25 +157,26 @@ theme = ExtResource( 8 )
 scroll_horizontal_enabled = false
 
 [node name="tabs" type="HBoxContainer" parent="elements/main_container/visuals/texture_container/background/ScrollContainer"]
-margin_right = 146.0
-margin_bottom = 24.0
+margin_right = 136.0
+margin_bottom = 130.0
 alignment = 1
 script = ExtResource( 11 )
 
 [node name="MarginContainer" type="MarginContainer" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs"]
 margin_right = 2.0
-margin_bottom = 24.0
+margin_bottom = 130.0
 custom_constants/margin_right = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs"]
 margin_left = 6.0
-margin_right = 146.0
-margin_bottom = 24.0
+margin_right = 136.0
+margin_bottom = 130.0
 
 [node name="MarginContainer" type="MarginContainer" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer"]
-margin_right = 140.0
+margin_right = 130.0
 
 [node name="video_tab" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 9 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 4.0
@@ -183,10 +184,9 @@ margin_right = 140.0
 margin_bottom = 24.0
 
 [node name="audio_tab" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 10 )]
-visible = false
-margin_left = -144.0
-margin_right = -14.0
-margin_bottom = 126.0
+margin_top = 4.0
+margin_right = 130.0
+margin_bottom = 130.0
 
 [connection signal="button_pressed" from="home_button_container/CenterContainer/small_button" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/video_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]

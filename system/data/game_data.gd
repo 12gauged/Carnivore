@@ -44,11 +44,11 @@ const DEFAULT_VOLUME: float = 1.6
 
 var game_settings: Dictionary = {
 	"audio": {
-		"master_bus": DEFAULT_VOLUME,
-		"music_bus": 1.3, # makes music slightly quieter by default
-		"entity_bus": DEFAULT_VOLUME,
-		"player_bus": DEFAULT_VOLUME,
-		"environment_bus": DEFAULT_VOLUME
+		"Master": DEFAULT_VOLUME,
+		"music": 1.3, # makes music slightly quieter by default
+		"entity_sounds": DEFAULT_VOLUME,
+		"player_sounds": DEFAULT_VOLUME,
+		"environment_sounds": DEFAULT_VOLUME
 	},
 	"video": {
 		"camera_shake": true,

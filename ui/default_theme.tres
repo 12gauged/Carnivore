@@ -6,27 +6,21 @@
 [ext_resource path="res://ui/gui/sliders/slider_normal/slider_normal_grabber_disabled.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/sliders/slider_vertical/slider_vertical_grabber_normal.png" type="Texture" id=6]
 
-[sub_resource type="StyleBoxTexture" id=4]
+[sub_resource type="StyleBoxTexture" id=9]
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=10]
 
 [sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 104, 8 )
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=11]
 texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 10, 52 )
-margin_left = 9.0
-margin_right = 9.0
-margin_top = 1.0
-margin_bottom = 1.0
+region_rect = Rect2( 0, 0, 10, 76 )
 
 [sub_resource type="StyleBoxTexture" id=7]
 texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 10, 75 )
-margin_top = 1.0
-margin_bottom = 16.0
+region_rect = Rect2( 0, 0, 10, 76 )
 
 [sub_resource type="DynamicFontData" id=1]
 antialiased = false
@@ -44,10 +38,10 @@ default_font = SubResource( 2 )
 HSlider/icons/grabber = ExtResource( 2 )
 HSlider/icons/grabber_disabled = ExtResource( 4 )
 HSlider/icons/grabber_highlight = ExtResource( 2 )
-HSlider/styles/grabber_area = SubResource( 4 )
-HSlider/styles/grabber_area_highlight = SubResource( 5 )
+HSlider/styles/grabber_area = SubResource( 9 )
+HSlider/styles/grabber_area_highlight = SubResource( 10 )
 HSlider/styles/slider = SubResource( 6 )
-VScrollBar/styles/grabber = SubResource( 8 )
-VScrollBar/styles/grabber_highlight = SubResource( 8 )
-VScrollBar/styles/grabber_pressed = SubResource( 8 )
+VScrollBar/styles/grabber = SubResource( 11 )
+VScrollBar/styles/grabber_highlight = SubResource( 11 )
+VScrollBar/styles/grabber_pressed = SubResource( 11 )
 VScrollBar/styles/scroll = SubResource( 7 )
