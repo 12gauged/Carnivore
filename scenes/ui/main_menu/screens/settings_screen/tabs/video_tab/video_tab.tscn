@@ -1,35 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small_toggle/small_button_toggle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/video_tab/video_tab.gd" type="Script" id=3]
-[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=4]
 
-[node name="video_tab" type="HBoxContainer"]
+[node name="video_tab" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
 
-[node name="save_settings" parent="." instance=ExtResource( 4 )]
-position = Vector2( 110, 112 )
-method = {
-"caller": "json_data_manager",
-"method": "save_settings"
-}
-
-[node name="options" type="GridContainer" parent="."]
-margin_right = 140.0
-margin_bottom = 135.0
-
-[node name="camera_shake" type="HBoxContainer" parent="options"]
-margin_right = 140.0
+[node name="camera_shake" type="HBoxContainer" parent="."]
+margin_right = 240.0
 margin_bottom = 20.0
 
-[node name="small_button_toggle" parent="options/camera_shake" instance=ExtResource( 2 )]
+[node name="small_button_toggle" parent="camera_shake" instance=ExtResource( 2 )]
 pressed = true
 setting_key = "camera_shake"
 
-[node name="Label" type="Label" parent="options/camera_shake"]
+[node name="Label" type="Label" parent="camera_shake"]
 margin_left = 24.0
 margin_top = 5.0
 margin_right = 140.0
@@ -37,5 +25,21 @@ margin_bottom = 15.0
 theme = ExtResource( 1 )
 text = "ui.settings.camera_shake"
 
-[connection signal="toggled" from="options/camera_shake/small_button_toggle" to="." method="_toggle_camera_shake_request"]
-[connection signal="toggled" from="options/camera_shake/small_button_toggle" to="save_settings" method="call_method"]
+[node name="fullscreen" type="HBoxContainer" parent="."]
+margin_top = 24.0
+margin_right = 240.0
+margin_bottom = 44.0
+
+[node name="small_button_toggle" parent="fullscreen" instance=ExtResource( 2 )]
+script = null
+
+[node name="Label" type="Label" parent="fullscreen"]
+margin_left = 24.0
+margin_top = 5.0
+margin_right = 124.0
+margin_bottom = 15.0
+theme = ExtResource( 1 )
+text = "ui.settings.fullscreen"
+
+[connection signal="toggled" from="camera_shake/small_button_toggle" to="." method="_on_camera_shake_toggled"]
+[connection signal="toggled" from="fullscreen/small_button_toggle" to="." method="_on_fullscreen_toggled"]

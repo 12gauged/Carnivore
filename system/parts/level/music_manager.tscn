@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://system/parts/level/music_manager.gd" type="Script" id=1]
+[ext_resource path="res://system/parts/part_music_streamer.tscn" type="PackedScene" id=2]
+
+[node name="music_manager" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="music_player" parent="." instance=ExtResource( 2 )]
+
+[connection signal="music_finished" from="music_player" to="." method="_on_part_music_streamer_music_finished"]

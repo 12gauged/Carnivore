@@ -129,6 +129,7 @@ mouse_filter = 2
 script = ExtResource( 10 )
 
 [node name="settings" parent="settings_ui_container" instance=ExtResource( 9 )]
+visible = false
 mouse_filter = 1
 
 [connection signal="paused" from="." to="pause_ui_container" method="show"]
@@ -148,4 +149,4 @@ mouse_filter = 1
 [editable path="settings_ui_container/settings/home_button_container/CenterContainer/small_button"]
 [editable path="settings_ui_container/settings/elements/main_container/visuals/tab_buttons/video_settings"]
 [editable path="settings_ui_container/settings/elements/main_container/visuals/tab_buttons/audio_settings"]
-[editable path="settings_ui_container/settings/elements/main_container/visuals/tab_buttons/locale_settings"]
+[editable path="settings_ui_container/settings/elements/main_container/visuals/tab_buttons/language_settings"]

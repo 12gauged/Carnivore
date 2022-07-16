@@ -11,6 +11,11 @@ func _ready():
 
 		if js_handler.load_value("game_settings") == null: save_settings()
 		else: load_settings()
+		
+		var current_locale = game_data.get_game_setting("locale", "value")
+		if current_locale != "DEFAULT":
+			TranslationServer.set_locale(current_locale)
+		
 		print("%s\nloaded." % game_data.game_settings, true)
 
 
@@ -24,6 +29,7 @@ func load_game():
 func save_settings(): js_handler.save_value("game_settings", json_handler.to_json_string(game_data.game_settings))
 func load_settings(): 
 	var loaded_values = json_handler.load_json_from_browser(js_handler.load_value("game_settings"))
+	print("loaded settings: %s" % loaded_values)
 	loaded_values = compare_dictionaries(loaded_values, game_data.game_settings)
 	game_data.game_settings = loaded_values
 
@@ -33,7 +39,7 @@ func compare_dictionaries(dir1, dir2):
 		match dir2[value] is Dictionary:
 			true:
 				for subvalue in dir2[value].keys():
-					if !subvalue in dir2[value].keys():
+					if !subvalue in dir1[value].keys():
 						print("%s/%s not present in the loaded values. adding it in..." % [value, subvalue])
 						dir1[value][subvalue] = dir2[value][subvalue]
 			false:

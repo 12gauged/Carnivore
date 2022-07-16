@@ -51,10 +51,11 @@ var game_settings: Dictionary = {
 		"environment_sounds": DEFAULT_VOLUME
 	},
 	"video": {
-		"camera_shake": true,
-		"fullscreen": true,
+		"camera_shake": true
 	},
-	"language": "en"
+	"locale": {
+		"value": "DEFAULT"	
+	}
 }
 
 var current_platform: String = "desktop" setget set_current_platform, get_current_platform # TEMP

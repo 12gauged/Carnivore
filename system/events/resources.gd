@@ -29,6 +29,10 @@ var resources: Dictionary = {
 		"player_hit": preload("res://sounds/entity/player/player_hit.wav"),
 		"player_throw": preload("res://sounds/entity/player/player_throw.wav")
 	},
+	"music": {
+		"music_sample": preload("res://sounds/music_stream_sample.tscn"),
+		"ant_raid": preload("res://music/ant_raid/ant_raid.ogg")
+	},
 	"scenes": {
 		"debug": preload("res://scenes/levels/dev/debug.tscn"),
 		"main": preload("res://main.tscn"),

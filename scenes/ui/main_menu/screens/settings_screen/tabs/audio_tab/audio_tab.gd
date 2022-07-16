@@ -13,6 +13,7 @@ onready var Sliders: Dictionary= {
 func _ready():
 	for VolumeSlider in Sliders.keys():
 		Sliders[VolumeSlider].set_value(game_data.get_game_setting("audio", VolumeSlider))
+		print("setting %s value to: %s" % [VolumeSlider, game_data.get_game_setting("audio", VolumeSlider)])
 		
 
 
@@ -20,4 +21,5 @@ func _on_slider_value_updated(id, value):
 	var bus_id = AudioServer.get_bus_index(id)
 	var value_in_db = linear2db(value)
 	AudioServer.set_bus_volume_db(bus_id, value_in_db)
+	game_data.set_game_setting("audio", id, value)
 	json_data_manager.save_settings()

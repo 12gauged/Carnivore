@@ -4,10 +4,11 @@ ui.startup.warning.lights.description,this game contains flashing lights,este jo
 ui.startup.warning.hardware_accel.title,performance warning!,aviso de desempenho!,untranslated,avertissement de performance
 ui.startup.warning.hardware_accel.description,this game requires you to have hardware acceleration activated for the best performance,este jogo requer que você tenha aceleração de hardware ativada para a melhor performance,untranslated,ce jeu nécessite que l'accélération matérielle soit activée pour de meilleures performances
 ui.main_menu.play,play,jogar,jouer,Jouer
-ui.credits.dev,developer,desenvolvedor(a),développeur(développeuse),développeurs
+ui.credits.dev,developer,desenvolvedor,développeur,développeur
 ui.credits.translators,translators,tradutores(as),untranslated,traducteurs
 ui.settings.title,settings,configurações,untranslated,untranslated
 ui.settings.camera_shake,camera shake,tremor de câmera,untranslated,untranslated
+ui.settings.fullscreen,fullscreen,tela-cheia,untranslated,untranslated
 ui.settings.master_bus,master volume,volume geral,untranslated,untranslated
 ui.settings.music_bus,music,música,untranslated,untranslated
 ui.settings.player_bus,player sounds,sons do jogador,untranslated,untranslated
