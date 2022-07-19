@@ -18,19 +18,15 @@ onready var RespawnDelayTimer: Timer = $respawn_delay_timer
 onready var Group = toolbox.get_node_in_group(entity_group)
 	
 	
-	
 func _ready():
-	if auto_spawn: 
-		spawn_entity()
+	if auto_spawn: spawn_entity()
 
 
 func get_spawn_offset() -> Vector2:
 	var result: Vector2 = Vector2.ZERO
-	
 	toolbox.SystemRNG.randomize()
 	result.x = toolbox.SystemRNG.randi_range(0, respawn_radius.x)
 	result.y = toolbox.SystemRNG.randi_range(0, respawn_radius.y)
-	
 	return result
 
 func can_spawn() -> bool:
@@ -50,7 +46,7 @@ func spawn_entity():
 	InstancedEntity.set_global_position(self.global_position + get_spawn_offset())
 	
 	if !deletion_signal.empty():
-		InstancedEntity.connect(deletion_signal, self, "_on_instanced_entity_deleted")
+		InstancedEntity.call_deferred("connect", deletion_signal, self, "_on_instanced_entity_deleted")
 	
 	emit_signal("entity_spawned", InstancedEntity)
 	

@@ -37,5 +37,5 @@ method_to_execute = {
 [node name="drop_animation" parent="." instance=ExtResource( 2 )]
 
 [connection signal="area_entered" from="." to="comp_interactable" method="_on_owner_area_entered"]
-[connection signal="interacted" from="." to="pickup_sound_effect" method="play"]
+[connection signal="interacted" from="." to="pickup_sound_effect" method="play_sound"]
 [connection signal="interacted" from="comp_interactable" to="." method="_on_interacted"]

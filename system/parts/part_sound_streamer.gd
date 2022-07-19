@@ -5,7 +5,7 @@ export(String) var bus = "Master"
 onready var StreamSample = resources.get_resource("sounds", "sample")
 onready var StreamGroup = toolbox.get_node_in_group("sound_streams")
 
-func play():
+func play_sound():
 	var NewStreamSample: AudioStreamPlayer2D = StreamSample.instance()
 	NewStreamSample.stream = stream
 	NewStreamSample.bus = bus

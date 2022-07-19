@@ -48,7 +48,7 @@ func shoot_projectile():
 	if projectile_type.empty(): return
 	if !ShotDelayTimer.is_stopped(): return
 	
-	ThrowSoundEffect.play()
+	ThrowSoundEffect.play_sound()
 	ShotDelayTimer.start()
 	camera_events.emit_signal("camera_shake_request", 0.2, 1)
 	player_events.emit_signal("projectile_thrown")

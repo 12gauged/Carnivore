@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://sounds/entity/enemy/frog/frog_spawn.wav" type="AudioStream" id=16]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=17]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=18]
+[ext_resource path="res://particles/entity/entity_big_death_particle.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sounds/entity/enemy/enemy_big_death.wav" type="AudioStream" id=20]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 3.0
@@ -84,10 +86,10 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
-"method": "play"
+"method": "play_sound"
 }, {
 "args": [  ],
-"method": "play"
+"method": "play_sound"
 } ]
 }
 
@@ -202,7 +204,7 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "play"
+"method": "play_sound"
 } ]
 }
 tracks/5/type = "method"
@@ -248,26 +250,13 @@ tracks/7/keys = {
 "update": 1,
 "values": [ true, false ]
 }
-tracks/8/type = "method"
-tracks/8/path = NodePath("../part_state_handler/SPAWN/spawn_sound_effect")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "play"
-} ]
-}
 
-[node name="frog" type="KinematicBody2D"]
+[node name="frog" type="KinematicBody2D" groups=["enemy_instances"]]
 script = ExtResource( 4 )
 MAX_HEALTH = 6
 MAX_SPEED = 300
 FRICTION = 10000
+DeathParticle = ExtResource( 19 )
 ID = "frog"
 TAGS = [ "COMP_EXECUTER", "ENTITY", "FROG" ]
 DEFAULT_STATE = "IDLE"
@@ -293,10 +282,6 @@ IGNORE_TAGS = [ "FROG", "ENEMY_PROJECTILE" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hurtbox"]
 position = Vector2( 0, -2 )
 shape = SubResource( 6 )
-
-[node name="hit_sound_effect" parent="part_hurtbox" instance=ExtResource( 9 )]
-stream = ExtResource( 10 )
-bus = "entity_sounds"
 
 [node name="part_hitbox" parent="." instance=ExtResource( 12 )]
 position = Vector2( 0, 2 )
@@ -374,21 +359,32 @@ particle_id = "entity_ground_slam"
 duration = 0.2
 intensity = 1.2
 
+[node name="hit_sound_effect" parent="." instance=ExtResource( 9 )]
+stream = ExtResource( 10 )
+bus = "entity_sounds"
+
+[node name="dead_sound_effect" parent="." instance=ExtResource( 9 )]
+stream = ExtResource( 20 )
+bus = "entity_sounds"
+
 [connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
 [connection signal="deleted" from="." to="death_loot_spawner2" method="spawn_entity"]
+[connection signal="deleted" from="." to="dead_sound_effect" method="play_sound"]
+[connection signal="hurt" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="self_give" from="." to="part_state_handler/JUMP/comp_movement_jump" method="set_owner"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
+[connection signal="state_entered" from="part_state_handler/SPAWN" to="part_state_handler/SPAWN/spawn_sound_effect" method="play_sound"]
 [connection signal="state_entered" from="part_state_handler/IDLE" to="part_state_handler/IDLE/change_state_timer" method="start_timer"]
 [connection signal="timeout" from="part_state_handler/IDLE/change_state_timer" to="part_state_handler" method="go_to_next_state"]
-[connection signal="state_entered" from="part_state_handler/JUMP" to="part_state_handler/SPAWN/spawn_sound_effect" method="play"]
+[connection signal="state_entered" from="part_state_handler/JUMP" to="part_state_handler/SPAWN/spawn_sound_effect" method="play_sound"]
 [connection signal="component_value_update" from="part_state_handler/JUMP/comp_movement_jump" to="." method="set_movement_direction"]
 [connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_hitbox" method="_enable_request"]
 [connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_state_handler" method="go_to_next_state"]
-[connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_state_handler/JUMP/land_sound_effect" method="play"]
+[connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_state_handler/JUMP/land_sound_effect" method="play_sound"]
 [connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_particle_emitter" method="emit_particle"]
 [connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_camera_shaker" method="shake_camera"]
 [connection signal="particle_finished" from="part_particle_emitter" to="part_hitbox" method="_disable_request"]

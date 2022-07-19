@@ -35,12 +35,17 @@ func _ready():
 	player_events.connect("set_stat_value", self, "update_stat")
 	# warning-ignore:return_value_discarded
 	player_events.connect("force_exit_from_eat_state", self, "_on_exit_from_eat_state_forced")
+	# warning-ignore:return_value_discarded
+	player_events.connect("unfreeze_player", self, "unfreeze")
+	# warning-ignore:return_value_discarded
+	player_events.connect("freeze_player", self, "freeze")
 		
 func _input(event):
 	if OS.is_debug_build():
-		if event.is_action_pressed("debug_f3"): die()
+		if event.is_action_pressed("debug_f3"): player_events.emit_signal("unfreeze_player")
 		if event.is_action_pressed("debug_f4"): update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
 		if event.is_action_pressed("debug_f6"): update_stat("health", int(max(get_stat("health") - 1, 0)))
+		if event.is_action_pressed("debug_f7"): player_events.emit_signal("freeze_player")
 	
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
 		if event.is_pressed(): enter_eat_state()
@@ -122,7 +127,6 @@ func consume_enemy(EnemyNode):
 	enemies_consumed += 1
 	if enemies_consumed >= 5: 
 		player_events.emit_signal("archievement_made", "full_belly", true)
-	print("enemies consumed: %s" % enemies_consumed)
 		
 func reset_stat_decrease_timer(mode: String):
 	HungerDecreaseTimer.stop()
@@ -133,6 +137,11 @@ func reset_stat_decrease_timer(mode: String):
 	
 func apply_damage(damage: int):
 	if damage <= 0: return
+	if damage >= get_stat("health"): 
+		die()
+		return
+	
+	emit_signal("hurt")
 	update_stat("health", get_stat("health") - damage)
 	start_invincibility()
 	start_blinking()

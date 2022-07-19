@@ -33,3 +33,6 @@ func validate_archievement(archievement, generation):
 	if requested_archievement_stat == true: return false ## if archievement has been completed
 	if generation == -1: return false ## if the generation is invalid
 	return true
+	
+func set_time_scale(value: float):
+	Engine.set_time_scale(value)

@@ -5,18 +5,21 @@ class_name Entity
 
 signal state_changed(new_state, old_state)
 signal dead(id)
+signal hurt()
 signal deleted()
+signal frozen()
+signal unfrozen()
 signal self_give(node)
 
 export(int) var MAX_HEALTH = 1
 export(int) var MAX_SPEED = 70
 export(int) var ACCELERATION = 700
 export(int) var FRICTION = 600
+export(PackedScene) var DeathParticle
 
 onready var stats = {"health": MAX_HEALTH, "invincible": false}
 onready var Collision: CollisionShape2D = $collision
 onready var TextureRes = $texture
-onready var DeathParticle = resources.get_resource("particles", "entity_death")
 onready var ParticleGroup = toolbox.get_node_in_group("particles")
 
 export(String) var ID = ""
@@ -30,18 +33,25 @@ var blinking
 var movement_direction: Vector2 = Vector2.ZERO setget set_movement_direction
 var velocity: Vector2 = Vector2.ZERO
 var state: String = "" setget set_state, get_state
+var frozen: bool = false
+
+var DEFAULT_FRICTION
+var DEFAULT_ACCELERATION
+var DEFAULT_MAX_SPEED
 
 
 
 func _ready():
+	DEFAULT_FRICTION = FRICTION
+	DEFAULT_ACCELERATION = ACCELERATION
+	DEFAULT_MAX_SPEED = MAX_SPEED
+	
 	emit_signal("self_give", self)
 	STARTING_STATE = DEFAULT_STATE if STARTING_STATE.empty() else STARTING_STATE
 	set_state(STARTING_STATE)
 	
 
 func _physics_process(delta):
-	if dead(): die()
-	
 	if blinking: count_damage_blink_delay()
 	else: stop_blinking()
 	
@@ -89,7 +99,6 @@ func set_rotation_degrees(value: float): rotation_degrees = value
 func start_invincibility(): set_stat("invincible", true)
 func stop_invincibility(): set_stat("invincible", false)
 	
-func dead(): return get_stat("health") <= 0
 func die(): 
 	emit_signal("dead", ID)
 	emit_signal("deleted")
@@ -118,6 +127,10 @@ func get_texture() -> Node:
 
 func apply_damage(damage: int):
 	if damage <= 0: return
+	if damage >= get_stat("health"):
+		die()
+		return
+	emit_signal("hurt")
 	set_stat("health", get_stat("health") - damage)
 	start_blinking()
 
@@ -128,3 +141,21 @@ func enable_collision(): Collision.set_deferred("disabled", false)
 func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
 	apply_damage(Hitbox.damage)
+	
+func freeze():
+	set_process(false)
+	#set_physics_process(false)
+	set_process_input(false)
+	frozen = true
+	FRICTION = DEFAULT_FRICTION * 0.145 # quick division by 6
+	movement_direction = Vector2.ZERO
+	emit_signal("frozen")
+	
+func unfreeze():
+	set_process(true)
+	#set_physics_process(true)
+	set_process_input(true)
+	frozen = false
+	FRICTION = DEFAULT_FRICTION
+	emit_signal("unfrozen")
+	

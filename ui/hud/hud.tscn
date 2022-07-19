@@ -98,7 +98,7 @@ custom_constants/margin_top = 13
 [node name="notifs" type="VBoxContainer" parent="root/top_elements"]
 margin_top = 25.0
 margin_right = 240.0
-margin_bottom = 25.0
+margin_bottom = 41.0
 
 [node name="wave_notification" type="Label" parent="root/top_elements/notifs"]
 visible = false
@@ -114,7 +114,6 @@ script = ExtResource( 7 )
 wait_time = 3.0
 
 [node name="archievement_notification" parent="root/top_elements/notifs" instance=ExtResource( 8 )]
-visible = false
 margin_left = 82.0
 margin_right = 158.0
 size_flags_horizontal = 4

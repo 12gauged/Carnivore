@@ -78,12 +78,11 @@ func process_enemy_deaths():
 	dead_enemies -= 1
 
 func free_all_enemies():
-	for AliveEnemy in SpawnedEnemies:
+	for AliveEnemy in get_tree().get_nodes_in_group("enemy_instances"):
 		if is_instance_valid(AliveEnemy):
 			AliveEnemy.queue_free()
 	enemy_id = 0
 	enemy_kill_count = 0
-	SpawnedEnemies = []
 			
 func spawn_first_enemies():
 	spawn_new_enemy()

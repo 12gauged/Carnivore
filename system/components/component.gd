@@ -26,6 +26,8 @@ func _process(delta):
 	
 func _execute(_delta): pass
 
-
 func set_owner(OwnerNode):
 	Owner = OwnerNode
+	
+func resume_execution(): can_execute = true
+func stop_execution(): can_execute = false

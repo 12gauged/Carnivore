@@ -14,6 +14,11 @@ signal projectile_collected(projectile)
 signal projectile_thrown()
 
 # warning-ignore:unused_signal
+signal freeze_player()
+# warning-ignore:unused_signal
+signal unfreeze_player()
+
+# warning-ignore:unused_signal
 signal entered_eat_state
 # warning-ignore:unused_signal
 signal exited_eat_state

@@ -18,9 +18,7 @@ func _ready():
 func _process(delta):
 	if current_state.empty(): return
 	
-	if self.name == "worm": print("rn the state is: ", current_state)
 	if state_executers.has(current_state):
-		if self.name == "worm": print("executing ", current_state)
 		state_executers[current_state]._state_execute(delta)
 	elif "*" in existing_state_nodes:
 		state_executers["*"]._state_execute(delta)

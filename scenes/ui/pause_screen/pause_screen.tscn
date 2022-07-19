@@ -129,7 +129,6 @@ mouse_filter = 2
 script = ExtResource( 10 )
 
 [node name="settings" parent="settings_ui_container" instance=ExtResource( 9 )]
-visible = false
 mouse_filter = 1
 
 [connection signal="paused" from="." to="pause_ui_container" method="show"]
