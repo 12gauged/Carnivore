@@ -295,6 +295,7 @@ DEFAULT_STATE = "DEFAULT"
 STARTING_STATE = "SPAWN"
 CONSTANT_STATES = [ "DIG", "ATTACK" ]
 state_execution_pattern = [ "DEFAULT", "DIG", "ATTACK" ]
+state_execution_pattern = [ "DEFAULT", "DIG", "ATTACK" ]
 
 [node name="texture" type="Sprite" parent="."]
 position = Vector2( 0, -5 )

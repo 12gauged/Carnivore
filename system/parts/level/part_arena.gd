@@ -110,7 +110,7 @@ func spawn_new_enemy():
 	# warning-ignore:return_value_discarded
 	SpawnedEnemy.connect("dead", self, "_on_enemy_killed")
 	# warning-ignore:return_value_discarded
-	SpawnedEnemy.connect("ready", self, "_on_enemy_entered_scene")
+	#SpawnedEnemy.connect("ready", self, "_on_enemy_entered_scene")
 	
 	living_enemies += 1
 	enemy_id += 1
@@ -133,16 +133,11 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 	if game_data.get_player_data("generation") < data.min_generation: return ""
 	
 	# increases the chance of heavy enemies to spawn by the end of the wave
-	print("%s spawn_chance: %s" % [data.entity_name, data.spawn_chance])
 	if data.spawn_chance < MAX_HEAVY_ENEMY_SPAWN_CHANCE: 
 		data.spawn_chance += 5 * int(enemy_id * 0.25) # quick division by 4
-		print("%s modified_spawn_chance: %s" % [data.entity_name, data.spawn_chance])
-		print("multiplier: %s\n" % str(1 + int(enemy_id * 0.25)))
 		
 	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1: return ""
-	
 	return data.entity_name
-	
 	
 	
 func trigger_spawner(spawner_id: int, entity_name: String):

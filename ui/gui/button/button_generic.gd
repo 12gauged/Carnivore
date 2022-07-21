@@ -14,5 +14,6 @@ func _ready():
 	if !is_instance_valid(Child): return
 	if self.disabled: Child.modulate = GRAY
 	
+	
 func set_child(): return null
 func _on_button_pressed(): emit_signal("button_pressed", id)

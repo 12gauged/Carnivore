@@ -27,12 +27,14 @@ export(Array) var TAGS = ["COMP_EXECUTER", "ENTITY"]
 export(String) var DEFAULT_STATE = ""
 export(String) var STARTING_STATE = ""
 export(Array) var CONSTANT_STATES = []
+export(Array) var state_execution_pattern
 
 var damage_blink_delay = [0, 20]
 var blinking
 var movement_direction: Vector2 = Vector2.ZERO setget set_movement_direction
 var velocity: Vector2 = Vector2.ZERO
 var state: String = "" setget set_state, get_state
+var state_id: int = 0
 var frozen: bool = false
 
 var DEFAULT_FRICTION
@@ -104,7 +106,13 @@ func die():
 	emit_signal("deleted")
 	emit_particle(DeathParticle)
 	queue_free()
-
+	
+func go_to_next_state():
+	state_id = state_id + 1 if state_id < len(state_execution_pattern) - 1 else 0
+	set_state(state_execution_pattern[state_id])
+	
+func start_state_pattern():
+	set_state(state_execution_pattern[0])
 
 func set_stat(stat: String, value): stats[stat] = value
 func get_stat(stat: String): return stats[stat]
@@ -144,18 +152,14 @@ func _on_damage_received(Hitbox: DetectionBox):
 	
 func freeze():
 	set_process(false)
-	#set_physics_process(false)
 	set_process_input(false)
 	frozen = true
-	FRICTION = DEFAULT_FRICTION * 0.145 # quick division by 6
 	movement_direction = Vector2.ZERO
 	emit_signal("frozen")
 	
 func unfreeze():
 	set_process(true)
-	#set_physics_process(true)
 	set_process_input(true)
 	frozen = false
-	FRICTION = DEFAULT_FRICTION
 	emit_signal("unfrozen")
 	

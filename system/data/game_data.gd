@@ -20,7 +20,7 @@ const ARCHIEVEMENT_REF: Dictionary = {
 
 var player_data = {
 	"lowest_time": [],
-	"generation": 0,
+	"generation": -1,
 	"archievements": {
 		"generation0": {
 			"village_savior": true,

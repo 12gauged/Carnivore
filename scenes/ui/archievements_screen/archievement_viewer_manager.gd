@@ -23,6 +23,8 @@ func _ready():
 
 
 func update_current_panel():
+	if game_data.get_player_data("generation") < 0: return
+	
 	var archievement = game_data.ARCHIEVEMENT_REF[current_generation][current_panel]
 	var archievement_title = ARCHIEVEMENT_TITLE_BASE % archievement
 	var archievement_description = ARCHIEVEMENT_DESCRIPTION_BASE % archievement

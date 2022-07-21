@@ -6,7 +6,7 @@ onready var screens: Dictionary = {
 	"main": $main,
 	"settings": $settings,
 	"credits": $credits,
-	"archievements": $archievements_screen
+	"challenges": $challenges_screen
 }
 onready var last_screen = screens.main
 
@@ -35,7 +35,7 @@ func go_to_screen(screen: String):
 func go_to_main_screen(): go_to_screen("main")
 func go_to_settings_screen(): go_to_screen("settings")
 func go_to_credits_screen(): go_to_screen("credits")
-func go_to_archievements_screen(): go_to_screen("archievements")
+func go_to_challenges_screen(): go_to_screen("challenges")
 
 
 func _on_animation_player_animation_finished(anim_name):

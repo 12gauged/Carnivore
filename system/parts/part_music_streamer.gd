@@ -14,6 +14,7 @@ func play():
 	NewStreamSample.bus = "music"
 	StreamGroup.add_child(NewStreamSample)
 	NewStreamSample.play()
+	# warning-ignore:return_value_discarded
 	NewStreamSample.connect("finished", self, "_on_stream_finished")
 	
 	

@@ -41,7 +41,7 @@ func spawn_entity():
 	var Scene: PackedScene = resources.get_resource("entities", entity_name)
 	var InstancedEntity = Scene.instance()
 	set_custom_values(InstancedEntity)
-	Group.add_child(InstancedEntity)
+	Group.call_deferred("add_child", InstancedEntity)
 	
 	InstancedEntity.set_global_position(self.global_position + get_spawn_offset())
 	

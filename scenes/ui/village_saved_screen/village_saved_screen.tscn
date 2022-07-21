@@ -16,21 +16,21 @@ anchor_bottom = 1.0
 [node name="victory_text_container" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -47.5
-margin_right = 47.5
-margin_bottom = 10.0
+margin_left = -77.0
+margin_right = 77.0
+margin_bottom = 24.0
 
 [node name="margin_top" type="MarginContainer" parent="victory_text_container"]
-margin_right = 96.0
+margin_right = 154.0
 margin_bottom = 10.0
 custom_constants/margin_bottom = 10
 
 [node name="victory_text" type="Label" parent="victory_text_container"]
 margin_top = 14.0
-margin_right = 96.0
+margin_right = 154.0
 margin_bottom = 24.0
 theme = ExtResource( 1 )
-text = "the village is safe!"
+text = "ui.victory_screen.village_safe"
 align = 1
 uppercase = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://world/level1/houses/mushroom_house_tall.tscn" type="PackedScene" id=13]
 [ext_resource path="res://entities/ant_soldier/ant_soldier_arena_data.tres" type="Resource" id=14]
 [ext_resource path="res://entities/fire_ant/fire_ant_arena_data.tres" type="Resource" id=15]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=16]
 [ext_resource path="res://system/parts/level/music_manager.tscn" type="PackedScene" id=17]
 
 [node name="level1" type="Node2D"]
@@ -38,7 +39,7 @@ tile_data = PoolIntArray( -131071, 2, 0, -131070, 0, 0, -131066, 2, 0, -131065, 
 position = Vector2( 128, -56 )
 
 [node name="texture" parent="objects/decoration/houses/mushroom_house_short" index="0"]
-frame = 0
+frame = 1
 flip_h = true
 
 [node name="mushroom_house_short2" parent="objects/decoration/houses" instance=ExtResource( 12 )]
@@ -57,7 +58,7 @@ position = Vector2( -16, -16 )
 position = Vector2( 272, 144 )
 
 [node name="texture" parent="objects/decoration/houses/mushroom_house_tall2" index="0"]
-frame = 3
+frame = 0
 flip_h = true
 
 [node name="entities" type="YSort" parent="objects"]
@@ -214,6 +215,13 @@ method = {
 "method": "set_time_scale"
 }
 
+[node name="stop_slowmo_method" parent="objects/part_arena" instance=ExtResource( 7 )]
+method = {
+"args": [ 1.0 ],
+"caller": "game_functions",
+"method": "set_time_scale"
+}
+
 [node name="village_savior_archievement" parent="objects/part_arena" instance=ExtResource( 7 )]
 method = {
 "args": [ "archievement_made", "village_savior", false ],
@@ -226,14 +234,22 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
+[node name="delay_for_level_ending" type="Timer" parent="objects/part_arena"]
+wait_time = 1.4
+one_shot = true
+script = ExtResource( 16 )
+
 [node name="part_camera" parent="." instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 128, 64 )
 
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_freeze_method" method="call_method"]
-[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/village_savior_archievement" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_slowmo_method" method="call_method"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/village_savior_archievement" method="call_method"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/delay_for_level_ending" method="start_timer"]
 [connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
+[connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]
+[connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]
 
 [editable path="objects/decoration/houses/mushroom_house_short"]
 [editable path="objects/decoration/houses/mushroom_house_tall2"]

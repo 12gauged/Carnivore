@@ -23,8 +23,7 @@ func _physics_process(delta):
 func set_direction(value: Vector2): direction = value.normalized()
 func set_speed(value: int): speed = value
 
-func set_hitbox_tags(tags: Array):
-	hitbox.TAGS = tags
+func set_hitbox_tags(tags: Array): hitbox.TAGS = tags
 
 
 

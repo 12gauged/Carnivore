@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/gui/button/button_generic.gd"
 }, {
+"base": "GenericButton",
+"class": "GenericButtonIcon",
+"language": "GDScript",
+"path": "res://ui/gui/button/button_icon.gd"
+}, {
 "base": "Control",
 "class": "InputHint",
 "language": "GDScript",
@@ -77,6 +82,7 @@ _global_script_class_icons={
 "EntityArenaData": "",
 "ExistenceController": "",
 "GenericButton": "",
+"GenericButtonIcon": "",
 "InputHint": "",
 "MenuScreen": "",
 "Projectile": "",

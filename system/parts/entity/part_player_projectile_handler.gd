@@ -80,7 +80,7 @@ func spawn_projectile():
 func _on_projectile_collected(projectile): set_projectile(projectile)
 	
 func _on_projectile_spawner_entity_spawned(ProjectileNode):
-	ProjectileNode.set_hitbox_tags(["PLAYER_PROJECTILE"])
+	ProjectileNode.call_deferred("set_hitbox_tags", ["PLAYER_PROJECTILE"])
 	ProjectileNode.set_direction(get_target_direction())
 	ProjectileNode.set_speed(projectile_speeds[projectile_type])
 	

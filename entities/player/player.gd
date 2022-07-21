@@ -39,6 +39,10 @@ func _ready():
 	player_events.connect("unfreeze_player", self, "unfreeze")
 	# warning-ignore:return_value_discarded
 	player_events.connect("freeze_player", self, "freeze")
+	# warning-ignore:return_value_discarded
+	connect("frozen", self, "_on_player_frozen")
+	# warning-ignore:return_value_discarded
+	connect("unfrozen", self, "_on_player_unfrozen")
 		
 func _input(event):
 	if OS.is_debug_build():
@@ -121,8 +125,8 @@ func consume_enemy(EnemyNode):
 	if "PLAYER" in EnemyNode.TAGS: return
 	
 	# regenerates both hunger and health
-	update_stat("hunger", min(get_stat("hunger") + 1, MAX_HUNGER))
-	update_stat("health", min(get_stat("health") + 1, MAX_HEALTH))
+	update_stat("hunger", int(min(get_stat("hunger") + 1, MAX_HUNGER)))
+	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
 		
 	enemies_consumed += 1
 	if enemies_consumed >= 5: 
@@ -166,3 +170,6 @@ func _on_exit_from_eat_state_forced(): exit_eat_state()
 func _on_player_movement_direction_updated(value): 
 	if get_state() == "EAT" and value == Vector2.ZERO: return
 	set_movement_direction(value)
+	
+func _on_player_frozen(): FRICTION = DEFAULT_FRICTION * 0.145
+func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION
