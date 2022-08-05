@@ -1,5 +1,8 @@
 extends Camera2D
 
+export(bool) var show_hud = true
+
+
 var default_zoom: Vector2 = zoom
 var smoothing: bool
 
@@ -14,6 +17,7 @@ var shake_intensity: float = 0
 func _ready():
 	# warning-ignore:return_value_discarded
 	camera_events.connect("camera_shake_request", self, "_on_camera_shake_request")
+	gui_events.emit_signal("show_hud" if show_hud else "hide_hud")
 
 func _physics_process(delta):
 	# checks if the camera is smoothing

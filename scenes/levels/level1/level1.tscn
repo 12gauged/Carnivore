@@ -39,7 +39,6 @@ tile_data = PoolIntArray( -131071, 2, 0, -131070, 0, 0, -131066, 2, 0, -131065, 
 position = Vector2( 128, -56 )
 
 [node name="texture" parent="objects/decoration/houses/mushroom_house_short" index="0"]
-frame = 1
 flip_h = true
 
 [node name="mushroom_house_short2" parent="objects/decoration/houses" instance=ExtResource( 12 )]

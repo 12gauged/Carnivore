@@ -1,16 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://ui/gui/comic/invasion/frame2.png" type="Texture" id=1]
-[ext_resource path="res://ui/gui/comic/invasion/frame0.png" type="Texture" id=2]
-[ext_resource path="res://ui/gui/comic/invasion/frame3.png" type="Texture" id=3]
-[ext_resource path="res://ui/gui/comic/invasion/frame1.png" type="Texture" id=4]
+[ext_resource path="res://entities/fire_ant/fire_ant.png" type="Texture" id=1]
+[ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=2]
+[ext_resource path="res://entities/fire_ant/fire_overlay.png" type="Texture" id=3]
+[ext_resource path="res://world/level1/houses/mushroom_house_short.tscn" type="PackedScene" id=4]
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://system/parts/part_input_detector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/level1/houses/mushroom_house_tall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://system/parts/level/part_camera.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("center_container/frame0:modulate")
+tracks/0/path = NodePath("soldier_ant:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -19,10 +22,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ Vector2( -13, 65 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("center_container/frame1:modulate")
+tracks/1/path = NodePath("fire_ant0:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -31,10 +34,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ Vector2( 104, 64 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("center_container/frame2:modulate")
+tracks/2/path = NodePath("fire_ant1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -43,10 +46,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ Vector2( 152, 64 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("center_container/frame3:modulate")
+tracks/3/path = NodePath("fire_ant2:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -55,68 +58,31 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ Vector2( 160, 48 ) ]
 }
-
-[sub_resource type="Animation" id=2]
-resource_name = "start"
-length = 12.0
-step = 1.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("center_container/frame0:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("center_container/frame1:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 3, 5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("center_container/frame2:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 6, 8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("center_container/frame3:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 9, 11 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath("go_to_level_method_caller")
+tracks/4/type = "value"
+tracks/4/path = NodePath("objects/decoration/houses/mushroom_house_short4:fire_lit")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "start"
+length = 12.0
+tracks/0/type = "method"
+tracks/0/path = NodePath("go_to_level_method_caller")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 12 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -124,51 +90,618 @@ tracks/4/keys = {
 "method": "call_method"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("soldier_ant:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -40, 64 ), Vector2( 128, 64 ) ]
+}
+tracks/2/type = "animation"
+tracks/2/path = NodePath("soldier_ant/AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": PoolStringArray( "FLY" ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("fire_ant0:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3, 3.5, 5.3, 5.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -80, 48 ), Vector2( 88, 48 ), Vector2( 88, 48 ), Vector2( -8, -8 ), Vector2( -16, -24 ) ]
+}
+tracks/4/type = "animation"
+tracks/4/path = NodePath("fire_ant0/AnimationPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": PoolStringArray( "MOVE", "IDLE", "MOVE" ),
+"times": PoolRealArray( 0, 3, 3.5 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("fire_ant1:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 3, 3.8, 5.6, 5.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -40, 32 ), Vector2( 128, 32 ), Vector2( 128, 32 ), Vector2( 123, -51 ), Vector2( 128, -64 ) ]
+}
+tracks/6/type = "animation"
+tracks/6/path = NodePath("fire_ant1/AnimationPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": PoolStringArray( "MOVE", "IDLE", "MOVE" ),
+"times": PoolRealArray( 0, 3, 3.8 )
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("fire_ant2:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 3, 4.1, 5.9, 6.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 48 ), Vector2( 168, 48 ), Vector2( 168, 48 ), Vector2( 270, -10 ), Vector2( 266, -22 ) ]
+}
+tracks/8/type = "animation"
+tracks/8/path = NodePath("fire_ant2/AnimationPlayer")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"clips": PoolStringArray( "MOVE", "IDLE", "MOVE" ),
+"times": PoolRealArray( 0, 3, 4.1 )
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("objects/decoration/houses/mushroom_house_short:fire_lit")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 6.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("objects/decoration/houses/mushroom_house_short4:fire_lit")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 6.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
-[node name="level1_comic" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[sub_resource type="Animation" id=10]
+resource_name = "FLY"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -0.5 ), Vector2( 0, 0.5 ), Vector2( 0, -0.5 ) ]
+}
 
-[node name="center_container" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 5 ]
+}
 
-[node name="frame0" type="TextureRect" parent="center_container"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 45.0
-margin_top = 16.0
-margin_right = 195.0
-margin_bottom = 118.0
-texture = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 7, 10 )
 
-[node name="frame1" type="TextureRect" parent="center_container"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 45.0
-margin_top = 16.0
-margin_right = 195.0
-margin_bottom = 118.0
-texture = ExtResource( 4 )
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 7, 0, 7, 10 )
 
-[node name="frame2" type="TextureRect" parent="center_container"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 45.0
-margin_top = 16.0
-margin_right = 195.0
-margin_bottom = 118.0
-texture = ExtResource( 1 )
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 14, 0, 7, 10 )
 
-[node name="frame3" type="TextureRect" parent="center_container"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 45.0
-margin_top = 16.0
-margin_right = 195.0
-margin_bottom = 118.0
-texture = ExtResource( 3 )
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
+[sub_resource type="Animation" id=7]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "MOVE"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -2.0, 2.0, -2.0, 2.0, -2.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "MOVE"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -2.0, 2.0, -2.0, 2.0, -2.0 ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "MOVE"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -2.0, 2.0, -2.0, 2.0, -2.0 ]
+}
+
+[sub_resource type="Animation" id=17]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "MOVE"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -2.0, 2.0, -2.0, 2.0, -2.0 ]
+}
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "MOVE"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -2.0, 2.0, -2.0, 2.0, -2.0 ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "MOVE"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -2.0, 2.0, -2.0, 2.0, -2.0 ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[node name="level1_comic" type="Node2D"]
+
+[node name="cutscene_animation_player" type="AnimationPlayer" parent="."]
 autoplay = "start"
 anims/RESET = SubResource( 1 )
 anims/start = SubResource( 2 )
+
+[node name="level1_tilemap" parent="." instance=ExtResource( 8 )]
+tile_data = PoolIntArray( -131071, 2, 0, -131070, 0, 0, -131066, 2, 0, -131065, 0, 0, -131063, 3, 0, -131062, 0, 0, -131061, 2, 0, -131060, 3, 0, -131059, 0, 0, -131058, 2, 0, -65536, 1, 0, -65535, 0, 0, -65532, 2, 0, -65531, 0, 0, -65530, 1, 0, -65528, 3, 0, -65526, 0, 0, -65525, 0, 0, -65524, 1, 0, -65522, 0, 0, -65521, 2, 0, 65535, 2, 0, 0, 3, 0, 2, 0, 0, 3, 3, 0, 4, 1, 0, 5, 0, 0, 7, 0, 0, 9, 3, 0, 11, 2, 0, 14, 0, 0, 15, 0, 0, 131070, 2, 0, 131071, 0, 0, 65536, 2, 0, 65537, 1, 0, 65538, 0, 0, 65539, 3, 0, 65541, 3, 0, 65543, 3, 0, 65544, 3, 0, 65546, 0, 0, 65548, 0, 0, 65549, 1, 0, 65550, 2, 0, 65551, 2, 0, 65553, 0, 0, 196607, 0, 0, 131072, 0, 0, 131078, 3, 0, 131081, 3, 0, 131082, 0, 0, 131083, 3, 0, 131084, 0, 0, 131085, 2, 0, 131086, 1, 0, 131087, 0, 0, 131088, 0, 0, 131089, 2, 0, 262142, 2, 0, 262143, 2, 0, 196609, 1, 0, 196610, 2, 0, 196612, 3, 0, 196614, 0, 0, 196615, 0, 0, 196616, 2, 0, 196617, 0, 0, 196618, 1, 0, 196619, 2, 0, 196622, 0, 0, 196624, 2, 0, 327678, 1, 0, 327679, 2, 0, 262146, 0, 0, 262147, 3, 0, 262149, 0, 0, 262150, 0, 0, 262152, 0, 0, 262153, 2, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262159, 2, 0, 262160, 0, 0, 262161, 0, 0, 393214, 0, 0, 327680, 3, 0, 327688, 3, 0, 327690, 2, 0, 327691, 2, 0, 327692, 1, 0, 327693, 2, 0, 327694, 0, 0, 327695, 1, 0, 327696, 0, 0, 327697, 2, 0, 458751, 2, 0, 393217, 1, 0, 393218, 0, 0, 393219, 3, 0, 393221, 3, 0, 393223, 3, 0, 393224, 3, 0, 393227, 1, 0, 393229, 0, 0, 393231, 0, 0, 393232, 2, 0, 458752, 0, 0, 458753, 0, 0, 458755, 0, 0, 458756, 3, 0, 458758, 2, 0, 458759, 0, 0, 458760, 0, 0, 458762, 3, 0, 458763, 0, 0, 458764, 0, 0, 458766, 0, 0, 524289, 0, 0, 524290, 1, 0, 524292, 1, 0, 524295, 0, 0, 524296, 1, 0, 524299, 0, 0, 524300, 2, 0, 524301, 0, 0, 524302, 2, 0 )
 
 [node name="go_to_level_method_caller" parent="." instance=ExtResource( 5 )]
 method = {
@@ -180,4 +713,181 @@ method = {
 [node name="part_input_detector" parent="." instance=ExtResource( 6 )]
 input_to_detect = "mouse_left"
 
+[node name="soldier_ant" type="Sprite" parent="."]
+position = Vector2( -13, 65 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, 0.500001 )
+hframes = 6
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="soldier_ant"]
+anims/FLY = SubResource( 10 )
+anims/RESET = SubResource( 11 )
+
+[node name="fire_ant0" type="Sprite" parent="."]
+position = Vector2( 104, 64 )
+rotation = 0.0349067
+texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
+hframes = 3
+frame = 2
+
+[node name="fire_overlay" type="AnimatedSprite" parent="fire_ant0"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 0, -6 )
+frames = SubResource( 6 )
+frame = 2
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fire_ant0"]
+anims/IDLE = SubResource( 7 )
+anims/MOVE = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[node name="fire_ant1" type="Sprite" parent="."]
+position = Vector2( 152, 64 )
+rotation = -0.0349066
+texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
+hframes = 3
+frame = 2
+
+[node name="fire_overlay" type="AnimatedSprite" parent="fire_ant1"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 0, -6 )
+frames = SubResource( 6 )
+frame = 2
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fire_ant1"]
+anims/IDLE = SubResource( 12 )
+anims/MOVE = SubResource( 13 )
+anims/RESET = SubResource( 14 )
+
+[node name="fire_ant2" type="Sprite" parent="."]
+position = Vector2( 160, 48 )
+rotation = 0.0349066
+texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
+hframes = 3
+frame = 2
+
+[node name="fire_overlay" type="AnimatedSprite" parent="fire_ant2"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 0, -6 )
+frames = SubResource( 6 )
+frame = 1
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fire_ant2"]
+anims/IDLE = SubResource( 15 )
+anims/MOVE = SubResource( 16 )
+anims/RESET = SubResource( 17 )
+
+[node name="fire_ant3" type="Sprite" parent="."]
+position = Vector2( 2.38419e-07, 80 )
+rotation = -0.0349066
+texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
+hframes = 3
+frame = 2
+
+[node name="fire_overlay" type="AnimatedSprite" parent="fire_ant3"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 0, -6 )
+frames = SubResource( 6 )
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fire_ant3"]
+anims/IDLE = SubResource( 18 )
+anims/MOVE = SubResource( 19 )
+anims/RESET = SubResource( 20 )
+
+[node name="fire_ant4" type="Sprite" parent="."]
+position = Vector2( -40, 96 )
+rotation = -0.0349066
+texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
+hframes = 3
+frame = 2
+
+[node name="fire_overlay" type="AnimatedSprite" parent="fire_ant4"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 0, -6 )
+frames = SubResource( 6 )
+frame = 2
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fire_ant4"]
+anims/IDLE = SubResource( 21 )
+anims/MOVE = SubResource( 22 )
+anims/RESET = SubResource( 23 )
+
+[node name="fire_ant5" type="Sprite" parent="."]
+position = Vector2( -80, 80 )
+rotation = -0.0349066
+texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
+hframes = 3
+frame = 2
+
+[node name="fire_overlay" type="AnimatedSprite" parent="fire_ant5"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 0, -6 )
+frames = SubResource( 6 )
+frame = 2
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fire_ant5"]
+anims/IDLE = SubResource( 24 )
+anims/MOVE = SubResource( 25 )
+anims/RESET = SubResource( 26 )
+
+[node name="objects" type="YSort" parent="."]
+
+[node name="decoration" type="YSort" parent="objects"]
+
+[node name="houses" type="YSort" parent="objects/decoration"]
+
+[node name="mushroom_house_short" parent="objects/decoration/houses" instance=ExtResource( 4 )]
+position = Vector2( 128, -56 )
+fire_lit = true
+
+[node name="texture" parent="objects/decoration/houses/mushroom_house_short" index="0"]
+flip_h = true
+
+[node name="mushroom_house_short2" parent="objects/decoration/houses" instance=ExtResource( 4 )]
+position = Vector2( -24, 144 )
+
+[node name="mushroom_house_short3" parent="objects/decoration/houses" instance=ExtResource( 4 )]
+position = Vector2( 128, 200 )
+
+[node name="mushroom_house_short4" parent="objects/decoration/houses" instance=ExtResource( 4 )]
+position = Vector2( 264, -16 )
+fire_lit = true
+
+[node name="mushroom_house_tall" parent="objects/decoration/houses" instance=ExtResource( 7 )]
+position = Vector2( -16, -16 )
+
+[node name="mushroom_house_tall2" parent="objects/decoration/houses" instance=ExtResource( 7 )]
+position = Vector2( 272, 144 )
+
+[node name="texture" parent="objects/decoration/houses/mushroom_house_tall2" index="0"]
+flip_h = true
+
+[node name="part_camera" parent="." instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 128, 64 )
+zoom = Vector2( 2, 2 )
+show_hud = false
+
 [connection signal="detected" from="part_input_detector" to="go_to_level_method_caller" method="call_method"]
+
+[editable path="objects/decoration/houses/mushroom_house_short"]
+[editable path="objects/decoration/houses/mushroom_house_tall2"]
