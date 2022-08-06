@@ -17,6 +17,7 @@ func _on_change_scene_request(new_scene, fading: bool = true, fading_speed: floa
 		BlackOverlay.fade_in()
 		return
 	set_current_scene(scene_ref)
+	gui_events.emit_signal("scene_changed_without_fading")
 		
 func set_current_scene(scene) -> void:
 	CurrentScene.get_child(0).queue_free()

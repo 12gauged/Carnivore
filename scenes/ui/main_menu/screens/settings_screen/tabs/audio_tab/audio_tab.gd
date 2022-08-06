@@ -13,7 +13,6 @@ onready var Sliders: Dictionary= {
 func _ready():
 	for VolumeSlider in Sliders.keys():
 		Sliders[VolumeSlider].set_value(game_data.get_game_setting("audio", VolumeSlider))
-		print("setting %s value to: %s" % [VolumeSlider, game_data.get_game_setting("audio", VolumeSlider)])
 		
 
 

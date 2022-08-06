@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends HBoxContainer
 
 onready var video_button = $video_settings
 onready var audio_button = $audio_settings

@@ -71,102 +71,93 @@ margin_left = -120.0
 margin_top = -67.5
 margin_right = 120.0
 margin_bottom = 46.5
-custom_constants/separation = 0
+custom_constants/separation = 1
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="elements/main_container"]
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 240.0
-margin_bottom = 6.0
+margin_bottom = 4.0
 mouse_filter = 1
 custom_constants/margin_top = 2
 
-[node name="Label" type="Label" parent="elements/main_container"]
-margin_top = 6.0
+[node name="tab_buttons" type="HBoxContainer" parent="elements/main_container"]
+margin_top = 5.0
 margin_right = 240.0
-margin_bottom = 16.0
-theme = ExtResource( 8 )
-text = "ui.settings.title"
-align = 1
-uppercase = true
-
-[node name="MarginContainer2" type="MarginContainer" parent="elements/main_container"]
-margin_top = 16.0
-margin_right = 240.0
-margin_bottom = 18.0
-custom_constants/margin_top = 2
-
-[node name="visuals" type="HBoxContainer" parent="elements/main_container"]
-margin_top = 18.0
-margin_right = 240.0
-margin_bottom = 110.0
-alignment = 1
-
-[node name="tab_buttons" type="VBoxContainer" parent="elements/main_container/visuals"]
-margin_left = 22.0
-margin_right = 42.0
-margin_bottom = 92.0
+margin_bottom = 25.0
 alignment = 1
 script = ExtResource( 13 )
 
-[node name="video_settings" parent="elements/main_container/visuals/tab_buttons" instance=ExtResource( 1 )]
-margin_top = 12.0
-margin_bottom = 32.0
+[node name="video_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
+margin_left = 86.0
+margin_right = 106.0
 toggle_mode = true
 pressed = true
 id = "video"
 
-[node name="icon" parent="elements/main_container/visuals/tab_buttons/video_settings/center_container" index="0"]
+[node name="icon" parent="elements/main_container/tab_buttons/video_settings/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 6 )
 
-[node name="audio_settings" parent="elements/main_container/visuals/tab_buttons" instance=ExtResource( 1 )]
-margin_top = 36.0
-margin_bottom = 56.0
+[node name="audio_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
+margin_left = 110.0
+margin_right = 130.0
 toggle_mode = true
 id = "audio"
 
-[node name="icon" parent="elements/main_container/visuals/tab_buttons/audio_settings/center_container" index="0"]
+[node name="icon" parent="elements/main_container/tab_buttons/audio_settings/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 7 )
 
-[node name="language_settings" parent="elements/main_container/visuals/tab_buttons" instance=ExtResource( 1 )]
-margin_top = 60.0
-margin_bottom = 80.0
+[node name="language_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
+margin_left = 134.0
+margin_right = 154.0
 toggle_mode = true
 id = "language"
 
-[node name="icon" parent="elements/main_container/visuals/tab_buttons/language_settings/center_container" index="0"]
+[node name="icon" parent="elements/main_container/tab_buttons/language_settings/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 5 )
 
+[node name="MarginContainer2" type="MarginContainer" parent="elements/main_container"]
+margin_top = 26.0
+margin_right = 240.0
+margin_bottom = 28.0
+custom_constants/margin_top = 2
+
+[node name="visuals" type="HBoxContainer" parent="elements/main_container"]
+margin_top = 29.0
+margin_right = 240.0
+margin_bottom = 109.0
+alignment = 1
+
 [node name="texture_container" type="VBoxContainer" parent="elements/main_container/visuals"]
-margin_left = 46.0
-margin_right = 218.0
-margin_bottom = 92.0
+margin_left = 34.0
+margin_right = 206.0
+margin_bottom = 80.0
 alignment = 1
 
 [node name="background" type="TextureRect" parent="elements/main_container/visuals/texture_container"]
 margin_right = 172.0
-margin_bottom = 92.0
+margin_bottom = 80.0
 texture = ExtResource( 4 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="elements/main_container/visuals/texture_container/background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = 4.0
+margin_top = 2.0
 margin_right = -2.0
-margin_bottom = -4.0
+margin_bottom = -2.0
 theme = ExtResource( 8 )
 scroll_horizontal_enabled = false
 
@@ -211,15 +202,21 @@ margin_top = 4.0
 margin_right = 80.0
 margin_bottom = 96.0
 
+[node name="MarginContainer3" type="MarginContainer" parent="elements/main_container"]
+margin_top = 110.0
+margin_right = 240.0
+margin_bottom = 112.0
+custom_constants/margin_top = 2
+
 [connection signal="button_pressed" from="home_button_container/CenterContainer/small_button" to="." method="_on_button_pressed"]
-[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/video_settings" to="elements/main_container/visuals/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/video_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
-[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/audio_settings" to="elements/main_container/visuals/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/audio_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
-[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/language_settings" to="elements/main_container/visuals/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="elements/main_container/visuals/tab_buttons/language_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/video_settings" to="elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/video_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/audio_settings" to="elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/audio_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/language_settings" to="elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/language_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 
 [editable path="home_button_container/CenterContainer/small_button"]
-[editable path="elements/main_container/visuals/tab_buttons/video_settings"]
-[editable path="elements/main_container/visuals/tab_buttons/audio_settings"]
-[editable path="elements/main_container/visuals/tab_buttons/language_settings"]
+[editable path="elements/main_container/tab_buttons/video_settings"]
+[editable path="elements/main_container/tab_buttons/audio_settings"]
+[editable path="elements/main_container/tab_buttons/language_settings"]

@@ -23,14 +23,12 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform float gray_amount = 4f;
+uniform float gray_amount = 4.0;
 
 
 void fragment() {
 	vec4 final_color = texture(SCREEN_TEXTURE, SCREEN_UV);
-	
 	final_color.rgb /= gray_amount;
-	
 	COLOR = final_color;
 }"
 

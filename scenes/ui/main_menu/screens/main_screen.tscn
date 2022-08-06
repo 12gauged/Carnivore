@@ -64,7 +64,7 @@ uppercase = true
 [node name="comp_method_caller" parent="center_elements/grid_container/play_button" instance=ExtResource( 3 )]
 position = Vector2( -64, -68 )
 method = {
-"args": [ "change_scene_request", "level1_comic" ],
+"args": [ "change_scene_request", "level1_comic", true, 0.3 ],
 "caller": "game_events",
 "method": "emit_signal"
 }
@@ -88,9 +88,21 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 5 )
 
-[node name="archievements_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]
+[node name="credits_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]
 margin_left = 30.0
 margin_right = 50.0
+id = "credits_screen"
+
+[node name="icon" parent="center_elements/grid_container/button_container/credits_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 4 )
+
+[node name="archievements_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]
+margin_left = 60.0
+margin_right = 80.0
 script = ExtResource( 9 )
 id = "challenges_screen"
 
@@ -100,18 +112,6 @@ margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 6 )
-
-[node name="credits_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]
-margin_left = 60.0
-margin_right = 80.0
-id = "credits_screen"
-
-[node name="icon" parent="center_elements/grid_container/button_container/credits_button/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 4 )
 
 [node name="bottom_right_elements" type="Control" parent="."]
 anchor_top = 1.0
@@ -133,10 +133,10 @@ valign = 2
 
 [connection signal="pressed" from="center_elements/grid_container/play_button" to="center_elements/grid_container/play_button/comp_method_caller" method="call_method"]
 [connection signal="button_pressed" from="center_elements/grid_container/button_container/settings_button" to="." method="_on_button_pressed"]
-[connection signal="button_pressed" from="center_elements/grid_container/button_container/archievements_button" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="center_elements/grid_container/button_container/credits_button" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="center_elements/grid_container/button_container/archievements_button" to="." method="_on_button_pressed"]
 
 [editable path="center_elements/grid_container/play_button"]
 [editable path="center_elements/grid_container/button_container/settings_button"]
-[editable path="center_elements/grid_container/button_container/archievements_button"]
 [editable path="center_elements/grid_container/button_container/credits_button"]
+[editable path="center_elements/grid_container/button_container/archievements_button"]

@@ -1,4 +1,4 @@
-extends Camera2D
+extends GenericCamera
 
 export(bool) var show_hud = true
 
@@ -8,9 +8,6 @@ var smoothing: bool
 
 var camera_smoothing_offset
 var rounded_global_position
-
-var shake_duration: float = 0
-var shake_intensity: float = 0
 
 
 
@@ -28,26 +25,6 @@ func _physics_process(delta):
 	smoothing = !(camera_smoothing_offset == rounded_global_position)
 	
 	execute_camera_shake(delta)
-
-
-
-func execute_camera_shake(delta: float) -> void:
-	if !game_data.get_game_setting("video", "camera_shake"): return
-	
-	if shake_duration <= 0:
-		shake_duration = 0
-		shake_intensity = 0
-		offset = Vector2.ZERO
-		return
-		
-	# Shakes the camera in a sine wave
-	offset = Vector2(sin(OS.get_ticks_msec() * 0.03), sin(OS.get_ticks_msec() * 0.07)) * shake_intensity
-	shake_duration -= delta
-
-func shake_camera(duration: float = .5, intensity: float = .1) -> void:
-	shake_duration = duration
-	if intensity <= shake_intensity: return
-	shake_intensity = intensity
 		
 func zoom_in(zoom_amount: Vector2) -> void: set_zoom(zoom_amount)
 func reset_zoom() -> void: set_zoom(default_zoom)

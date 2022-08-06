@@ -28,7 +28,7 @@ void fragment()
 		vec3 final_color;
 		
 		if(full_sprite_highlight) {
-			final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a * (float(full_sprite_highlight) / 2f));
+			final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a * (float(full_sprite_highlight) / 2.0));
 		} else {
 			final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a);
 		}

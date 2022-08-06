@@ -20,6 +20,7 @@ onready var Group = toolbox.get_node_in_group(entity_group)
 	
 func _ready():
 	if auto_spawn: spawn_entity()
+	elif respawn: RespawnDelayTimer.start(respawn_delay)
 
 
 func get_spawn_offset() -> Vector2:

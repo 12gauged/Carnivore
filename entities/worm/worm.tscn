@@ -242,6 +242,7 @@ stream = ExtResource( 10 )
 bus = "entity_sounds"
 
 [connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
+[connection signal="deleted" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="hurt" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="self_give" from="." to="part_state_handler/MOVE/comp_movement_track_target" method="set_texture_to_flip"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]

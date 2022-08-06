@@ -17,6 +17,7 @@ func set_fading_speed(speed: float) -> void:
 
 
 func _on_animation_player_animation_finished(anim_name):
+	gui_events.emit_signal("black_overlay_anim_finished", anim_name)
 	match anim_name:
 		"fade_out": 
 			emit_signal("fade_out_finished")

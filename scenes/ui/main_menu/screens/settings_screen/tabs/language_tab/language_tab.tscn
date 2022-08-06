@@ -13,6 +13,7 @@ margin_left = 80.0
 margin_top = 0.0
 margin_right = 160.0
 margin_bottom = 20.0
+toggle_mode = true
 id = "en"
 
 [node name="text" parent="english_button/center_container" index="0"]
@@ -25,6 +26,7 @@ margin_left = 80.0
 margin_top = 24.0
 margin_right = 160.0
 margin_bottom = 44.0
+toggle_mode = true
 id = "pt"
 
 [node name="text" parent="portuguese_button/center_container" index="0"]
@@ -37,6 +39,7 @@ margin_left = 80.0
 margin_top = 48.0
 margin_right = 160.0
 margin_bottom = 68.0
+toggle_mode = true
 id = "fr"
 
 [node name="text" parent="french_button/center_container" index="0"]
@@ -49,6 +52,7 @@ margin_left = 80.0
 margin_top = 72.0
 margin_right = 160.0
 margin_bottom = 92.0
+toggle_mode = true
 id = "fr_CA"
 
 [node name="text" parent="french_CA_button/center_container" index="0"]
