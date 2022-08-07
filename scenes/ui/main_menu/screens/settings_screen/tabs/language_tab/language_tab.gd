@@ -8,15 +8,25 @@ onready var lang_node_ref: Dictionary = {
 	"fr_CA": $french_CA_button
 }
 
+var PreviouslyPressedButton: TextureButton
+
 
 func _ready():
-	lang_node_ref[get_loaded_locale(TranslationServer.get_locale())].pressed = true
+	PreviouslyPressedButton = lang_node_ref[get_loaded_locale(TranslationServer.get_locale())]
+	PreviouslyPressedButton.pressed = true
+	PreviouslyPressedButton.disabled = true
 
 
 func _on_language_button_pressed(id):
 	game_data.set_game_setting("locale", "value", id)
 	json_data_manager.save_settings()
 	TranslationServer.set_locale(id)
+	
+	PreviouslyPressedButton.disabled = false
+	PreviouslyPressedButton.pressed = false
+	
+	PreviouslyPressedButton = lang_node_ref[id]
+	PreviouslyPressedButton.disabled = true
 	
 	
 func get_loaded_locale(user_locale: String) -> String:

@@ -5,10 +5,12 @@ export(String) var id = ""
 
 
 func _input(event):
-	self.mouse_filter = MOUSE_FILTER_PASS
+	# Prevents sliders from working with the scroll wheel
+	if game_data.current_platform != "desktop": return
 	
 	if not event is InputEventMouseButton: return
 	
+	self.mouse_filter = MOUSE_FILTER_PASS
 	if event.button_index in [BUTTON_WHEEL_UP, BUTTON_WHEEL_DOWN]:
 		self.mouse_filter = MOUSE_FILTER_IGNORE
 

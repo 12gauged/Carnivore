@@ -134,6 +134,10 @@ mouse_cursor/custom_image_hotspot=Vector2( 14, 14 )
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
+[global]
+
+shader=false
+
 [importer_defaults]
 
 texture={
@@ -261,8 +265,8 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
 gles3/shaders/shader_compilation_mode=2
 gles3/shaders/shader_compilation_mode.mobile=2
 gles3/shaders/shader_compilation_mode.web=2
