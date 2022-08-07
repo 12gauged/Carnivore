@@ -65,6 +65,15 @@ var current_arena_wave: int = 1 setget set_current_wave, get_current_wave
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 
+
+## TO SET DEVELOPER VARIABLE VALUES
+func _ready():
+	if !OS.is_debug_build(): return
+	
+	current_platform = "mobile"
+
+
+
 func set_current_platform(platform_name: String): current_platform = platform_name
 func get_current_platform() -> String: return current_platform
 

@@ -237,6 +237,7 @@ visible = false
 material = ExtResource( 20 )
 texture = ExtResource( 15 )
 script = ExtResource( 16 )
+visible_by_default = false
 
 [node name="collision" type="CollisionShape2D" parent="."]
 visible = false

@@ -9,6 +9,10 @@ var can_pause: bool = false
 
 func _ready(): 
 	# warning-ignore:return_value_discarded
+	
+	# warning-ignore:return_value_discarded
+	gui_events.connect("toggle_pause_request", self, "toggle_pause")
+	# warning-ignore:return_value_discarded
 	gui_events.connect("scene_changed_without_fading", self, "_on_scene_changed_without_fading")
 	# warning-ignore:return_value_discarded
 	gui_events.connect("black_overlay_anim_finished", self, "_on_black_overlay_anim_finished")

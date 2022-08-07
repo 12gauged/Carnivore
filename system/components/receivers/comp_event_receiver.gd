@@ -14,4 +14,5 @@ func _ready():
 	
 
 func _on_event_received():
+	print("event %s received from %s." % [event, emitter])
 	emit_signal("event_received")

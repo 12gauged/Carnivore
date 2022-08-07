@@ -1,6 +1,7 @@
 extends Node2D
 
-export(Dictionary) var event = {"caller": "", "method": ""}
+export(String) var caller = ""
+export(String) var event = ""
 
-
-func call_event()
+func call_event():
+	toolbox.callers[caller].emit_signal(event)

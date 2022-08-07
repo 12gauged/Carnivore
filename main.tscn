@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://system/ui/scene_manager/scene_manager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ui/startup_screen/startup_screen.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/gui/black_overlay.gd" type="Script" id=3]
-[ext_resource path="res://system/parts/level/part_wave_time_tracker.gd" type="Script" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -80,11 +79,5 @@ anims/RESET = SubResource( 1 )
 anims/fade_in = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
 
-[node name="part_wave_time_tracker" type="Node" parent="."]
-script = ExtResource( 4 )
-
-[node name="timer" type="Timer" parent="part_wave_time_tracker"]
-
 [connection signal="fade_in_finished" from="black_overlay" to="." method="_on_black_overlay_fade_in_finished"]
 [connection signal="animation_finished" from="black_overlay/animation_player" to="black_overlay" method="_on_animation_player_animation_finished"]
-[connection signal="timeout" from="part_wave_time_tracker/timer" to="part_wave_time_tracker" method="_on_timer_timeout"]

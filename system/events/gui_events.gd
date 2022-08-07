@@ -22,3 +22,6 @@ signal notify_archievement(archievement, notify)
 signal scene_changed_without_fading
 # warning-ignore:unused_signal
 signal black_overlay_anim_finished(animation)
+
+# warning-ignore:unused_signal
+signal toggle_pause_request

@@ -26,6 +26,11 @@ signal exited_eat_state
 signal force_exit_from_eat_state
 
 # warning-ignore:unused_signal
+signal special_attack_unavailable
+# warning-ignore:unused_signal
+signal special_attack_available
+
+# warning-ignore:unused_signal
 signal enter_eat_state_request
 
 # warning-ignore:unused_signal

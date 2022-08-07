@@ -149,9 +149,11 @@ modulate = Color( 1, 1, 1, 0 )
 material = ExtResource( 9 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
-offset = Vector2( 0.5, 0 )
+offset = Vector2( 0.5, -16.6667 )
 hframes = 6
 frame = 4
+script = ExtResource( 14 )
+visible_by_default = false
 
 [node name="spear" type="Sprite" parent="texture"]
 visible = false
@@ -219,7 +221,7 @@ auto_execute = false
 target_node_group = "player"
 
 [node name="state_duration_timer" type="Timer" parent="part_state_handler/MOVE"]
-wait_time = 4.0
+wait_time = 2.0
 one_shot = true
 script = ExtResource( 18 )
 
@@ -227,7 +229,7 @@ script = ExtResource( 18 )
 script = ExtResource( 4 )
 
 [node name="state_duration_timer" type="Timer" parent="part_state_handler/CHARGE"]
-wait_time = 2.0
+wait_time = 0.8
 one_shot = true
 script = ExtResource( 18 )
 
@@ -243,7 +245,7 @@ entity_group = "projectiles"
 script = ExtResource( 17 )
 
 [node name="state_duration_timer" type="Timer" parent="part_state_handler/ATTACK"]
-wait_time = 0.8
+wait_time = 0.2
 one_shot = true
 script = ExtResource( 18 )
 

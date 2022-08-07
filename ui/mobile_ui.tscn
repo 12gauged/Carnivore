@@ -1,0 +1,221 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/gui/button/joystick/mobile_joystick.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/gui/icons/special_attack_icon.png" type="Texture" id=3]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/gui/button/joystick/shoot/joystick_button_shoot.png" type="Texture" id=5]
+[ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=6]
+[ext_resource path="res://ui/gui/icons/pause_icon.png" type="Texture" id=7]
+[ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/mobile_ui/margin_controller.gd" type="Script" id=9]
+[ext_resource path="res://system/components/receivers/comp_event_receiver.tscn" type="PackedScene" id=10]
+
+[node name="mobile_ui" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 6 )
+
+[node name="shooting_joystick" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -45.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( -434, -7 )
+custom_constants/separation = 0
+script = ExtResource( 9 )
+margin1 = NodePath("shooting_joystick_vertical_container/bottom_margin")
+margin1_grow_direction = "bottom"
+margin1_value = 25
+margin2 = NodePath("right_margin")
+margin2_grow_direction = "right"
+margin2_value = 45
+
+[node name="shooting_joystick_vertical_container" type="VBoxContainer" parent="shooting_joystick"]
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="shooting_joystick" parent="shooting_joystick/shooting_joystick_vertical_container" instance=ExtResource( 2 )]
+margin_top = 110.0
+margin_bottom = 110.0
+
+[node name="TouchScreenButton" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot" index="0"]
+normal = ExtResource( 5 )
+input_event = "player_shooting_direction_updated"
+read_touches = false
+
+[node name="pressed_method_caller" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" instance=ExtResource( 4 )]
+method = {
+"args": [ "player_shooting_joystick_pressed" ],
+"caller": "input_events",
+"method": "emit_signal"
+}
+
+[node name="released_method_caller" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" instance=ExtResource( 4 )]
+method = {
+"args": [ "player_shooting_joystick_released" ],
+"caller": "input_events",
+"method": "emit_signal"
+}
+
+[node name="bottom_margin" type="MarginContainer" parent="shooting_joystick/shooting_joystick_vertical_container"]
+margin_top = 110.0
+margin_bottom = 135.0
+custom_constants/margin_bottom = 25
+
+[node name="right_margin" type="MarginContainer" parent="shooting_joystick"]
+margin_right = 45.0
+margin_bottom = 135.0
+custom_constants/margin_right = 45
+
+[node name="special_attack" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -27.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( -434, -7 )
+custom_constants/separation = 0
+alignment = 2
+script = ExtResource( 9 )
+margin1 = NodePath("special_attack_vertical_container/bottom_margin")
+margin1_grow_direction = "bottom"
+margin1_value = 7
+margin2 = NodePath("../shooting_joystick/right_margin")
+margin2_grow_direction = "right"
+margin2_value = 7
+
+[node name="special_attack_vertical_container" type="VBoxContainer" parent="special_attack"]
+margin_right = 20.0
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="small_button" parent="special_attack/special_attack_vertical_container" instance=ExtResource( 1 )]
+margin_top = 108.0
+margin_bottom = 128.0
+disabled = true
+
+[node name="icon" parent="special_attack/special_attack_vertical_container/small_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 3 )
+
+[node name="comp_method_caller" parent="special_attack/special_attack_vertical_container/small_button" instance=ExtResource( 4 )]
+method = {
+"args": [ "enter_eat_state_request" ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
+[node name="bottom_margin" type="MarginContainer" parent="special_attack/special_attack_vertical_container"]
+margin_top = 128.0
+margin_right = 20.0
+margin_bottom = 135.0
+custom_constants/margin_bottom = 7
+
+[node name="comp_event_receiver" parent="special_attack/special_attack_vertical_container" instance=ExtResource( 10 )]
+emitter = "player_events"
+event = "special_attack_available"
+
+[node name="comp_event_receiver2" parent="special_attack/special_attack_vertical_container" instance=ExtResource( 10 )]
+emitter = "player_events"
+event = "special_attack_unavailable"
+
+[node name="right_margin" type="MarginContainer" parent="special_attack"]
+margin_left = 20.0
+margin_right = 27.0
+margin_bottom = 135.0
+custom_constants/margin_right = 7
+
+[node name="movement_joystick" type="HBoxContainer" parent="."]
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+margin1 = NodePath("left_margin")
+margin1_grow_direction = "left"
+margin1_value = 35
+margin2 = NodePath("h_box_container/bottom_margin")
+margin2_grow_direction = "bottom"
+margin2_value = 20
+
+[node name="left_margin" type="MarginContainer" parent="movement_joystick"]
+margin_right = 35.0
+margin_bottom = 135.0
+custom_constants/margin_left = 35
+
+[node name="h_box_container" type="VBoxContainer" parent="movement_joystick"]
+margin_left = 39.0
+margin_right = 39.0
+margin_bottom = 135.0
+alignment = 2
+
+[node name="movement_joystick" parent="movement_joystick/h_box_container" instance=ExtResource( 2 )]
+margin_top = 111.0
+margin_bottom = 111.0
+
+[node name="bottom_margin" type="MarginContainer" parent="movement_joystick/h_box_container"]
+margin_top = 115.0
+margin_bottom = 135.0
+custom_constants/margin_bottom = 20
+
+[node name="pause_button" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+grow_horizontal = 0
+custom_constants/separation = 0
+alignment = 2
+script = ExtResource( 9 )
+margin1 = NodePath("HBoxContainer/top_margin")
+margin1_value = 3
+margin2 = NodePath("right_margin")
+margin2_grow_direction = "right"
+margin2_value = 3
+
+[node name="HBoxContainer" type="VBoxContainer" parent="pause_button"]
+margin_left = 17.0
+margin_right = 37.0
+margin_bottom = 40.0
+custom_constants/separation = 0
+
+[node name="top_margin" type="MarginContainer" parent="pause_button/HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 3.0
+custom_constants/margin_top = 3
+
+[node name="pause_button" parent="pause_button/HBoxContainer" instance=ExtResource( 1 )]
+margin_top = 3.0
+margin_bottom = 23.0
+
+[node name="icon" parent="pause_button/HBoxContainer/pause_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 7 )
+
+[node name="comp_event_caller" parent="pause_button/HBoxContainer/pause_button" instance=ExtResource( 8 )]
+event = "toggle_pause_request"
+
+[node name="right_margin" type="MarginContainer" parent="pause_button"]
+margin_left = 37.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/margin_right = 3
+
+[connection signal="pressed" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
+[connection signal="released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
+[connection signal="pressed" from="special_attack/special_attack_vertical_container/small_button" to="special_attack/special_attack_vertical_container/small_button/comp_method_caller" method="call_method"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/comp_event_receiver" to="special_attack/special_attack_vertical_container/small_button" method="enable"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/comp_event_receiver2" to="special_attack/special_attack_vertical_container/small_button" method="disable"]
+[connection signal="pressed" from="pause_button/HBoxContainer/pause_button" to="pause_button/HBoxContainer/pause_button/comp_event_caller" method="call_event"]
+
+[editable path="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick"]
+[editable path="special_attack/special_attack_vertical_container/small_button"]
+[editable path="pause_button/HBoxContainer/pause_button"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=18]
 [ext_resource path="res://particles/entity/entity_big_death_particle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sounds/entity/enemy/enemy_big_death.wav" type="AudioStream" id=20]
+[ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=21]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 3.0
@@ -250,6 +251,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("../texture:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="frog" type="KinematicBody2D" groups=["enemy_instances"]]
 script = ExtResource( 4 )
@@ -268,7 +281,11 @@ state_execution_pattern = [ "IDLE", "CROAK", "JUMP" ]
 material = ExtResource( 7 )
 position = Vector2( 0, -3 )
 texture = ExtResource( 5 )
+offset = Vector2( 0, -80 )
 hframes = 4
+frame = 3
+script = ExtResource( 21 )
+visible_by_default = false
 
 [node name="collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708

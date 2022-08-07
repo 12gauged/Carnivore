@@ -57,7 +57,7 @@ intensity = 1.2
 
 [node name="explode_sound_player" parent="." instance=ExtResource( 7 )]
 stream = ExtResource( 8 )
-bus = "entity_sounds"
+bus = "environment_sounds"
 
 [node name="lifetime_timer" type="Timer" parent="."]
 wait_time = 5.0

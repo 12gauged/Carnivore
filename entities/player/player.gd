@@ -47,7 +47,7 @@ func _ready():
 func _input(event):
 	if OS.is_debug_build():
 		if event.is_action_pressed("debug_f3"): player_events.emit_signal("unfreeze_player")
-		if event.is_action_pressed("debug_f4"): update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
+		if event.is_action_pressed("debug_f4"): consume_meat()
 		if event.is_action_pressed("debug_f6"): update_stat("health", int(max(get_stat("health") - 1, 0)))
 		if event.is_action_pressed("debug_f7"): player_events.emit_signal("freeze_player")
 	
@@ -90,6 +90,7 @@ func enter_eat_state():
 	InvincibilityTimer.stop()
 	set_stat("invincible", true)
 	player_events.emit_signal("entered_eat_state")
+	player_events.emit_signal("special_attack_unavailable")
 	# yeah i use the same timer for both hunger and energy, deal with it
 	reset_stat_decrease_timer("energy")
 	set_movement_direction(Vector2.LEFT)
@@ -116,6 +117,9 @@ func consume_meat():
 		update_stat("hunger", get_stat("hunger") + 1)
 	else:
 		update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
+		if get_stat("energy") == MAX_ENERGY:
+			player_events.emit_signal("special_attack_available")
+		
 	HungerDecreaseTimer.start()
 	
 func consume_enemy(EnemyNode):
