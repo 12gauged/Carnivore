@@ -173,6 +173,7 @@ func _on_hunger_decrease_delay_timeout():
 func _on_exit_from_eat_state_forced(): exit_eat_state()
 func _on_player_movement_direction_updated(value): 
 	if get_state() == "EAT" and value == Vector2.ZERO: return
+	player_events.emit_signal("player_moving" if value != Vector2.ZERO else "player_not_moving")
 	set_movement_direction(value)
 	
 func _on_player_frozen(): FRICTION = DEFAULT_FRICTION * 0.145

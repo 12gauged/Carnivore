@@ -19,6 +19,10 @@ signal freeze_player()
 signal unfreeze_player()
 
 # warning-ignore:unused_signal
+signal player_moving
+# warning-ignore:unused_signal
+signal player_not_moving
+# warning-ignore:unused_signal
 signal entered_eat_state
 # warning-ignore:unused_signal
 signal exited_eat_state

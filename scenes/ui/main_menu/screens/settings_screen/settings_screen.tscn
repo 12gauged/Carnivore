@@ -132,6 +132,7 @@ texture = ExtResource( 5 )
 [node name="control_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
 margin_left = 146.0
 margin_right = 166.0
+disabled = true
 toggle_mode = true
 id = "control"
 

@@ -5,7 +5,12 @@ const MAX_SPAWN_CHANCE: int = 80
 onready var DeathLootSpawner = $death_loot_spawner
 
 func _ready():
-	var loot_spawn_chance = max(MIN_SPAWN_CHANCE, MAX_SPAWN_CHANCE - 7 * game_data.get_current_wave() - 1)
+	var loot_spawn_chance
+	
+	if game_data.get_player_data("generation") == -1:
+		loot_spawn_chance = 100
+	else:
+		loot_spawn_chance = max(MIN_SPAWN_CHANCE, MAX_SPAWN_CHANCE - 7 * game_data.get_current_wave() - 1)
 	DeathLootSpawner.set_spawn_chance(loot_spawn_chance)
 
 func _on_rock_spawned(InstancedEntity):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/button/joystick/mobile_joystick.tscn" type="PackedScene" id=2]
@@ -10,12 +10,26 @@
 [ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/mobile_ui/margin_controller.gd" type="Script" id=9]
 [ext_resource path="res://system/components/receivers/comp_event_receiver.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/gui/text_box/text_box_horizontal.png" type="Texture" id=11]
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=12]
+[ext_resource path="res://ui/mobile_ui/tutorial_controller_mobile.gd" type="Script" id=13]
+[ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=14]
+[ext_resource path="res://ui/gui/text_box/text_box_vertical.png" type="Texture" id=15]
 
 [node name="mobile_ui" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 6 )
+
+[node name="tutorial_controller" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="movement_timer" type="Timer" parent="tutorial_controller"]
+wait_time = 1.6
+
+[node name="hunger_timer" type="Timer" parent="tutorial_controller"]
+wait_time = 3.6
 
 [node name="shooting_joystick" type="HBoxContainer" parent="."]
 anchor_left = 1.0
@@ -59,6 +73,33 @@ method = {
 "args": [ "player_shooting_joystick_released" ],
 "caller": "input_events",
 "method": "emit_signal"
+}
+
+[node name="shooting_tutorial" type="TextureRect" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" groups=["tutorial", "tutorial_shooting"]]
+visible = false
+margin_left = -121.0
+margin_top = -24.0
+margin_right = -18.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
+texture = ExtResource( 11 )
+flip_h = true
+script = ExtResource( 14 )
+visible_by_default = false
+
+[node name="Label" type="Label" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/shooting_tutorial"]
+anchor_left = 0.038835
+anchor_top = 0.0833333
+anchor_right = 0.932039
+anchor_bottom = 0.916667
+size_flags_horizontal = 0
+theme = ExtResource( 12 )
+text = "tutorial.throw_stone"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
 }
 
 [node name="bottom_margin" type="MarginContainer" parent="shooting_joystick/shooting_joystick_vertical_container"]
@@ -113,6 +154,36 @@ method = {
 "method": "emit_signal"
 }
 
+[node name="special_attack_tutorial" type="TextureRect" parent="special_attack/special_attack_vertical_container/small_button" groups=["tutorial", "tutorial_eating"]]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -32.0
+margin_right = -45.0
+margin_bottom = 16.0
+size_flags_horizontal = 0
+texture = ExtResource( 11 )
+flip_h = true
+script = ExtResource( 14 )
+visible_by_default = false
+
+[node name="Label" type="Label" parent="special_attack/special_attack_vertical_container/small_button/special_attack_tutorial"]
+anchor_left = 0.038835
+anchor_top = 0.0833333
+anchor_right = 0.932039
+anchor_bottom = 0.916667
+size_flags_horizontal = 0
+theme = ExtResource( 12 )
+text = "tutorial.special_attack"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="bottom_margin" type="MarginContainer" parent="special_attack/special_attack_vertical_container"]
 margin_top = 128.0
 margin_right = 20.0
@@ -138,7 +209,7 @@ anchor_bottom = 1.0
 script = ExtResource( 9 )
 margin1 = NodePath("left_margin")
 margin1_grow_direction = "left"
-margin1_value = 35
+margin1_value = 30
 margin2 = NodePath("h_box_container/bottom_margin")
 margin2_grow_direction = "bottom"
 margin2_value = 20
@@ -157,6 +228,36 @@ alignment = 2
 [node name="movement_joystick" parent="movement_joystick/h_box_container" instance=ExtResource( 2 )]
 margin_top = 111.0
 margin_bottom = 111.0
+
+[node name="movement_tutorial" type="TextureRect" parent="movement_joystick/h_box_container/movement_joystick" groups=["tutorial", "tutorial_movement"]]
+visible = false
+margin_left = 18.0
+margin_top = -24.0
+margin_right = 121.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
+texture = ExtResource( 11 )
+script = ExtResource( 14 )
+visible_by_default = false
+
+[node name="Label" type="Label" parent="movement_joystick/h_box_container/movement_joystick/movement_tutorial"]
+anchor_left = 0.0679612
+anchor_top = 0.0833333
+anchor_right = 0.961165
+anchor_bottom = 0.916667
+size_flags_horizontal = 0
+theme = ExtResource( 12 )
+text = "tutorial.movement"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Timer" type="Timer" parent="movement_joystick/h_box_container/movement_joystick/movement_tutorial"]
+one_shot = true
+autostart = true
 
 [node name="bottom_margin" type="MarginContainer" parent="movement_joystick/h_box_container"]
 margin_top = 115.0
@@ -209,11 +310,58 @@ margin_right = 40.0
 margin_bottom = 40.0
 custom_constants/margin_right = 3
 
+[node name="hunger_tutorial_container" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="hunger_tutorial_container"]
+margin_right = 104.0
+margin_bottom = 17.0
+custom_constants/margin_top = 17
+
+[node name="HBoxContainer" type="HBoxContainer" parent="hunger_tutorial_container"]
+margin_top = 17.0
+margin_right = 104.0
+margin_bottom = 68.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="hunger_tutorial_container/HBoxContainer"]
+margin_bottom = 51.0
+custom_constants/margin_left = 0
+
+[node name="hunger_tutorial" type="TextureRect" parent="hunger_tutorial_container/HBoxContainer" groups=["tutorial", "tutorial_hunger"]]
+margin_left = 4.0
+margin_right = 104.0
+margin_bottom = 51.0
+size_flags_horizontal = 0
+texture = ExtResource( 15 )
+flip_v = true
+script = ExtResource( 14 )
+visible_by_default = false
+
+[node name="Label" type="Label" parent="hunger_tutorial_container/HBoxContainer/hunger_tutorial"]
+anchor_left = 0.04
+anchor_top = 0.137255
+anchor_right = 0.96
+anchor_bottom = 0.921569
+size_flags_horizontal = 0
+theme = ExtResource( 12 )
+text = "tutorial.hunger"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="timeout" from="tutorial_controller/movement_timer" to="tutorial_controller" method="_on_movement_timer_timeout"]
+[connection signal="timeout" from="tutorial_controller/hunger_timer" to="tutorial_controller" method="_on_hunger_timer_timeout"]
 [connection signal="pressed" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/small_button" to="special_attack/special_attack_vertical_container/small_button/comp_method_caller" method="call_method"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/comp_event_receiver" to="special_attack/special_attack_vertical_container/small_button" method="enable"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/comp_event_receiver2" to="special_attack/special_attack_vertical_container/small_button" method="disable"]
+[connection signal="timeout" from="movement_joystick/h_box_container/movement_joystick/movement_tutorial/Timer" to="movement_joystick/h_box_container/movement_joystick/movement_tutorial" method="show"]
 [connection signal="pressed" from="pause_button/HBoxContainer/pause_button" to="pause_button/HBoxContainer/pause_button/comp_event_caller" method="call_event"]
 
 [editable path="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick"]

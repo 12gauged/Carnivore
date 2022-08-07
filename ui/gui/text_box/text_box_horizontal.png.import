@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/text_box.png-c80dd48d902241c13c6281141fdebe1c.stex"
+path="res://.import/text_box_horizontal.png-b10df731b16b3a3ea6c52434dbcdf3a3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/gui/text_box/text_box.png"
-dest_files=[ "res://.import/text_box.png-c80dd48d902241c13c6281141fdebe1c.stex" ]
+source_file="res://ui/gui/text_box/text_box_horizontal.png"
+dest_files=[ "res://.import/text_box_horizontal.png-b10df731b16b3a3ea6c52434dbcdf3a3.stex" ]
 
 [params]
 
