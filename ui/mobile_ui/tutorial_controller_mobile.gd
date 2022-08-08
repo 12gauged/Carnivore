@@ -5,6 +5,7 @@ onready var ShootingTutorial = toolbox.get_node_in_group("tutorial_shooting")
 onready var HungerTutorial = toolbox.get_node_in_group("tutorial_hunger")
 onready var EatingTutorial = toolbox.get_node_in_group("tutorial_eating")
 
+onready var MovementFirstAppearTimer: Timer = $movement_first_appear_timer
 onready var MovementTimer: Timer = $movement_timer
 onready var HungerTimer: Timer = $hunger_timer
 
@@ -29,6 +30,7 @@ func _ready():
 		
 	player_events.connect("player_moving", self, "_on_player_moving")
 	player_events.connect("player_not_moving", self, "_on_player_not_moving")
+	MovementFirstAppearTimer.start()
 	
 	
 ## Movement Tutorial	

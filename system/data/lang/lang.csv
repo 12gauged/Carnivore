@@ -39,5 +39,8 @@ ui.challenges.not_so_wet.title,not so wet,na seca,pas si humide,pas très mouill
 ui.challenges.not_so_wet.description,use fire to kill a frog,use fogo para matar um sapo,utiliser le feu pour tuer une grenouille,Brûlez une grenouille
 ui.challenges.secret_weapon.title,secret weapon,arma secreta,arme secrète,arme secrète
 ui.challenges.secret_weapon.description,use a frog to kill all enemies in the wave,use um sapo para matar todos os inimigos da onda,utiliser une grenouille pour tuer tous les ennemis dans une vague,utiliser une grenouille pour tuer tous les ennemis dans une vague
-tutorial.movement,use the joystick to ,use o joystick para se movimentar, untranslated, untranslateds
+tutorial.movement,use the joystick to move your character,use o joystick para se movimentar,untranslated,untranslated
+tutorial.throw_stone,use the joystick to throw the stone,use o joystick para jogar a pedra,untranslated,untranslated
+tutorial.hunger,don't get hungry!,não fique com fome!,untranslated,untranslated
+tutorial.special_attack,press the lightning button to use your special attack!,aperte o botão do raio para usar seu ataque especial!,untranslated,untranslated
 hud.wave_indicator,wave %s!,onda %s!,vague %s,vague %s!

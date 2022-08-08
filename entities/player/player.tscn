@@ -359,6 +359,7 @@ wait_time = 1.2
 one_shot = true
 
 [connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
+[connection signal="entered_eat_state" from="." to="texture/hands_overlay" method="hide"]
 [connection signal="frozen" from="." to="part_state_handler/*/comp_movement_keyboard" method="stop_execution"]
 [connection signal="frozen" from="." to="part_player_projectile_handler/part_input_detector" method="stop_execution"]
 [connection signal="hurt" from="." to="part_hurtbox/hit_sound_effect" method="play_sound"]
@@ -376,6 +377,7 @@ one_shot = true
 [connection signal="projectile_collected" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]
 [connection signal="projectile_thrown" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
 [connection signal="remove_tag_request" from="part_player_projectile_handler" to="." method="remove_tag"]
+[connection signal="show_hand_overlay" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]
 [connection signal="entity_spawned" from="part_player_projectile_handler/projectile_spawner" to="part_player_projectile_handler" method="_on_projectile_spawner_entity_spawned"]
 [connection signal="detected" from="part_player_projectile_handler/part_input_detector" to="part_player_projectile_handler" method="shoot_projectile"]
 [connection signal="hit_detected" from="part_mouth_hitbox" to="." method="consume_enemy"]

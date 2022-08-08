@@ -1,5 +1,10 @@
 extends Entity
 
+
+signal entered_eat_state
+signal exited_eat_state
+
+
 const HUNGER_DECREASE_DELAY = 3.0
 const ENERGY_DECREASE_DELAY = 0.8
 
@@ -91,6 +96,7 @@ func enter_eat_state():
 	set_stat("invincible", true)
 	player_events.emit_signal("entered_eat_state")
 	player_events.emit_signal("special_attack_unavailable")
+	emit_signal("entered_eat_state")
 	# yeah i use the same timer for both hunger and energy, deal with it
 	reset_stat_decrease_timer("energy")
 	set_movement_direction(Vector2.LEFT)
@@ -101,6 +107,7 @@ func exit_eat_state():
 	remove_tag("EAT")
 	set_state("IDLE")
 	set_stat("invincible", false)
+	emit_signal("exited_eat_state")
 	reset_stat_decrease_timer("hunger")
 	player_events.emit_signal("exited_eat_state")
 	set_rotation_degrees(0.0)

@@ -4,6 +4,7 @@ signal projectile_collected
 signal projectile_thrown 
 signal add_tag_request(tag)
 signal remove_tag_request(tag)
+signal show_hand_overlay
 
 onready var ShotDelayTimer: Timer = $shot_delay_timer
 onready var ProjectileTexture: Sprite = $projectile_holder/projectile_texture
@@ -45,6 +46,7 @@ func _input(event):
 	if event is InputEventMouseMotion: set_target_direction(global_position.direction_to(get_global_mouse_position()))
 	
 func shoot_projectile():
+	if on_eat_state: return
 	if projectile_type.empty(): return
 	if !ShotDelayTimer.is_stopped(): return
 	
@@ -112,6 +114,9 @@ func _on_player_entered_eat_state():
 func _on_player_exited_eat_state():
 	self.visible = true
 	on_eat_state = false
+	
+	if !projectile_type.empty():
+		emit_signal("show_hand_overlay")
 
 func _on_player_shooting_direction_updated(value):
 	if value == Vector2.ZERO and last_shooting_direction != Vector2.ZERO:

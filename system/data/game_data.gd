@@ -70,7 +70,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 func _ready():
 	if !OS.is_debug_build(): return
 	
-	current_platform = "mobile"
+	#current_platform = "mobile"
 
 
 
