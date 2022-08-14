@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://entities/ant/ant.gd" type="Script" id=1]
 [ext_resource path="res://entities/ant/ant.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://sounds/entity/enemy/enemy_hit.wav" type="AudioStream" id=10]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=11]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=12]
+[ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.0
@@ -380,11 +381,7 @@ anims/DIG = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 anims/SPAWN = SubResource( 7 )
 
-[node name="death_loot_spawner" parent="." instance=ExtResource( 7 )]
-entity_name = "meat_drop"
-entity_group = "drops"
-deletion_signal = "interacted"
-spawn_chance = 60
+[node name="enemy_loot_spawner" parent="." instance=ExtResource( 13 )]
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
 TAGS = [ "ENEMY" ]
@@ -400,7 +397,7 @@ scale = Vector2( 0.998317, 0.99272 )
 stream = ExtResource( 10 )
 bus = "entity_sounds"
 
-[connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
+[connection signal="deleted" from="." to="enemy_loot_spawner" method="drop_loot"]
 [connection signal="deleted" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]

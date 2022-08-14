@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://entities/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/state.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=14]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=15]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=16]
+[ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=17]
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 8 )
@@ -302,18 +303,15 @@ anims/MOVE = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 anims/SPAWN = SubResource( 12 )
 
-[node name="death_loot_spawner" parent="." instance=ExtResource( 5 )]
-entity_name = "meat_drop"
-entity_group = "drops"
-deletion_signal = "interacted"
-spawn_chance = 60
-
 [node name="hit_sound_effect" parent="." instance=ExtResource( 10 )]
 stream = ExtResource( 13 )
 bus = "entity_sounds"
 
-[connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
+[node name="enemy_loot_spawner" parent="." instance=ExtResource( 17 )]
+drop_chance = 60
+
 [connection signal="deleted" from="." to="hit_sound_effect" method="play_sound"]
+[connection signal="deleted" from="." to="enemy_loot_spawner" method="drop_loot"]
 [connection signal="hurt" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]

@@ -16,7 +16,7 @@
 [ext_resource path="res://sounds/entity/enemy/frog/frog_land.wav" type="AudioStream" id=14]
 [ext_resource path="res://sounds/entity/enemy/frog/frog_croak.wav" type="AudioStream" id=15]
 [ext_resource path="res://sounds/entity/enemy/frog/frog_spawn.wav" type="AudioStream" id=16]
-[ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=17]
+[ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=17]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=18]
 [ext_resource path="res://particles/entity/entity_big_death_particle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sounds/entity/enemy/enemy_big_death.wav" type="AudioStream" id=20]
@@ -310,19 +310,9 @@ damage = 4
 rotation = 1.5708
 shape = SubResource( 7 )
 
-[node name="death_loot_spawner" parent="." instance=ExtResource( 17 )]
-position = Vector2( -2, 0 )
-entity_name = "meat_drop"
-entity_group = "drops"
-deletion_signal = "interacted"
-respawn_radius = Vector2( 2, 2 )
+[node name="enemy_loot_spawner" parent="." instance=ExtResource( 17 )]
 
-[node name="death_loot_spawner2" parent="." instance=ExtResource( 17 )]
-position = Vector2( 2, 0 )
-entity_name = "meat_drop"
-entity_group = "drops"
-deletion_signal = "interacted"
-respawn_radius = Vector2( 2, 2 )
+[node name="enemy_loot_spawner2" parent="." instance=ExtResource( 17 )]
 
 [node name="part_state_handler" parent="." instance=ExtResource( 1 )]
 
@@ -384,9 +374,9 @@ bus = "entity_sounds"
 stream = ExtResource( 20 )
 bus = "entity_sounds"
 
-[connection signal="deleted" from="." to="death_loot_spawner" method="spawn_entity"]
-[connection signal="deleted" from="." to="death_loot_spawner2" method="spawn_entity"]
 [connection signal="deleted" from="." to="dead_sound_effect" method="play_sound"]
+[connection signal="deleted" from="." to="enemy_loot_spawner" method="drop_loot"]
+[connection signal="deleted" from="." to="enemy_loot_spawner2" method="drop_loot"]
 [connection signal="hurt" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="self_give" from="." to="part_state_handler/JUMP/comp_movement_jump" method="set_owner"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]

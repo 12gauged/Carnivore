@@ -6,6 +6,7 @@ ui.startup.warning.hardware_accel.description,this game requires you to have har
 ui.main_menu.play,play,jogar,jouer,Jouer
 ui.credits.dev,developer,desenvolvedor,développeur,développeur
 ui.credits.translators,translators,tradutores(as),traducteurs,traducteurs
+ui.warning.erase_data,erase data? all progress will be lost,apagar dados? todo progresso será perdido,untranslated,untranslated
 ui.settings.title,settings,configurações,configuration,configuration
 ui.settings.camera_shake,camera shake,tremor de câmera,tremblement de la caméra,tremblement du caméra
 ui.settings.fullscreen,fullscreen,tela-cheia,plein-écran,plein-écran
@@ -14,6 +15,7 @@ ui.settings.music_bus,music,música,musique,musique
 ui.settings.player_bus,player sounds,sons do jogador,bruits du joueur,bruits du joueur 
 ui.settings.entity_bus,entity sounds,sons de entidades,bruits d’entités,bruits d’entités
 ui.settings.environment_bus,environment sounds,sons do ambiente,bruits d’ambiance,bruits d’ambiance
+ui.settings.erase_data,erase data,apagar dados,untranslated,untranslated
 ui.pause_screen.paused,paused,em pausa,en pause,en pause
 ui.pause_screen.resume,resume,continuar,reprendre,continuer
 ui.death_screen.game_over,game over,fim de jogo,game over,game over

@@ -73,3 +73,6 @@ func save_value(key, value): JavaScript.eval("saveValue('%s', %s)" % [key, value
 func load_value(key):
 	var value = JavaScript.eval("loadValue('%s')" % key)
 	return value 
+	
+func reload_page() -> void:
+	JavaScript.eval("location.reload()")

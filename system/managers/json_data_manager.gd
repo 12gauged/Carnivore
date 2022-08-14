@@ -36,6 +36,10 @@ func load_settings():
 	print("loaded settings: %s" % loaded_values)
 	loaded_values = compare_dictionaries(loaded_values, game_data.game_settings)
 	game_data.game_settings = loaded_values
+	
+func save_all():
+	save_settings()
+	save_game()
 
 
 func compare_dictionaries(dir1, dir2):

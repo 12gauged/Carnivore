@@ -126,6 +126,7 @@ func consume_meat():
 		update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
 		if get_stat("energy") == MAX_ENERGY:
 			player_events.emit_signal("special_attack_available")
+			add_tag("FULL")
 		
 	HungerDecreaseTimer.start()
 	
@@ -176,6 +177,7 @@ func _on_hunger_decrease_delay_timeout():
 				apply_damage(1)
 				return
 			update_stat("hunger", int(max(get_stat("hunger") - 1, 0)))
+			remove_tag("FULL")
 			
 func _on_exit_from_eat_state_forced(): exit_eat_state()
 func _on_player_movement_direction_updated(value): 
@@ -185,3 +187,7 @@ func _on_player_movement_direction_updated(value):
 	
 func _on_player_frozen(): FRICTION = DEFAULT_FRICTION * 0.145
 func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION
+
+
+func _on_player_state_changed(new_state, _old_state):
+	game_data.current_player_state = new_state

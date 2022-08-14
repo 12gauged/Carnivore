@@ -23,6 +23,8 @@ var tutorial_stage: int = TUTORIAL_STAGES.MOVEMENT
 
 
 func _ready():
+	if game_data.current_platform != "mobile": return
+	
 	if game_data.get_player_data("generation") >= 0:
 		for Tutorial in get_tree().get_nodes_in_group("tutorial"):
 			Tutorial.visible = false

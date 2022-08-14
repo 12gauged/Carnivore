@@ -22,6 +22,7 @@ offset = Vector2( 0, -1 )
 shape = SubResource( 1 )
 
 [node name="comp_interactable" parent="." instance=ExtResource( 2 )]
+IGNORE_TAGS = [ "EAT", "FULL" ]
 method_to_execute = {
 "args": [ "meat_consumed" ],
 "caller": "player_events",

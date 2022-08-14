@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/language_tab/language_tab.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tab_buttons.gd" type="Script" id=13]
 [ext_resource path="res://ui/gui/icons/controls_icon.png" type="Texture" id=14]
+[ext_resource path="res://ui/gui/icons/storage_icon.png" type="Texture" id=15]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/storage_tab/storage_tab.tscn" type="PackedScene" id=16]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 16777217
@@ -90,8 +92,8 @@ alignment = 1
 script = ExtResource( 13 )
 
 [node name="video_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 74.0
-margin_right = 94.0
+margin_left = 62.0
+margin_right = 82.0
 toggle_mode = true
 pressed = true
 id = "video"
@@ -104,8 +106,8 @@ margin_bottom = 18.0
 texture = ExtResource( 6 )
 
 [node name="audio_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 98.0
-margin_right = 118.0
+margin_left = 86.0
+margin_right = 106.0
 toggle_mode = true
 id = "audio"
 
@@ -117,8 +119,8 @@ margin_bottom = 18.0
 texture = ExtResource( 7 )
 
 [node name="language_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 122.0
-margin_right = 142.0
+margin_left = 110.0
+margin_right = 130.0
 toggle_mode = true
 id = "language"
 
@@ -130,11 +132,11 @@ margin_bottom = 18.0
 texture = ExtResource( 5 )
 
 [node name="control_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 146.0
-margin_right = 166.0
+margin_left = 134.0
+margin_right = 154.0
 disabled = true
 toggle_mode = true
-id = "control"
+id = "controls"
 
 [node name="icon" parent="elements/main_container/tab_buttons/control_settings/center_container" index="0"]
 margin_left = 2.0
@@ -142,6 +144,19 @@ margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 14 )
+
+[node name="storage_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
+margin_left = 158.0
+margin_right = 178.0
+toggle_mode = true
+id = "storage"
+
+[node name="icon" parent="elements/main_container/tab_buttons/storage_settings/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 15 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="elements/main_container"]
 margin_top = 26.0
@@ -217,6 +232,14 @@ margin_top = 4.0
 margin_right = 80.0
 margin_bottom = 96.0
 
+[node name="storage_tab" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 16 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 4.0
+margin_right = 80.0
+margin_bottom = 24.0
+
 [node name="MarginContainer3" type="MarginContainer" parent="elements/main_container"]
 margin_top = 110.0
 margin_right = 240.0
@@ -232,9 +255,12 @@ custom_constants/margin_top = 2
 [connection signal="button_pressed" from="elements/main_container/tab_buttons/language_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 [connection signal="button_pressed" from="elements/main_container/tab_buttons/control_settings" to="elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
 [connection signal="button_pressed" from="elements/main_container/tab_buttons/control_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/storage_settings" to="elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
+[connection signal="button_pressed" from="elements/main_container/tab_buttons/storage_settings" to="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 
 [editable path="home_button_container/CenterContainer/small_button"]
 [editable path="elements/main_container/tab_buttons/video_settings"]
 [editable path="elements/main_container/tab_buttons/audio_settings"]
 [editable path="elements/main_container/tab_buttons/language_settings"]
 [editable path="elements/main_container/tab_buttons/control_settings"]
+[editable path="elements/main_container/tab_buttons/storage_settings"]

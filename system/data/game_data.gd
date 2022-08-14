@@ -18,7 +18,7 @@ const ARCHIEVEMENT_REF: Dictionary = {
 	}
 }
 
-var player_data = {
+const default_player_data = {
 	"lowest_time": [],
 	"generation": -1,
 	"archievements": {
@@ -39,10 +39,11 @@ var player_data = {
 		}
 	}
 }
+var player_data: Dictionary = default_player_data
 
 const DEFAULT_VOLUME: float = 1.6
 
-var game_settings: Dictionary = {
+const default_game_settings: Dictionary = {
 	"audio": {
 		"Master": DEFAULT_VOLUME,
 		"music": 1.3, # makes music slightly quieter by default
@@ -57,11 +58,13 @@ var game_settings: Dictionary = {
 		"value": "DEFAULT"	
 	}
 }
+var game_settings: Dictionary = default_game_settings
 
 var current_platform: String = "desktop" setget set_current_platform, get_current_platform # TEMP
 var current_level: String = "" setget set_current_level, get_current_level
 var current_level_time: Array = [] setget set_current_level_time, get_current_level_time
 var current_arena_wave: int = 1 setget set_current_wave, get_current_wave
+var current_player_state: String = ""
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 
@@ -70,7 +73,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 func _ready():
 	if !OS.is_debug_build(): return
 	
-	#current_platform = "mobile"
+	current_platform = "mobile"
 
 
 
@@ -94,3 +97,9 @@ func get_game_setting(group, key): return game_settings[group][key]
 
 func set_last_lowest_level_time(value: Array): last_lowest_level_time = value
 func get_last_lowest_level_time() -> Array: return last_lowest_level_time
+
+func reset_all_data():
+	player_data = default_player_data
+	game_settings = default_game_settings
+	json_data_manager.save_all()
+	js_handler.reload_page()

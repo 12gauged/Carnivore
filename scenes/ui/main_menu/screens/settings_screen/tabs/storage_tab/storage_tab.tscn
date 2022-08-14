@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/gui/button/wide/wide_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/storage_tab/storage_tab.gd" type="Script" id=2]
+
+[node name="storage_tab" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 240.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="wide_button" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 80.0
+margin_top = 0.0
+margin_right = 160.0
+margin_bottom = 20.0
+id = "erase_data"
+
+[node name="text" parent="HBoxContainer/wide_button/center_container" index="0"]
+margin_left = 0.0
+margin_right = 106.0
+text = "ui.settings.erase_data"
+
+[connection signal="button_pressed" from="HBoxContainer/wide_button" to="." method="_on_wide_button_button_pressed"]
+
+[editable path="HBoxContainer/wide_button"]
