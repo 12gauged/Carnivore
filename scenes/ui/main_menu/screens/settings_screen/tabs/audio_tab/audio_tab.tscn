@@ -125,7 +125,7 @@ max_value = 1.6
 step = 0.05
 value = 1.6
 script = ExtResource( 5 )
-id = "player_sounds"
+id = "entity_sounds"
 
 [node name="environment_bus" type="VBoxContainer" parent="."]
 margin_top = 104.0
@@ -155,7 +155,13 @@ max_value = 1.6
 step = 0.05
 value = 1.6
 script = ExtResource( 5 )
-id = "player_sounds"
+id = "environment_sounds"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_top = 130.0
+margin_right = 130.0
+margin_bottom = 140.0
+custom_constants/margin_bottom = 10
 
 [connection signal="slider_value_updated" from="master_bus/HSlider" to="." method="_on_slider_value_updated"]
 [connection signal="slider_value_updated" from="music_bus/HSlider" to="." method="_on_slider_value_updated"]

@@ -21,4 +21,4 @@ func _on_slider_value_updated(id, value):
 	var value_in_db = linear2db(value)
 	AudioServer.set_bus_volume_db(bus_id, value_in_db)
 	game_data.set_game_setting("audio", id, value)
-	json_data_manager.save_settings()
+	global_data_manager.save_settings()

@@ -1,6 +1,7 @@
 extends Node
 
 onready var MovementTutorial = toolbox.get_node_in_group("tutorial_movement")
+onready var PickStoneTutorial = toolbox.get_node_in_group("tutorial_pick_stone")
 onready var ShootingTutorial = toolbox.get_node_in_group("tutorial_shooting")
 onready var HungerTutorial = toolbox.get_node_in_group("tutorial_hunger")
 onready var EatingTutorial = toolbox.get_node_in_group("tutorial_eating")
@@ -23,9 +24,12 @@ var tutorial_stage: int = TUTORIAL_STAGES.MOVEMENT
 
 
 func _ready():
-	if game_data.current_platform != "mobile": return
+	if game_data.current_platform != "mobile": 
+		game_events.emit_signal("tutorial_finished")
+		return
 	
 	if game_data.get_player_data("generation") >= 0:
+		game_events.emit_signal("tutorial_finished")
 		for Tutorial in get_tree().get_nodes_in_group("tutorial"):
 			Tutorial.visible = false
 		return
@@ -45,6 +49,8 @@ func _on_movement_timer_timeout():
 	if tutorial_stage != TUTORIAL_STAGES.MOVEMENT: return
 	player_events.connect("projectile_collected", self, "_on_player_projectile_collected")
 	tutorial_stage = TUTORIAL_STAGES.PICK_STONE
+	PickStoneTutorial.visible = true
+	game_events.emit_signal("spawn_tutorial_stone")
 	MovementTutorial.hide()
 	
 	
@@ -53,6 +59,7 @@ func _on_movement_timer_timeout():
 func _on_player_projectile_collected(_projectile):
 	if tutorial_stage != TUTORIAL_STAGES.PICK_STONE: return
 	player_events.connect("projectile_thrown", self, "_on_player_projectile_thrown")
+	PickStoneTutorial.visible = false
 	tutorial_stage = TUTORIAL_STAGES.SHOOTING
 	ShootingTutorial.show()
 
@@ -75,6 +82,7 @@ func _on_hunger_timer_timeout():
 	tutorial_stage = TUTORIAL_STAGES.EATING
 	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
 	player_events.connect("special_attack_unavailable", self, "_on_player_special_attack_unavailable")
+	game_events.emit_signal("tutorial_finished")
 
 
 ## EATING TUTORIAL

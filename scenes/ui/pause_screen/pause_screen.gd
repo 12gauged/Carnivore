@@ -9,7 +9,7 @@ var can_pause: bool = false
 
 func _ready(): 
 	# warning-ignore:return_value_discarded
-	
+	game_events.connect("arena_ended", self, "_on_arena_ended")
 	# warning-ignore:return_value_discarded
 	gui_events.connect("toggle_pause_request", self, "toggle_pause")
 	# warning-ignore:return_value_discarded
@@ -34,3 +34,6 @@ func _on_black_overlay_anim_finished(anim_name):
 	can_pause = anim_name == "fade_out"
 func _on_scene_changed_without_fading(): 
 	can_pause = true
+
+func _on_arena_ended():
+	can_pause = false

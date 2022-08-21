@@ -8,6 +8,10 @@ signal wave_finished
 signal arena_ended
 # warning-ignore:unused_signal
 signal level_started
+# warning-ignore:unused_signal
+signal tutorial_finished
+# warning-ignore:unused_signal
+signal spawn_tutorial_stone
 
 # warning-ignore:unused_signal
 signal wave_time_updated(value)

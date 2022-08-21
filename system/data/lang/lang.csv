@@ -7,6 +7,7 @@ ui.main_menu.play,play,jogar,jouer,Jouer
 ui.credits.dev,developer,desenvolvedor,développeur,développeur
 ui.credits.translators,translators,tradutores(as),traducteurs,traducteurs
 ui.warning.erase_data,erase data? all progress will be lost,apagar dados? todo progresso será perdido,untranslated,untranslated
+ui.warning.restart_game,the game needs to be restarted to apply the changes,o jogo precisa ser reiniciado para aplicar as mudanças,untranslated,untranslated
 ui.settings.title,settings,configurações,configuration,configuration
 ui.settings.camera_shake,camera shake,tremor de câmera,tremblement de la caméra,tremblement du caméra
 ui.settings.fullscreen,fullscreen,tela-cheia,plein-écran,plein-écran
@@ -42,6 +43,7 @@ ui.challenges.not_so_wet.description,use fire to kill a frog,use fogo para matar
 ui.challenges.secret_weapon.title,secret weapon,arma secreta,arme secrète,arme secrète
 ui.challenges.secret_weapon.description,use a frog to kill all enemies in the wave,use um sapo para matar todos os inimigos da onda,utiliser une grenouille pour tuer tous les ennemis dans une vague,utiliser une grenouille pour tuer tous les ennemis dans une vague
 tutorial.movement,use the joystick to move your character,use o joystick para se movimentar,untranslated,untranslated
+tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
 tutorial.throw_stone,use the joystick to throw the stone,use o joystick para jogar a pedra,untranslated,untranslated
 tutorial.hunger,don't get hungry!,não fique com fome!,untranslated,untranslated
 tutorial.special_attack,press the lightning button to use your special attack!,aperte o botão do raio para usar seu ataque especial!,untranslated,untranslated

@@ -12,8 +12,6 @@ var rounded_global_position
 
 
 func _ready():
-	# warning-ignore:return_value_discarded
-	camera_events.connect("camera_shake_request", self, "_on_camera_shake_request")
 	gui_events.emit_signal("show_hud" if show_hud else "hide_hud")
 
 func _physics_process(delta):

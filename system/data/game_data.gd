@@ -69,13 +69,6 @@ var current_player_state: String = ""
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 
 
-## TO SET DEVELOPER VARIABLE VALUES
-func _ready():
-	if !OS.is_debug_build(): return
-	
-	current_platform = "mobile"
-
-
 
 func set_current_platform(platform_name: String): current_platform = platform_name
 func get_current_platform() -> String: return current_platform
@@ -101,5 +94,5 @@ func get_last_lowest_level_time() -> Array: return last_lowest_level_time
 func reset_all_data():
 	player_data = default_player_data
 	game_settings = default_game_settings
-	json_data_manager.save_all()
-	js_handler.reload_page()
+	global_data_manager.save_all()
+	#js_handler.reload_page()

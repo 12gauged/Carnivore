@@ -59,10 +59,16 @@ func set_custom_values(Instance):
 		
 func set_spawn_chance(value: int):
 	spawn_chance = value
+	
+func allow_auto_spawning(): 
+	auto_spawn = true
+	if respawn: RespawnDelayTimer.start(respawn_delay)
+func stop_auto_spawning(): auto_spawn = false
 		
 		
 func _on_instanced_entity_deleted():
 	if respawn: RespawnDelayTimer.start(respawn_delay)
 
 func _on_respawn_delay_timer_timeout():
+	if !auto_spawn: return
 	spawn_entity()

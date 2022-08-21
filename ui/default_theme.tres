@@ -16,11 +16,17 @@ region_rect = Rect2( 0, 0, 104, 8 )
 
 [sub_resource type="StyleBoxTexture" id=11]
 texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 10, 76 )
+region_rect = Rect2( 0, 3, 10, 2 )
+margin_left = 1.0
+margin_right = 1.0
+margin_top = 2.0
+margin_bottom = 2.0
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=12]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 10, 76 )
+margin_top = 3.0
+margin_bottom = 3.0
 
 [sub_resource type="DynamicFontData" id=1]
 antialiased = false
@@ -44,4 +50,4 @@ HSlider/styles/slider = SubResource( 6 )
 VScrollBar/styles/grabber = SubResource( 11 )
 VScrollBar/styles/grabber_highlight = SubResource( 11 )
 VScrollBar/styles/grabber_pressed = SubResource( 11 )
-VScrollBar/styles/scroll = SubResource( 7 )
+VScrollBar/styles/scroll = SubResource( 12 )

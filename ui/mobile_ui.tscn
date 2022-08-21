@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/button/joystick/mobile_joystick.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://ui/gui/text_box/text_box_vertical.png" type="Texture" id=15]
 [ext_resource path="res://ui/gui/button/small/button_small_pressed.png" type="Texture" id=16]
 [ext_resource path="res://ui/gui/button/small/button_small_normal.png" type="Texture" id=17]
+[ext_resource path="res://ui/gui/text_box/text_box_rectangle.png" type="Texture" id=18]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -325,25 +326,28 @@ margin_bottom = 40.0
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="hunger_tutorial_container"]
-margin_right = 104.0
+margin_right = 120.0
 margin_bottom = 17.0
 custom_constants/margin_top = 17
 
 [node name="HBoxContainer" type="HBoxContainer" parent="hunger_tutorial_container"]
 margin_top = 17.0
-margin_right = 104.0
+margin_right = 120.0
 margin_bottom = 68.0
+custom_constants/separation = 0
 
 [node name="MarginContainer2" type="MarginContainer" parent="hunger_tutorial_container/HBoxContainer"]
+margin_right = 20.0
 margin_bottom = 51.0
-custom_constants/margin_left = 0
+custom_constants/margin_left = 20
 
 [node name="hunger_tutorial" type="TextureRect" parent="hunger_tutorial_container/HBoxContainer" groups=["tutorial", "tutorial_hunger"]]
-margin_left = 4.0
-margin_right = 104.0
+margin_left = 20.0
+margin_right = 120.0
 margin_bottom = 51.0
 size_flags_horizontal = 0
 texture = ExtResource( 15 )
+flip_h = true
 flip_v = true
 script = ExtResource( 14 )
 visible_by_default = false
@@ -362,6 +366,51 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 70.0
+margin_right = 170.0
+margin_bottom = 135.0
+rect_pivot_offset = Vector2( -113, 13 )
+custom_constants/separation = 0
+alignment = 2
+
+[node name="pick_stone_tutorial" type="TextureRect" parent="HBoxContainer/VBoxContainer" groups=["tutorial", "tutorial_pick_stone"]]
+margin_top = 85.0
+margin_right = 100.0
+margin_bottom = 133.0
+size_flags_horizontal = 0
+texture = ExtResource( 18 )
+flip_h = true
+script = ExtResource( 14 )
+visible_by_default = false
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/pick_stone_tutorial"]
+anchor_left = 0.038835
+anchor_top = 0.0833333
+anchor_right = 0.932039
+anchor_bottom = 0.916667
+size_flags_horizontal = 0
+theme = ExtResource( 12 )
+text = "tutorial.pick_stone"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 133.0
+margin_right = 100.0
+margin_bottom = 135.0
+custom_constants/margin_bottom = 2
 
 [connection signal="timeout" from="tutorial_controller/movement_first_appear_timer" to="movement_joystick/h_box_container/movement_joystick/movement_tutorial" method="show"]
 [connection signal="timeout" from="tutorial_controller/movement_timer" to="tutorial_controller" method="_on_movement_timer_timeout"]

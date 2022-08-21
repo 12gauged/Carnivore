@@ -36,6 +36,7 @@ func _on_archievement_made(archievement: String, notify):
 	var archievement_generation = game_functions.get_archievement_generation(archievement) 
 	var player_generation: int = game_data.get_player_data("generation")
 
+	if game_data.get_player_data("generation") < 0: return
 	if archievement_generation != starting_player_generation: return
 	if !game_functions.validate_archievement(archievement, starting_player_generation): return
 	
@@ -50,7 +51,7 @@ func _on_archievement_made(archievement: String, notify):
 		game_data.set_player_data("generation", player_generation + 1)
 		debug_log.dprint("generation complete! new generation: %s" % game_data.get_player_data("generation"))
 	
-	json_data_manager.save_game()
+	global_data_manager.save_player_data()
 	
 	
 func _on_level_started(): starting_player_generation = game_data.get_player_data("generation")
