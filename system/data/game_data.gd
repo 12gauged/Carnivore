@@ -43,7 +43,7 @@ var player_data: Dictionary = default_player_data
 
 const DEFAULT_VOLUME: float = 1.6
 
-const default_game_settings: Dictionary = {
+var default_game_settings: Dictionary = {
 	"audio": {
 		"Master": DEFAULT_VOLUME,
 		"music": 1.3, # makes music slightly quieter by default
@@ -56,6 +56,14 @@ const default_game_settings: Dictionary = {
 	},
 	"locale": {
 		"value": "DEFAULT"	
+	},
+	"desktop_keybinds": {
+		"controls_up": OS.find_scancode_from_string("W"),
+		"controls_right": OS.find_scancode_from_string("D"),
+		"controls_down": OS.find_scancode_from_string("S"),
+		"controls_left": OS.find_scancode_from_string("A"),
+		"controls_shoot": BUTTON_LEFT,
+		"controls_special": BUTTON_MIDDLE
 	}
 }
 var game_settings: Dictionary = default_game_settings
@@ -67,6 +75,12 @@ var current_arena_wave: int = 1 setget set_current_wave, get_current_wave
 var current_player_state: String = ""
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
+
+
+
+func _ready(): # For debug values
+	if !OS.is_debug_build() or OS.get_name() == "Android": return
+	player_data.generation = 1
 
 
 
@@ -95,4 +109,3 @@ func reset_all_data():
 	player_data = default_player_data
 	game_settings = default_game_settings
 	global_data_manager.save_all()
-	#js_handler.reload_page()

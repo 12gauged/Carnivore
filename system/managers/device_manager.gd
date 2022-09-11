@@ -11,4 +11,10 @@ func _ready():
 		match OS.get_name():
 			"Android": player_platform = "mobile"
 			_: player_platform = "desktop"
+			
+			
+	if OS.is_debug_build() and player_platform != "mobile":
+		# debug values
+		player_platform = "desktop"
+		pass
 	game_data.set_current_platform(player_platform)

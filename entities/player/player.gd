@@ -7,6 +7,7 @@ signal exited_eat_state
 
 const HUNGER_DECREASE_DELAY = 3.0
 const ENERGY_DECREASE_DELAY = 0.8
+const HUNGER_DECREASE_DELAY_TUTORIAL = 4.0
 
 const HUNGER_DAMAGE = 1
 const DAMAGE_CAMERA_SHAKE_DURATION = 0.3
@@ -56,7 +57,7 @@ func _input(event):
 		if event.is_action_pressed("debug_f6"): update_stat("health", int(max(get_stat("health") - 1, 0)))
 		if event.is_action_pressed("debug_f7"): player_events.emit_signal("freeze_player")
 	
-	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+	if event is InputEventMouseButton and event.button_index == game_data.game_settings.desktop_keybinds.controls_special:
 		if event.is_pressed(): enter_eat_state()
 
 func _process(_delta):
@@ -70,12 +71,24 @@ func process_inconstant_state():
 	if get_state() != "EAT":
 		set_state("IDLE" if movement_direction == Vector2.ZERO else "MOVE")
 
+
+# Felipe seu burro
+# tira esses ifs
+#          - Felipe do Passado
+
 func update_stat(id: String, value: int, animate: bool = true):
 	set_stat(id, value)
 	player_events.emit_signal("status_value_update", id, get_stat(id), animate)
 	
 	if id != "can_get_hungry": return
 	
+	if game_data.get_player_data('generation'):
+		if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
+			HungerDecreaseTimer.stop()
+		else:
+			HungerDecreaseTimer.start(HUNGER_DECREASE_DELAY_TUTORIAL)
+		return
+		
 	if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
 		HungerDecreaseTimer.stop()
 	else:
@@ -146,6 +159,13 @@ func consume_enemy(EnemyNode):
 		
 func reset_stat_decrease_timer(mode: String):
 	HungerDecreaseTimer.stop()
+	
+	if game_data.get_player_data("generation") < 0:
+		match mode:
+			"hunger": HungerDecreaseTimer.wait_time = HUNGER_DECREASE_DELAY_TUTORIAL
+			"energy": HungerDecreaseTimer.wait_time = ENERGY_DECREASE_DELAY
+		return
+		
 	match mode:
 		"hunger": HungerDecreaseTimer.wait_time = HUNGER_DECREASE_DELAY
 		"energy": HungerDecreaseTimer.wait_time = ENERGY_DECREASE_DELAY

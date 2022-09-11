@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://ui/gui/icons/controls_icon.png" type="Texture" id=14]
 [ext_resource path="res://ui/gui/icons/storage_icon.png" type="Texture" id=15]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/storage_tab/storage_tab.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/controls_tab/desktop/desktop_controls_tab.tscn" type="PackedScene" id=17]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 16777217
@@ -134,7 +135,6 @@ texture = ExtResource( 5 )
 [node name="control_settings" parent="elements/main_container/tab_buttons" instance=ExtResource( 1 )]
 margin_left = 134.0
 margin_right = 154.0
-disabled = true
 toggle_mode = true
 id = "controls"
 
@@ -230,7 +230,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 4.0
 margin_right = 80.0
-margin_bottom = 96.0
+margin_bottom = 110.0
 
 [node name="storage_tab" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 16 )]
 visible = false
@@ -238,6 +238,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 4.0
 margin_right = 80.0
+margin_bottom = 24.0
+
+[node name="desktop_controls_tab" parent="elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 17 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 4.0
+margin_right = 155.0
 margin_bottom = 24.0
 
 [node name="MarginContainer3" type="MarginContainer" parent="elements/main_container"]

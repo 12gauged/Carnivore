@@ -21,11 +21,13 @@ enum TUTORIAL_STAGES {
 
 
 var tutorial_stage: int = TUTORIAL_STAGES.MOVEMENT
+var remaining_movement_time: float = 0.0
 
 
 func _ready():
 	if game_data.current_platform != "mobile": 
 		game_events.emit_signal("tutorial_finished")
+		game_events.emit_signal("spawn_tutorial_stone")
 		return
 	
 	if game_data.get_player_data("generation") >= 0:
@@ -37,13 +39,15 @@ func _ready():
 	player_events.connect("player_moving", self, "_on_player_moving")
 	player_events.connect("player_not_moving", self, "_on_player_not_moving")
 	MovementFirstAppearTimer.start()
+	remaining_movement_time = MovementTimer.time_left
 	
 	
 ## Movement Tutorial	
 
 func _on_player_moving(): 
-	if MovementTimer.is_stopped(): MovementTimer.start()
+	if MovementTimer.is_stopped(): MovementTimer.start(remaining_movement_time)
 func _on_player_not_moving(): 
+	remaining_movement_time = MovementTimer.time_left
 	MovementTimer.stop()
 func _on_movement_timer_timeout():
 	if tutorial_stage != TUTORIAL_STAGES.MOVEMENT: return

@@ -30,6 +30,7 @@ animations = [ {
 
 [node name="entity_big_death_particle" type="AnimatedSprite"]
 frames = SubResource( 14 )
+frame = 3
 playing = true
 script = ExtResource( 1 )
 

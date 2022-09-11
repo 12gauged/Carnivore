@@ -310,7 +310,7 @@ bus = "player_sounds"
 
 [node name="part_input_detector" parent="part_player_projectile_handler" instance=ExtResource( 22 )]
 platform = "desktop"
-input_to_detect = "mouse_left"
+input_to_detect = "controls_shoot"
 
 [node name="shot_delay_timer" type="Timer" parent="part_player_projectile_handler"]
 wait_time = 0.4

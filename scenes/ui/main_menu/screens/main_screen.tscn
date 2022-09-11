@@ -127,7 +127,7 @@ margin_left = -120.0
 margin_top = -14.0
 margin_right = 120.0
 theme = ExtResource( 8 )
-text = "v0.23"
+text = "v0.24"
 align = 1
 valign = 2
 

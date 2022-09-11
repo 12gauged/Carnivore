@@ -11,6 +11,7 @@
 [node name="small_button" type="TextureButton"]
 margin_right = 20.0
 margin_bottom = 20.0
+size_flags_horizontal = 4
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )

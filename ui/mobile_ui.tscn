@@ -102,7 +102,6 @@ method = {
 }
 
 [node name="shooting_tutorial" type="TextureRect" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" groups=["tutorial", "tutorial_shooting"]]
-visible = false
 margin_left = -121.0
 margin_top = -24.0
 margin_right = -18.0
@@ -121,6 +120,32 @@ anchor_bottom = 0.916667
 size_flags_horizontal = 0
 theme = ExtResource( 12 )
 text = "tutorial.throw_stone"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="special_attack_tutorial" type="TextureRect" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" groups=["tutorial", "tutorial_special_attack"]]
+margin_left = -121.0
+margin_top = -24.0
+margin_right = -18.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
+texture = ExtResource( 11 )
+flip_h = true
+script = ExtResource( 14 )
+visible_by_default = false
+
+[node name="Label" type="Label" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/special_attack_tutorial"]
+anchor_left = 0.038835
+anchor_top = 0.0833333
+anchor_right = 0.932039
+anchor_bottom = 0.916667
+size_flags_horizontal = 0
+theme = ExtResource( 12 )
+text = "tutorial.special_attack"
 align = 1
 valign = 1
 autowrap = true
@@ -347,7 +372,6 @@ margin_right = 120.0
 margin_bottom = 51.0
 size_flags_horizontal = 0
 texture = ExtResource( 15 )
-flip_h = true
 flip_v = true
 script = ExtResource( 14 )
 visible_by_default = false
@@ -415,8 +439,8 @@ custom_constants/margin_bottom = 2
 [connection signal="timeout" from="tutorial_controller/movement_first_appear_timer" to="movement_joystick/h_box_container/movement_joystick/movement_tutorial" method="show"]
 [connection signal="timeout" from="tutorial_controller/movement_timer" to="tutorial_controller" method="_on_movement_timer_timeout"]
 [connection signal="timeout" from="tutorial_controller/hunger_timer" to="tutorial_controller" method="_on_hunger_timer_timeout"]
-[connection signal="pressed" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
-[connection signal="released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
+[connection signal="joystick_pressed" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
+[connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" method="hide"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" method="show"]

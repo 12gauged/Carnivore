@@ -5,6 +5,9 @@ extends TouchScreenButton
 ## YouTube channel: https://www.youtube.com/channel/UCJqCPFHdbc6443G3Sz6VYDw
 ## Video I watched: https://www.youtube.com/watch?v=uGyEP2LUFPg&t=0s
 
+signal joystick_pressed
+signal joystick_released
+
 export(String) var input_event = "player_movement_direction_updated"
 export(bool) var register_center_touches = false
 export(bool) var read_touches = true
@@ -29,7 +32,8 @@ func _input(event: InputEvent):
 	if event is InputEventScreenTouch and !event.is_pressed() and event.get_index() == ongoing_drag:
 		ongoing_drag = -1
 		input_events.emit_signal(input_event, Vector2.ZERO)
-		emit_signal("released")
+		if get_button_position().length() > threshold:
+			emit_signal("joystick_released")
 
 func _process(delta):
 	if ongoing_drag == -1:
@@ -55,7 +59,9 @@ func set_joystick_position_from_drag(event):
 			set_joystick_position()
 			ongoing_drag = event.get_index()
 			input_events.emit_signal(input_event, get_value())
-			emit_signal("pressed")
+			
+			if get_button_position().length() > threshold:
+				emit_signal("joystick_pressed")
 
 
 func set_joystick_position() -> void:

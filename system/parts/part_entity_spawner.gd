@@ -62,7 +62,6 @@ func set_spawn_chance(value: int):
 	
 func allow_auto_spawning(): 
 	auto_spawn = true
-	if respawn: RespawnDelayTimer.start(respawn_delay)
 func stop_auto_spawning(): auto_spawn = false
 		
 		

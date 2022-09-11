@@ -51,14 +51,14 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 4.0
 margin_right = -4.0
-margin_bottom = -5.0
+margin_bottom = -4.0
 alignment = 2
 
 [node name="button_holder" type="GridContainer" parent="CenterContainer/popup_warn/VBoxContainer2"]
 margin_left = 24.0
-margin_top = 71.0
+margin_top = 72.0
 margin_right = 68.0
-margin_bottom = 91.0
+margin_bottom = 92.0
 grow_horizontal = 0
 size_flags_horizontal = 4
 columns = 2

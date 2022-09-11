@@ -266,7 +266,7 @@ tracks/8/keys = {
 
 [node name="frog" type="KinematicBody2D" groups=["enemy_instances"]]
 script = ExtResource( 4 )
-MAX_HEALTH = 6
+MAX_HEALTH = 8
 MAX_SPEED = 300
 FRICTION = 10000
 DeathParticle = ExtResource( 19 )
@@ -374,9 +374,9 @@ bus = "entity_sounds"
 stream = ExtResource( 20 )
 bus = "entity_sounds"
 
-[connection signal="deleted" from="." to="dead_sound_effect" method="play_sound"]
 [connection signal="deleted" from="." to="enemy_loot_spawner" method="drop_loot"]
 [connection signal="deleted" from="." to="enemy_loot_spawner2" method="drop_loot"]
+[connection signal="deleted" from="." to="dead_sound_effect" method="play_sound"]
 [connection signal="hurt" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="self_give" from="." to="part_state_handler/JUMP/comp_movement_jump" method="set_owner"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]

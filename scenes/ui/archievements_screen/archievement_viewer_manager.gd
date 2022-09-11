@@ -3,11 +3,13 @@ extends MenuScreen
 const ARCHIEVEMENT_TITLE_BASE: String = "ui.challenges.%s.title"
 const ARCHIEVEMENT_DESCRIPTION_BASE: String = "ui.challenges.%s.description"
 
-onready var CurrentArchievement = $archievement_viewer_manager/CenterContainer/archievement_container/current_archievement
-onready var ArrowDown = $archievement_viewer_manager/CenterContainer/archievement_container/arrow_down
-onready var ArrowUp = $archievement_viewer_manager/CenterContainer/archievement_container/arrow_up
-onready var TabOutOfFocusTop = $archievement_viewer_manager/CenterContainer/tab_top_container/tab_top
-onready var TabOutOfFocusBottom = $archievement_viewer_manager/CenterContainer/tab_bottom_container/tab_bottom
+onready var CurrentArchievement = $challenges/archievement_viewer_manager/archievement_container/challenges_container/current_archievement
+onready var ArrowRight = $challenges/VBoxContainer/arrow_container/arrow_right
+onready var ArrowLeft = $challenges/VBoxContainer/arrow_container/arrow_left
+onready var TabOutOfFocusLeft = $challenges/archievement_viewer_manager/archievement_container/challenges_container/out_of_focus_left
+onready var TabOutOfFocusRight = $challenges/archievement_viewer_manager/archievement_container/challenges_container/out_of_focus_right
+
+onready var PageNumber = $challenges/VBoxContainer/arrow_container/page
 
 
 export(int) var number_of_archievements = 3
@@ -35,11 +37,13 @@ func update_current_panel():
 		CurrentArchievement.mark_archievement_as_complete()
 	else: CurrentArchievement.mark_archievement_as_incomplete()
 	
-	ArrowUp.disabled = current_panel == 0
-	ArrowDown.disabled = current_panel == number_of_archievements
+	ArrowLeft.disabled = current_panel == 0
+	ArrowRight.disabled = current_panel == number_of_archievements
 	
-	TabOutOfFocusTop.visible = current_panel > 0
-	TabOutOfFocusBottom.visible = current_panel < number_of_archievements
+	TabOutOfFocusLeft.modulate.a = 1 if current_panel > 0 else 0
+	TabOutOfFocusRight.modulate.a = 1 if current_panel < number_of_archievements else 0
+	
+	PageNumber.text = "%s/%s" % [current_panel + 1, number_of_archievements + 1]
 
 
 func _on_arrow_button_pressed(id):
