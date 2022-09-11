@@ -80,7 +80,7 @@ theme = ExtResource( 1 )
 custom_constants/line_spacing = 0
 text = "Evo
 Icedmi
-BlackWidow"
+Fryg"
 align = 1
 
 [node name="margin_bottom" type="MarginContainer" parent="center_container/v_grid_container"]
@@ -94,7 +94,6 @@ margin_left = 41.0
 margin_top = 99.0
 margin_right = 61.0
 margin_bottom = 119.0
-size_flags_horizontal = 4
 id = "main_screen"
 
 [node name="icon" parent="center_container/v_grid_container/home_button/center_container" index="0"]
