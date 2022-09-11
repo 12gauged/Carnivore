@@ -4,7 +4,7 @@ onready var MovementTutorial = toolbox.get_node_in_group("tutorial_movement")
 onready var PickStoneTutorial = toolbox.get_node_in_group("tutorial_pick_stone")
 onready var ShootingTutorial = toolbox.get_node_in_group("tutorial_shooting")
 onready var HungerTutorial = toolbox.get_node_in_group("tutorial_hunger")
-onready var EatingTutorial = toolbox.get_node_in_group("tutorial_eating")
+onready var EatingTutorial = toolbox.get_node_in_group("tutorial_special_attack")
 
 onready var MovementFirstAppearTimer: Timer = $movement_first_appear_timer
 onready var MovementTimer: Timer = $movement_timer
@@ -87,6 +87,7 @@ func _on_hunger_timer_timeout():
 	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
 	player_events.connect("special_attack_unavailable", self, "_on_player_special_attack_unavailable")
 	game_events.emit_signal("tutorial_finished")
+	player_events.emit_signal("set_stat_value", "can_get_hungry", true)
 
 
 ## EATING TUTORIAL

@@ -19,6 +19,7 @@ export(int) var MAX_ENERGY = 6
 onready var HungerDecreaseTimer: Timer = $hunger_decrease_delay
 onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
+onready var AnimPlayer = $part_state_anim_handler/animation_player
 
 var enemies_consumed: int = 0
 
@@ -82,7 +83,7 @@ func update_stat(id: String, value: int, animate: bool = true):
 	
 	if id != "can_get_hungry": return
 	
-	if game_data.get_player_data('generation'):
+	if game_data.get_player_data('generation') < 0:
 		if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
 			HungerDecreaseTimer.stop()
 		else:
@@ -91,6 +92,7 @@ func update_stat(id: String, value: int, animate: bool = true):
 		
 	if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
 		HungerDecreaseTimer.stop()
+		print("stopping hunger decrease timer.")
 	else:
 		HungerDecreaseTimer.start()
 
@@ -125,6 +127,7 @@ func exit_eat_state():
 	player_events.emit_signal("exited_eat_state")
 	set_rotation_degrees(0.0)
 	set_movement_direction(Vector2.ZERO)
+	AnimPlayer.play("RESET")
 	
 	## Archievement
 	enemies_consumed = 0
@@ -164,6 +167,7 @@ func reset_stat_decrease_timer(mode: String):
 		match mode:
 			"hunger": HungerDecreaseTimer.wait_time = HUNGER_DECREASE_DELAY_TUTORIAL
 			"energy": HungerDecreaseTimer.wait_time = ENERGY_DECREASE_DELAY
+		HungerDecreaseTimer.start()
 		return
 		
 	match mode:
@@ -192,6 +196,7 @@ func _on_hunger_decrease_delay_timeout():
 				exit_eat_state()
 				return
 			update_stat("energy", int(max(get_stat("energy") - 1, 0)))
+			print("reducing energy! value: %s" % get_stat("energy"))
 		_:
 			if get_stat("hunger") <= 0: 
 				apply_damage(1)

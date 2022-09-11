@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/gui/mouse/mouse_indicator/mouse_indicator_none.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/controls_tab/desktop/mousebind.gd" type="Script" id=3]
+[ext_resource path="res://ui/gui/button/medium/button_medium.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("button_medium:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "key_label_flash"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("button_medium:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="mousebind" type="HBoxContainer"]
+anchor_right = 1.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 15.0
+theme = ExtResource( 1 )
+text = "ui.settings.controls_"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 99.0
+margin_right = 115.0
+margin_bottom = 20.0
+custom_constants/margin_right = 16
+
+[node name="button_medium" parent="." instance=ExtResource( 8 )]
+margin_left = 210.0
+margin_right = 240.0
+size_flags_horizontal = 10
+texture_normal = ExtResource( 2 )
+texture_pressed = null
+texture_hover = null
+texture_disabled = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/key_label_flash = SubResource( 2 )
+
+[connection signal="button_pressed" from="button_medium" to="." method="_on_button_medium_button_pressed"]

@@ -20,7 +20,9 @@ ui.settings.controls_up,walk up,andar para cima,untranslated,untranslated
 ui.settings.controls_right,walk right,andar para direita,untranslated,untranslated
 ui.settings.controls_down,walk down,andar para baixo,untranslated,untranslated
 ui.settings.controls_left,walk left,andar para esquerda,untranslated,untranslated
-ui.settings.throw,throw,atirar,untranslated,untranslated
+ui.settings.controls_pause,pause,pausar,untranslated,untranslated
+ui.settings.controls_throw,throw,atirar,untranslated,untranslated
+ui.settings.controls_special,special,especial,untranslated,untranslated
 ui.settings.press_any_key,press any key,aperte qualquer tecla,untranslated,untranslated
 ui.settings.erase_data,erase data,apagar dados,untranslated,untranslated
 ui.pause_screen.paused,paused,em pausa,en pause,en pause

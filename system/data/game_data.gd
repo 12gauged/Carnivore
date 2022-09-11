@@ -62,8 +62,9 @@ var default_game_settings: Dictionary = {
 		"controls_right": OS.find_scancode_from_string("D"),
 		"controls_down": OS.find_scancode_from_string("S"),
 		"controls_left": OS.find_scancode_from_string("A"),
+		"controls_pause": OS.find_scancode_from_string("ESCAPE"),
 		"controls_shoot": BUTTON_LEFT,
-		"controls_special": BUTTON_MIDDLE
+		"controls_special": BUTTON_RIGHT
 	}
 }
 var game_settings: Dictionary = default_game_settings
@@ -80,7 +81,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	player_data.generation = 1
+	player_data.generation = -1
 
 
 

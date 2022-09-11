@@ -110,7 +110,6 @@ func spawn_new_enemy():
 	# warning-ignore:return_value_discarded
 	SpawnedEnemy.connect("dead", self, "_on_enemy_killed")
 	# warning-ignore:return_value_discarded
-	#SpawnedEnemy.connect("ready", self, "_on_enemy_entered_scene")
 	
 	living_enemies += 1
 	enemy_id += 1

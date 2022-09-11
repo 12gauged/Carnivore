@@ -19,7 +19,7 @@ func _ready():
 	self.visible = false
 
 func _input(event):
-	if event.is_action_pressed("ui_return"):
+	if event.is_action_pressed("controls_pause"):
 		toggle_pause()
 
 func toggle_pause():
