@@ -17,7 +17,6 @@ func _ready():
 
 func _process(delta):
 	if current_state.empty(): return
-	
 	if state_executers.has(current_state):
 		state_executers[current_state]._state_execute(delta)
 	elif "*" in existing_state_nodes:

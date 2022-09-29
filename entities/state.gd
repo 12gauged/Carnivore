@@ -34,6 +34,8 @@ func _execute(_delta): pass
 
 
 func execute_components(delta):
+	if COMPONENT_ARRAY_LEN < 0: return
+	
 	# Basically loops through and executes all the components within the state 
 	# without using a for loop.
 	component_id = component_id + 1 if component_id < COMPONENT_ARRAY_LEN - 1 else 0

@@ -23,6 +23,11 @@ signal show_input_hint(input_hint_id)
 signal hide_input_hint(input_hint_id)
 
 # warning-ignore:unused_signal
+signal toggle_debug_log
+# warning-ignore:unused_signal
+signal show_debug_log
+
+# warning-ignore:unused_signal
 signal notify_archievement(archievement, notify)
 
 # warning-ignore:unused_signal

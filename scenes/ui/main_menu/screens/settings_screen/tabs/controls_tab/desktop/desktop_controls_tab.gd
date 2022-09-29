@@ -58,7 +58,6 @@ func process_mouse_input(event):
 	if event is InputEventMouseButton:
 		if mouse_looking_for_input:
 			selected_button.enable()
-			print("allowing mouse!")
 			mouse_looking_for_input = false		
 			set_process_input(false)
 			return

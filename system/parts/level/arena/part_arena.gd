@@ -12,7 +12,8 @@ export(int) var number_of_extra_waves_per_gen = 0
 export(int) var max_enemy_number = 1
 export(float) var max_enemy_counter_modifier = 0.3
 export(int) var enemies_per_wave = 1
-export(float) var enemies_per_wave_modifier = 1.2
+export(float) var enemies_per_wave_modifier = 1.4
+export(float) var spawn_chance_modifier = 1.2
 export(int) var time_between_waves = 6
 
 onready var wave_start_delay: Timer = $wave_start_delay
@@ -135,7 +136,7 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 	if data.spawn_chance < MAX_HEAVY_ENEMY_SPAWN_CHANCE: 
 		data.spawn_chance += 5 * int(enemy_id * 0.25) # quick division by 4
 		
-	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1: return ""
+	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1 + floor(game_data.get_player_data("generation") * spawn_chance_modifier): return ""
 	return data.entity_name
 	
 	
@@ -165,8 +166,8 @@ func end_wave():
 	
 	enemy_kill_count = 0
 	enemy_id = 0
-	enemies_per_wave = int(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
-	max_enemy_number = int(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
+	enemies_per_wave = floor(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
+	max_enemy_number = floor(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
 	player_events.emit_signal("force_exit_from_eat_state")
 	game_events.emit_signal("wave_finished")

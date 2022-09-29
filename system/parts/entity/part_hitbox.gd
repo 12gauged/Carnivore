@@ -5,6 +5,7 @@ signal hit_detected(Hurtbox)
 export(int) var damage
 export(bool) var override_invincibility = false
 export(bool) var continuous_hits = false
+export(bool) var delete_on_hit = true
 export(float) var hit_delay = 1.0
 
 

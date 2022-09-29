@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://system/components/movement/comp_movement_keyboard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -26,10 +26,24 @@
 [ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.png" type="Texture" id=24]
 [ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.gd" type="Script" id=25]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=26]
+[ext_resource path="res://system/components/movement/comp_move_to_direction.gd" type="Script" id=27]
+[ext_resource path="res://entities/player/visual/trail.png" type="Texture" id=28]
+[ext_resource path="res://system/random_scripts/particle_controller.gd" type="Script" id=29]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=30]
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0.0992366, 0.731818 ), 0.0, 0.0, 0, 0, Vector2( 0.56743, 0.694318 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0124999 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 0.313726, 0.313726, 0.313726, 1, 1, 1, 1, 0 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.0
 height = 6.0
+
+[sub_resource type="Animation" id=9]
+resource_name = "DASH"
+length = 0.4
 
 [sub_resource type="Animation" id=5]
 resource_name = "EAT"
@@ -232,6 +246,33 @@ rotation = 0.0349066
 texture = ExtResource( 3 )
 hframes = 5
 
+[node name="step_particle" type="CPUParticles2D" parent="texture"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+show_behind_parent = true
+position = Vector2( -0.244296, 6.99574 )
+rotation = 0.0349066
+amount = 2
+lifetime = 0.3
+local_coords = false
+direction = Vector2( 0, 0 )
+gravity = Vector2( 0, 0 )
+scale_amount = 4.0
+scale_amount_curve = SubResource( 10 )
+
+[node name="dash_particle" type="CPUParticles2D" parent="texture"]
+show_behind_parent = true
+position = Vector2( 2.98023e-08, -4.76837e-07 )
+rotation = 0.0349066
+emitting = false
+amount = 4
+lifetime = 0.3
+local_coords = false
+texture = ExtResource( 28 )
+direction = Vector2( 0, 0 )
+gravity = Vector2( 0, 0 )
+color_ramp = SubResource( 11 )
+script = ExtResource( 29 )
+
 [node name="hands_overlay" type="Sprite" parent="texture"]
 visible = false
 material = ExtResource( 20 )
@@ -270,12 +311,25 @@ auto_execute = false
 stream = ExtResource( 18 )
 bus = "player_sounds"
 
+[node name="DASH" type="Node2D" parent="part_state_handler"]
+script = ExtResource( 6 )
+
+[node name="comp_move_to_direction" type="Node2D" parent="part_state_handler/DASH"]
+script = ExtResource( 27 )
+auto_execute = false
+
+[node name="particle_stop_emitting_delay" type="Timer" parent="part_state_handler/DASH"]
+wait_time = 0.2
+one_shot = true
+script = ExtResource( 30 )
+
 [node name="part_state_anim_handler" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -7 )
 states = [ "IDLE", "MOVE", "MOVE_PROJECTILE" ]
 
 [node name="animation_player" type="AnimationPlayer" parent="part_state_anim_handler"]
 root_node = NodePath("../../texture")
+anims/DASH = SubResource( 9 )
 anims/EAT = SubResource( 5 )
 anims/IDLE = SubResource( 3 )
 anims/MOVE = SubResource( 4 )
@@ -326,6 +380,7 @@ method = {
 [node name="part_mouth_hitbox" parent="." instance=ExtResource( 10 )]
 TAGS = [ "PLAYER_MOUTH" ]
 damage = 500
+delete_on_hit = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_mouth_hitbox"]
 position = Vector2( 6, 0 )
@@ -372,9 +427,18 @@ one_shot = true
 [connection signal="unfrozen" from="." to="part_player_projectile_handler/part_input_detector" method="resume_execution"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="executing" from="part_state_handler/*" to="part_mouth_hitbox" method="_disable_request"]
+[connection signal="component_value_update" from="part_state_handler/*/comp_movement_keyboard" to="." method="set_movement_direction"]
+[connection signal="component_value_update" from="part_state_handler/*/comp_movement_keyboard" to="part_state_handler/DASH/comp_move_to_direction" method="set_movement_direction"]
 [connection signal="executing" from="part_state_handler/EAT" to="part_mouth_hitbox" method="_enable_request"]
 [connection signal="component_value_update" from="part_state_handler/EAT/comp_movement_track_mouse" to="." method="set_movement_direction"]
+[connection signal="state_entered" from="part_state_handler/DASH" to="part_player_projectile_handler" method="_on_player_entered_eat_state"]
+[connection signal="state_entered" from="part_state_handler/DASH" to="texture/dash_particle" method="emit"]
+[connection signal="state_exited" from="part_state_handler/DASH" to="part_player_projectile_handler" method="_on_player_exited_eat_state"]
+[connection signal="state_exited" from="part_state_handler/DASH" to="part_state_handler/DASH/particle_stop_emitting_delay" method="start_timer"]
+[connection signal="component_value_update" from="part_state_handler/DASH/comp_move_to_direction" to="." method="set_movement_direction"]
+[connection signal="timeout" from="part_state_handler/DASH/particle_stop_emitting_delay" to="texture/dash_particle" method="stop_emitting"]
 [connection signal="add_tag_request" from="part_player_projectile_handler" to="." method="add_tag"]
+[connection signal="hide_hand_overlay" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
 [connection signal="projectile_collected" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]
 [connection signal="projectile_thrown" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
 [connection signal="remove_tag_request" from="part_player_projectile_handler" to="." method="remove_tag"]

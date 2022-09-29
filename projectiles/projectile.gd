@@ -31,4 +31,5 @@ func _on_lifetime_timer_timeout():
 	emit_signal("deleted", self)
 	queue_free()
 
-func _on_part_hitbox_hit_detected(Hurtbox): emit_signal("collided", Hurtbox, self)
+func _on_part_hitbox_hit_detected(Hurtbox): 
+	emit_signal("collided", Hurtbox, self)

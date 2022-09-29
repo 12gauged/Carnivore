@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/button/wide/wide_button.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/ui/main_menu/screens/menu_screen.gd" type="Script" id=7]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=8]
 [ext_resource path="res://ui/gui/button/small/challenges_button/challenges_button.gd" type="Script" id=9]
+[ext_resource path="res://ui/gui/icons/debug_icon.png" type="Texture" id=10]
+[ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/gui/logo/carnivore.png" type="Texture" id=15]
 
 [node name="main" type="Control"]
@@ -113,12 +115,12 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 6 )
 
-[node name="bottom_right_elements" type="Control" parent="."]
+[node name="version_label_container" type="Control" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="version_label" type="Label" parent="bottom_right_elements"]
+[node name="version_label" type="Label" parent="version_label_container"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -127,16 +129,61 @@ margin_left = -120.0
 margin_top = -14.0
 margin_right = 120.0
 theme = ExtResource( 8 )
-text = "v0.24"
+text = "v0.31"
 align = 1
 valign = 2
+
+[node name="Control" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 18.0
+margin_right = 40.0
+margin_bottom = 38.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer"]
+margin_right = 5.0
+margin_bottom = 20.0
+custom_constants/margin_left = 5
+
+[node name="small_button" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 5.0
+margin_right = 25.0
+
+[node name="icon" parent="Control/VBoxContainer/HBoxContainer/small_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 10 )
+
+[node name="comp_event_caller" parent="Control/VBoxContainer/HBoxContainer/small_button" instance=ExtResource( 11 )]
+event = "toggle_debug_log"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
+margin_top = 38.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/margin_bottom = 2
 
 [connection signal="pressed" from="center_elements/grid_container/play_button" to="center_elements/grid_container/play_button/comp_method_caller" method="call_method"]
 [connection signal="button_pressed" from="center_elements/grid_container/button_container/settings_button" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="center_elements/grid_container/button_container/credits_button" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="center_elements/grid_container/button_container/archievements_button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/small_button" to="Control/VBoxContainer/HBoxContainer/small_button/comp_event_caller" method="call_event"]
 
 [editable path="center_elements/grid_container/play_button"]
 [editable path="center_elements/grid_container/button_container/settings_button"]
 [editable path="center_elements/grid_container/button_container/credits_button"]
 [editable path="center_elements/grid_container/button_container/archievements_button"]
+[editable path="Control/VBoxContainer/HBoxContainer/small_button"]

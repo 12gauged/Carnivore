@@ -22,6 +22,7 @@ enum TUTORIAL_STAGES {
 
 var tutorial_stage: int = TUTORIAL_STAGES.MOVEMENT
 var remaining_movement_time: float = 0.0
+var player_entered_eat_state: bool = false
 
 
 func _ready():
@@ -36,7 +37,9 @@ func _ready():
 			Tutorial.visible = false
 		return
 		
+	# warning-ignore:return_value_discarded
 	player_events.connect("player_moving", self, "_on_player_moving")
+	# warning-ignore:return_value_discarded
 	player_events.connect("player_not_moving", self, "_on_player_not_moving")
 	MovementFirstAppearTimer.start()
 	remaining_movement_time = MovementTimer.time_left
@@ -51,6 +54,7 @@ func _on_player_not_moving():
 	MovementTimer.stop()
 func _on_movement_timer_timeout():
 	if tutorial_stage != TUTORIAL_STAGES.MOVEMENT: return
+	# warning-ignore:return_value_discarded
 	player_events.connect("projectile_collected", self, "_on_player_projectile_collected")
 	tutorial_stage = TUTORIAL_STAGES.PICK_STONE
 	PickStoneTutorial.visible = true
@@ -62,6 +66,7 @@ func _on_movement_timer_timeout():
 
 func _on_player_projectile_collected(_projectile):
 	if tutorial_stage != TUTORIAL_STAGES.PICK_STONE: return
+	# warning-ignore:return_value_discarded
 	player_events.connect("projectile_thrown", self, "_on_player_projectile_thrown")
 	PickStoneTutorial.visible = false
 	tutorial_stage = TUTORIAL_STAGES.SHOOTING
@@ -84,8 +89,12 @@ func _on_hunger_timer_timeout():
 	if tutorial_stage != TUTORIAL_STAGES.HUNGER: return
 	HungerTutorial.hide()
 	tutorial_stage = TUTORIAL_STAGES.EATING
+	# warning-ignore:return_value_discarded
 	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
+	# warning-ignore:return_value_discarded
 	player_events.connect("special_attack_unavailable", self, "_on_player_special_attack_unavailable")
+	# warning-ignore:return_value_discarded
+	player_events.connect("exited_eat_state", self, "_on_player_exited_eat_state")
 	game_events.emit_signal("tutorial_finished")
 	player_events.emit_signal("set_stat_value", "can_get_hungry", true)
 
@@ -98,3 +107,8 @@ func _on_player_special_attack_available():
 func _on_player_special_attack_unavailable(): 
 	if tutorial_stage != TUTORIAL_STAGES.EATING: return
 	EatingTutorial.hide()
+	
+func _on_player_exited_eat_state():
+	debug_log.dprint("exited eat state!")
+	player_events.disconnect("special_attack_available", self, "_on_player_special_attack_available")
+	player_events.disconnect("special_attack_unavailable", self, "_on_player_special_attack_unavailable")

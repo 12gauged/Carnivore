@@ -149,6 +149,8 @@ func enable_collision(): Collision.set_deferred("disabled", false)
 func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
 	apply_damage(Hitbox.damage)
+	if Hitbox.delete_on_hit: 
+		Hitbox.get_parent().queue_free()
 	
 func freeze():
 	set_process(false)

@@ -21,6 +21,9 @@ onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
 onready var AnimPlayer = $part_state_anim_handler/animation_player
 
+onready var DASH_SPEED = DEFAULT_MAX_SPEED * 2
+const DASH_DURATION = 0.25
+
 var enemies_consumed: int = 0
 
 func _ready():
@@ -58,8 +61,11 @@ func _input(event):
 		if event.is_action_pressed("debug_f6"): update_stat("health", int(max(get_stat("health") - 1, 0)))
 		if event.is_action_pressed("debug_f7"): player_events.emit_signal("freeze_player")
 	
+	if get_stat("energy") <= 0: return
 	if event is InputEventMouseButton and event.button_index == game_data.game_settings.desktop_keybinds.controls_special:
-		if event.is_pressed(): enter_eat_state()
+		if get_state() == "DASH": return
+		var method = "dash" if get_stat("energy") <= 5 and get_state() != "EAT" else "enter_eat_state"
+		if event.is_pressed(): call(method)
 
 func _process(_delta):
 	if get_state() in CONSTANT_STATES: process_constant_state()
@@ -69,7 +75,7 @@ func _process(_delta):
 func process_constant_state(): pass
 
 func process_inconstant_state():
-	if get_state() != "EAT":
+	if not get_state() in ["EAT", "DASH"]:
 		set_state("IDLE" if movement_direction == Vector2.ZERO else "MOVE")
 
 
@@ -92,7 +98,6 @@ func update_stat(id: String, value: int, animate: bool = true):
 		
 	if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
 		HungerDecreaseTimer.stop()
-		print("stopping hunger decrease timer.")
 	else:
 		HungerDecreaseTimer.start()
 
@@ -104,7 +109,7 @@ func stop_invincibility():
 	set_stat("invincible", false)
 
 func enter_eat_state():
-	if get_state() == "EAT" or get_stat("energy") < 5: return
+	if get_state() == "EAT": return
 	add_tag("EAT")
 	set_state("EAT")
 	InvincibilityTimer.stop()
@@ -118,6 +123,8 @@ func enter_eat_state():
 	input_events.emit_signal("player_movement_direction_updated", Vector2.LEFT)
 	
 func exit_eat_state():
+	if get_state() != "EAT": return
+	
 	start_invincibility()
 	remove_tag("EAT")
 	set_state("IDLE")
@@ -128,9 +135,20 @@ func exit_eat_state():
 	set_rotation_degrees(0.0)
 	set_movement_direction(Vector2.ZERO)
 	AnimPlayer.play("RESET")
-	
 	## Archievement
 	enemies_consumed = 0
+	
+func dash():
+	if get_state() == "EAT": return
+	set_state("DASH")
+	MAX_SPEED = DASH_SPEED
+	ACCELERATION *= 2
+	print("velocity before: ", velocity)
+	yield(get_tree().create_timer(DASH_DURATION), "timeout")
+	MAX_SPEED = DEFAULT_MAX_SPEED
+	ACCELERATION = DEFAULT_ACCELERATION
+	print("velocity after: ", velocity)
+	set_state("IDLE")
 
 func consume_meat():
 	if get_state() == "EAT": return
@@ -143,6 +161,8 @@ func consume_meat():
 		if get_stat("energy") == MAX_ENERGY:
 			player_events.emit_signal("special_attack_available")
 			add_tag("FULL")
+		else:
+			remove_tag("FULL")
 		
 	HungerDecreaseTimer.start()
 	
@@ -196,7 +216,7 @@ func _on_hunger_decrease_delay_timeout():
 				exit_eat_state()
 				return
 			update_stat("energy", int(max(get_stat("energy") - 1, 0)))
-			print("reducing energy! value: %s" % get_stat("energy"))
+			remove_tag("FULL")
 		_:
 			if get_stat("hunger") <= 0: 
 				apply_damage(1)
@@ -208,7 +228,6 @@ func _on_exit_from_eat_state_forced(): exit_eat_state()
 func _on_player_movement_direction_updated(value): 
 	if get_state() == "EAT" and value == Vector2.ZERO: return
 	player_events.emit_signal("player_moving" if value != Vector2.ZERO else "player_not_moving")
-	set_movement_direction(value)
 	
 func _on_player_frozen(): FRICTION = DEFAULT_FRICTION * 0.145
 func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION

@@ -13,7 +13,7 @@ func resume_game():
 	SceneTreeNode.paused = false
 	
 func save_game():
-	json_data_manager.save_game()
+	json_data_manager.save_all()
 
 func is_game_paused() -> bool: 
 	var SceneTreeNode = get_tree()

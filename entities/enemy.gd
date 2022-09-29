@@ -13,9 +13,12 @@ func _on_deleted():
 	
 func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
-	apply_damage(Hitbox.damage)
+	
+	var damage = Hitbox.damage
+	apply_damage(damage)
+	
+	if Hitbox.delete_on_hit: Hitbox.get_parent().queue_free()
 	
 	if !"WORM" in Hitbox.TAGS or game_data.get_player_data("generation") < 1: return
-	
-	if Hitbox.damage >= get_stat("health"): ## if a worm killed this enemy
+	if damage >= get_stat("health"): ## if a worm killed this enemy
 		player_events.emit_signal("archievement_made", "accidental_punch", true)

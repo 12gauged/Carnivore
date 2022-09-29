@@ -37,6 +37,12 @@ const default_player_data = {
 			"not_so_wet": false,
 			"secret_weapon": false
 		}
+	},
+	"skills": {
+		"movement": {
+			"dash": true,
+			"tunnel_digger": false,
+		}
 	}
 }
 var player_data: Dictionary = default_player_data

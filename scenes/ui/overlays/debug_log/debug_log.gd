@@ -14,7 +14,7 @@ func _input(event):
 
 
 func _ready(): 
-	LogLabel.visible = OS.is_debug_build()
+	gui_events.connect("toggle_debug_log", self, "_toggle_debug_log_request")
 	startup_logs()
 
 
@@ -69,3 +69,10 @@ func string_as_dict(text: String, dict_formatting: bool = false) -> String:
 		else: result += c
 	
 	return result
+
+
+
+
+func _toggle_debug_log_request(): 
+	dprint("toggle debug log")
+	LogLabel.visible = !LogLabel.visible

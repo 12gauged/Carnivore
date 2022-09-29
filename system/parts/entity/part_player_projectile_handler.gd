@@ -5,6 +5,7 @@ signal projectile_thrown
 signal add_tag_request(tag)
 signal remove_tag_request(tag)
 signal show_hand_overlay
+signal hide_hand_overlay
 
 onready var ShotDelayTimer: Timer = $shot_delay_timer
 onready var ProjectileTexture: Sprite = $projectile_holder/projectile_texture
@@ -111,12 +112,18 @@ func _on_projectile_deleted(projectile):
 func _on_player_entered_eat_state():
 	self.visible = false
 	on_eat_state = true
+	hide_hand_overlay()
 func _on_player_exited_eat_state():
 	self.visible = true
 	on_eat_state = false
+	show_hand_overlay()
 	
+func show_hand_overlay():
 	if !projectile_type.empty():
 		emit_signal("show_hand_overlay")
+func hide_hand_overlay():
+	if !projectile_type.empty():
+		emit_signal("hide_hand_overlay")
 
 func _on_player_shooting_direction_updated(value):
 	if value == Vector2.ZERO and last_shooting_direction != Vector2.ZERO:
