@@ -200,6 +200,7 @@ method = {
 
 [node name="part_input_detector" parent="." instance=ExtResource( 4 )]
 input_to_detect = "mouse_left"
+number_of_inputs = 2
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 autoplay = "start"

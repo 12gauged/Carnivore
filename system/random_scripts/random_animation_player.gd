@@ -12,4 +12,7 @@ func _ready():
 func play_random():
 	toolbox.SystemRNG.randomize()
 	play(ANIMATION_LIST[toolbox.SystemRNG.randi_range(0, ANIMATION_LIST_LEN - 1)])
+	
+func stop_playing():
+	stop(true)
 		

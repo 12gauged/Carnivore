@@ -40,7 +40,7 @@ const default_player_data = {
 	},
 	"skills": {
 		"movement": {
-			"dash": true,
+			"dash": false,
 			"tunnel_digger": false,
 		}
 	}
@@ -52,7 +52,7 @@ const DEFAULT_VOLUME: float = 1.6
 var default_game_settings: Dictionary = {
 	"audio": {
 		"Master": DEFAULT_VOLUME,
-		"music": 1.3, # makes music slightly quieter by default
+		"music": DEFAULT_VOLUME,
 		"entity_sounds": DEFAULT_VOLUME,
 		"player_sounds": DEFAULT_VOLUME,
 		"environment_sounds": DEFAULT_VOLUME
@@ -87,7 +87,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	player_data.generation = -1
+	player_data.generation = 0
 
 
 

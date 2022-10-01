@@ -189,6 +189,7 @@ disabled = true
 TAGS = [ "WORM" ]
 IGNORE_TAGS = [ "ENEMY_PROJECTILE" ]
 damage = 2
+delete_on_hit = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hitbox"]
 rotation = 1.5708

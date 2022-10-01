@@ -214,6 +214,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("../part_state_handler")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_state_pattern"
+} ]
+}
 
 [node name="fire_ant" type="KinematicBody2D" groups=["enemy_instances"]]
 script = ExtResource( 1 )
@@ -239,7 +253,6 @@ visible_by_default = false
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
-frame = 2
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -268,6 +281,7 @@ auto_execute = false
 target_node_group = "player"
 
 [node name="player_tag_detector" parent="part_state_handler/MOVE" instance=ExtResource( 6 )]
+disabled = true
 TAGS = [ "FIRE_ANT_PLAYER_SENSOR" ]
 ACCEPT_TAGS = [ "PLAYER" ]
 
@@ -318,6 +332,8 @@ drop_chance = 60
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
+[connection signal="state_entered" from="part_state_handler/MOVE" to="part_state_handler/MOVE/player_tag_detector" method="_enable_request"]
+[connection signal="state_exited" from="part_state_handler/MOVE" to="part_state_handler/MOVE/player_tag_detector" method="_disable_request"]
 [connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
 [connection signal="tag_detected" from="part_state_handler/MOVE/player_tag_detector" to="part_state_handler" method="go_to_next_state"]
 [connection signal="state_entered" from="part_state_handler/CHARGE" to="part_state_handler/CHARGE/charge_timer" method="start_timer"]

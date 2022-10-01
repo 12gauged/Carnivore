@@ -3,6 +3,8 @@ extends Entity
 
 signal entered_eat_state
 signal exited_eat_state
+signal charging_attack
+signal not_charging_attack
 
 
 const HUNGER_DECREASE_DELAY = 3.0
@@ -19,10 +21,18 @@ export(int) var MAX_ENERGY = 6
 onready var HungerDecreaseTimer: Timer = $hunger_decrease_delay
 onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
+onready var SpecialAttackChargeTimer: Timer = $special_attack_charge_timer
+onready var SpecialAttackInputDelayTimer: Timer = $special_attack_input_delay
 onready var AnimPlayer = $part_state_anim_handler/animation_player
 
-onready var DASH_SPEED = DEFAULT_MAX_SPEED * 2
-const DASH_DURATION = 0.25
+var mouse_pressed_last_frame: bool = false
+var dash_requested: bool = false
+
+onready var DASH_SPEED = DEFAULT_MAX_SPEED * 1.5
+const DASH_DURATION = 0.4
+
+const NO_WORLD_COLLISION = 128
+const ALL_WORLD_COLLISIONS = 131
 
 var enemies_consumed: int = 0
 
@@ -63,9 +73,19 @@ func _input(event):
 	
 	if get_stat("energy") <= 0: return
 	if event is InputEventMouseButton and event.button_index == game_data.game_settings.desktop_keybinds.controls_special:
-		if get_state() == "DASH": return
-		var method = "dash" if get_stat("energy") <= 5 and get_state() != "EAT" else "enter_eat_state"
-		if event.is_pressed(): call(method)
+		if get_state() in ["DASH", "EAT"]: return
+		if get_stat("energy") < 1: return
+			
+		
+		if event.is_pressed() and get_stat("energy") == MAX_ENERGY:
+			SpecialAttackInputDelayTimer.start()
+		else:
+			emit_signal("not_charging_attack")
+			SpecialAttackChargeTimer.stop()
+			SpecialAttackInputDelayTimer.stop()
+			mouse_pressed_last_frame = false
+			dash()
+		
 
 func _process(_delta):
 	if get_state() in CONSTANT_STATES: process_constant_state()
@@ -110,6 +130,8 @@ func stop_invincibility():
 
 func enter_eat_state():
 	if get_state() == "EAT": return
+	if get_stat("energy") < MAX_ENERGY: return
+	
 	add_tag("EAT")
 	set_state("EAT")
 	InvincibilityTimer.stop()
@@ -143,12 +165,20 @@ func dash():
 	set_state("DASH")
 	MAX_SPEED = DASH_SPEED
 	ACCELERATION *= 2
-	print("velocity before: ", velocity)
+	set_collisions(false)
+	update_stat("energy", int(max(get_stat("energy") - 1, 0)))
 	yield(get_tree().create_timer(DASH_DURATION), "timeout")
+	set_collisions(true)
 	MAX_SPEED = DEFAULT_MAX_SPEED
 	ACCELERATION = DEFAULT_ACCELERATION
-	print("velocity after: ", velocity)
 	set_state("IDLE")
+	
+func set_collisions(value):
+	#return
+	set_collision_layer_bit(0, value)
+	set_collision_layer_bit(1, value)
+	set_collision_mask_bit(0, value)
+	set_collision_mask_bit(1, value)
 
 func consume_meat():
 	if get_state() == "EAT": return
@@ -206,6 +236,8 @@ func apply_damage(damage: int):
 	start_invincibility()
 	start_blinking()
 	camera_events.emit_signal("camera_shake_request", DAMAGE_CAMERA_SHAKE_DURATION, DAMAGE_CAMERA_SHAKE_INTENSITY)
+	
+
 		
 		
 
@@ -235,3 +267,10 @@ func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION
 
 func _on_player_state_changed(new_state, _old_state):
 	game_data.current_player_state = new_state
+
+
+func _on_special_attack_charge_timer_timeout(): enter_eat_state()
+func _on_special_attack_input_delay_timeout():
+	SpecialAttackChargeTimer.start()
+	mouse_pressed_last_frame = true
+	emit_signal("charging_attack")

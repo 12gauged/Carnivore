@@ -9,8 +9,11 @@ func _on_entity_spawned(InstancedEntity):
 	
 func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
+	var damage = Hitbox.damage
 	
+	if Hitbox.delete_on_hit: 
+		Hitbox.get_parent().queue_free()
 	if "FROG" in Hitbox.TAGS: ## Gets 1 tapped by frogs lol n00b
 		apply_damage(MAX_HEALTH)
 		return
-	apply_damage(Hitbox.damage)
+	apply_damage(damage)

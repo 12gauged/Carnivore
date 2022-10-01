@@ -57,7 +57,7 @@ func _input(event):
 func _ready():
 	game_data.current_arena_wave = 1
 	number_of_waves += number_of_extra_waves_per_gen * game_data.get_player_data("generation")
-	initial_max_enemy_number = max_enemy_number
+	initial_max_enemy_number = max_enemy_number + ceil(max_enemy_counter_modifier * game_data.get_player_data("generation"))
 	initial_enemies_per_wave_value = enemies_per_wave
 	enemy_counter[FILLER_ENEMY] = 0
 	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
@@ -127,16 +127,17 @@ func get_random_enemy() -> String:
 	
 		
 func check_enemy_conditions(data: EntityArenaData) -> String:
-	if game_data.current_arena_wave < data.wave_requirement: return ""
+	var player_generation = game_data.get_player_data("generation")
+	if game_data.current_arena_wave < data.wave_requirement - data.wave_requirement_reducing_modifier * player_generation: return ""
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
-	if game_data.get_player_data("generation") < data.min_generation: return ""
+	if player_generation < data.min_generation: return ""
 	
 	# increases the chance of heavy enemies to spawn by the end of the wave
 	if data.spawn_chance < MAX_HEAVY_ENEMY_SPAWN_CHANCE: 
 		data.spawn_chance += 5 * int(enemy_id * 0.25) # quick division by 4
 		
-	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1 + floor(game_data.get_player_data("generation") * spawn_chance_modifier): return ""
+	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1 + floor(player_generation * spawn_chance_modifier): return ""
 	return data.entity_name
 	
 	
@@ -166,7 +167,7 @@ func end_wave():
 	
 	enemy_kill_count = 0
 	enemy_id = 0
-	enemies_per_wave = floor(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
+	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = floor(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
 	player_events.emit_signal("force_exit_from_eat_state")
