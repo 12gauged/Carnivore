@@ -26,8 +26,10 @@ var ProjectileScene
 var ProjectileInstance
 var projectile_kill_tracker: Dictionary = {}
 
+const DEFAULT_SPEED = 450
 const projectile_speeds: Dictionary = {
-	"stone_projectile": 450
+	"stone_projectile": DEFAULT_SPEED,
+	"healing_plant_seed": 0,
 }
 		
 func _ready():

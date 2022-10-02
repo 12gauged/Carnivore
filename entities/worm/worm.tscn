@@ -17,8 +17,8 @@
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 1.0
-height = 10.0
+radius = 2.99998
+height = 6.00004
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 6.5, 5 )
@@ -170,7 +170,7 @@ hframes = 3
 vframes = 4
 
 [node name="collision" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2( 0, -2 )
 rotation = 1.5708
 shape = SubResource( 4 )
 

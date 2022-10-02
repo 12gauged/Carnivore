@@ -23,8 +23,8 @@
 [ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=21]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 1.0
-height = 8.0
+radius = 3.0
+height = 6.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 8.0
@@ -221,7 +221,7 @@ script = ExtResource( 14 )
 visible_by_default = false
 
 [node name="collision" type="CollisionShape2D" parent="."]
-rotation = 1.5708
+position = Vector2( 0, -6 )
 shape = SubResource( 1 )
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]

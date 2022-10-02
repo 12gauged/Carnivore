@@ -23,8 +23,8 @@
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=21]
 
 [sub_resource type="CapsuleShape2D" id=5]
-radius = 3.0
-height = 12.0
+radius = 3.99998
+height = 10.0
 
 [sub_resource type="CircleShape2D" id=6]
 radius = 8.0
@@ -281,9 +281,7 @@ state_execution_pattern = [ "IDLE", "CROAK", "JUMP" ]
 material = ExtResource( 7 )
 position = Vector2( 0, -3 )
 texture = ExtResource( 5 )
-offset = Vector2( 0, -80 )
 hframes = 4
-frame = 3
 script = ExtResource( 21 )
 visible_by_default = false
 

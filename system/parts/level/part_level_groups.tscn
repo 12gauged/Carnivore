@@ -9,3 +9,5 @@
 [node name="drops" type="YSort" parent="." groups=["drops"]]
 
 [node name="particles" type="YSort" parent="." groups=["particles"]]
+
+[node name="healing_plants" type="YSort" parent="." groups=["healing_plants"]]

@@ -17,6 +17,7 @@ var resources: Dictionary = {
 		"stone_drop": preload("res://entities/drops/stone/stone_drop.png"),
 		
 		"stone_projectile": preload("res://projectiles/stone/stone_projectile.png"),
+		"healing_plant_seed": preload("res://projectiles/seed_projectile/healing_plant_seed_projectile.png"),
 		"pickup_particle": preload("res://particles/pickup/pickup_particle.png"),
 		
 		"mushroom_house0": preload("res://world/level1/houses/mushroom_house_short.png"),
@@ -52,9 +53,12 @@ var resources: Dictionary = {
 		"ant_soldier": preload("res://entities/ant_soldier/ant_soldier.tscn"),
 		"fire_ant": preload("res://entities/fire_ant/fire_ant.tscn"),
 		
+		"healing_plant": preload("res://entities/healing_plant/healing_plant.tscn"),
+		
 		"stone_projectile": preload("res://projectiles/stone/stone_projectile.tscn"),
 		"spear_projectile": preload("res://projectiles/spear/spear_projectile.tscn"),
 		"fire_area": preload("res://projectiles/fire_area/fire_area.tscn"),
+		"healing_plant_seed": preload("res://projectiles/seed_projectile/healing_plant_seed_projectile.tscn"),
 		
 		"stone_drop": preload("res://entities/drops/stone/stone_drop.tscn"),
 		

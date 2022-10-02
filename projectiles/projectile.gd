@@ -14,7 +14,9 @@ onready var LifetimeTimer = $lifetime_timer
 onready var scene_tree = get_tree()
 var direction: Vector2 = Vector2.ZERO setget set_direction
 
-func _ready(): LifetimeTimer.start(max_lifetime)
+func _ready(): 
+	if !is_instance_valid(LifetimeTimer): return
+	LifetimeTimer.start(max_lifetime)
 
 func _physics_process(delta):
 	global_position += direction * (speed * delta)
@@ -23,7 +25,9 @@ func _physics_process(delta):
 func set_direction(value: Vector2): direction = value.normalized()
 func set_speed(value: int): speed = value
 
-func set_hitbox_tags(tags: Array): hitbox.TAGS = tags
+func set_hitbox_tags(tags: Array): 
+	if !is_instance_valid(hitbox): return
+	hitbox.TAGS = tags
 
 
 

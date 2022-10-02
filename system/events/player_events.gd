@@ -1,6 +1,8 @@
 extends Node
 
 # warning-ignore:unused_signal
+signal healed_by_plant
+# warning-ignore:unused_signal
 signal meat_consumed
 
 # warning-ignore:unused_signal

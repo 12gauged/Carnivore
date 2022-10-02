@@ -212,11 +212,11 @@ position = Vector2( 174, -122 )
 texture = ExtResource( 22 )
 
 [node name="tree0_2" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 309, -18 )
+position = Vector2( 323, -19 )
 texture = ExtResource( 22 )
 
 [node name="tree0_3" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 214, 201 )
+position = Vector2( 230, 215 )
 texture = ExtResource( 22 )
 
 [node name="tree0_6" type="Sprite" parent="objects/decoration/trees"]
@@ -224,7 +224,7 @@ position = Vector2( 131, 239 )
 texture = ExtResource( 22 )
 
 [node name="tree0_4" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( -42, 178 )
+position = Vector2( -55, 180 )
 texture = ExtResource( 22 )
 
 [node name="tree0_5" type="Sprite" parent="objects/decoration/trees"]
@@ -244,15 +244,15 @@ position = Vector2( 370, -75 )
 texture = ExtResource( 22 )
 
 [node name="tree1_0" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 31, -128 )
+position = Vector2( 23, -133 )
 texture = ExtResource( 21 )
 
 [node name="tree1_5" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 100, -113 )
+position = Vector2( 96, -117 )
 texture = ExtResource( 21 )
 
 [node name="tree1_1" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( -28, -79 )
+position = Vector2( -32, -82 )
 texture = ExtResource( 21 )
 
 [node name="tree1_2" type="Sprite" parent="objects/decoration/trees"]
@@ -371,7 +371,6 @@ FILLER_ENEMY = "ant"
 enemy_spawn_data = [ ExtResource( 18 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 15 ) ]
 number_of_waves = 10
 number_of_extra_waves_per_gen = 4
-max_enemy_counter_modifier = 0.6
 enemies_per_wave = 3
 time_between_waves = 5
 

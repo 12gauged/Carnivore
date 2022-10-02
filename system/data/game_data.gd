@@ -38,11 +38,10 @@ const default_player_data = {
 			"secret_weapon": false
 		}
 	},
-	"skills": {
-		"movement": {
-			"dash": false,
-			"tunnel_digger": false,
-		}
+	"moves": {
+		"selected_move": "",
+		"dash": false,
+		"healing_plant": false
 	}
 }
 var player_data: Dictionary = default_player_data
@@ -51,7 +50,7 @@ const DEFAULT_VOLUME: float = 1.6
 
 var default_game_settings: Dictionary = {
 	"audio": {
-		"Master": DEFAULT_VOLUME,
+		"Master": DEFAULT_VOLUME / 2,
 		"music": DEFAULT_VOLUME,
 		"entity_sounds": DEFAULT_VOLUME,
 		"player_sounds": DEFAULT_VOLUME,
@@ -87,7 +86,8 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	player_data.generation = 0
+	player_data.generation = 2
+	player_data.moves.selected_move = "healing_plant"
 
 
 

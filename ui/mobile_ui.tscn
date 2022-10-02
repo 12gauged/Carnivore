@@ -229,14 +229,6 @@ margin_right = 16.0
 margin_bottom = 135.0
 custom_constants/margin_bottom = 7
 
-[node name="comp_event_receiver" parent="special_attack/special_attack_vertical_container" instance=ExtResource( 10 )]
-emitter = "player_events"
-event = "special_attack_available"
-
-[node name="comp_event_receiver2" parent="special_attack/special_attack_vertical_container" instance=ExtResource( 10 )]
-emitter = "player_events"
-event = "special_attack_unavailable"
-
 [node name="right_margin" type="MarginContainer" parent="special_attack"]
 margin_left = 20.0
 margin_right = 27.0
@@ -293,6 +285,10 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="comp_event_caller" parent="movement_joystick/h_box_container/movement_joystick" instance=ExtResource( 8 )]
+
+[node name="comp_event_caller2" parent="movement_joystick/h_box_container/movement_joystick" instance=ExtResource( 8 )]
 
 [node name="bottom_margin" type="MarginContainer" parent="movement_joystick/h_box_container"]
 margin_top = 115.0
@@ -396,6 +392,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 70.0
@@ -442,9 +441,12 @@ custom_constants/margin_bottom = 2
 [connection signal="joystick_pressed" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
+[connection signal="released" from="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" method="hide"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" method="show"]
+[connection signal="joystick_pressed" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="pressed" from="pause_button/HBoxContainer/pause_button" to="pause_button/HBoxContainer/pause_button/comp_event_caller" method="call_event"]
 
 [editable path="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick"]
+[editable path="movement_joystick/h_box_container/movement_joystick"]
 [editable path="pause_button/HBoxContainer/pause_button"]
