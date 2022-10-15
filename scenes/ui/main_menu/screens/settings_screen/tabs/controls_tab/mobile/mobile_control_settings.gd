@@ -50,7 +50,6 @@ func return_to_settings_screen():
 func _on_button_pressed(button):
 	if is_instance_valid(SelectedButton): change_button_color(SelectedButton, Color.white)
 	change_button_color(button, Color.yellow)
-	debug_log.dprint("button pressed")
 	SelectedButton = button
 
 
@@ -61,10 +60,8 @@ func _on_exit_without_saving_button_pressed(_id):
 
 func _on_exit_and_save_button_pressed(_id):
 	debug_log.dprint("%s" % changes)
-	print(changes)
 	for change in changes.keys():	
 		gui_events.emit_signal("mobile_button_displacement_updated", change, changes[change])
-		print("%s: %s" % [change, changes[change]])
 	previous_control_layout = game_data.game_settings.mobile_button_displacement
 	global_data_manager.save_settings()
 	return_to_settings_screen()

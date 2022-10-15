@@ -1,114 +1,54 @@
-extends Node
-
-onready var MovementTutorial = toolbox.get_node_in_group("tutorial_movement")
-onready var PickStoneTutorial = toolbox.get_node_in_group("tutorial_pick_stone")
-onready var ShootingTutorial = toolbox.get_node_in_group("tutorial_shooting")
-onready var HungerTutorial = toolbox.get_node_in_group("tutorial_hunger")
-onready var EatingTutorial = toolbox.get_node_in_group("tutorial_special_attack")
-
-onready var MovementFirstAppearTimer: Timer = $movement_first_appear_timer
-onready var MovementTimer: Timer = $movement_timer
-onready var HungerTimer: Timer = $hunger_timer
+extends Control
 
 
-enum TUTORIAL_STAGES {
+signal request_movement_joystick_animation
+signal request_stop_movement_joystick_animation
+
+onready var MultiuseTimer := $timer
+onready var TutorialTextCooldown := $tutorial_text_show_cooldown
+onready var TutorialTextBox := $HBoxContainer/VBoxContainer/TutorialTextBox
+onready var TutorialLabel := $HBoxContainer/VBoxContainer/TutorialTextBox/Label
+
+
+const movement_tutorial_text = "tutorial.movement"
+const pick_stone_tutorial_text = "tutorial.pick_stone"
+const shooting_tutorial_text = "tutorial.throw_stone"
+const hunger_tutorial_text = "tutorial.hunger"
+const special_tutorial_text = "tutorial.special_attack"
+
+
+enum {
 	MOVEMENT,
 	PICK_STONE,
-	HUNGER,
 	SHOOTING,
-	EATING
+	SPECIAL
 }
-
-
-var tutorial_stage: int = TUTORIAL_STAGES.MOVEMENT
-var remaining_movement_time: float = 0.0
-var player_entered_eat_state: bool = false
+var tutorial_stage := MOVEMENT
 
 
 func _ready():
-	if game_data.current_platform != "mobile": 
-		game_events.emit_signal("tutorial_finished")
-		game_events.emit_signal("spawn_tutorial_stone")
-		return
+	emit_signal("request_movement_joystick_animation")
+
+
+func _on_movement_joystick_used():
+	emit_signal("request_stop_movement_joystick_animation")
+	if !MultiuseTimer.is_stopped(): return
+	MultiuseTimer.start(2)
+
+
+func _on_timer_timeout():
+	match tutorial_stage:
+		MOVEMENT: 
+			TutorialTextBox.visible = false
+			TutorialLabel.text = tr(pick_stone_tutorial_text)
+			tutorial_stage = PICK_STONE
+			TutorialTextCooldown.start()
+
+
+
+func _on_tutorial_text_show_cooldown_timeout():
+	TutorialTextBox.visible = true
 	
-	if game_data.get_player_data("generation") >= 0:
-		game_events.emit_signal("tutorial_finished")
-		for Tutorial in get_tree().get_nodes_in_group("tutorial"):
-			Tutorial.visible = false
-		return
-		
-	# warning-ignore:return_value_discarded
-	player_events.connect("player_moving", self, "_on_player_moving")
-	# warning-ignore:return_value_discarded
-	player_events.connect("player_not_moving", self, "_on_player_not_moving")
-	MovementFirstAppearTimer.start()
-	remaining_movement_time = MovementTimer.time_left
-	
-	
-## Movement Tutorial	
-
-func _on_player_moving(): 
-	if MovementTimer.is_stopped(): MovementTimer.start(remaining_movement_time)
-func _on_player_not_moving(): 
-	remaining_movement_time = MovementTimer.time_left
-	MovementTimer.stop()
-func _on_movement_timer_timeout():
-	if tutorial_stage != TUTORIAL_STAGES.MOVEMENT: return
-	# warning-ignore:return_value_discarded
-	player_events.connect("projectile_collected", self, "_on_player_projectile_collected")
-	tutorial_stage = TUTORIAL_STAGES.PICK_STONE
-	PickStoneTutorial.visible = true
-	game_events.emit_signal("spawn_tutorial_stone")
-	MovementTutorial.hide()
-	
-	
-## Picking stone tutorial
-
-func _on_player_projectile_collected(_projectile):
-	if tutorial_stage != TUTORIAL_STAGES.PICK_STONE: return
-	# warning-ignore:return_value_discarded
-	player_events.connect("projectile_thrown", self, "_on_player_projectile_thrown")
-	PickStoneTutorial.visible = false
-	tutorial_stage = TUTORIAL_STAGES.SHOOTING
-	ShootingTutorial.show()
-
-	
-## Shooting tutorial
-
-func _on_player_projectile_thrown():
-	if tutorial_stage != TUTORIAL_STAGES.SHOOTING: return
-	ShootingTutorial.hide()
-	tutorial_stage = TUTORIAL_STAGES.HUNGER
-	HungerTutorial.show()
-	HungerTimer.start()
-	
-
-## Hunger Tutorial
-
-func _on_hunger_timer_timeout():
-	if tutorial_stage != TUTORIAL_STAGES.HUNGER: return
-	HungerTutorial.hide()
-	tutorial_stage = TUTORIAL_STAGES.EATING
-	# warning-ignore:return_value_discarded
-	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
-	# warning-ignore:return_value_discarded
-	player_events.connect("special_attack_unavailable", self, "_on_player_special_attack_unavailable")
-	# warning-ignore:return_value_discarded
-	player_events.connect("exited_eat_state", self, "_on_player_exited_eat_state")
-	game_events.emit_signal("tutorial_finished")
-	player_events.emit_signal("set_stat_value", "can_get_hungry", true)
-
-
-## EATING TUTORIAL
-
-func _on_player_special_attack_available():
-	if tutorial_stage != TUTORIAL_STAGES.EATING: return
-	EatingTutorial.show()
-func _on_player_special_attack_unavailable(): 
-	if tutorial_stage != TUTORIAL_STAGES.EATING: return
-	EatingTutorial.hide()
-	
-func _on_player_exited_eat_state():
-	debug_log.dprint("exited eat state!")
-	player_events.disconnect("special_attack_available", self, "_on_player_special_attack_available")
-	player_events.disconnect("special_attack_unavailable", self, "_on_player_special_attack_unavailable")
+	match tutorial_stage:
+		PICK_STONE:
+			game_events.emit_signal("spawn_tutorial_stone")

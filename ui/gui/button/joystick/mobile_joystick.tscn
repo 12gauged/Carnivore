@@ -1,9 +1,79 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/gui/button/joystick/mobile_joystick.gd" type="Script" id=1]
 [ext_resource path="res://ui/gui/button/joystick/default/joystick_button_default.png" type="Texture" id=2]
 [ext_resource path="res://ui/gui/button/joystick/default/joystick_background_default.png" type="Texture" id=3]
 [ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=4]
+[ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=5]
+[ext_resource path="res://ui/gui/button/joystick/animation_control.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 10, -10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../TouchScreenButton:read_touches")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../TouchScreenButton:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "spin"
+length = 1.59
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -14 ), Vector2( 11, -11 ), Vector2( 14, 0 ), Vector2( 11, 11 ), Vector2( 0, 14 ), Vector2( -11, 11 ), Vector2( -14, 0 ), Vector2( -11, -11 ), Vector2( 0, -14 ) ]
+}
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 8.0
@@ -27,12 +97,27 @@ margin_bottom = 16.0
 rect_pivot_offset = Vector2( 16, 16 )
 mouse_filter = 2
 texture = ExtResource( 3 )
+script = ExtResource( 6 )
 
 [node name="button_pivot" type="Position2D" parent="background"]
 position = Vector2( 16, 16 )
+
+[node name="tutorial_stick_pivot" type="Position2D" parent="background/button_pivot"]
+position = Vector2( 10, -10 )
+script = ExtResource( 5 )
+visible_by_default = false
+
+[node name="Sprite" type="Sprite" parent="background/button_pivot/tutorial_stick_pivot"]
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="background/button_pivot/tutorial_stick_pivot"]
+playback_speed = 0.6
+anims/RESET = SubResource( 5 )
+anims/spin = SubResource( 4 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="background/button_pivot"]
 position = Vector2( -8, -8 )
 normal = ExtResource( 2 )
 shape = SubResource( 3 )
+shape_visible = false
 script = ExtResource( 1 )

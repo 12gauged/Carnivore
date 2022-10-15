@@ -7,6 +7,7 @@ extends TouchScreenButton
 
 signal joystick_pressed
 signal joystick_released
+signal joystick_in_use
 
 export(String) var input_event = "player_movement_direction_updated"
 export(bool) var register_center_touches = false
@@ -50,6 +51,7 @@ func set_joystick_position_from_drag_and_touch(event):
 			set_joystick_position()
 			ongoing_drag = event.get_index()
 			input_events.emit_signal(input_event, get_value())
+			emit_signal("joystick_in_use")
 
 func set_joystick_position_from_drag(event):
 	if event is InputEventScreenDrag:
@@ -59,6 +61,7 @@ func set_joystick_position_from_drag(event):
 			set_joystick_position()
 			ongoing_drag = event.get_index()
 			input_events.emit_signal(input_event, get_value())
+			emit_signal("joystick_in_use")
 			
 			if get_button_position().length() > threshold:
 				emit_signal("joystick_pressed")
