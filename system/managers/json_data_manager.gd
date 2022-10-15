@@ -10,13 +10,22 @@ func setup():
 	
 	debug_log.call_deferred("dprint", "loading from browser")
 	
-	if js_handler.load_value(PLAYER_DATA_LOCALIZATION) == null: save_player_data()
-	else: load_game()
+	if js_handler.load_value(PLAYER_DATA_LOCALIZATION) == null: 
+		print("No player data found. Generating new save...")
+		save_player_data()
+	else: 
+		print("Player data found. Loading...")
+		load_game()
 
-	if js_handler.load_value(GAME_SETTINGS_LOCALIZATION) == null: save_settings()
-	else: load_settings()
+	if js_handler.load_value(GAME_SETTINGS_LOCALIZATION) == null:
+		print("No game settings found. Starting with default settings...")
+		save_settings()
+	else: 
+		print("Game settings found. Loading...")
+		load_settings()
 	
 	var current_locale = game_data.get_game_setting("locale", "value")
+	print("LOADED LOCALE: %s" % current_locale)
 	if current_locale != "DEFAULT":
 		TranslationServer.set_locale(current_locale)
 
@@ -24,15 +33,19 @@ func setup():
 func save_player_data(): js_handler.save_value(PLAYER_DATA_LOCALIZATION, json_handler.to_json_string(game_data.player_data))
 func load_game(): 
 	var loaded_values = json_handler.load_json_from_browser(js_handler.load_value(PLAYER_DATA_LOCALIZATION)).duplicate()
-	game_data.player_data = compare_dictionaries(game_data.default_player_data, loaded_values)
+	#game_data.player_data = compare_dictionaries(game_data.default_player_data, loaded_values)
+	game_data.override_player_data(compare_dictionaries(game_data.default_player_data, loaded_values))
 
 func save_settings(): js_handler.save_value(GAME_SETTINGS_LOCALIZATION, json_handler.to_json_string(game_data.game_settings))
 func load_settings(): 
 	var loaded_values = json_handler.load_json_from_browser(js_handler.load_value(GAME_SETTINGS_LOCALIZATION))
-	print("loaded settings: %s" % loaded_values)
-	game_data.game_settings = compare_dictionaries(game_data.default_game_settings, loaded_values)
+	var formatted_values = compare_dictionaries(loaded_values, game_data.default_game_settings)
+	game_data.override_game_settings(formatted_values)
+	print("loaded_values: %s" % loaded_values)
+	print("formatted_values: %s" % formatted_values)
 	
 func save_all():
+	print("Saving...")
 	save_settings()
 	save_player_data()
 	

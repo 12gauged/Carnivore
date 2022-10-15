@@ -23,8 +23,12 @@ ui.settings.controls_left,walk left,andar para esquerda,untranslated,untranslate
 ui.settings.controls_pause,pause,pausar,untranslated,untranslated
 ui.settings.controls_throw,throw,atirar,untranslated,untranslated
 ui.settings.controls_special,special,especial,untranslated,untranslated
+ui.settings.edit_layout,edit buttons,editar botões,untranslated,untranslated
+ui.settings.control_editor,control editor,editor de controles,untranslated,untranslated
 ui.settings.press_any_key,press any key,aperte qualquer tecla,untranslated,untranslated
 ui.settings.erase_data,erase data,apagar dados,untranslated,untranslated
+ui.save,save,salvar,untranslated,untranslated
+ui.exit,exit,sair,untranslated,untranslated
 ui.pause_screen.paused,paused,em pausa,en pause,en pause
 ui.pause_screen.resume,resume,continuar,reprendre,continuer
 ui.death_screen.game_over,game over,fim de jogo,game over,game over

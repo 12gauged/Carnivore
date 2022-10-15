@@ -1,0 +1,356 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://ui/mobile_ui/mobile_button_displacement.gd" type="Script" id=1]
+[ext_resource path="res://ui/gui/button/small/button_small_normal.png" type="Texture" id=2]
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/gui/icons/pause_icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/controls_tab/mobile/mobile_control_settings.gd" type="Script" id=5]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/controls_tab/mobile/buttons/fake_mobile_shooting_joystick.png" type="Texture" id=6]
+[ext_resource path="res://ui/gui/icons/special_attack_icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/controls_tab/mobile/buttons/fake_mobile_joystick.png" type="Texture" id=8]
+[ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/controls_tab/mobile/editable_button.gd" type="Script" id=9]
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/gui/text_box/box_rectangle_wide.png" type="Texture" id=11]
+[ext_resource path="res://ui/gui/icons/agree_icon.png" type="Texture" id=12]
+[ext_resource path="res://ui/gui/icons/disagree_icon.png" type="Texture" id=13]
+[ext_resource path="res://entities/player/player.png" type="Texture" id=14]
+[ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=15]
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 14 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 14 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec4 color: hint_color = vec4(1.0);
+uniform vec4 overrideColor: hint_color = vec4(1.0);
+
+
+void fragment() {
+	vec4 pixelColor = texture(TEXTURE, UV);
+	vec4 finalColor = pixelColor;
+	if(pixelColor == overrideColor) {
+		finalColor = color;
+	}
+	COLOR = finalColor;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/overrideColor = Color( 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/overrideColor = Color( 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/overrideColor = Color( 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/overrideColor = Color( 1, 1, 1, 1 )
+
+[node name="mobile_layout_editor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -162, -27 )
+script = ExtResource( 5 )
+
+[node name="level1_tilemap" parent="." instance=ExtResource( 15 )]
+tile_data = PoolIntArray( 65538, 1, 0, 65547, 1, 0, 131072, 2, 0, 131085, 2, 0, 196609, 2, 0, 196611, 0, 0, 196612, 2, 0, 196620, 3, 0, 262144, 1, 0, 262147, 2, 0, 262148, 0, 0, 262154, 3, 0, 262155, 0, 0, 262157, 1, 0, 327689, 2, 0, 327690, 0, 0, 393222, 1, 0, 458756, 2, 0, 458760, 2, 0 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="player_anchor" type="Control" parent="CenterContainer"]
+margin_left = 120.0
+margin_top = 67.0
+margin_right = 120.0
+margin_bottom = 67.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CenterContainer/player_anchor"]
+modulate = Color( 0.25, 0.25, 0.25, 1 )
+frames = SubResource( 9 )
+playing = true
+
+[node name="movement_joystick" type="HBoxContainer" parent="."]
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="left_margin" type="MarginContainer" parent="movement_joystick"]
+margin_right = 35.0
+margin_bottom = 135.0
+mouse_filter = 1
+custom_constants/margin_left = 35
+script = ExtResource( 1 )
+assigned_setting_value = "movement_joystick"
+
+[node name="h_box_container" type="VBoxContainer" parent="movement_joystick"]
+margin_left = 35.0
+margin_right = 35.0
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="fake_movement_joystick" type="Control" parent="movement_joystick/h_box_container"]
+margin_top = 114.0
+margin_bottom = 114.0
+mouse_filter = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="movement_joystick/h_box_container/fake_movement_joystick"]
+material = SubResource( 10 )
+position = Vector2( -16, -16 )
+normal = ExtResource( 8 )
+script = ExtResource( 9 )
+margin_x = NodePath("../../../left_margin")
+margin_y = NodePath("../../bottom_margin")
+
+[node name="bottom_margin" type="MarginContainer" parent="movement_joystick/h_box_container"]
+margin_top = 114.0
+margin_bottom = 135.0
+mouse_filter = 1
+custom_constants/margin_bottom = 21
+script = ExtResource( 1 )
+margin_axis = "-y"
+assigned_setting_value = "movement_joystick"
+
+[node name="shooting_joystick" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -45.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( -434, -7 )
+mouse_filter = 2
+custom_constants/separation = 0
+alignment = 2
+
+[node name="shooting_joystick_vertical_container" type="VBoxContainer" parent="shooting_joystick"]
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="fake_shooting_joystick" type="Control" parent="shooting_joystick/shooting_joystick_vertical_container"]
+margin_top = 110.0
+margin_bottom = 110.0
+mouse_filter = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="shooting_joystick/shooting_joystick_vertical_container/fake_shooting_joystick"]
+material = SubResource( 11 )
+position = Vector2( -16, -16 )
+normal = ExtResource( 6 )
+script = ExtResource( 9 )
+margin_x = NodePath("../../../right_margin")
+margin_y = NodePath("../../bottom_margin")
+
+[node name="bottom_margin" type="MarginContainer" parent="shooting_joystick/shooting_joystick_vertical_container"]
+margin_top = 110.0
+margin_bottom = 135.0
+mouse_filter = 2
+custom_constants/margin_bottom = 25
+script = ExtResource( 1 )
+margin_axis = "-y"
+assigned_setting_value = "shooting_joystick"
+
+[node name="right_margin" type="MarginContainer" parent="shooting_joystick"]
+margin_right = 45.0
+margin_bottom = 135.0
+mouse_filter = 2
+custom_constants/margin_right = 45
+script = ExtResource( 1 )
+margin_axis = "-x"
+assigned_setting_value = "shooting_joystick"
+
+[node name="special_attack" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -27.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( -434, -7 )
+custom_constants/separation = 0
+alignment = 2
+
+[node name="special_attack_vertical_container" type="VBoxContainer" parent="special_attack"]
+margin_left = 13.0
+margin_right = 13.0
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="button_anchor" type="Control" parent="special_attack/special_attack_vertical_container"]
+margin_top = 121.0
+margin_bottom = 121.0
+mouse_filter = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="special_attack/special_attack_vertical_container/button_anchor"]
+material = SubResource( 12 )
+position = Vector2( -10, -10 )
+normal = ExtResource( 2 )
+script = ExtResource( 9 )
+margin_x = NodePath("../../../right_margin")
+margin_y = NodePath("../../bottom_margin")
+
+[node name="Sprite" type="Sprite" parent="special_attack/special_attack_vertical_container/button_anchor/TouchScreenButton"]
+use_parent_material = true
+position = Vector2( 10, 10 )
+texture = ExtResource( 7 )
+
+[node name="bottom_margin" type="MarginContainer" parent="special_attack/special_attack_vertical_container"]
+margin_top = 121.0
+margin_bottom = 135.0
+mouse_filter = 2
+custom_constants/margin_bottom = 14
+script = ExtResource( 1 )
+margin_axis = "-y"
+assigned_setting_value = "special_attack"
+
+[node name="right_margin" type="MarginContainer" parent="special_attack"]
+margin_left = 13.0
+margin_right = 27.0
+margin_bottom = 135.0
+mouse_filter = 2
+custom_constants/margin_right = 14
+script = ExtResource( 1 )
+margin_axis = "-x"
+assigned_setting_value = "special_attack"
+
+[node name="pause_button" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+grow_horizontal = 0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="pause_button"]
+margin_left = 28.0
+margin_right = 28.0
+margin_bottom = 40.0
+custom_constants/separation = 0
+
+[node name="top_margin" type="MarginContainer" parent="pause_button/HBoxContainer"]
+margin_bottom = 12.0
+custom_constants/margin_top = 12
+script = ExtResource( 1 )
+margin_axis = "y"
+assigned_setting_value = "pause_button"
+
+[node name="button_anchor" type="Control" parent="pause_button/HBoxContainer"]
+margin_top = 12.0
+margin_bottom = 12.0
+mouse_filter = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="pause_button/HBoxContainer/button_anchor"]
+material = SubResource( 13 )
+position = Vector2( -10, -10 )
+normal = ExtResource( 2 )
+script = ExtResource( 9 )
+margin_x = NodePath("../../../right_margin")
+margin_y = NodePath("../../top_margin")
+
+[node name="Sprite" type="Sprite" parent="pause_button/HBoxContainer/button_anchor/TouchScreenButton"]
+use_parent_material = true
+position = Vector2( 10, 10 )
+texture = ExtResource( 4 )
+
+[node name="right_margin" type="MarginContainer" parent="pause_button"]
+margin_left = 28.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/margin_right = 12
+script = ExtResource( 1 )
+margin_axis = "-x"
+assigned_setting_value = "pause_button"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -50.0
+margin_right = 50.0
+margin_bottom = 48.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+margin_right = 100.0
+margin_bottom = 64.0
+texture = ExtResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.5
+margin_top = -24.5
+margin_right = 48.5
+margin_bottom = 24.5
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureRect/VBoxContainer"]
+margin_right = 97.0
+margin_bottom = 23.0
+theme = ExtResource( 3 )
+text = "ui.settings.control_editor"
+align = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TextureRect/VBoxContainer"]
+margin_top = 27.0
+margin_right = 97.0
+margin_bottom = 47.0
+alignment = 1
+
+[node name="small_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 26.0
+margin_right = 46.0
+
+[node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 12 )
+
+[node name="small_button2" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 50.0
+margin_right = 70.0
+
+[node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button2/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 13 )
+
+[connection signal="button_pressed" from="movement_joystick/h_box_container/fake_movement_joystick/TouchScreenButton" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="shooting_joystick/shooting_joystick_vertical_container/fake_shooting_joystick/TouchScreenButton" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="special_attack/special_attack_vertical_container/button_anchor/TouchScreenButton" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="pause_button/HBoxContainer/button_anchor/TouchScreenButton" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button" to="." method="_on_exit_and_save_button_pressed"]
+[connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button2" to="." method="_on_exit_without_saving_button_pressed"]
+
+[editable path="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button"]
+[editable path="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button2"]

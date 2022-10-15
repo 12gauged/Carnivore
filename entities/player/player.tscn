@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://system/components/movement/comp_movement_keyboard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -26,7 +26,7 @@
 [ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.png" type="Texture" id=24]
 [ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.gd" type="Script" id=25]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=26]
-[ext_resource path="res://system/components/movement/comp_move_to_direction.gd" type="Script" id=27]
+[ext_resource path="res://system/components/movement/comp_movement_jump.tscn" type="PackedScene" id=27]
 [ext_resource path="res://entities/player/visual/trail.png" type="Texture" id=28]
 [ext_resource path="res://system/random_scripts/particle_controller.gd" type="Script" id=29]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=30]
@@ -34,6 +34,9 @@
 [ext_resource path="res://sounds/entity/player/player_charge.wav" type="AudioStream" id=32]
 [ext_resource path="res://system/random_scripts/collision_control.gd" type="Script" id=33]
 [ext_resource path="res://entities/player/visual/healing_particle.png" type="Texture" id=34]
+[ext_resource path="res://entities/player/ground_slam_mouse_position.gd" type="Script" id=35]
+[ext_resource path="res://system/parts/part_particle_emitter.tscn" type="PackedScene" id=36]
+[ext_resource path="res://system/parts/part_camera_shaker.tscn" type="PackedScene" id=37]
 
 [sub_resource type="Curve" id=10]
 _data = [ Vector2( 0.0992366, 0.731818 ), 0.0, 0.0, 0, 0, Vector2( 0.56743, 0.694318 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0124999 ), 0.0, 0.0, 0, 0 ]
@@ -294,6 +297,9 @@ height = 8.0
 radius = 3.0
 height = 6.0
 
+[sub_resource type="CircleShape2D" id=18]
+radius = 16.0
+
 [node name="player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 131
 collision_mask = 131
@@ -419,14 +425,40 @@ bus = "player_sounds"
 [node name="DASH" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 6 )
 
-[node name="comp_move_to_direction" type="Node2D" parent="part_state_handler/DASH"]
-script = ExtResource( 27 )
-auto_execute = false
-
 [node name="particle_stop_emitting_delay" type="Timer" parent="part_state_handler/DASH"]
 wait_time = 0.1
 one_shot = true
 script = ExtResource( 30 )
+
+[node name="comp_movement_jump" parent="part_state_handler/DASH" instance=ExtResource( 27 )]
+auto_execute = false
+target_node_group = "SlamPosition"
+jump_force = 10
+jump_height = 5
+jump_speed_multiplier = 2
+use_projectile_motion = true
+
+[node name="slam_direction_sensor" type="Node2D" parent="part_state_handler/DASH"]
+
+[node name="mouse_pivot" type="Position2D" parent="part_state_handler/DASH/slam_direction_sensor"]
+script = ExtResource( 35 )
+
+[node name="slam_position" type="Position2D" parent="part_state_handler/DASH/slam_direction_sensor/mouse_pivot" groups=["SlamPosition"]]
+position = Vector2( 92, 0 )
+
+[node name="Polygon2D" type="Polygon2D" parent="part_state_handler/DASH/slam_direction_sensor/mouse_pivot/slam_position"]
+visible = false
+position = Vector2( -52, 0 )
+scale = Vector2( 0.8, 0.8 )
+color = Color( 0.443137, 0.701961, 0.282353, 1 )
+polygon = PoolVector2Array( -2.5, -2.5, 2.5, -2.5, 2.5, 2.5, -2.5, 2.5 )
+
+[node name="part_particle_emitter" parent="part_state_handler/DASH" instance=ExtResource( 36 )]
+position = Vector2( 0, -3 )
+particle_id = "entity_ground_slam"
+
+[node name="part_camera_shaker" parent="part_state_handler/DASH" instance=ExtResource( 37 )]
+intensity = 5.0
 
 [node name="part_state_anim_handler" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -7 )
@@ -523,6 +555,11 @@ shape = SubResource( 16 )
 wait_time = 2.0
 one_shot = true
 
+[node name="ground_slam_hurtbox" parent="." instance=ExtResource( 11 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground_slam_hurtbox"]
+shape = SubResource( 18 )
+
 [node name="hunger_decrease_delay" type="Timer" parent="."]
 wait_time = 4.0
 
@@ -551,6 +588,7 @@ one_shot = true
 [connection signal="not_charging_attack" from="." to="texture/charge_particle/charge_animation" method="stop_playing"]
 [connection signal="self_give" from="." to="part_state_handler" method="set_owner"]
 [connection signal="self_give" from="." to="part_state_handler/EAT/comp_look_at" method="target_node_receiver"]
+[connection signal="self_give" from="." to="part_state_handler/DASH/comp_movement_jump" method="set_owner"]
 [connection signal="state_changed" from="." to="." method="_on_player_state_changed"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
@@ -559,17 +597,20 @@ one_shot = true
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="executing" from="part_state_handler/*" to="part_mouth_hitbox" method="_disable_request"]
 [connection signal="component_value_update" from="part_state_handler/*/comp_movement_keyboard" to="." method="set_movement_direction"]
-[connection signal="component_value_update" from="part_state_handler/*/comp_movement_keyboard" to="part_state_handler/DASH/comp_move_to_direction" method="set_movement_direction"]
 [connection signal="executing" from="part_state_handler/EAT" to="part_mouth_hitbox" method="_enable_request"]
 [connection signal="component_value_update" from="part_state_handler/EAT/comp_movement_track_mouse" to="." method="set_movement_direction"]
 [connection signal="state_entered" from="part_state_handler/DASH" to="texture/dash_particle" method="emit"]
+[connection signal="state_entered" from="part_state_handler/DASH" to="part_state_handler/DASH/comp_movement_jump" method="start_jump"]
 [connection signal="state_entered" from="part_state_handler/DASH" to="part_player_projectile_handler" method="_on_player_entered_eat_state"]
 [connection signal="state_entered" from="part_state_handler/DASH" to="part_hurtbox" method="_disable_request"]
 [connection signal="state_exited" from="part_state_handler/DASH" to="part_state_handler/DASH/particle_stop_emitting_delay" method="start_timer"]
 [connection signal="state_exited" from="part_state_handler/DASH" to="part_player_projectile_handler" method="_on_player_exited_eat_state"]
 [connection signal="state_exited" from="part_state_handler/DASH" to="part_hurtbox" method="_enable_request"]
-[connection signal="component_value_update" from="part_state_handler/DASH/comp_move_to_direction" to="." method="set_movement_direction"]
 [connection signal="timeout" from="part_state_handler/DASH/particle_stop_emitting_delay" to="texture/dash_particle" method="stop_emitting"]
+[connection signal="component_value_update" from="part_state_handler/DASH/comp_movement_jump" to="." method="set_movement_direction"]
+[connection signal="jump_finished" from="part_state_handler/DASH/comp_movement_jump" to="." method="_on_ground_slam_finished"]
+[connection signal="jump_finished" from="part_state_handler/DASH/comp_movement_jump" to="part_state_handler/DASH/part_particle_emitter" method="emit_particle"]
+[connection signal="jump_finished" from="part_state_handler/DASH/comp_movement_jump" to="part_state_handler/DASH/part_camera_shaker" method="shake_camera"]
 [connection signal="add_tag_request" from="part_player_projectile_handler" to="." method="add_tag"]
 [connection signal="hide_hand_overlay" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
 [connection signal="projectile_collected" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]

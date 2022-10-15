@@ -1,5 +1,10 @@
 extends Node
 
+## all the warnings are so godot 
+## doesnt show warnings on the debugger
+
+## these signals are used, just not in this script
+
 # warning-ignore:unused_signal
 signal show_hud
 # warning-ignore:unused_signal
@@ -26,6 +31,9 @@ signal hide_input_hint(input_hint_id)
 signal toggle_debug_log
 # warning-ignore:unused_signal
 signal show_debug_log
+
+# warning-ignore:unused_signal
+signal mobile_button_displacement_updated(id, value)
 
 # warning-ignore:unused_signal
 signal notify_archievement(archievement, notify)

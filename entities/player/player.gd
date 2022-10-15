@@ -48,9 +48,7 @@ func _ready():
 	call_deferred("update_stat", "hunger", get_stat("hunger"), false)
 	
 	# warning-ignore:return_value_discarded
-	input_events.connect("player_movement_direction_updated", self, "set_movement_direction")
-	# warning-ignore:return_value_discarded
-	input_events.connect("player_movement_direction_updated", self, "_on_player_movement_direction_updated")
+	input_events.connect("player_movement_direction_updated", self, "_on_player_used_joystick")
 	# warning-ignore:return_value_discarded
 	player_events.connect("meat_consumed", self, "consume_meat")
 	# warning-ignore:return_value_discarded
@@ -194,16 +192,9 @@ func call_secondary_move():
 	
 func dash():
 	if get_state() == "EAT": return
-	set_state("DASH")
+	set_movement_direction(Vector2.ZERO)
 	MAX_SPEED = DASH_SPEED
-	ACCELERATION *= 2
-	set_collisions(false)
-	update_stat("energy", int(max(get_stat("energy") - 1, 0)))
-	yield(get_tree().create_timer(DASH_DURATION), "timeout")
-	set_collisions(true)
-	MAX_SPEED = DEFAULT_MAX_SPEED
-	ACCELERATION = DEFAULT_ACCELERATION
-	set_state("IDLE")
+	set_state("DASH")
 	
 func get_healing_plant_seed(): 
 	ProjectileHandler.set_projectile("healing_plant_seed")
@@ -304,6 +295,15 @@ func _on_hunger_decrease_delay_timeout():
 			remove_tag("FULL")
 			
 func _on_exit_from_eat_state_forced(): exit_eat_state()
+
+
+func _on_player_used_joystick(value):
+	
+	if get_state() == "DASH": return
+	
+	set_movement_direction(value)
+	_on_player_movement_direction_updated(value)
+	
 func _on_player_movement_direction_updated(value): 
 	if get_state() in ["EAT", "DASH"] or value == Vector2.ZERO: return
 	player_events.emit_signal("player_moving" if value != Vector2.ZERO else "player_not_moving")
@@ -336,3 +336,10 @@ func _on_healing_timer_timeout():
 	HealingTimer.start()
 	emit_signal("healing")
 	player_events.emit_signal("healed_by_plant")
+
+
+func _on_ground_slam_finished():
+	set_state("IDLE")
+	set_movement_direction(Vector2.ZERO)
+	MAX_SPEED = DEFAULT_MAX_SPEED
+	velocity = Vector2.ZERO

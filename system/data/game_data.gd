@@ -70,6 +70,12 @@ var default_game_settings: Dictionary = {
 		"controls_pause": OS.find_scancode_from_string("ESCAPE"),
 		"controls_shoot": BUTTON_LEFT,
 		"controls_special": BUTTON_RIGHT
+	},
+	"mobile_button_displacement": {
+		"movement_joystick": Vector2(35, 20),
+		"shooting_joystick": Vector2(45, 25),
+		"special_attack": Vector2(14, 14),
+		"pause_button": Vector2(12, 12)
 	}
 }
 var game_settings: Dictionary = default_game_settings
@@ -86,8 +92,12 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	player_data.generation = 2
-	player_data.moves.selected_move = "healing_plant"
+	#player_data.generation = 2
+	#player_data.moves.selected_move = "dash"
+	
+	
+func override_game_settings(value): game_settings = value
+func override_player_data(value): player_data = value
 
 
 
@@ -113,6 +123,7 @@ func set_last_lowest_level_time(value: Array): last_lowest_level_time = value
 func get_last_lowest_level_time() -> Array: return last_lowest_level_time
 
 func reset_all_data():
+	print("RESETTING DATA")
 	player_data = default_player_data
 	game_settings = default_game_settings
 	global_data_manager.save_all()

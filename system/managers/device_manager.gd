@@ -15,6 +15,6 @@ func _ready():
 			
 	if OS.is_debug_build() and player_platform != "mobile":
 		# debug values
-		player_platform = "desktop"
+		player_platform = "mobile"
 		pass
 	game_data.set_current_platform(player_platform)

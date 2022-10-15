@@ -85,24 +85,10 @@ func process_variable_request(variable, just_give_this_self):
 	return just_give_this_self[variable_owner][variable_name]
 	
 	
-func convert_time_to_text(minutes: int, seconds: int):
-	var base_string = "%s:%s"
-	var result
-
-	if minutes < 10 and seconds < 10: base_string = "0%s:0%s"
-	elif minutes >= 10 and seconds < 10: base_string = "%s:0%s"
-	elif minutes >= 10 and seconds >= 10: base_string = "%s:%s"
-	elif minutes < 10 and seconds >= 10: base_string = "0%s:%s"
-	
-	result = base_string % [minutes, seconds]
-	return result
-	
-func minutes_to_seconds(minutes, seconds: int = 0) -> int:
-	return seconds + minutes * 60
-	
-	
 func vector_values_to_int(Vector: Vector2) -> Vector2: 
 	return Vector2(int(Vector.x), int(Vector.y))
+func vector_abs(vector: Vector2) -> Vector2:
+	return Vector2(abs(vector.x), abs(vector.y))
 func stepify_vector(Vector: Vector2, step: int) -> Vector2: 
 	return Vector2(stepify(Vector.x, step), stepify(Vector.y, step))
 func mirror_ceil(value: float):

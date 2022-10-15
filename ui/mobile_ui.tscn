@@ -8,7 +8,6 @@
 [ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=6]
 [ext_resource path="res://ui/gui/icons/pause_icon.png" type="Texture" id=7]
 [ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=8]
-[ext_resource path="res://ui/mobile_ui/margin_controller.gd" type="Script" id=9]
 [ext_resource path="res://system/components/receivers/comp_event_receiver.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/gui/text_box/text_box_horizontal.png" type="Texture" id=11]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=12]
@@ -18,8 +17,9 @@
 [ext_resource path="res://ui/gui/button/small/button_small_pressed.png" type="Texture" id=16]
 [ext_resource path="res://ui/gui/button/small/button_small_normal.png" type="Texture" id=17]
 [ext_resource path="res://ui/gui/text_box/text_box_rectangle.png" type="Texture" id=18]
+[ext_resource path="res://ui/mobile_ui/mobile_button_displacement.gd" type="Script" id=19]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 void fragment() {
@@ -37,7 +37,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+shader = SubResource( 3 )
 
 [node name="mobile_ui" type="Control"]
 anchor_right = 1.0
@@ -65,13 +65,6 @@ margin_left = -45.0
 grow_horizontal = 0
 rect_pivot_offset = Vector2( -434, -7 )
 custom_constants/separation = 0
-script = ExtResource( 9 )
-margin1 = NodePath("shooting_joystick_vertical_container/bottom_margin")
-margin1_grow_direction = "bottom"
-margin1_value = 25
-margin2 = NodePath("right_margin")
-margin2_grow_direction = "right"
-margin2_value = 45
 
 [node name="shooting_joystick_vertical_container" type="VBoxContainer" parent="shooting_joystick"]
 margin_bottom = 135.0
@@ -157,11 +150,17 @@ __meta__ = {
 margin_top = 110.0
 margin_bottom = 135.0
 custom_constants/margin_bottom = 25
+script = ExtResource( 19 )
+margin_axis = "-y"
+assigned_setting_value = "shooting_joystick"
 
 [node name="right_margin" type="MarginContainer" parent="shooting_joystick"]
 margin_right = 45.0
 margin_bottom = 135.0
 custom_constants/margin_right = 45
+script = ExtResource( 19 )
+margin_axis = "-x"
+assigned_setting_value = "shooting_joystick"
 
 [node name="special_attack" type="HBoxContainer" parent="."]
 anchor_left = 1.0
@@ -172,41 +171,40 @@ grow_horizontal = 0
 rect_pivot_offset = Vector2( -434, -7 )
 custom_constants/separation = 0
 alignment = 2
-script = ExtResource( 9 )
-margin1 = NodePath("special_attack_vertical_container/bottom_margin")
-margin1_grow_direction = "bottom"
-margin1_value = 7
-margin2 = NodePath("../shooting_joystick/right_margin")
-margin2_grow_direction = "right"
-margin2_value = 7
 
 [node name="special_attack_vertical_container" type="VBoxContainer" parent="special_attack"]
-margin_left = 4.0
-margin_right = 20.0
+margin_left = 13.0
+margin_right = 13.0
 margin_bottom = 135.0
 custom_constants/separation = 0
 alignment = 2
 
-[node name="special_attack_button" type="TextureRect" parent="special_attack/special_attack_vertical_container"]
-margin_top = 112.0
-margin_right = 16.0
-margin_bottom = 128.0
+[node name="button_anchor" type="Control" parent="special_attack/special_attack_vertical_container"]
+margin_top = 121.0
+margin_bottom = 121.0
+mouse_filter = 2
+
+[node name="special_attack_button" type="TextureRect" parent="special_attack/special_attack_vertical_container/button_anchor"]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
 texture = ExtResource( 3 )
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="special_attack/special_attack_vertical_container/special_attack_button"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button"]
 show_behind_parent = true
 position = Vector2( -2, -2 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 16 )
 
-[node name="comp_method_caller" parent="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton" instance=ExtResource( 4 )]
+[node name="comp_method_caller" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" instance=ExtResource( 4 )]
 method = {
 "args": [ "enter_eat_state_request" ],
 "caller": "player_events",
 "method": "emit_signal"
 }
 
-[node name="grayscale_overlay" type="ColorRect" parent="special_attack/special_attack_vertical_container/special_attack_button"]
+[node name="grayscale_overlay" type="ColorRect" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button"]
 visible = false
 material = SubResource( 2 )
 margin_left = -1.0
@@ -215,40 +213,40 @@ margin_right = 17.0
 margin_bottom = 17.0
 script = ExtResource( 14 )
 
-[node name="set_grayscale_event" parent="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" instance=ExtResource( 10 )]
+[node name="set_grayscale_event" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" instance=ExtResource( 10 )]
 emitter = "player_events"
 event = "special_attack_available"
 
-[node name="set_normal_event" parent="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" instance=ExtResource( 10 )]
+[node name="set_normal_event" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" instance=ExtResource( 10 )]
 emitter = "player_events"
 event = "special_attack_unavailable"
 
 [node name="bottom_margin" type="MarginContainer" parent="special_attack/special_attack_vertical_container"]
-margin_top = 128.0
-margin_right = 16.0
+margin_top = 121.0
 margin_bottom = 135.0
-custom_constants/margin_bottom = 7
+custom_constants/margin_bottom = 14
+script = ExtResource( 19 )
+margin_axis = "-y"
+assigned_setting_value = "special_attack"
 
 [node name="right_margin" type="MarginContainer" parent="special_attack"]
-margin_left = 20.0
+margin_left = 13.0
 margin_right = 27.0
 margin_bottom = 135.0
-custom_constants/margin_right = 7
+custom_constants/margin_right = 14
+script = ExtResource( 19 )
+margin_axis = "-x"
+assigned_setting_value = "special_attack"
 
 [node name="movement_joystick" type="HBoxContainer" parent="."]
 anchor_bottom = 1.0
-script = ExtResource( 9 )
-margin1 = NodePath("left_margin")
-margin1_grow_direction = "left"
-margin1_value = 30
-margin2 = NodePath("h_box_container/bottom_margin")
-margin2_grow_direction = "bottom"
-margin2_value = 20
 
 [node name="left_margin" type="MarginContainer" parent="movement_joystick"]
 margin_right = 35.0
 margin_bottom = 135.0
 custom_constants/margin_left = 35
+script = ExtResource( 19 )
+assigned_setting_value = "movement_joystick"
 
 [node name="h_box_container" type="VBoxContainer" parent="movement_joystick"]
 margin_left = 39.0
@@ -294,6 +292,9 @@ __meta__ = {
 margin_top = 115.0
 margin_bottom = 135.0
 custom_constants/margin_bottom = 20
+script = ExtResource( 19 )
+margin_axis = "-y"
+assigned_setting_value = "movement_joystick"
 
 [node name="pause_button" type="HBoxContainer" parent="."]
 anchor_left = 1.0
@@ -303,43 +304,49 @@ margin_bottom = 40.0
 grow_horizontal = 0
 custom_constants/separation = 0
 alignment = 2
-script = ExtResource( 9 )
-margin1 = NodePath("HBoxContainer/top_margin")
-margin1_value = 3
-margin2 = NodePath("right_margin")
-margin2_grow_direction = "right"
-margin2_value = 3
 
 [node name="HBoxContainer" type="VBoxContainer" parent="pause_button"]
-margin_left = 17.0
-margin_right = 37.0
+margin_left = 28.0
+margin_right = 28.0
 margin_bottom = 40.0
 custom_constants/separation = 0
 
 [node name="top_margin" type="MarginContainer" parent="pause_button/HBoxContainer"]
-margin_right = 20.0
-margin_bottom = 3.0
-custom_constants/margin_top = 3
+margin_bottom = 12.0
+custom_constants/margin_top = 12
+script = ExtResource( 19 )
+margin_axis = "y"
+assigned_setting_value = "pause_button"
 
-[node name="pause_button" parent="pause_button/HBoxContainer" instance=ExtResource( 1 )]
-margin_top = 3.0
-margin_bottom = 23.0
+[node name="button_anchor" type="Control" parent="pause_button/HBoxContainer"]
+margin_top = 12.0
+margin_bottom = 12.0
+mouse_filter = 2
 
-[node name="icon" parent="pause_button/HBoxContainer/pause_button/center_container" index="0"]
+[node name="pause_button" parent="pause_button/HBoxContainer/button_anchor" instance=ExtResource( 1 )]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
+
+[node name="icon" parent="pause_button/HBoxContainer/button_anchor/pause_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 7 )
 
-[node name="comp_event_caller" parent="pause_button/HBoxContainer/pause_button" instance=ExtResource( 8 )]
+[node name="comp_event_caller" parent="pause_button/HBoxContainer/button_anchor/pause_button" instance=ExtResource( 8 )]
 event = "toggle_pause_request"
 
 [node name="right_margin" type="MarginContainer" parent="pause_button"]
-margin_left = 37.0
+margin_left = 28.0
 margin_right = 40.0
 margin_bottom = 40.0
-custom_constants/margin_right = 3
+custom_constants/margin_right = 12
+script = ExtResource( 19 )
+margin_axis = "-x"
+assigned_setting_value = "pause_button"
 
 [node name="hunger_tutorial_container" type="VBoxContainer" parent="."]
 margin_right = 40.0
@@ -440,13 +447,13 @@ custom_constants/margin_bottom = 2
 [connection signal="timeout" from="tutorial_controller/hunger_timer" to="tutorial_controller" method="_on_hunger_timer_timeout"]
 [connection signal="joystick_pressed" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
-[connection signal="pressed" from="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
-[connection signal="released" from="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
-[connection signal="event_received" from="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" method="hide"]
-[connection signal="event_received" from="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/special_attack_button/grayscale_overlay" method="show"]
+[connection signal="pressed" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
+[connection signal="released" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" method="hide"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" method="show"]
 [connection signal="joystick_pressed" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
-[connection signal="pressed" from="pause_button/HBoxContainer/pause_button" to="pause_button/HBoxContainer/pause_button/comp_event_caller" method="call_event"]
+[connection signal="pressed" from="pause_button/HBoxContainer/button_anchor/pause_button" to="pause_button/HBoxContainer/button_anchor/pause_button/comp_event_caller" method="call_event"]
 
 [editable path="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick"]
 [editable path="movement_joystick/h_box_container/movement_joystick"]
-[editable path="pause_button/HBoxContainer/pause_button"]
+[editable path="pause_button/HBoxContainer/button_anchor/pause_button"]

@@ -22,7 +22,8 @@ func load_game():
 		FileManager.open(player_data_file, FileManager.READ)
 		var player_data = FileManager.get_var()
 		FileManager.close()
-		game_data.player_data = compare_dictionaries(game_data.default_player_data, player_data)
+		#game_data.player_data = compare_dictionaries(game_data.default_player_data, player_data)
+		game_data.call_deferred("override_player_data", compare_dictionaries(player_data, game_data.default_player_data))
 	else: save_player_data()
 		
 	if FileManager.file_exists(settings_file):
@@ -30,7 +31,8 @@ func load_game():
 		FileManager.open(settings_file, FileManager.READ)
 		var game_settings = FileManager.get_var()
 		FileManager.close()
-		game_data.game_settings = compare_dictionaries(game_data.default_game_settings, game_settings)
+		#game_data.game_settings = compare_dictionaries(game_data.default_game_settings, game_settings)
+		game_data.call_deferred("override_game_settings", compare_dictionaries(game_settings, game_data.default_game_settings))
 	else: save_settings()
 		
 
