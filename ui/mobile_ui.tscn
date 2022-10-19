@@ -314,6 +314,7 @@ autowrap = true
 one_shot = true
 
 [connection signal="joystick_in_use" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
+[connection signal="joystick_in_use" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="tutorials" method="_on_shooting_joystick_in_use"]
 [connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="released" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
@@ -323,7 +324,9 @@ one_shot = true
 [connection signal="joystick_pressed" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="pressed" from="pause_button/HBoxContainer/button_anchor/pause_button" to="pause_button/HBoxContainer/button_anchor/pause_button/comp_event_caller" method="call_event"]
 [connection signal="request_movement_joystick_animation" from="tutorials" to="movement_joystick/h_box_container/movement_joystick/background" method="play_tutorial_animation"]
+[connection signal="request_shooting_joystick_animation" from="tutorials" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background" method="play_tutorial_animation"]
 [connection signal="request_stop_movement_joystick_animation" from="tutorials" to="movement_joystick/h_box_container/movement_joystick/background" method="stop_playing_tutorial_animation"]
+[connection signal="request_stop_shooting_joystick_animation" from="tutorials" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background" method="stop_playing_tutorial_animation"]
 [connection signal="timeout" from="tutorials/timer" to="tutorials" method="_on_timer_timeout"]
 [connection signal="timeout" from="tutorials/tutorial_text_show_cooldown" to="tutorials" method="_on_tutorial_text_show_cooldown_timeout"]
 

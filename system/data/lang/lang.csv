@@ -57,6 +57,7 @@ ui.challenges.secret_weapon.description,use a frog to kill all enemies in the wa
 tutorial.movement,use the joystick to move your character,use o joystick para se movimentar,untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
 tutorial.throw_stone,throw the stone with the joystick,jogue a pedra com o joystick,untranslated,untranslated
+tutorial.eating,eat the meat,coma a carne,untranslated,untranslated
 tutorial.hunger,don't get hungry!,não fique com fome!,untranslated,untranslated
 tutorial.special_attack,press the lightning button to use your special attack!,aperte o botão do raio para usar seu ataque especial!,untranslated,untranslated
 hud.wave_indicator,wave %s!,onda %s!,vague %s,vague %s!
