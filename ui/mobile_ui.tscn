@@ -311,8 +311,9 @@ autowrap = true
 [node name="timer" type="Timer" parent="tutorials"]
 
 [node name="tutorial_text_show_cooldown" type="Timer" parent="tutorials"]
+one_shot = true
 
-[connection signal="joystick_pressed" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
+[connection signal="joystick_in_use" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="released" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]

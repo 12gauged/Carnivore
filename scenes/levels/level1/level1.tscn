@@ -406,7 +406,7 @@ respawn = true
 respawn_radius = Vector2( 40, 40 )
 
 [node name="spawn_delay" type="Timer" parent="objects/rock_spawners"]
-wait_time = 1.5
+wait_time = 0.8
 one_shot = true
 script = ExtResource( 16 )
 
@@ -521,6 +521,10 @@ script = ExtResource( 16 )
 emitter = "game_events"
 event = "tutorial_finished"
 
+[node name="spawn_tutorial_enemy" parent="objects/part_arena" instance=ExtResource( 9 )]
+emitter = "game_events"
+event = "spawn_tutorial_ant"
+
 [node name="part_camera" parent="." instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 128, 64 )
@@ -530,6 +534,7 @@ autoplay = "start"
 anims/RESET = SubResource( 1 )
 anims/start = SubResource( 2 )
 
+[connection signal="timeout" from="objects/rock_spawners/spawn_delay" to="objects/rock_spawners" method="spawn_tutorial_stones"]
 [connection signal="event_received" from="objects/rock_spawners/comp_event_receiver" to="objects/rock_spawners/spawn_delay" method="start_timer"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_freeze_method" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_slowmo_method" method="call_method"]
@@ -538,6 +543,7 @@ anims/start = SubResource( 2 )
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]
 [connection signal="event_received" from="objects/part_arena/comp_event_receiver" to="objects/part_arena/arena_start_delay" method="start_timer"]
+[connection signal="event_received" from="objects/part_arena/spawn_tutorial_enemy" to="objects/part_arena" method="spawn_new_enemy_uncounted"]
 
 [editable path="objects/decoration/houses/mushroom_house_short"]
 [editable path="objects/decoration/houses/mushroom_house_tall2"]

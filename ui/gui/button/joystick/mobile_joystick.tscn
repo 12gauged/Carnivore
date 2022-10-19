@@ -103,6 +103,7 @@ script = ExtResource( 6 )
 position = Vector2( 16, 16 )
 
 [node name="tutorial_stick_pivot" type="Position2D" parent="background/button_pivot"]
+visible = false
 position = Vector2( 10, -10 )
 script = ExtResource( 5 )
 visible_by_default = false

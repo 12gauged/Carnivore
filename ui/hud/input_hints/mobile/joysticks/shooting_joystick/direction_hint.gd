@@ -26,11 +26,13 @@ func _ready():
 func _on_player_shooting_direction_updated(value):
 	look_at(self.global_position + value)
 	
-func _on_player_shooting_joystick_pressed(): self.visible = bool(1 * can_show)
-func _on_player_shooting_joystick_released(): self.visible = false
-
-func _on_player_projectile_thrown(): 
-	can_show = FALSE
+func _on_player_shooting_joystick_pressed(): 
+	print("OI!")
+	self.visible = bool(1 * can_show)
+func _on_player_shooting_joystick_released(): self.visible = false#  ^
+									 #                               |
+func _on_player_projectile_thrown(): #                               |
+	can_show = FALSE ## enum trickery for multiplication reasons ----|
 	self.visible = false
 func _on_player_projectile_collected(_projectile): 
 	can_show = TRUE

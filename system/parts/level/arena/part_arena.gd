@@ -89,7 +89,7 @@ func spawn_first_enemies():
 	spawn_new_enemy()
 	last_max_enemy_number = max_enemy_number
 
-func spawn_new_enemy():
+func spawn_new_enemy(count_enemy := true):
 	toolbox.SystemRNG.randomize()
 	enemy_name = get_random_enemy()
 	
@@ -104,17 +104,22 @@ func spawn_new_enemy():
 	# configures the spawner and spawns the entity
 	ChosenSpawner.set_entity(enemy_name)
 	SpawnedEnemy = ChosenSpawner.spawn_entity()
-	#SpawnedEnemies.append(SpawnedEnemy)
 	# discards the used spawner
 	AvailableSpawners.remove(enemy_spawner_id)
 	
+	if !count_enemy: return SpawnedEnemy
+	
 	# warning-ignore:return_value_discarded
 	SpawnedEnemy.connect("dead", self, "_on_enemy_killed")
-	# warning-ignore:return_value_discarded
 	
 	living_enemies += 1
 	enemy_id += 1
 	enemy_counter[enemy_name] += 1
+	
+func spawn_new_enemy_uncounted(): ## used only in the tutorial
+	var NewEnemy = spawn_new_enemy(false)
+	NewEnemy.call_deferred("enable_highlight") ## method only exists in the ant script
+	NewEnemy.connect("deleted", self, "_on_tutorial_ant_killed")
 	
 func get_random_enemy() -> String:
 	var result: String = FILLER_ENEMY
@@ -187,6 +192,9 @@ func _on_enemy_killed(id):
 	dead_enemies += 1
 	living_enemies -= 1
 	enemy_counter[id] -= 1
+	
+func _on_tutorial_ant_killed():
+	game_events.emit_signal("tutorial_ant_dead")
 
 func _on_arena_start_request(): 
 	start_wave()

@@ -7,8 +7,9 @@ func _ready():
 	if game_data.get_player_data("generation") >= 0:
 		for spawner in Spawners.get_children():
 			spawner.allow_auto_spawning()
-
-		return
+		
+func spawn_tutorial_stones():
 	for spawner in Spawners.get_children():
-		SpawnDelayTimer.connect("timeout", spawner, "allow_auto_spawning")
-		SpawnDelayTimer.connect("timeout", spawner.RespawnDelayTimer, "start", [0.2])
+		spawner.allow_auto_spawning()
+		spawner.RespawnDelayTimer.start(0.2)
+		print("spawning tutorial stone")

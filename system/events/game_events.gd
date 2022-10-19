@@ -12,6 +12,10 @@ signal level_started
 signal tutorial_finished
 # warning-ignore:unused_signal
 signal spawn_tutorial_stone
+# warning-ignore:unused_signal
+signal spawn_tutorial_ant
+# warning-ignore:unused_signal
+signal tutorial_ant_dead
 
 # warning-ignore:unused_signal
 signal wave_time_updated(value)

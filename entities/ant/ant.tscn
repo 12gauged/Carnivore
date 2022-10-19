@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://entities/ant/ant.gd" type="Script" id=1]
 [ext_resource path="res://entities/ant/ant.png" type="Texture" id=2]
@@ -13,6 +13,33 @@
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=11]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform vec4 highlight_color: hint_color;
+uniform bool activated = false;
+
+const vec4 black = vec4(0.0, 0.0, 0.0, 1.0);
+
+void fragment() {
+	vec4 pixel_color = texture(TEXTURE, UV);
+	vec4 final_color = pixel_color;
+	
+	if (activated) {
+		if (pixel_color.a > 0.0 && pixel_color != black) {
+			final_color = highlight_color;
+		}
+	}
+	
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = SubResource( 8 )
+shader_param/highlight_color = Color( 1, 1, 0, 1 )
+shader_param/activated = false
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.0
@@ -298,6 +325,7 @@ CONSTANT_STATES = [ "DIG", "ATTACK" ]
 state_execution_pattern = [ "DEFAULT", "DIG", "ATTACK" ]
 
 [node name="texture" type="Sprite" parent="."]
+material = SubResource( 9 )
 position = Vector2( 0, -5 )
 texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )

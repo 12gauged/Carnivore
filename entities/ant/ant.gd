@@ -12,6 +12,10 @@ func _ready():
 	else:
 		loot_spawn_chance = max(MIN_SPAWN_CHANCE, MAX_SPAWN_CHANCE - 7 * game_data.get_current_wave() - 1)
 	DeathLootSpawner.set_drop_chance(loot_spawn_chance)
+	
+	
+func enable_highlight():
+	get_texture().material.set_shader_param("activated", true)
 
 func _on_rock_spawned(InstancedEntity):
 	if !is_instance_valid(AI_TARGET): return

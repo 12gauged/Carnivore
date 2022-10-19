@@ -56,7 +56,7 @@ ui.challenges.secret_weapon.title,secret weapon,arma secreta,arme secrète,arme 
 ui.challenges.secret_weapon.description,use a frog to kill all enemies in the wave,use um sapo para matar todos os inimigos da onda,utiliser une grenouille pour tuer tous les ennemis dans une vague,utiliser une grenouille pour tuer tous les ennemis dans une vague
 tutorial.movement,use the joystick to move your character,use o joystick para se movimentar,untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
-tutorial.throw_stone,use the joystick to throw the stone,use o joystick para jogar a pedra,untranslated,untranslated
+tutorial.throw_stone,throw the stone with the joystick,jogue a pedra com o joystick,untranslated,untranslated
 tutorial.hunger,don't get hungry!,não fique com fome!,untranslated,untranslated
 tutorial.special_attack,press the lightning button to use your special attack!,aperte o botão do raio para usar seu ataque especial!,untranslated,untranslated
 hud.wave_indicator,wave %s!,onda %s!,vague %s,vague %s!

@@ -74,7 +74,8 @@ func count_damage_blink_delay():
 func stop_blinking():
 	var texture = get_texture()
 	if texture != null and texture.material != null:
-		texture.material.set_shader_param("active", false)
+		if texture.material.get_shader_param("active"): 
+			texture.material.set_shader_param("active", false)
 
 func start_blinking():
 	var texture = get_texture()
