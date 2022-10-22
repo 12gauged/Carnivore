@@ -17,6 +17,8 @@ const HUNGER_DAMAGE = 1
 const DAMAGE_CAMERA_SHAKE_DURATION = 0.3
 const DAMAGE_CAMERA_SHAKE_INTENSITY = 0.8
 
+const GROUND_SLAM_COST = 4
+
 export(int) var MAX_HUNGER = 6
 export(int) var MAX_ENERGY = 6
 
@@ -176,7 +178,7 @@ func check_if_using_special_or_normal_move():
 				debug_log.dprint("dashing!")
 				emit_signal("not_charging_attack")
 				SpecialAttackInputDelayTimer.stop()
-				dash()
+				ground_slam()
 			else:
 				SpecialAttackChargeTimer.stop()
 				emit_signal("not_charging_attack")
@@ -187,13 +189,15 @@ func call_secondary_move():
 	if selected_move.empty(): return
 	
 	match selected_move:
-		"dash": dash()
+		"ground_slam": ground_slam()
 		"healing_plant": get_healing_plant_seed()
 	
-func dash():
-	if get_state() == "EAT": return
+func ground_slam():
+	if get_state() in ["EAT", "DASH"]: return
+	if get_stat("energy") <= GROUND_SLAM_COST: return
+	
 	set_movement_direction(Vector2.ZERO)
-	MAX_SPEED = DASH_SPEED
+	update_stat("energy", get_stat("energy") - GROUND_SLAM_COST)
 	set_state("DASH")
 	
 func get_healing_plant_seed(): 

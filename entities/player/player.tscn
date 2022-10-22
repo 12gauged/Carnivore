@@ -447,8 +447,7 @@ script = ExtResource( 35 )
 position = Vector2( 92, 0 )
 
 [node name="Polygon2D" type="Polygon2D" parent="part_state_handler/DASH/slam_direction_sensor/mouse_pivot/slam_position"]
-visible = false
-position = Vector2( -52, 0 )
+position = Vector2( -7.62939e-06, 0 )
 scale = Vector2( 0.8, 0.8 )
 color = Color( 0.443137, 0.701961, 0.282353, 1 )
 polygon = PoolVector2Array( -2.5, -2.5, 2.5, -2.5, 2.5, 2.5, -2.5, 2.5 )

@@ -19,7 +19,6 @@ const ARCHIEVEMENT_REF: Dictionary = {
 }
 
 const default_player_data = {
-	"lowest_time": [],
 	"generation": -1,
 	"archievements": {
 		"generation0": {
@@ -40,7 +39,7 @@ const default_player_data = {
 	},
 	"moves": {
 		"selected_move": "",
-		"dash": false,
+		"ground_slam": false,
 		"healing_plant": false
 	}
 }
@@ -93,7 +92,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 func _ready(): # For debug values
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
 	#player_data.generation = 2
-	#player_data.moves.selected_move = "dash"
+	player_data.moves.selected_move = "ground_slam"
 	
 	
 func override_game_settings(value): game_settings = value
