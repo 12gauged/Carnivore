@@ -12,4 +12,3 @@ func spawn_tutorial_stones():
 	for spawner in Spawners.get_children():
 		spawner.allow_auto_spawning()
 		spawner.RespawnDelayTimer.start(0.2)
-		print("spawning tutorial stone")

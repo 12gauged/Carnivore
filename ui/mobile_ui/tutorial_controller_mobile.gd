@@ -34,6 +34,10 @@ var tutorial_stage := MOVEMENT
 
 
 func _ready():
+	if game_data.get_player_data("generation") > -1:
+		end_tutorial()
+		return
+	
 	emit_signal("request_movement_joystick_animation")
 
 
@@ -50,6 +54,8 @@ func end_tutorial():
 
 
 func _on_movement_joystick_used():
+	if game_data.get_player_data("generation") > -1: return
+	
 	emit_signal("request_stop_movement_joystick_animation")
 	if !MultiuseTimer.is_stopped(): return
 	MultiuseTimer.start(DELAY_BETWEEN_TUTORIALS)

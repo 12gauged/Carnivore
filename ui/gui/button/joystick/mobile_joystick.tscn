@@ -109,6 +109,7 @@ script = ExtResource( 5 )
 visible_by_default = false
 
 [node name="Sprite" type="Sprite" parent="background/button_pivot/tutorial_stick_pivot"]
+modulate = Color( 1, 1, 0, 1 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="background/button_pivot/tutorial_stick_pivot"]
