@@ -59,15 +59,18 @@ func _input(event):
 func _ready():
 	game_data.current_arena_wave = 1
 	
-	var player_bounty: int = game_data.get_player_data("bounty")
-	difficulty = player_bounty / 100 * (int(player_bounty > 100) + 1)
-	
+	var player_bounty: float = game_data.get_player_data("bounty")
+	difficulty = int(ceil(player_bounty / 100.0 * int(player_bounty > 100)))
 	number_of_waves += number_of_extra_waves_per_gen * difficulty
+	debug_log.dprint("difficulty: %s" % difficulty)
+	debug_log.dprint("number_of_waves: %s" % number_of_waves)
+	
 	initial_max_enemy_number = max_enemy_number + ceil(max_enemy_counter_modifier * difficulty)
 	initial_enemies_per_wave_value = enemies_per_wave
 	enemy_counter[FILLER_ENEMY] = 0
 	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
 	Spawners = get_node("spawners").get_children()
+	
 		
 func _process(_delta): 
 	if arena_state != RUNNING: return
@@ -168,12 +171,12 @@ func start_wave():
 	game_events.emit_signal("start_wave_time_tracker")
 
 func end_wave():
-	game_data.current_arena_wave += 1
-	arena_state = IN_BETWEEN_WAVES
-	
 	if game_data.current_arena_wave == number_of_waves:
 		end_arena()
 		return
+	
+	game_data.current_arena_wave += 1
+	arena_state = IN_BETWEEN_WAVES
 	
 	enemy_kill_count = 0
 	enemy_id = 0

@@ -343,6 +343,7 @@ script = ExtResource( 3 )
 [node name="comp_movement_jump" parent="part_state_handler/JUMP" instance=ExtResource( 6 )]
 auto_execute = false
 target_node_group = "player"
+jump_distance_limit = 50
 use_projectile_motion = true
 
 [node name="land_sound_effect" parent="part_state_handler/JUMP" instance=ExtResource( 9 )]

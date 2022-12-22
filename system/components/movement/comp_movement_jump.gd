@@ -8,6 +8,7 @@ export(String) var target_node_group: String
 export(int) var jump_force = 90
 export(int) var jump_height = 10
 export(int) var jump_speed_multiplier = 1
+export(int) var jump_distance_limit = 0
 export(bool) var use_projectile_motion = false
 
 
@@ -46,6 +47,10 @@ func start_jump():
 	
 	jump_initial_pos = Owner.global_position
 	target_pos = Target.global_position - jump_initial_pos
+	
+	if jump_distance_limit > 0:
+		target_pos.x = clamp(abs(target_pos.x), 0.0, jump_distance_limit) * (target_pos.x / abs(target_pos.x))
+		target_pos.y = clamp(abs(target_pos.y), 0.0, jump_distance_limit) * (target_pos.y / abs(target_pos.y))
 	
 	launch_direction = Vector2.RIGHT if target_pos.x > 0 else Vector2.LEFT
 	
