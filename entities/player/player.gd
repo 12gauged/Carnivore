@@ -3,6 +3,7 @@ extends Entity
 
 signal entered_eat_state
 signal exited_eat_state
+signal healing
 
 
 const HUNGER_DECREASE_DELAY = 3.0

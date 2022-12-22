@@ -23,11 +23,11 @@
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=21]
 
 [sub_resource type="CapsuleShape2D" id=5]
-radius = 3.99998
-height = 10.0
+radius = 2.95636
+height = 8.08675
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 8.0
+radius = 7.0
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 9.99997
@@ -286,7 +286,7 @@ script = ExtResource( 21 )
 visible_by_default = false
 
 [node name="collision" type="CollisionShape2D" parent="."]
-rotation = 1.5708
+rotation = 1.5795
 shape = SubResource( 5 )
 disabled = true
 
@@ -296,10 +296,11 @@ IGNORE_TAGS = [ "FROG", "ENEMY_PROJECTILE" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hurtbox"]
 position = Vector2( 0, -2 )
+rotation = 0.00364119
 shape = SubResource( 6 )
 
 [node name="part_hitbox" parent="." instance=ExtResource( 12 )]
-position = Vector2( 0, 2 )
+position = Vector2( 0, 1 )
 disabled = true
 TAGS = [ "FROG" ]
 damage = 4
