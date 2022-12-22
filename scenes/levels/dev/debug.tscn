@@ -31,7 +31,7 @@ TAGS = [ "COMP_EXECUTER", "ENTITY", "DEBUG_GAMEPLAY_CHANGES" ]
 
 [node name="part_enemy_spawner2" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 155, 74 )
-entity_name = "frog"
+entity_name = "fire_ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
 

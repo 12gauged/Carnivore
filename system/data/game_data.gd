@@ -1,47 +1,8 @@
 extends Node
 
-const ARCHIEVEMENT_REF: Dictionary = {
-	"generation0": {
-		0: "village_savior", ## Save the village
-		1: "full_belly", ## Eat 5 or more enemies on a row 
-		2: "triple_kill" ## Kill 3 enemies with a single shot
-	},
-	"generation1": {
-		0: "ant_on_a_stick", ## Make an ant soldier impale 3 or more enemies
-		1: "accidental_punch", ## Make a worm kill another enemy
-		2: "friendly_fire" ## Make a frog kill an ant soldier
-	},
-	"generation2": {
-		0: "gotcha", # Kill a fire ant before it explodes
-		1: "not_so_wet", # Use fire to kill a frog
-		2: "secret_weapon" # Use a frog to kill all enemies in a wave
-	}
-}
-
+const DEFAULT_BOUNTY = 20
 const default_player_data = {
-	"generation": -1,
-	"archievements": {
-		"generation0": {
-			"village_savior": true,
-			"full_belly": false,
-			"triple_kill": false
-		},
-		"generation1": {
-			"ant_on_a_stick": false,
-			"accidental_punch": false,
-			"friendly_fire": false
-		},
-		"generation2": {
-			"gotcha": false,
-			"not_so_wet": false,
-			"secret_weapon": false
-		}
-	},
-	"moves": {
-		"selected_move": "",
-		"ground_slam": false,
-		"healing_plant": false
-	}
+	"bounty": DEFAULT_BOUNTY,
 }
 var player_data: Dictionary = default_player_data
 
@@ -89,10 +50,8 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 
 
-func _ready(): # For debug values
+func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	#player_data.generation = 2
-	player_data.moves.selected_move = "ground_slam"
 	
 	
 func override_game_settings(value): game_settings = value

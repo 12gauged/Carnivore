@@ -52,7 +52,7 @@ func start_jump():
 	target_pos.x = abs(target_pos.x)
 	target_pos.y *= -1
 	
-	velocity = sqrt(GRAVITY * (target_pos.y + sqrt(pow(target_pos.y, 2) + pow(target_pos.x, 2))) + 3)
+	velocity = sqrt(GRAVITY * (target_pos.y + sqrt(pow(target_pos.y, 2) + pow(target_pos.x, 2))))
 	launch_angle = atan(target_pos.y / target_pos.x + sqrt(pow(target_pos.y, 2) / pow(target_pos.x, 2) + 1))
 	time_to_target = target_pos.x / (velocity * cos(launch_angle))
 	
@@ -68,8 +68,7 @@ func projectile_motion(delta):
 		can_execute = false
 		return
 	
-	elapsed_time += delta * 16 # corrects the delta value
-	#print("%s : %s" % [elapsed_time, time_to_target])
+	elapsed_time += delta * 5 # corrects the delta value
 	
 	var displacement_x = velocity * elapsed_time * cos(launch_angle)
 	var displacement_y = velocity * elapsed_time * sin(launch_angle) - 0.5 * GRAVITY * pow(elapsed_time, 2)
@@ -78,8 +77,7 @@ func projectile_motion(delta):
 	displacement_y = displacement_y * -1.0
 	
 	var owner_position = Owner.global_position
-	var direction_vector = owner_position.direction_to(jump_initial_pos + (Vector2(displacement_x, displacement_y)))
-	
+	var direction_vector = owner_position.direction_to(jump_initial_pos + Vector2(displacement_x, displacement_y))
 	emit_signal("component_value_update", direction_vector)
 	
 	

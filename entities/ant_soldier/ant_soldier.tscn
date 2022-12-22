@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://entities/ant_soldier/ant_soldier.gd" type="Script" id=1]
 [ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=14]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=15]
 [ext_resource path="res://system/archievement_sensors/generation1/friendly_fire_challenge_sensor.gd" type="Script" id=16]
-[ext_resource path="res://system/archievement_sensors/generation1/ant_on_a_stick_challenge_sensor.gd" type="Script" id=17]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=18]
 [ext_resource path="res://particles/entity/entity_big_death_particle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sounds/entity/enemy/enemy_big_death.wav" type="AudioStream" id=20]
@@ -278,9 +277,6 @@ position = Vector2( 0, -7 )
 entity_name = "spear_projectile"
 entity_group = "projectiles"
 
-[node name="ant_on_a_stick_archievement_sensor" type="Node2D" parent="part_state_handler/ATTACK/part_entity_spawner"]
-script = ExtResource( 17 )
-
 [node name="state_duration_timer" type="Timer" parent="part_state_handler/ATTACK"]
 wait_time = 0.2
 one_shot = true
@@ -334,5 +330,4 @@ anims/float = SubResource( 8 )
 [connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/part_entity_spawner" method="spawn_entity"]
 [connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/state_duration_timer" method="start_timer"]
 [connection signal="entity_spawned" from="part_state_handler/ATTACK/part_entity_spawner" to="." method="_on_entity_spawned"]
-[connection signal="entity_spawned" from="part_state_handler/ATTACK/part_entity_spawner" to="part_state_handler/ATTACK/part_entity_spawner/ant_on_a_stick_archievement_sensor" method="_on_part_entity_spawner_entity_spawned"]
 [connection signal="timeout" from="part_state_handler/ATTACK/state_duration_timer" to="part_state_handler" method="go_to_next_state"]

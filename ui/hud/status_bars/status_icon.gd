@@ -12,8 +12,12 @@ func _ready():
 	player_events.connect("status_value_update", self, "_on_player_status_value_update")
 
 
-func play_empty_anim(): AnimPlayer.play("empty")
-func play_fill_anim(): AnimPlayer.play("fill")
+func play_empty_anim(): 
+	AnimPlayer.stop()
+	AnimPlayer.play("empty")
+func play_fill_anim(): 
+	AnimPlayer.stop()
+	AnimPlayer.play("fill")
 	
 	
 	

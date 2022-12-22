@@ -34,7 +34,7 @@ var tutorial_stage := MOVEMENT
 
 
 func _ready():
-	if game_data.get_player_data("generation") > -1:
+	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY:
 		end_tutorial()
 		return
 	
@@ -54,7 +54,7 @@ func end_tutorial():
 
 
 func _on_movement_joystick_used():
-	if game_data.get_player_data("generation") > -1: return
+	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY: return
 	
 	emit_signal("request_stop_movement_joystick_animation")
 	if !MultiuseTimer.is_stopped(): return

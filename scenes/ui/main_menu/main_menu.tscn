@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/ui/main_menu/screens/main_screen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/settings_screen.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=3]
 [ext_resource path="res://scenes/ui/main_menu/screens/credits_screen.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/ui/archievements_screen/challenges_screen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/ui/pop_ups/warning/popup_warn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/ui/main_menu/menu_screen_controller.gd" type="Script" id=10]
 
@@ -89,9 +88,6 @@ visible = false
 [node name="credits" parent="menu_screen_controller" instance=ExtResource( 4 )]
 visible = false
 
-[node name="challenges_screen" parent="menu_screen_controller" instance=ExtResource( 5 )]
-visible = false
-
 [node name="animation_player" type="AnimationPlayer" parent="menu_screen_controller"]
 autoplay = "RESET"
 anims/RESET = SubResource( 1 )
@@ -113,5 +109,4 @@ script = ExtResource( 3 )
 [connection signal="button_pressed" from="menu_screen_controller/main" to="menu_screen_controller" method="_on_button_pressed"]
 [connection signal="button_pressed" from="menu_screen_controller/settings" to="menu_screen_controller" method="_on_button_pressed"]
 [connection signal="button_pressed" from="menu_screen_controller/credits" to="menu_screen_controller" method="_on_button_pressed"]
-[connection signal="button_pressed" from="menu_screen_controller/challenges_screen" to="menu_screen_controller" method="_on_button_pressed"]
 [connection signal="animation_finished" from="menu_screen_controller/animation_player" to="menu_screen_controller" method="_on_animation_player_animation_finished"]

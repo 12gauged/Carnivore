@@ -70,10 +70,14 @@ use_parent_material = false
 [node name="energy_icon1" parent="empty_bar/icons" instance=ExtResource( 1 )]
 material = SubResource( 3 )
 use_parent_material = false
+margin_left = 8.0
+margin_right = 16.0
 
 [node name="energy_icon2" parent="empty_bar/icons" instance=ExtResource( 1 )]
 material = SubResource( 4 )
 use_parent_material = false
+margin_left = 16.0
+margin_right = 24.0
 
 [node name="energy_icon3" parent="empty_bar/icons" instance=ExtResource( 1 )]
 material = SubResource( 5 )

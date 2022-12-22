@@ -34,6 +34,7 @@ ACCEPT_TAGS = [ "PLAYER_HURTBOX", "ENEMY_HURTBOX" ]
 damage = 1
 override_invincibility = true
 continuous_hits = true
+delete_on_hit = false
 hit_delay = 4.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hitbox"]

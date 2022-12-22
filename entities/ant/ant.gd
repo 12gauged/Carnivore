@@ -7,7 +7,7 @@ onready var DeathLootSpawner = $enemy_loot_spawner
 func _ready():
 	var loot_spawn_chance
 	
-	if game_data.get_player_data("generation") == -1:
+	if game_data.get_player_data("bounty") == game_data.DEFAULT_BOUNTY:
 		loot_spawn_chance = 100
 	else:
 		loot_spawn_chance = max(MIN_SPAWN_CHANCE, MAX_SPAWN_CHANCE - 7 * game_data.get_current_wave() - 1)

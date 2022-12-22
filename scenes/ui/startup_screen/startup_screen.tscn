@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/gui/logo/12gauged_big.png" type="Texture" id=3]
 [ext_resource path="res://system/parts/part_input_detector.tscn" type="PackedScene" id=4]
@@ -19,46 +18,10 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("warnings:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("warning_lights:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("warning_hardware_accel:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=2]
 resource_name = "start"
-length = 5.0
+length = 3.5
 step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("logo_container/12gauged_logo:modulate")
@@ -79,105 +42,17 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 5 ),
+"times": PoolRealArray( 3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "call_method"
 } ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("warning_lights:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 3, 4, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("warning_hardware_accel:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 3, 4, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="startup_screen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="warning_lights" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -85.0
-margin_top = -44.5
-margin_right = 85.0
-margin_bottom = -7.5
-size_flags_horizontal = 4
-theme = ExtResource( 1 )
-
-[node name="title" type="Label" parent="warning_lights"]
-margin_right = 170.0
-margin_bottom = 10.0
-custom_colors/font_color = Color( 1, 1, 0, 1 )
-text = "ui.startup.warning.lights.title"
-align = 1
-uppercase = true
-
-[node name="description" type="Label" parent="warning_lights"]
-margin_top = 14.0
-margin_right = 170.0
-margin_bottom = 37.0
-text = "ui.startup.warning.lights.description"
-align = 1
-autowrap = true
-
-[node name="warning_hardware_accel" type="VBoxContainer" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -106.0
-margin_top = -1.5
-margin_right = 106.0
-margin_bottom = 35.5
-size_flags_horizontal = 4
-theme = ExtResource( 1 )
-alignment = 1
-
-[node name="title" type="Label" parent="warning_hardware_accel"]
-margin_right = 212.0
-margin_bottom = 10.0
-custom_colors/font_color = Color( 1, 1, 0, 1 )
-text = "ui.startup.warning.hardware_accel.title"
-align = 1
-uppercase = true
-
-[node name="description" type="Label" parent="warning_hardware_accel"]
-margin_top = 14.0
-margin_right = 212.0
-margin_bottom = 37.0
-text = "ui.startup.warning.hardware_accel.description"
-align = 1
-autowrap = true
-
-[node name="warnings" type="VBoxContainer" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-alignment = 1
 
 [node name="logo_container" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -185,10 +60,10 @@ anchor_bottom = 1.0
 
 [node name="12gauged_logo" type="TextureRect" parent="logo_container"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 63.0
-margin_top = 52.0
-margin_right = 177.0
-margin_bottom = 82.0
+margin_left = 77.0
+margin_top = 56.0
+margin_right = 162.0
+margin_bottom = 78.0
 texture = ExtResource( 3 )
 
 [node name="comp_method_caller" parent="." instance=ExtResource( 2 )]

@@ -1,8 +1,6 @@
 extends Node
 
 # warning-ignore:unused_signal
-signal healed_by_plant
-# warning-ignore:unused_signal
 signal meat_consumed
 
 # warning-ignore:unused_signal
@@ -38,6 +36,3 @@ signal special_attack_available
 
 # warning-ignore:unused_signal
 signal enter_eat_state_request
-
-# warning-ignore:unused_signal
-signal archievement_made(archievement)

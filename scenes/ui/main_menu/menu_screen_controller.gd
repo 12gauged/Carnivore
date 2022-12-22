@@ -5,8 +5,7 @@ onready var AnimPlayer: AnimationPlayer = $animation_player
 onready var screens: Dictionary = {
 	"main": $main,
 	"settings": $settings,
-	"credits": $credits,
-	"challenges": $challenges_screen
+	"credits": $credits
 }
 onready var last_screen = screens.main
 

@@ -13,7 +13,7 @@ signal button_pressed(button)
 
 
 func _ready(): 
-	connect("pressed", self, "_on_button_down")
+	var _err = connect("pressed", self, "_on_button_down")
 	
 
 func set_margins(value: Vector2):

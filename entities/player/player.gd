@@ -3,10 +3,6 @@ extends Entity
 
 signal entered_eat_state
 signal exited_eat_state
-signal charging_attack
-signal not_charging_attack
-signal healing
-signal healing_from_plant
 
 
 const HUNGER_DECREASE_DELAY = 3.0
@@ -17,7 +13,7 @@ const HUNGER_DAMAGE = 1
 const DAMAGE_CAMERA_SHAKE_DURATION = 0.3
 const DAMAGE_CAMERA_SHAKE_INTENSITY = 0.8
 
-const GROUND_SLAM_COST = 4
+const GROUND_SLAM_COST = 3
 
 export(int) var MAX_HUNGER = 6
 export(int) var MAX_ENERGY = 6
@@ -25,20 +21,8 @@ export(int) var MAX_ENERGY = 6
 onready var HungerDecreaseTimer: Timer = $hunger_decrease_delay
 onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
-onready var SpecialAttackChargeTimer: Timer = $special_attack_charge_timer
-onready var SpecialAttackInputDelayTimer: Timer = $special_attack_input_delay
 onready var AnimPlayer = $part_state_anim_handler/animation_player
-onready var HealingTimer: Timer = $healing_area_detector/healing_timer
 onready var ProjectileHandler: Node2D = $part_player_projectile_handler
-
-var button_press_state: bool = false
-var in_healing_plant: bool = false
-var last_entered_plant_id: int = 0
-
-onready var DASH_SPEED = DEFAULT_MAX_SPEED * 1.5
-const DASH_DURATION = 0.4
-
-var enemies_consumed: int = 0
 
 func _ready():
 	add_tag("PLAYER")
@@ -54,7 +38,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	player_events.connect("meat_consumed", self, "consume_meat")
 	# warning-ignore:return_value_discarded
-	player_events.connect("enter_eat_state_request", self, "check_if_using_special_or_normal_move")
+	player_events.connect("enter_eat_state_request", self, "enter_eat_state")
 	# warning-ignore:return_value_discarded
 	player_events.connect("set_stat_value", self, "update_stat")
 	# warning-ignore:return_value_discarded
@@ -74,23 +58,16 @@ func _input(event):
 		if event.is_action_pressed("debug_f4"): consume_meat()
 		if event.is_action_pressed("debug_f6"): update_stat("health", int(max(get_stat("health") - 1, 0)))
 		if event.is_action_pressed("debug_f7"): player_events.emit_signal("freeze_player")
-	
-	if get_stat("energy") <= 0: return
-	if event is InputEventMouseButton and event.button_index == game_data.game_settings.desktop_keybinds.controls_special:
-		if get_state() in ["DASH", "EAT"]: return
-		if get_stat("energy") < 1: return
-			
-		if event.is_pressed() and get_stat("energy") == MAX_ENERGY:
-			SpecialAttackInputDelayTimer.start()
-		elif SpecialAttackChargeTimer.is_stopped():
-			emit_signal("not_charging_attack")
-			SpecialAttackChargeTimer.stop()
-			SpecialAttackInputDelayTimer.stop()
-			call_secondary_move()
-		else:
-			SpecialAttackChargeTimer.stop()
-			emit_signal("not_charging_attack")
 		
+	if get_stat("energy") <= 0: return
+	
+	match event.get_class():
+		"InputEventMouseButton":
+			if !event.button_index == game_data.game_settings.desktop_keybinds.controls_special: continue
+			if get_state() == "EAT": continue
+			if get_stat("energy") < MAX_ENERGY: continue
+			enter_eat_state()
+
 
 func _process(_delta):
 	if get_state() in CONSTANT_STATES: process_constant_state()
@@ -100,8 +77,8 @@ func _process(_delta):
 func process_constant_state(): pass
 
 func process_inconstant_state():
-	if not get_state() in ["EAT", "DASH"]:
-		set_state("IDLE" if movement_direction == Vector2.ZERO else "MOVE")
+	if get_state() in ["EAT", "DASH"]: return
+	set_state("IDLE" if movement_direction == Vector2.ZERO else "MOVE")
 
 
 # Felipe seu burro
@@ -113,18 +90,12 @@ func update_stat(id: String, value: int, animate: bool = true):
 	player_events.emit_signal("status_value_update", id, get_stat(id), animate)
 	
 	if id != "can_get_hungry": return
-	
-	if game_data.get_player_data('generation') < 0:
-		if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
-			HungerDecreaseTimer.stop()
-		else:
-			HungerDecreaseTimer.start(HUNGER_DECREASE_DELAY_TUTORIAL)
+	if game_data.get_player_data("bounty") == game_data.DEFAULT_BOUNTY:
+		HungerDecreaseTimer.wait_time = HUNGER_DECREASE_DELAY_TUTORIAL
+		HungerDecreaseTimer.call("stop" if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped() else "start")
 		return
 		
-	if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
-		HungerDecreaseTimer.stop()
-	else:
-		HungerDecreaseTimer.start()
+	HungerDecreaseTimer.call("stop" if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped() else "start")
 
 func start_invincibility():
 	set_stat("invincible", true)
@@ -160,55 +131,6 @@ func exit_eat_state():
 	set_rotation_degrees(0.0)
 	set_movement_direction(Vector2.ZERO)
 	AnimPlayer.play("RESET")
-	## Archievement
-	enemies_consumed = 0
-	
-
-func check_if_using_special_or_normal_move():
-	if get_stat("energy") < 1: return
-	
-	button_press_state = !button_press_state
-	match button_press_state:
-		true:
-			if get_stat("energy") == MAX_ENERGY:
-				SpecialAttackInputDelayTimer.start()
-				debug_log.dprint("charging special..")
-		false:
-			if SpecialAttackChargeTimer.is_stopped():
-				debug_log.dprint("dashing!")
-				emit_signal("not_charging_attack")
-				SpecialAttackInputDelayTimer.stop()
-				ground_slam()
-			else:
-				SpecialAttackChargeTimer.stop()
-				emit_signal("not_charging_attack")
-	
-func call_secondary_move():
-	var selected_move = game_data.player_data.moves.selected_move
-	
-	if selected_move.empty(): return
-	
-	match selected_move:
-		"ground_slam": ground_slam()
-		"healing_plant": get_healing_plant_seed()
-	
-func ground_slam():
-	if get_state() in ["EAT", "DASH"]: return
-	if get_stat("energy") <= GROUND_SLAM_COST: return
-	
-	set_movement_direction(Vector2.ZERO)
-	update_stat("energy", get_stat("energy") - GROUND_SLAM_COST)
-	set_state("DASH")
-	
-func get_healing_plant_seed(): 
-	ProjectileHandler.set_projectile("healing_plant_seed")
-	
-func set_collisions(value):
-	#return
-	set_collision_layer_bit(0, value)
-	set_collision_layer_bit(1, value)
-	set_collision_mask_bit(0, value)
-	set_collision_mask_bit(1, value)
 
 func consume_meat():
 	if get_state() == "EAT": return
@@ -216,14 +138,15 @@ func consume_meat():
 	HungerDecreaseTimer.stop()
 	if get_stat("hunger") < MAX_HUNGER:
 		update_stat("hunger", get_stat("hunger") + 1)
+		HungerDecreaseTimer.start()
+		return
+	
+	update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
+	if get_stat("energy") == MAX_ENERGY:
+		add_tag("FULL")
+		player_events.emit_signal("special_attack_available")
 	else:
-		update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
-		if get_stat("energy") == MAX_ENERGY:
-			add_tag("FULL")
-		elif get_stat("energy") >= 1:
-			player_events.emit_signal("special_attack_available")
-		else:
-			remove_tag("FULL")
+		remove_tag("FULL")
 		
 	HungerDecreaseTimer.start()
 	
@@ -240,33 +163,25 @@ func consume_enemy(EnemyNode):
 	update_stat("hunger", int(min(get_stat("hunger") + 1, MAX_HUNGER)))
 	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
 		
-	enemies_consumed += 1
-	if enemies_consumed >= 5: 
-		player_events.emit_signal("archievement_made", "full_belly", true)
-		
 func reset_stat_decrease_timer(mode: String):
 	HungerDecreaseTimer.stop()
 	
-	if game_data.get_player_data("generation") < 0:
-		match mode:
-			"hunger": HungerDecreaseTimer.wait_time = HUNGER_DECREASE_DELAY_TUTORIAL
-			"energy": HungerDecreaseTimer.wait_time = ENERGY_DECREASE_DELAY
-		HungerDecreaseTimer.start()
-		return
-		
+	var player_bounty = game_data.get_player_data("bounty")
+	var hunger_wait_time = HUNGER_DECREASE_DELAY_TUTORIAL if player_bounty == game_data.DEFAULT_BOUNTY else HUNGER_DECREASE_DELAY
+	var energy_wait_time = ENERGY_DECREASE_DELAY
+	
 	match mode:
-		"hunger": HungerDecreaseTimer.wait_time = HUNGER_DECREASE_DELAY
-		"energy": HungerDecreaseTimer.wait_time = ENERGY_DECREASE_DELAY
+			"hunger": HungerDecreaseTimer.wait_time = hunger_wait_time
+			"energy": HungerDecreaseTimer.wait_time = energy_wait_time
+
 	HungerDecreaseTimer.start()
+	
 	
 func apply_damage(damage: int):
 	if damage <= 0: return
 	if damage >= get_stat("health"): 
 		die()
 		return
-		
-	if in_healing_plant and HealingTimer.is_stopped():
-		HealingTimer.start()
 	
 	emit_signal("hurt")
 	update_stat("health", get_stat("health") - damage)
@@ -318,32 +233,3 @@ func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION
 
 func _on_player_state_changed(new_state, _old_state):
 	game_data.current_player_state = new_state
-
-
-func _on_special_attack_charge_timer_timeout(): enter_eat_state()
-func _on_special_attack_input_delay_timeout():
-	SpecialAttackChargeTimer.start()
-	emit_signal("charging_attack")
-
-
-func _on_healing_area_detector_area_entered(area):
-	in_healing_plant = true
-	if HealingTimer.is_stopped(): _on_healing_timer_timeout()
-func _on_healing_area_detector_area_exited(area):
-	in_healing_plant = false
-func _on_healing_timer_timeout():
-	if !in_healing_plant: return
-	
-	if get_stat("health") >= MAX_HEALTH: return
-	
-	update_stat("health", get_stat("health") + 1)
-	HealingTimer.start()
-	emit_signal("healing")
-	player_events.emit_signal("healed_by_plant")
-
-
-func _on_ground_slam_finished():
-	set_state("IDLE")
-	set_movement_direction(Vector2.ZERO)
-	MAX_SPEED = DEFAULT_MAX_SPEED
-	velocity = Vector2.ZERO

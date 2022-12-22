@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/button/joystick/mobile_joystick.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/gui/text_box/tutorial_text_box.png" type="Texture" id=9]
 [ext_resource path="res://system/components/receivers/comp_event_receiver.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/gui/button/touch_screen_button_disable.gd" type="Script" id=11]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=12]
 [ext_resource path="res://ui/mobile_ui/tutorial_controller_mobile.gd" type="Script" id=13]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=14]
@@ -134,6 +135,7 @@ show_behind_parent = true
 position = Vector2( -2, -2 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 16 )
+script = ExtResource( 11 )
 
 [node name="comp_method_caller" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" instance=ExtResource( 4 )]
 method = {
@@ -267,6 +269,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="tutorials"]
 anchor_right = 1.0
@@ -274,6 +279,9 @@ anchor_bottom = 1.0
 mouse_filter = 2
 custom_constants/separation = 0
 alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="tutorials/HBoxContainer"]
 margin_left = 78.0
@@ -318,7 +326,9 @@ one_shot = true
 [connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="released" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="enable"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" method="hide"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="disable"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" method="show"]
 [connection signal="joystick_in_use" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="tutorials" method="_on_movement_joystick_used"]
 [connection signal="joystick_pressed" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]

@@ -89,7 +89,7 @@ func _on_projectile_spawner_entity_spawned(ProjectileNode):
 	ProjectileNode.set_direction(get_target_direction())
 	ProjectileNode.set_speed(projectile_speeds[projectile_type])
 	
-	if game_data.get_player_data("generation") > 1: return 
+	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY: return 
 	
 	ProjectileNode.connect("collided", self, "_on_projectile_collided")
 	ProjectileNode.connect("deleted", self, "_on_projectile_deleted")
