@@ -1,6 +1,8 @@
 extends Entity
 class_name Enemy
 
+export(int) var bounty_value = 10
+
 onready var Player = toolbox.get_node_in_group("player")
 onready var AI_TARGET = Player
 
@@ -16,9 +18,5 @@ func _on_damage_received(Hitbox: DetectionBox):
 	
 	var damage = Hitbox.damage
 	apply_damage(damage)
-	
+
 	if Hitbox.delete_on_hit: Hitbox.get_parent().queue_free()
-	
-	if !"WORM" in Hitbox.TAGS or game_data.get_player_data("generation") < 1: return
-	if damage >= get_stat("health"): ## if a worm killed this enemy
-		player_events.emit_signal("archievement_made", "accidental_punch", true)

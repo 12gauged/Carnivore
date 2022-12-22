@@ -38,6 +38,7 @@ func _ready():
 		end_tutorial()
 		return
 	
+	TutorialLabel.text = movement_tutorial_text
 	emit_signal("request_movement_joystick_animation")
 
 
@@ -70,6 +71,7 @@ func _on_player_picked_projectile(projectile):
 	
 func _on_tutorial_ant_dead():
 	skip_tutorial_stage(eating_tutorial_text, EATING, 0.1)
+	# warning-ignore:return_value_discarded
 	player_events.connect("meat_consumed", self, "_on_meat_consumed")
 	
 func _on_meat_consumed():
@@ -92,9 +94,11 @@ func _on_tutorial_text_show_cooldown_timeout():
 	
 	match tutorial_stage:
 		PICK_STONE:
+			# warning-ignore:return_value_discarded
 			player_events.connect("projectile_collected", self, "_on_player_picked_projectile")
 			game_events.emit_signal("spawn_tutorial_stone")
 		SHOOTING:
 			game_events.emit_signal("spawn_tutorial_ant")
+			# warning-ignore:return_value_discarded
 			game_events.connect("tutorial_ant_dead", self, "_on_tutorial_ant_dead")
 			emit_signal("request_shooting_joystick_animation")
