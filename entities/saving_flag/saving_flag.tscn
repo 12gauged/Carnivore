@@ -150,20 +150,27 @@ anims/blink = SubResource( 5 )
 particle_id = "progress_saved_indicator"
 
 [node name="rock_spawner" parent="." instance=ExtResource( 7 )]
-position = Vector2( 16, 24 )
+position = Vector2( 24, 24 )
 entity_name = "stone_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 respawn = true
-respawn_radius = Vector2( 40, 40 )
+respawn_radius = Vector2( 5, 5 )
 
 [node name="rock_spawner2" parent="." instance=ExtResource( 7 )]
-position = Vector2( -16, -24 )
+position = Vector2( -24, -32 )
 entity_name = "stone_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 respawn = true
-respawn_radius = Vector2( 40, 40 )
+respawn_radius = Vector2( 5, 5 )
+
+[node name="rock_spawner3" parent="." instance=ExtResource( 7 )]
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 5, 5 )
 
 [connection signal="deleted" from="." to="part_particle_emitter" method="emit_particle"]
 [connection signal="body_entered" from="saving_area" to="." method="_on_saving_area_body_entered"]
