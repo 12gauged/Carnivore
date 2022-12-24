@@ -21,7 +21,7 @@ onready var TutorialLabel: Label = $HBoxContainer/VBoxContainer/TutorialTextBox/
 
 
 func _ready():
-	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY: 
+	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY:
 		end_tutorial()
 		return
 	TutorialLabel.text = tr(movement_tutorial_text)

@@ -66,3 +66,8 @@ func _on_exit_and_save_button_pressed(_id):
 	global_data_manager.save_settings()
 	return_to_settings_screen()
 	
+
+func _on_reset_button_pressed(_id):
+	game_data.game_settings.mobile_button_displacement = game_data.default_game_settings.mobile_button_displacement
+	global_data_manager.save_settings()
+	return_to_settings_screen()

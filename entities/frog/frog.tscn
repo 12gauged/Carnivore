@@ -276,6 +276,7 @@ DEFAULT_STATE = "IDLE"
 STARTING_STATE = "SPAWN"
 CONSTANT_STATES = [ "CROAK" ]
 state_execution_pattern = [ "IDLE", "CROAK", "JUMP" ]
+bounty_value = 20
 
 [node name="texture" type="Sprite" parent="."]
 material = ExtResource( 7 )
@@ -376,9 +377,13 @@ bus = "entity_sounds"
 stream = ExtResource( 20 )
 bus = "entity_sounds"
 
+[node name="bounty_indicator_emitter" parent="." instance=ExtResource( 11 )]
+particle_id = "bounty_indicator"
+
 [connection signal="deleted" from="." to="enemy_loot_spawner" method="drop_loot"]
 [connection signal="deleted" from="." to="enemy_loot_spawner2" method="drop_loot"]
 [connection signal="deleted" from="." to="dead_sound_effect" method="play_sound"]
+[connection signal="deleted" from="." to="bounty_indicator_emitter" method="emit_particle"]
 [connection signal="hurt" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="self_give" from="." to="part_state_handler/JUMP/comp_movement_jump" method="set_owner"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]

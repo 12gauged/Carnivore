@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://ui/hud/status_bars/energy_bar/energy_bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/hud/status_bars/hunger_bar/hunger_bar.tscn" type="PackedScene" id=2]
@@ -10,9 +10,9 @@
 [ext_resource path="res://ui/desktop_ui/desktop_ui.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/pause_screen/pause_screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=10]
-[ext_resource path="res://ui/hud/wave_time_clock.gd" type="Script" id=11]
 [ext_resource path="res://ui/mobile_ui/mobile_ui.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=13]
+[ext_resource path="res://ui/hud/status_bars/bounty_label/bounty_label.gd" type="Script" id=14]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -29,6 +29,38 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 3 )
 shader_param/gray_amount = 4.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "highlight"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "highlight_long"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 0 ) ]
+}
 
 [node name="hud" type="CanvasLayer"]
 
@@ -53,12 +85,13 @@ margin_right = 240.0
 [node name="status_bars" type="CenterContainer" parent="root/top_elements"]
 margin_top = 4.0
 margin_right = 240.0
-margin_bottom = 4.0
+margin_bottom = 14.0
 
 [node name="horizontal_margin" type="GridContainer" parent="root/top_elements/status_bars"]
-margin_left = 75.0
-margin_right = 165.0
-custom_constants/hseparation = 90
+margin_left = 67.0
+margin_right = 172.0
+margin_bottom = 10.0
+custom_constants/hseparation = 35
 columns = 3
 
 [node name="hunger_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
@@ -66,31 +99,41 @@ anchor_left = 0.0
 anchor_right = 0.0
 margin_left = 0.0
 margin_right = 0.0
-
-[node name="wave_time_clock" type="Label" parent="root/top_elements/status_bars/horizontal_margin"]
-visible = false
-margin_left = 50.0
-margin_right = 74.0
 margin_bottom = 10.0
-text = "00:00"
+
+[node name="bounty_label" type="Label" parent="root/top_elements/status_bars/horizontal_margin"]
+modulate = Color( 1, 1, 0, 1 )
+margin_left = 35.0
+margin_right = 70.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 35, 0 )
+size_flags_horizontal = 0
+theme = ExtResource( 5 )
+text = "100000"
 align = 1
-script = ExtResource( 11 )
+script = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="root/top_elements/status_bars/horizontal_margin/bounty_label"]
+autoplay = "highlight_long"
+anims/highlight = SubResource( 4 )
+anims/highlight_long = SubResource( 5 )
 
 [node name="energy_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_left = 90.0
-margin_right = 90.0
+margin_left = 105.0
+margin_right = 105.0
+margin_bottom = 10.0
 
 [node name="wave_text_margin" type="MarginContainer" parent="root/top_elements"]
-margin_top = 8.0
+margin_top = 18.0
 margin_right = 240.0
-margin_bottom = 21.0
+margin_bottom = 31.0
 custom_constants/margin_top = 13
 
 [node name="notifs" type="VBoxContainer" parent="root/top_elements"]
-margin_top = 25.0
+margin_top = 35.0
 margin_right = 240.0
-margin_bottom = 35.0
+margin_bottom = 45.0
 
 [node name="wave_notification" type="Label" parent="root/top_elements/notifs"]
 margin_right = 240.0
@@ -117,22 +160,23 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -28.5
+margin_left = -42.0
 margin_top = -19.0
-margin_right = 28.5
+margin_right = 42.0
 grow_vertical = 0
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="root/center_bottom_elements"]
 margin_top = 19.0
-margin_right = 57.0
+margin_right = 84.0
 margin_bottom = 19.0
+custom_constants/separation = 0
 alignment = 1
 
 [node name="health_bar" parent="root/center_bottom_elements/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
-margin_left = 28.0
-margin_right = 28.0
+margin_left = 42.0
+margin_right = 42.0
 
 [node name="text_box_container" type="VBoxContainer" parent="root"]
 anchor_left = 0.5

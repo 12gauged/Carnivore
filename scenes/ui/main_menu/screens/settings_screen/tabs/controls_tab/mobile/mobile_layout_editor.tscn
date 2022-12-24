@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://ui/mobile_ui/mobile_button_displacement.gd" type="Script" id=1]
 [ext_resource path="res://ui/gui/button/small/button_small_normal.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://ui/gui/icons/disagree_icon.png" type="Texture" id=13]
 [ext_resource path="res://entities/player/player.png" type="Texture" id=14]
 [ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=15]
+[ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=16]
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 14 )
@@ -323,22 +324,33 @@ margin_right = 97.0
 margin_bottom = 47.0
 alignment = 1
 
-[node name="small_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
-margin_left = 26.0
-margin_right = 46.0
+[node name="save_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 14.0
+margin_right = 34.0
 
-[node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/save_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 12 )
 
-[node name="small_button2" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
-margin_left = 50.0
-margin_right = 70.0
+[node name="reset_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 38.0
+margin_right = 58.0
 
-[node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button2/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/reset_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 16 )
+
+[node name="exit_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 62.0
+margin_right = 82.0
+
+[node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/exit_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
@@ -349,8 +361,10 @@ texture = ExtResource( 13 )
 [connection signal="button_pressed" from="shooting_joystick/shooting_joystick_vertical_container/fake_shooting_joystick/TouchScreenButton" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="special_attack/special_attack_vertical_container/button_anchor/TouchScreenButton" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="pause_button/HBoxContainer/button_anchor/TouchScreenButton" to="." method="_on_button_pressed"]
-[connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button" to="." method="_on_exit_and_save_button_pressed"]
-[connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button2" to="." method="_on_exit_without_saving_button_pressed"]
+[connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/save_button" to="." method="_on_exit_and_save_button_pressed"]
+[connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/reset_button" to="." method="_on_reset_button_pressed"]
+[connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/exit_button" to="." method="_on_exit_without_saving_button_pressed"]
 
-[editable path="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button"]
-[editable path="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/small_button2"]
+[editable path="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/save_button"]
+[editable path="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/reset_button"]
+[editable path="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/exit_button"]

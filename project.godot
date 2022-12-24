@@ -123,6 +123,7 @@ debug_log="*res://scenes/ui/overlays/debug_log/debug_log.tscn"
 cache="*res://system/managers/cache.tscn"
 android_data_manager="*res://system/managers/android_data_manager.gd"
 global_data_manager="*res://system/managers/global_data_manager.gd"
+bounty_manager="*res://system/managers/bounty_manager.tscn"
 
 [display]
 

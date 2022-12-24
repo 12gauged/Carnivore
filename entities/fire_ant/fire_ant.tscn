@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://entities/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/state.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=15]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=16]
 [ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=17]
+[ext_resource path="res://system/parts/part_particle_emitter.tscn" type="PackedScene" id=18]
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 8 )
@@ -238,6 +239,7 @@ TAGS = [ "COMP_EXECUTER", "ENTITY", "FIRE_ANT" ]
 DEFAULT_STATE = "MOVE"
 STARTING_STATE = "SPAWN"
 state_execution_pattern = [ "MOVE", "CHARGE", "ATTACK" ]
+bounty_value = 10
 
 [node name="texture" type="Sprite" parent="."]
 position = Vector2( 0, -5 )
@@ -253,7 +255,6 @@ visible_by_default = false
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
-frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -325,9 +326,13 @@ bus = "entity_sounds"
 [node name="enemy_loot_spawner" parent="." instance=ExtResource( 17 )]
 drop_chance = 60
 
+[node name="bounty_indicator_emitter" parent="." instance=ExtResource( 18 )]
+particle_id = "bounty_indicator"
+
 [connection signal="deleted" from="." to="hit_sound_effect" method="play_sound"]
 [connection signal="deleted" from="." to="enemy_loot_spawner" method="drop_loot"]
 [connection signal="hurt" from="." to="hit_sound_effect" method="play_sound"]
+[connection signal="killed_by_player" from="." to="bounty_indicator_emitter" method="emit_particle"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]

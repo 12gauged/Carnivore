@@ -64,5 +64,6 @@ var resources: Dictionary = {
 		"pickup": preload("res://particles/pickup/pickup_particle.tscn"),
 		"entity_death": preload("res://particles/entity/entity_death_particle.tscn"),
 		"entity_ground_slam": preload("res://particles/entity/entity_ground_slam_particle.tscn"),
+		"bounty_indicator": preload("res://particles/entity/bounty_indicator.tscn")
 	}
 }

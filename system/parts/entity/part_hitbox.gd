@@ -21,7 +21,6 @@ func _physics_process(_delta):
 	if !is_instance_valid(DetectedArea): return
 	if time_counter >= hit_delay:
 		DetectedArea.emit_signal("hit_detected", self)
-		DetectedArea.emit_signal("play_hit_sound_request")
 		time_counter = 0
 		return
 	time_counter += 0.1

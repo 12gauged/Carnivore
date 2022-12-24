@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://entities/ant/ant.gd" type="Script" id=1]
 [ext_resource path="res://entities/ant/ant.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=11]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=13]
+[ext_resource path="res://system/parts/part_particle_emitter.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Shader" id=8]
 code = "shader_type canvas_item;
@@ -425,8 +426,12 @@ scale = Vector2( 0.998317, 0.99272 )
 stream = ExtResource( 10 )
 bus = "entity_sounds"
 
+[node name="bounty_indicator_emitter" parent="." instance=ExtResource( 14 )]
+particle_id = "bounty_indicator"
+
 [connection signal="deleted" from="." to="enemy_loot_spawner" method="drop_loot"]
 [connection signal="deleted" from="." to="hit_sound_effect" method="play_sound"]
+[connection signal="deleted" from="." to="bounty_indicator_emitter" method="emit_particle"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]

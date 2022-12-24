@@ -144,7 +144,7 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 	if game_data.current_arena_wave < data.wave_requirement - data.wave_requirement_reducing_modifier * difficulty: return ""
 	if !enemy_counter.has(data.entity_name): enemy_counter[data.entity_name] = 0
 	if enemy_counter[data.entity_name] >= data.max_number_per_wave: return ""
-	if difficulty < data.min_generation: return ""
+	if game_data.get_player_data("bounty") < data.min_bounty: return ""
 	
 	# increases the chance of heavy enemies to spawn by the end of the wave
 	if data.spawn_chance < MAX_HEAVY_ENEMY_SPAWN_CHANCE: 

@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "start"
-length = 3.5
+length = 3.0
 step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("logo_container/12gauged_logo:modulate")
@@ -42,7 +42,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 3 ),
+"times": PoolRealArray( 2.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -60,10 +60,10 @@ anchor_bottom = 1.0
 
 [node name="12gauged_logo" type="TextureRect" parent="logo_container"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 77.0
-margin_top = 56.0
-margin_right = 162.0
-margin_bottom = 78.0
+margin_left = 63.0
+margin_top = 52.0
+margin_right = 177.0
+margin_bottom = 82.0
 texture = ExtResource( 3 )
 
 [node name="comp_method_caller" parent="." instance=ExtResource( 2 )]

@@ -1,12 +1,11 @@
 extends KinematicBody2D
 class_name Entity
 
-
-
 signal state_changed(new_state, old_state)
 signal dead(id)
 signal hurt()
 signal deleted()
+signal killed_by_player()
 signal frozen()
 signal unfrozen()
 signal self_give(node)
@@ -138,6 +137,7 @@ func apply_damage(damage: int):
 	if damage <= 0: return
 	if damage >= get_stat("health"):
 		die()
+		emit_signal("killed_by_player")
 		return
 	emit_signal("hurt")
 	set_stat("health", get_stat("health") - damage)

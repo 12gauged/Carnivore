@@ -36,3 +36,6 @@ signal special_attack_available
 
 # warning-ignore:unused_signal
 signal enter_eat_state_request
+
+# warning-ignore:unused_signal
+signal bounty_increased
