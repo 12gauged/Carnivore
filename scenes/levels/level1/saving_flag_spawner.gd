@@ -1,16 +1,13 @@
 extends Node2D
 
-const BOUNTY_OFFSET = 100
-
 onready var FlagSpawner: Node2D = $flag_spawner
 var can_spawn: bool = true
+var bounty_offset: int = 400
 var target_bounty: int = 0
 var target_bounty_multiplier
 
 func _ready():
-	var player_bounty: float = game_data.get_player_data("bounty")
-	target_bounty_multiplier = int(ceil(player_bounty / 100.0 * int(player_bounty > 100)) + 1)
-	target_bounty = game_data.get_player_data("bounty") + BOUNTY_OFFSET * target_bounty_multiplier
+	target_bounty = game_data.get_player_data("bounty") + bounty_offset
 
 
 func _process(delta):
@@ -29,5 +26,5 @@ func _on_part_arena_wave_started():
 	if !can_spawn: return
 	if game_data.level_player_bounty >= target_bounty:
 		FlagSpawner.spawn_entity()
-		target_bounty += BOUNTY_OFFSET
-		target_bounty *= target_bounty_multiplier
+		bounty_offset *= 2
+		target_bounty += bounty_offset
