@@ -56,14 +56,16 @@ var resources: Dictionary = {
 		"spear_projectile": preload("res://projectiles/spear/spear_projectile.tscn"),
 		"fire_area": preload("res://projectiles/fire_area/fire_area.tscn"),
 		
-		"stone_drop": preload("res://entities/drops/stone/stone_drop.tscn"),
+		"saving_flag": preload("res://entities/saving_flag/saving_flag.tscn"),
 		
+		"stone_drop": preload("res://entities/drops/stone/stone_drop.tscn"),
 		"meat_drop": preload("res://entities/drops/meat/meat.tscn")
 	},
 	"particles": {
 		"pickup": preload("res://particles/pickup/pickup_particle.tscn"),
 		"entity_death": preload("res://particles/entity/entity_death_particle.tscn"),
 		"entity_ground_slam": preload("res://particles/entity/entity_ground_slam_particle.tscn"),
-		"bounty_indicator": preload("res://particles/entity/bounty_indicator.tscn")
+		"bounty_indicator": preload("res://particles/entity/bounty_indicator.tscn"),
+		"progress_saved_indicator": preload("res://particles/entity/progress_saved_indicator.tscn")
 	}
 }

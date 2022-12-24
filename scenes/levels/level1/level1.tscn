@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://world/level1/vegetation/trees/tree1.png" type="Texture" id=21]
 [ext_resource path="res://world/level1/vegetation/trees/tree0.png" type="Texture" id=22]
 [ext_resource path="res://world/level1/tilemap/fences_tilemap.png" type="Texture" id=23]
+[ext_resource path="res://scenes/levels/level1/saving_flag_spawner.gd" type="Script" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -525,6 +526,16 @@ event = "tutorial_finished"
 emitter = "game_events"
 event = "spawn_tutorial_ant"
 
+[node name="saving_flag_spawner" type="Node2D" parent="objects"]
+script = ExtResource( 24 )
+
+[node name="flag_spawner" parent="objects/saving_flag_spawner" instance=ExtResource( 2 )]
+position = Vector2( 128, 64 )
+entity_name = "saving_flag"
+entity_group = "saving_flags"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
 [node name="part_camera" parent="." instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 128, 64 )
@@ -544,6 +555,7 @@ anims/start = SubResource( 2 )
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]
 [connection signal="event_received" from="objects/part_arena/comp_event_receiver" to="objects/part_arena/arena_start_delay" method="start_timer"]
 [connection signal="event_received" from="objects/part_arena/spawn_tutorial_enemy" to="objects/part_arena" method="spawn_new_enemy_uncounted"]
+[connection signal="entity_spawned" from="objects/saving_flag_spawner/flag_spawner" to="objects/saving_flag_spawner" method="_on_flag_spawner_entity_spawned"]
 
 [editable path="objects/decoration/houses/mushroom_house_short"]
 [editable path="objects/decoration/houses/mushroom_house_tall2"]

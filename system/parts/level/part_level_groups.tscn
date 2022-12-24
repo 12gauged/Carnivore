@@ -10,4 +10,4 @@
 
 [node name="particles" type="YSort" parent="." groups=["particles"]]
 
-[node name="healing_plants" type="YSort" parent="." groups=["healing_plants"]]
+[node name="saving_flags" type="YSort" parent="." groups=["saving_flags"]]
