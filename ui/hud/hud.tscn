@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.1, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 0 ) ]
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -59,7 +59,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.6, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 0 ) ]
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="hud" type="CanvasLayer"]
@@ -114,7 +114,6 @@ align = 1
 script = ExtResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="root/top_elements/status_bars/horizontal_margin/bounty_label"]
-autoplay = "highlight_long"
 anims/highlight = SubResource( 4 )
 anims/highlight_long = SubResource( 5 )
 
@@ -214,6 +213,9 @@ margin_top = -67.5
 margin_right = 120.0
 margin_bottom = 67.5
 script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
 platform = "desktop"
 
 [node name="darker_colors" type="ColorRect" parent="root"]
