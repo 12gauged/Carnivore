@@ -34,6 +34,18 @@ text = "ui.victory_screen.village_safe"
 align = 1
 uppercase = true
 
+[node name="bounty_container" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="bounty" type="Label" parent="bounty_container"]
+modulate = Color( 1, 1, 0, 1 )
+margin_right = 240.0
+margin_bottom = 10.0
+theme = ExtResource( 1 )
+align = 1
+
 [node name="v_button_container" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0

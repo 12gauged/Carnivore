@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/wide/wide_button.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=8]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/settings_screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=10]
+[ext_resource path="res://ui/hud/overlay.gd" type="Script" id=11]
+[ext_resource path="res://scenes/ui/pop_ups/warning/popup_warn.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -30,6 +32,22 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 2 )
 shader_param/active = false
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform float gray_amount = 4.0;
+
+
+void fragment() {
+	vec4 final_color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	final_color.rgb /= gray_amount;
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/gray_amount = 4.0
 
 [node name="pause_screen" type="Control"]
 pause_mode = 2
@@ -107,19 +125,19 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 8 )
 
-[node name="unpause_method_caller" parent="pause_ui_container/grid_container/h_grid_container/home_button" instance=ExtResource( 5 )]
-position = Vector2( -42, 21 )
-method = {
-"caller": "game_functions",
-"method": "resume_game"
-}
-
-[node name="go_to_main_menu_method_caller" parent="pause_ui_container/grid_container/h_grid_container/home_button" instance=ExtResource( 5 )]
-position = Vector2( -42, 21 )
+[node name="go_to_main_menu_method_caller" parent="pause_ui_container" instance=ExtResource( 5 )]
+position = Vector2( 79, 99 )
 method = {
 "args": [ "change_scene_request", "main_menu" ],
 "caller": "game_events",
 "method": "emit_signal"
+}
+
+[node name="unpause_method_caller" parent="pause_ui_container" instance=ExtResource( 5 )]
+position = Vector2( 79, 99 )
+method = {
+"caller": "game_functions",
+"method": "resume_game"
 }
 
 [node name="settings_ui_container" type="Control" parent="."]
@@ -131,13 +149,24 @@ script = ExtResource( 10 )
 [node name="settings" parent="settings_ui_container" instance=ExtResource( 9 )]
 mouse_filter = 1
 
+[node name="popup_warn" parent="." instance=ExtResource( 12 )]
+visible = false
+
+[node name="darker_colors" type="ColorRect" parent="popup_warn"]
+pause_mode = 2
+show_behind_parent = true
+material = SubResource( 7 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 11 )
+
 [connection signal="paused" from="." to="pause_ui_container" method="show"]
 [connection signal="paused" from="." to="settings_ui_container" method="hide"]
 [connection signal="pressed" from="pause_ui_container/grid_container/resume_button" to="." method="toggle_pause"]
 [connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/settings_button" to="pause_ui_container" method="hide"]
 [connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/settings_button" to="settings_ui_container" method="show"]
-[connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/home_button" to="pause_ui_container/grid_container/h_grid_container/home_button/unpause_method_caller" method="call_method"]
-[connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/home_button" to="pause_ui_container/grid_container/h_grid_container/home_button/go_to_main_menu_method_caller" method="call_method"]
+[connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/home_button" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="settings_ui_container/settings/main_settings_container/home_button_container/CenterContainer/small_button" to="pause_ui_container" method="show"]
 [connection signal="pressed" from="settings_ui_container/settings/main_settings_container/home_button_container/CenterContainer/small_button" to="settings_ui_container" method="hide"]
 
@@ -151,3 +180,6 @@ mouse_filter = 1
 [editable path="settings_ui_container/settings/main_settings_container/elements/main_container/tab_buttons/language_settings"]
 [editable path="settings_ui_container/settings/main_settings_container/elements/main_container/tab_buttons/control_settings"]
 [editable path="settings_ui_container/settings/main_settings_container/elements/main_container/tab_buttons/storage_settings"]
+[editable path="popup_warn"]
+[editable path="popup_warn/CenterContainer/popup_warn/VBoxContainer2/button_holder/agree"]
+[editable path="popup_warn/CenterContainer/popup_warn/VBoxContainer2/button_holder/disagree"]

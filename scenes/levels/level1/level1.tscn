@@ -417,7 +417,7 @@ event = "spawn_tutorial_stone"
 [node name="part_arena" parent="objects" groups=["arena"] instance=ExtResource( 5 )]
 FILLER_ENEMY = "ant"
 enemy_spawn_data = [ ExtResource( 18 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 15 ) ]
-number_of_waves = 4
+number_of_waves = 8
 number_of_extra_waves_per_gen = 4
 enemies_per_wave = 3
 time_between_waves = 5

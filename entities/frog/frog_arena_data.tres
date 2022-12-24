@@ -9,4 +9,4 @@ wave_requirement = 6
 wave_requirement_reducing_modifier = 3.0
 max_number_per_wave = 1
 spawn_chance = 20
-min_bounty = 200
+min_bounty = 500

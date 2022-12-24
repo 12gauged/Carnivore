@@ -6,6 +6,7 @@ signal exited_eat_state
 signal healing
 
 
+const HUNGER_DECREASE_DELAY_WHEN_FULL = 1.5
 const HUNGER_DECREASE_DELAY = 3.0
 const ENERGY_DECREASE_DELAY = 0.8
 const HUNGER_DECREASE_DELAY_TUTORIAL = 4.0
@@ -13,8 +14,6 @@ const HUNGER_DECREASE_DELAY_TUTORIAL = 4.0
 const HUNGER_DAMAGE = 1
 const DAMAGE_CAMERA_SHAKE_DURATION = 0.3
 const DAMAGE_CAMERA_SHAKE_INTENSITY = 0.8
-
-const GROUND_SLAM_COST = 3
 
 export(int) var MAX_HUNGER = 6
 export(int) var MAX_ENERGY = 6
@@ -170,6 +169,10 @@ func reset_stat_decrease_timer(mode: String):
 	var player_bounty = game_data.get_player_data("bounty")
 	var hunger_wait_time = HUNGER_DECREASE_DELAY_TUTORIAL if player_bounty == game_data.DEFAULT_BOUNTY else HUNGER_DECREASE_DELAY
 	var energy_wait_time = ENERGY_DECREASE_DELAY
+	
+	if get_stat("energy") == MAX_ENERGY:
+		hunger_wait_time = HUNGER_DECREASE_DELAY_WHEN_FULL
+	debug_log.dprint("hunger_wait_time: %s" % hunger_wait_time)
 	
 	match mode:
 			"hunger": HungerDecreaseTimer.wait_time = hunger_wait_time

@@ -20,6 +20,7 @@ func _ready():
 	
 func set_player_bounty(value):
 	player_bounty = value
+	game_data.level_player_bounty = player_bounty
 	self.text = str(player_bounty)	
 
 
