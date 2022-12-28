@@ -21,6 +21,7 @@ onready var TutorialLabel: Label = $HBoxContainer/VBoxContainer/TutorialTextBox/
 
 
 func _ready():
+	end_tutorial()
 	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY:
 		end_tutorial()
 		return
@@ -28,5 +29,5 @@ func _ready():
 	
 		
 func end_tutorial():
-	TutorialLabel.visible = false
+	self.visible = false
 	game_events.emit_signal("tutorial_finished")

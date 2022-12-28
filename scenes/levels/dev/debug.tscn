@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://system/parts/entity/part_camera_control.tscn" type="PackedScene" id=5]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://system/data/level_data.gd" type="Script" id=7]
+[ext_resource path="res://entities/saving_flag/saving_flag.tscn" type="PackedScene" id=8]
 
 [node name="debug" type="Node2D"]
 script = ExtResource( 7 )
@@ -34,7 +35,6 @@ position = Vector2( 203, 78 )
 entity_name = "frog"
 entity_group = "enemies"
 deletion_signal = "deleted"
-auto_spawn = true
 
 [node name="drop_spawner" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 32, 59 )
@@ -67,6 +67,9 @@ entity_group = "drops"
 deletion_signal = "interacted"
 auto_spawn = true
 respawn = true
+
+[node name="saving_flag" parent="objects" instance=ExtResource( 8 )]
+position = Vector2( -80, 71 )
 
 [node name="part_camera" parent="." instance=ExtResource( 4 )]
 position = Vector2( 49, 45 )

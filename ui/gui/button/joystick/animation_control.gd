@@ -10,7 +10,7 @@ onready var JoystickTutorialButtonPivot := $button_pivot/tutorial_stick_pivot
 
 
 func play_tutorial_animation():
-	JoystickButton.modulate.a = 1.0
+	JoystickButton.modulate.a = 0.0
 	JoystickTutorialButtonPivot.show()
 	SpinningButtonAnimPlayer.call("play" if !play_backwards else "play_backwards","spin")
 	

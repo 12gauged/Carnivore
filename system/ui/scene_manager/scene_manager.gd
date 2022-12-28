@@ -12,7 +12,7 @@ func _ready():
 func _on_change_scene_request(new_scene, fading: bool = true, fading_speed: float = 1.0):
 	scene_ref = resources.get_resource("scenes", new_scene)
 	
-	if not "level" in new_scene: ## Resets the level player bounty when leaving the level
+	if not "level" in new_scene and new_scene != "village_saved_screen": ## Resets the level player bounty when leaving the level
 		game_data.level_player_bounty = 0
 	
 	if fading:

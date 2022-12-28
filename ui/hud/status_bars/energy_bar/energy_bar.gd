@@ -16,15 +16,16 @@ func set_status(value: int, animate: bool = true):
 
 	if energy_difference < 0:
 		for i in range(abs(energy_difference)):
-			var icon_id = value + (i - 1)
+			var icon_id = value
 			if animate: Icons[icon_id].play_empty_anim()
-			else: Icons[icon_id].visible = false			
+			else: Icons[icon_id].visible = false		
 			
 	elif energy_difference > 0:
 		for i in range(energy_difference):
 			var icon_id = value - (i + 1)
 			if animate: 
 				Icons[icon_id].play_fill_anim()
+				Icons[icon_id].visible = true
 			else: Icons[icon_id].visible = true
 		if value < max_bar_size: play_increase_sound()
 		else: play_full_sound()
