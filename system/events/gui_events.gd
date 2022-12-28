@@ -16,7 +16,7 @@ signal text_box_request(texts)
 signal text_box_skipped
 
 # warning-ignore:unused_signal
-signal warning_request(id, text)
+signal warning_request(id, text, show_agree_button, show_disagree_button)
 # warning-ignore:unused_signal
 signal warning_request_accepted(id)
 # warning-ignore:unused_signal

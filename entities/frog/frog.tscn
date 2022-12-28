@@ -306,10 +306,16 @@ disabled = true
 TAGS = [ "FROG" ]
 damage = 4
 delete_on_hit = false
+hit_delay = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hitbox"]
 rotation = 1.5708
 shape = SubResource( 7 )
+
+[node name="disable_timer" type="Timer" parent="part_hitbox"]
+wait_time = 0.025
+one_shot = true
+script = ExtResource( 18 )
 
 [node name="enemy_loot_spawner" parent="." instance=ExtResource( 17 )]
 
@@ -389,6 +395,7 @@ particle_id = "bounty_indicator"
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
+[connection signal="timeout" from="part_hitbox/disable_timer" to="part_hitbox" method="_disable_request"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="state_entered" from="part_state_handler/SPAWN" to="part_state_handler/SPAWN/spawn_sound_effect" method="play_sound"]
@@ -401,4 +408,4 @@ particle_id = "bounty_indicator"
 [connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_state_handler/JUMP/land_sound_effect" method="play_sound"]
 [connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_particle_emitter" method="emit_particle"]
 [connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_camera_shaker" method="shake_camera"]
-[connection signal="particle_finished" from="part_particle_emitter" to="part_hitbox" method="_disable_request"]
+[connection signal="jump_finished" from="part_state_handler/JUMP/comp_movement_jump" to="part_hitbox/disable_timer" method="start_timer"]

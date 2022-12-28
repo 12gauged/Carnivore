@@ -18,6 +18,7 @@ func _ready():
 	set_physics_process(continuous_hits)
 	
 func _physics_process(_delta):
+	# only runs when continuous_hits is true
 	if !is_instance_valid(DetectedArea): return
 	if time_counter >= hit_delay:
 		DetectedArea.emit_signal("hit_detected", self)

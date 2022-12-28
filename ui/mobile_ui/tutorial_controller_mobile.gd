@@ -82,7 +82,7 @@ func _on_meat_consumed():
 
 func _on_timer_timeout():
 	match tutorial_stage:
-		MOVEMENT: 
+		MOVEMENT:
 			skip_tutorial_stage(pick_stone_tutorial_text, PICK_STONE)
 		HUNGER:
 			end_tutorial()

@@ -155,7 +155,7 @@ entity_name = "stone_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 respawn = true
-respawn_radius = Vector2( 5, 5 )
+respawn_delay = 1.0
 
 [node name="rock_spawner2" parent="." instance=ExtResource( 7 )]
 position = Vector2( -24, -32 )
@@ -163,13 +163,14 @@ entity_name = "stone_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 respawn = true
-respawn_radius = Vector2( 5, 5 )
+respawn_delay = 1.0
 
 [node name="rock_spawner3" parent="." instance=ExtResource( 7 )]
 entity_name = "stone_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 respawn = true
+respawn_delay = 1.0
 respawn_radius = Vector2( 5, 5 )
 
 [connection signal="deleted" from="." to="part_particle_emitter" method="emit_particle"]

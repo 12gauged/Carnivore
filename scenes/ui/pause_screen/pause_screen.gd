@@ -44,7 +44,7 @@ func _on_arena_ended():
 
 
 func _on_home_button_pressed():
-	gui_events.emit_signal("warning_request", "lose_progress", "ui.pause_screen.lose_progress")
+	gui_events.emit_signal("warning_request", "lose_progress", "ui.pause_screen.lose_progress", true, true)
 	gui_events.connect("warning_request_accepted", self, "_on_warning_accepted")
 
 func _on_warning_accepted(warning_id: String):

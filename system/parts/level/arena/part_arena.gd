@@ -62,8 +62,6 @@ func _ready():
 	var player_bounty: float = game_data.get_player_data("bounty")
 	difficulty = int(ceil(player_bounty / 100.0 * int(player_bounty > 100)))
 	number_of_waves += number_of_extra_waves_per_gen * difficulty
-	debug_log.dprint("difficulty: %s" % difficulty)
-	debug_log.dprint("number_of_waves: %s" % number_of_waves)
 	
 	initial_max_enemy_number = max_enemy_number + ceil(max_enemy_counter_modifier * difficulty)
 	initial_enemies_per_wave_value = enemies_per_wave

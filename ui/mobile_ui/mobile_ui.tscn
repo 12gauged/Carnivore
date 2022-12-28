@@ -64,6 +64,9 @@ alignment = 2
 margin_top = 110.0
 margin_bottom = 110.0
 
+[node name="background" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" index="0"]
+play_backwards = true
+
 [node name="TouchScreenButton" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot" index="1"]
 normal = ExtResource( 5 )
 input_event = "player_shooting_direction_updated"

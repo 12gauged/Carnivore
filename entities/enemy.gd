@@ -15,6 +15,7 @@ func _ready():
 	
 func _on_deleted():
 	player_events.emit_signal("bounty_increased", bounty_value)
+	game_data.level_player_bounty += bounty_value
 	camera_events.emit_signal("camera_shake_request", 0.2, 2)
 	
 func _on_damage_received(Hitbox: DetectionBox):

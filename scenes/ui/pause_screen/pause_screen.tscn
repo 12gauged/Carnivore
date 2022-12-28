@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/wide/wide_button.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=10]
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=11]
 [ext_resource path="res://scenes/ui/pop_ups/warning/popup_warn.tscn" type="PackedScene" id=12]
+[ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/gui/icons/debug_icon.png" type="Texture" id=14]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -161,6 +163,49 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 11 )
 
+[node name="debug_button_holder" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="debug_button_holder"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="debug_button_holder/VBoxContainer"]
+margin_top = 18.0
+margin_right = 40.0
+margin_bottom = 38.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="debug_button_holder/VBoxContainer/HBoxContainer"]
+margin_right = 5.0
+margin_bottom = 20.0
+custom_constants/margin_left = 5
+
+[node name="small_button" parent="debug_button_holder/VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 5.0
+margin_right = 25.0
+
+[node name="icon" parent="debug_button_holder/VBoxContainer/HBoxContainer/small_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 14 )
+
+[node name="comp_event_caller" parent="debug_button_holder/VBoxContainer/HBoxContainer/small_button" instance=ExtResource( 13 )]
+event = "toggle_debug_log"
+
+[node name="MarginContainer" type="MarginContainer" parent="debug_button_holder/VBoxContainer"]
+margin_top = 38.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/margin_bottom = 2
+
 [connection signal="paused" from="." to="pause_ui_container" method="show"]
 [connection signal="paused" from="." to="settings_ui_container" method="hide"]
 [connection signal="pressed" from="pause_ui_container/grid_container/resume_button" to="." method="toggle_pause"]
@@ -169,6 +214,7 @@ script = ExtResource( 11 )
 [connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/home_button" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="settings_ui_container/settings/main_settings_container/home_button_container/CenterContainer/small_button" to="pause_ui_container" method="show"]
 [connection signal="pressed" from="settings_ui_container/settings/main_settings_container/home_button_container/CenterContainer/small_button" to="settings_ui_container" method="hide"]
+[connection signal="pressed" from="debug_button_holder/VBoxContainer/HBoxContainer/small_button" to="debug_button_holder/VBoxContainer/HBoxContainer/small_button/comp_event_caller" method="call_event"]
 
 [editable path="pause_ui_container/grid_container/resume_button"]
 [editable path="pause_ui_container/grid_container/h_grid_container/settings_button"]
@@ -183,3 +229,4 @@ script = ExtResource( 11 )
 [editable path="popup_warn"]
 [editable path="popup_warn/CenterContainer/popup_warn/VBoxContainer2/button_holder/agree"]
 [editable path="popup_warn/CenterContainer/popup_warn/VBoxContainer2/button_holder/disagree"]
+[editable path="debug_button_holder/VBoxContainer/HBoxContainer/small_button"]
