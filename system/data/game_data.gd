@@ -45,7 +45,9 @@ var current_level: String = "" setget set_current_level, get_current_level
 var current_level_time: Array = [] setget set_current_level_time, get_current_level_time
 var current_arena_wave: int = 1 setget set_current_wave, get_current_wave
 var current_player_state: String = ""
+var initial_player_bounty
 var level_player_bounty: int = 0
+var total_level_player_bounty: int = 0
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 

@@ -1,15 +1,15 @@
 extends Node2D
 
 
-const TUTORIAL_BOUNTY_OFFSET = 200
+const TUTORIAL_BOUNTY_OFFSET = 180
 const BOUNTY_OFFSET_MULTIPLIER = 0.5
 
 onready var FlagSpawner: Node2D = $flag_spawner
 var can_spawn: bool = true
-var initial_player_bounty: int = 0
 var bounty_offset: int = 0
 var target_bounty: int = 0
 var target_bounty_multiplier
+var initial_player_bounty = 0
 
 
 func _ready():
