@@ -15,7 +15,7 @@ func set_status(value: int, animate: bool = true):
 	var energy_difference = value - last_status_value
 
 	if energy_difference < 0:
-		for i in range(abs(energy_difference)):
+		for _i in range(abs(energy_difference)):
 			var icon_id = value
 			if animate: Icons[icon_id].play_empty_anim()
 			else: Icons[icon_id].visible = false		

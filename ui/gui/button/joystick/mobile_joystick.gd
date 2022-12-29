@@ -8,9 +8,9 @@ extends TouchScreenButton
 signal joystick_pressed
 signal joystick_released
 signal joystick_in_use
+signal joystick_returned
 
 export(String) var input_event = "player_movement_direction_updated"
-export(bool) var register_center_touches = false
 export(bool) var read_touches = true
 
 onready var ButtonPivot: Position2D = get_parent()
@@ -29,12 +29,14 @@ func _input(event: InputEvent):
 	
 	if read_touches: set_joystick_position_from_drag_and_touch(event)
 	else: set_joystick_position_from_drag(event)
-		
-	if event is InputEventScreenTouch and !event.is_pressed() and event.get_index() == ongoing_drag:
-		ongoing_drag = -1
-		input_events.emit_signal(input_event, Vector2.ZERO)
-		if get_button_position().length() > threshold:
-			emit_signal("joystick_released")
+	
+	if not(event is InputEventScreenTouch and !event.is_pressed() and event.get_index() == ongoing_drag): return
+	ongoing_drag = -1
+	input_events.emit_signal(input_event, Vector2.ZERO)
+	
+	var signal_to_emit = "joystick_released" if get_button_position().length() > threshold else "joystick_returned"
+	print(signal_to_emit)
+	emit_signal(signal_to_emit)
 
 func _process(delta):
 	if ongoing_drag == -1:
@@ -60,11 +62,12 @@ func set_joystick_position_from_drag(event):
 			set_global_position(event.position - button_radius)
 			set_joystick_position()
 			ongoing_drag = event.get_index()
-			input_events.emit_signal(input_event, get_value())
-			emit_signal("joystick_in_use")
 			
 			if get_button_position().length() > threshold:
 				emit_signal("joystick_pressed")
+				emit_signal("joystick_in_use")
+				input_events.emit_signal(input_event, get_value())
+				return
 
 
 func set_joystick_position() -> void:

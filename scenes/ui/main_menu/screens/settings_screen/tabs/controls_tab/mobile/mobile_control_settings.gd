@@ -35,7 +35,6 @@ func _input(event):
 
 	changes[SelectedButton.get_margin_assigned_setting_key()[0]] = new_chosen_position
 	SelectedButton.set_margins(new_chosen_position)
-	print("setting margins for: ", SelectedButton.name)
 	
 
 

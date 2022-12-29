@@ -95,6 +95,7 @@ margin_bottom = 67.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CenterContainer/player_anchor"]
 modulate = Color( 0.25, 0.25, 0.25, 1 )
 frames = SubResource( 9 )
+frame = 1
 playing = true
 
 [node name="movement_joystick" type="HBoxContainer" parent="."]

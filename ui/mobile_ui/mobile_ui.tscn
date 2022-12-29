@@ -70,10 +70,18 @@ play_backwards = true
 [node name="TouchScreenButton" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot" index="1"]
 normal = ExtResource( 5 )
 input_event = "player_shooting_direction_updated"
+read_touches = false
 
 [node name="pressed_method_caller" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" instance=ExtResource( 4 )]
 method = {
 "args": [ "player_shooting_joystick_pressed" ],
+"caller": "input_events",
+"method": "emit_signal"
+}
+
+[node name="returned_method_caller" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" instance=ExtResource( 4 )]
+method = {
+"args": [ "player_shooting_joystick_returned" ],
 "caller": "input_events",
 "method": "emit_signal"
 }
@@ -327,6 +335,7 @@ one_shot = true
 [connection signal="joystick_in_use" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="joystick_in_use" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="tutorials" method="_on_shooting_joystick_in_use"]
 [connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
+[connection signal="joystick_returned" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/returned_method_caller" method="call_method"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="released" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="enable"]
