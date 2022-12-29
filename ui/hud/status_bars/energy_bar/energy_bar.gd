@@ -1,5 +1,6 @@
 extends StatusBar
-	
+
+const MAX_ENERGY: int = 6
 onready var max_bar_size = len(Icons)
 
 	
@@ -13,6 +14,8 @@ func init_shader(value: bool):
 	
 func set_status(value: int, animate: bool = true):
 	var energy_difference = value - last_status_value
+
+	IconContainer.modulate = Color.yellow if value == MAX_ENERGY else Color.white
 
 	if energy_difference < 0:
 		for _i in range(abs(energy_difference)):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/wide/wide_button.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/ui/pop_ups/warning/popup_warn.tscn" type="PackedScene" id=12]
 [ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ui/gui/icons/debug_icon.png" type="Texture" id=14]
+[ext_resource path="res://system/random_scripts/debug_feature.gd" type="Script" id=15]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -168,6 +169,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -40.0
 margin_right = 40.0
+script = ExtResource( 15 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="debug_button_holder"]
 anchor_right = 1.0

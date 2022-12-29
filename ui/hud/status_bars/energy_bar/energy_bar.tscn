@@ -94,8 +94,8 @@ margin_right = 40.0
 [node name="energy_icon5" parent="empty_bar/icons" instance=ExtResource( 1 )]
 material = SubResource( 7 )
 use_parent_material = false
-margin_left = 40.0
-margin_right = 48.0
+margin_left = 32.0
+margin_right = 40.0
 
 [node name="increase_sound_effect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
