@@ -9,7 +9,7 @@ func _ready():
 	connect("visibility_changed", self, "_on_visibility_changed")
 	gui_events.connect("mobile_button_displacement_updated", self, "_on_displacement_updated")
 	update_displacement(game_data.get_game_setting("mobile_button_displacement", assigned_setting_value))
-		
+
 		
 func update_displacement(displacement):
 	match margin_axis:

@@ -4,7 +4,7 @@ const DEFAULT_BOUNTY = 20
 const default_player_data = {
 	"bounty": DEFAULT_BOUNTY,
 }
-var player_data: Dictionary = default_player_data
+var player_data: Dictionary = default_player_data.duplicate(true)
 
 const DEFAULT_VOLUME: float = 1.6
 
@@ -38,7 +38,7 @@ var default_game_settings: Dictionary = {
 		"pause_button": Vector2(12, 12)
 	}
 }
-var game_settings: Dictionary = default_game_settings
+var game_settings: Dictionary = default_game_settings.duplicate(true)
 
 var current_platform: String = "desktop" setget set_current_platform, get_current_platform # TEMP
 var current_level: String = "" setget set_current_level, get_current_level
@@ -57,8 +57,8 @@ func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN d
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
 	
 	
-func override_game_settings(value): game_settings = value
-func override_player_data(value): player_data = value
+func override_game_settings(value: Dictionary): game_settings = value.duplicate(true)
+func override_player_data(value: Dictionary): player_data = value.duplicate(true)
 
 
 
@@ -85,6 +85,6 @@ func get_last_lowest_level_time() -> Array: return last_lowest_level_time
 
 func reset_all_data():
 	print("RESETTING DATA")
-	player_data = default_player_data
-	game_settings = default_game_settings
+	player_data = default_player_data.duplicate(true)
+	game_settings = default_game_settings.duplicate(true)
 	global_data_manager.save_all()

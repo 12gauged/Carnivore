@@ -35,6 +35,7 @@ func _input(event):
 
 	changes[SelectedButton.get_margin_assigned_setting_key()[0]] = new_chosen_position
 	SelectedButton.set_margins(new_chosen_position)
+	print("setting margins for: ", SelectedButton.name)
 	
 
 
@@ -54,20 +55,32 @@ func _on_button_pressed(button):
 
 
 func _on_exit_without_saving_button_pressed(_id):
-	game_data.game_settings.mobile_button_displacement = previous_control_layout
+	game_data.game_settings.mobile_button_displacement = previous_control_layout.duplicate()
 	return_to_settings_screen()
 
 
 func _on_exit_and_save_button_pressed(_id):
-	debug_log.dprint("%s" % changes)
 	for change in changes.keys():	
 		gui_events.emit_signal("mobile_button_displacement_updated", change, changes[change])
-	previous_control_layout = game_data.game_settings.mobile_button_displacement
+	previous_control_layout = game_data.game_settings.mobile_button_displacement.duplicate()
 	global_data_manager.save_settings()
 	return_to_settings_screen()
 	
 
 func _on_reset_button_pressed(_id):
-	game_data.game_settings.mobile_button_displacement = game_data.default_game_settings.mobile_button_displacement
-	global_data_manager.save_settings()
-	return_to_settings_screen()
+	changes = {}
+	var button_positions: Dictionary = game_data.default_game_settings.mobile_button_displacement.duplicate()
+	for button in button_positions.keys():	
+		gui_events.emit_signal("mobile_button_displacement_updated", button, button_positions[button])
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
