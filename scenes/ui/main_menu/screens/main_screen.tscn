@@ -65,7 +65,7 @@ uppercase = true
 [node name="comp_method_caller" parent="center_elements/grid_container/play_button" instance=ExtResource( 3 )]
 position = Vector2( -64, -68 )
 method = {
-"args": [ "change_scene_request", "level1_comic", true, 0.3 ],
+"args": [ "change_scene_request", "level1", true, 0.3 ],
 "caller": "game_events",
 "method": "emit_signal"
 }
