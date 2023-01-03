@@ -42,6 +42,9 @@ var resources: Dictionary = {
 		"village_saved_screen": preload("res://scenes/ui/village_saved_screen/village_saved_screen.tscn"),
 		
 		"level1": preload("res://scenes/levels/level1/level1.tscn"),
+		"jail": preload("res://scenes/levels/jail/jail.tscn"),
+		"arena": preload("res://scenes/levels/arena/arena.tscn"),
+		
 		"level1_comic": preload("res://scenes/levels/level1/level1_comic.tscn")
 	},
 	"entities": {

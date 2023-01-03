@@ -1,0 +1,791 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://entities/frog/frog_arena_data.tres" type="Resource" id=1]
+[ext_resource path="res://entities/worm/worm_arena_data.tres" type="Resource" id=2]
+[ext_resource path="res://entities/fire_ant/fire_ant_arena_data.tres" type="Resource" id=3]
+[ext_resource path="res://entities/ant_soldier/ant_soldier_arena_data.tres" type="Resource" id=4]
+[ext_resource path="res://system/parts/level/part_player_camera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://system/components/receivers/comp_event_receiver.tscn" type="PackedScene" id=6]
+[ext_resource path="res://system/parts/entity/part_camera_control.tscn" type="PackedScene" id=7]
+[ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://music/ant_raid/ant_raid.ogg" type="AudioStream" id=9]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/levels/level1/rock_spawners.gd" type="Script" id=13]
+[ext_resource path="res://scenes/levels/level1/saving_flag_spawner.gd" type="Script" id=14]
+[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=15]
+[ext_resource path="res://system/parts/level/arena/part_arena.tscn" type="PackedScene" id=16]
+[ext_resource path="res://system/parts/level/music_manager.tscn" type="PackedScene" id=17]
+[ext_resource path="res://world/arena/arena_tilemap.png" type="Texture" id=18]
+[ext_resource path="res://system/data/level_data.gd" type="Script" id=19]
+[ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/levels/arena/ant_banner.tscn" type="PackedScene" id=21]
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+points = PoolVector2Array( 0, 0, 5, 10, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
+
+[sub_resource type="ConvexPolygonShape2D" id=16]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 6, 5, 0, 12 )
+
+[sub_resource type="ConvexPolygonShape2D" id=15]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 12, 10, 5, 0, 5 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+points = PoolVector2Array( 0, 16, 11, 10, 16, 0, 16, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=11]
+0/name = "arena_tilemap.png 0"
+0/texture = ExtResource( 18 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 32, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "arena_tilemap.png 1"
+1/texture = ExtResource( 18 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 48, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "arena_tilemap.png 2"
+2/texture = ExtResource( 18 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 48, 16, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "arena_tilemap.png 3"
+3/texture = ExtResource( 18 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 64, 16, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "arena_tilemap.png 4"
+4/texture = ExtResource( 18 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 64, 32, 16, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape = SubResource( 8 )
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+4/z_index = 0
+5/name = "arena_tilemap.png 5"
+5/texture = ExtResource( 18 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 64, 48, 16, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "arena_tilemap.png 6"
+6/texture = ExtResource( 18 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 48, 48, 16, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape = SubResource( 13 )
+6/shape_one_way = false
+6/shape_one_way_margin = 1.0
+6/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 13 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+6/z_index = 0
+7/name = "arena_tilemap.png 7"
+7/texture = ExtResource( 18 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 48, 64, 16, 16 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "arena_tilemap.png 8"
+8/texture = ExtResource( 18 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 32, 64, 16, 16 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape = SubResource( 10 )
+8/shape_one_way = false
+8/shape_one_way_margin = 1.0
+8/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+8/z_index = 0
+9/name = "arena_tilemap.png 9"
+9/texture = ExtResource( 18 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 16, 64, 16, 16 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+10/name = "arena_tilemap.png 10"
+10/texture = ExtResource( 18 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 16, 48, 16, 16 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape = SubResource( 12 )
+10/shape_one_way = false
+10/shape_one_way_margin = 1.0
+10/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 12 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+10/z_index = 0
+11/name = "arena_tilemap.png 11"
+11/texture = ExtResource( 18 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 48, 16, 16 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
+12/name = "arena_tilemap.png 12"
+12/texture = ExtResource( 18 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 0, 32, 16, 16 )
+12/tile_mode = 0
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape = SubResource( 4 )
+12/shape_one_way = false
+12/shape_one_way_margin = 1.0
+12/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+12/z_index = 0
+13/name = "arena_tilemap.png 13"
+13/texture = ExtResource( 18 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 0, 16, 16, 16 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
+13/shapes = [  ]
+13/z_index = 0
+14/name = "arena_tilemap.png 14"
+14/texture = ExtResource( 18 )
+14/tex_offset = Vector2( 0, 0 )
+14/modulate = Color( 1, 1, 1, 1 )
+14/region = Rect2( 16, 16, 16, 16 )
+14/tile_mode = 0
+14/occluder_offset = Vector2( 0, 0 )
+14/navigation_offset = Vector2( 0, 0 )
+14/shape_offset = Vector2( 0, 0 )
+14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape_one_way = false
+14/shape_one_way_margin = 0.0
+14/shapes = [  ]
+14/z_index = 0
+15/name = "arena_tilemap.png 15"
+15/texture = ExtResource( 18 )
+15/tex_offset = Vector2( 0, 0 )
+15/modulate = Color( 1, 1, 1, 1 )
+15/region = Rect2( 16, 0, 16, 16 )
+15/tile_mode = 0
+15/occluder_offset = Vector2( 0, 0 )
+15/navigation_offset = Vector2( 0, 0 )
+15/shape_offset = Vector2( 0, 0 )
+15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+15/shape_one_way = false
+15/shape_one_way_margin = 0.0
+15/shapes = [  ]
+15/z_index = 0
+16/name = "arena_tilemap.png 16"
+16/texture = ExtResource( 18 )
+16/tex_offset = Vector2( 0, 0 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 80, 16, 16, 16 )
+16/tile_mode = 0
+16/occluder_offset = Vector2( 0, 0 )
+16/navigation_offset = Vector2( 0, 0 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape_one_way = false
+16/shape_one_way_margin = 0.0
+16/shapes = [  ]
+16/z_index = 0
+17/name = "arena_tilemap.png 17"
+17/texture = ExtResource( 18 )
+17/tex_offset = Vector2( 0, 0 )
+17/modulate = Color( 1, 1, 1, 1 )
+17/region = Rect2( 96, 48, 16, 16 )
+17/tile_mode = 0
+17/occluder_offset = Vector2( 0, 0 )
+17/navigation_offset = Vector2( 0, 0 )
+17/shape_offset = Vector2( 0, 0 )
+17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+17/shape = SubResource( 6 )
+17/shape_one_way = false
+17/shape_one_way_margin = 1.0
+17/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+17/z_index = 0
+18/name = "arena_tilemap.png 18"
+18/texture = ExtResource( 18 )
+18/tex_offset = Vector2( 0, 0 )
+18/modulate = Color( 1, 1, 1, 1 )
+18/region = Rect2( 112, 16, 16, 16 )
+18/tile_mode = 0
+18/occluder_offset = Vector2( 0, 0 )
+18/navigation_offset = Vector2( 0, 0 )
+18/shape_offset = Vector2( 0, 0 )
+18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape_one_way = false
+18/shape_one_way_margin = 0.0
+18/shapes = [  ]
+18/z_index = 0
+19/name = "arena_tilemap.png 19"
+19/texture = ExtResource( 18 )
+19/tex_offset = Vector2( 0, 0 )
+19/modulate = Color( 1, 1, 1, 1 )
+19/region = Rect2( 80, 0, 16, 16 )
+19/tile_mode = 0
+19/occluder_offset = Vector2( 0, 0 )
+19/navigation_offset = Vector2( 0, 0 )
+19/shape_offset = Vector2( 0, 0 )
+19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+19/shape = SubResource( 16 )
+19/shape_one_way = false
+19/shape_one_way_margin = 1.0
+19/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 16 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+19/z_index = 0
+20/name = "arena_tilemap.png 20"
+20/texture = ExtResource( 18 )
+20/tex_offset = Vector2( 0, 0 )
+20/modulate = Color( 1, 1, 1, 1 )
+20/region = Rect2( 96, 0, 16, 16 )
+20/tile_mode = 0
+20/occluder_offset = Vector2( 0, 0 )
+20/navigation_offset = Vector2( 0, 0 )
+20/shape_offset = Vector2( 0, 0 )
+20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+20/shape_one_way = false
+20/shape_one_way_margin = 0.0
+20/shapes = [  ]
+20/z_index = 0
+21/name = "arena_tilemap.png 21"
+21/texture = ExtResource( 18 )
+21/tex_offset = Vector2( 0, 0 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 112, 0, 16, 16 )
+21/tile_mode = 0
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape = SubResource( 15 )
+21/shape_one_way = false
+21/shape_one_way_margin = 1.0
+21/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 15 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+21/z_index = 0
+22/name = "arena_tilemap.png 22"
+22/texture = ExtResource( 18 )
+22/tex_offset = Vector2( 0, 0 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 96, 16, 16, 16 )
+22/tile_mode = 0
+22/occluder_offset = Vector2( 0, 0 )
+22/navigation_offset = Vector2( 0, 0 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape_one_way = false
+22/shape_one_way_margin = 0.0
+22/shapes = [  ]
+22/z_index = 0
+23/name = "arena_tilemap.png 23"
+23/texture = ExtResource( 18 )
+23/tex_offset = Vector2( 0, 0 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 96, 32, 16, 16 )
+23/tile_mode = 0
+23/occluder_offset = Vector2( 0, 0 )
+23/navigation_offset = Vector2( 0, 0 )
+23/shape_offset = Vector2( 0, 0 )
+23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape_one_way = false
+23/shape_one_way_margin = 0.0
+23/shapes = [  ]
+23/z_index = 0
+24/name = "arena_tilemap.png 24"
+24/texture = ExtResource( 18 )
+24/tex_offset = Vector2( 0, 0 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 128, 0, 16, 16 )
+24/tile_mode = 0
+24/occluder_offset = Vector2( 0, 0 )
+24/navigation_offset = Vector2( 0, 0 )
+24/shape_offset = Vector2( 0, 0 )
+24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape_one_way = false
+24/shape_one_way_margin = 0.0
+24/shapes = [  ]
+24/z_index = 0
+25/name = "arena_tilemap.png 25"
+25/texture = ExtResource( 18 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 128, 16, 16, 16 )
+25/tile_mode = 0
+25/occluder_offset = Vector2( 0, 0 )
+25/navigation_offset = Vector2( 0, 0 )
+25/shape_offset = Vector2( 0, 0 )
+25/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+25/shape_one_way = false
+25/shape_one_way_margin = 0.0
+25/shapes = [  ]
+25/z_index = 0
+26/name = "arena_tilemap.png 26"
+26/texture = ExtResource( 18 )
+26/tex_offset = Vector2( 0, 0 )
+26/modulate = Color( 1, 1, 1, 1 )
+26/region = Rect2( 128, 32, 16, 16 )
+26/tile_mode = 0
+26/occluder_offset = Vector2( 0, 0 )
+26/navigation_offset = Vector2( 0, 0 )
+26/shape_offset = Vector2( 0, 0 )
+26/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+26/shape_one_way = false
+26/shape_one_way_margin = 0.0
+26/shapes = [  ]
+26/z_index = 0
+27/name = "arena_tilemap.png 27"
+27/texture = ExtResource( 18 )
+27/tex_offset = Vector2( 0, 0 )
+27/modulate = Color( 1, 1, 1, 1 )
+27/region = Rect2( 128, 48, 16, 16 )
+27/tile_mode = 0
+27/occluder_offset = Vector2( 0, 0 )
+27/navigation_offset = Vector2( 0, 0 )
+27/shape_offset = Vector2( 0, 0 )
+27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape_one_way = false
+27/shape_one_way_margin = 0.0
+27/shapes = [  ]
+27/z_index = 0
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 1.5, 1.5 ) ]
+}
+
+[node name="arena" type="Node2D"]
+script = ExtResource( 19 )
+level_name = "arena"
+
+[node name="arena_tilemap" type="TileMap" parent="."]
+tile_set = SubResource( 11 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 1, 15, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 1, 0, 65536, 13, 0, 65537, 14, 0, 65538, 22, 0, 65541, 20, 0, 65543, 22, 0, 65545, 20, 0, 65549, 20, 0, 65551, 22, 0, 65554, 2, 0, 65555, 3, 0, 131072, 12, 0, 131073, 22, 0, 131074, 23, 0, 131075, 23, 0, 131076, 20, 0, 131078, 22, 0, 131080, 23, 0, 131081, 22, 0, 131082, 23, 0, 131083, 23, 0, 131084, 20, 0, 131086, 22, 0, 131088, 23, 0, 131089, 22, 0, 131090, 23, 0, 131091, 4, 0, 196608, 12, 0, 196609, 19, 0, 196610, 17, 0, 196611, 17, 0, 196612, 17, 0, 196613, 17, 0, 196614, 17, 0, 196615, 17, 0, 196616, 17, 0, 196617, 17, 0, 196618, 17, 0, 196619, 17, 0, 196620, 17, 0, 196621, 17, 0, 196622, 17, 0, 196623, 17, 0, 196624, 17, 0, 196625, 17, 0, 196626, 21, 0, 196627, 4, 0, 262144, 12, 0, 262145, 16, 0, 262157, 24, 0, 262162, 18, 0, 262163, 4, 0, 327680, 12, 0, 327684, 24, 0, 327685, 25, 0, 327686, 27, 0, 327688, 25, 0, 327689, 26, 0, 327692, 25, 0, 327695, 27, 0, 327697, 27, 0, 327699, 4, 0, 393216, 12, 0, 393218, 27, 0, 393219, 26, 0, 393231, 25, 0, 393235, 4, 0, 458752, 12, 0, 458765, 26, 0, 458771, 4, 0, 524288, 12, 0, 524293, 25, 0, 524296, 27, 0, 524300, 24, 0, 524307, 4, 0, 589824, 12, 0, 589826, 26, 0, 589829, 26, 0, 589833, 25, 0, 589840, 26, 0, 589843, 4, 0, 655360, 12, 0, 655362, 24, 0, 655371, 27, 0, 655379, 4, 0, 720896, 12, 0, 720904, 24, 0, 720910, 26, 0, 720915, 4, 0, 786432, 12, 0, 786436, 26, 0, 786438, 27, 0, 786447, 25, 0, 786449, 24, 0, 786451, 4, 0, 851968, 12, 0, 851971, 25, 0, 851978, 26, 0, 851987, 4, 0, 917504, 12, 0, 917515, 25, 0, 917523, 4, 0, 983040, 12, 0, 983044, 27, 0, 983047, 26, 0, 983054, 25, 0, 983056, 26, 0, 983059, 4, 0, 1048576, 12, 0, 1048579, 26, 0, 1048584, 24, 0, 1048586, 26, 0, 1048589, 24, 0, 1048595, 4, 0, 1114112, 11, 0, 1114113, 10, 0, 1114130, 6, 0, 1114131, 5, 0, 1179649, 9, 0, 1179650, 8, 0, 1179651, 8, 0, 1179652, 8, 0, 1179653, 8, 0, 1179654, 8, 0, 1179655, 8, 0, 1179656, 8, 0, 1179657, 8, 0, 1179658, 8, 0, 1179659, 8, 0, 1179660, 8, 0, 1179661, 8, 0, 1179662, 8, 0, 1179663, 8, 0, 1179664, 8, 0, 1179665, 8, 0, 1179666, 7, 0 )
+
+[node name="level1_tilemap" parent="." instance=ExtResource( 20 )]
+tile_data = PoolIntArray( 327692, 1, 0 )
+
+[node name="sound_streams" type="Node2D" parent="." groups=["sound_streams"]]
+
+[node name="music_manager" parent="." instance=ExtResource( 17 )]
+track_list = [ ExtResource( 9 ) ]
+stream_mode = 2
+
+[node name="objects" type="YSort" parent="."]
+
+[node name="decoration" type="YSort" parent="objects"]
+
+[node name="ant_banner" parent="objects/decoration" instance=ExtResource( 21 )]
+position = Vector2( 64, 32 )
+
+[node name="ant_banner2" parent="objects/decoration" instance=ExtResource( 21 )]
+position = Vector2( 256, 32 )
+
+[node name="entities" type="YSort" parent="objects"]
+
+[node name="player" parent="objects/entities" instance=ExtResource( 11 )]
+position = Vector2( 127, 86 )
+
+[node name="part_camera_control" parent="objects/entities/player" instance=ExtResource( 7 )]
+
+[node name="part_level_groups" parent="objects/entities" instance=ExtResource( 12 )]
+
+[node name="rock_spawners" type="YSort" parent="objects"]
+script = ExtResource( 13 )
+
+[node name="Spawners" type="Node2D" parent="objects/rock_spawners"]
+position = Vector2( 160, 168 )
+
+[node name="part_entity_spawner0" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( -80, 0 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner1" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( -56, -48 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner2" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( 0, -64 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner3" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( 56, -48 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner4" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( 80, 0 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner5" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( 56, 48 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner6" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( 0, 64 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner7" parent="objects/rock_spawners/Spawners" instance=ExtResource( 8 )]
+position = Vector2( -56, 48 )
+entity_name = "stone_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+respawn = true
+respawn_radius = Vector2( 40, 40 )
+
+[node name="spawn_delay" type="Timer" parent="objects/rock_spawners"]
+wait_time = 0.8
+one_shot = true
+script = ExtResource( 15 )
+
+[node name="comp_event_receiver" parent="objects/rock_spawners" instance=ExtResource( 6 )]
+emitter = "game_events"
+event = "spawn_tutorial_stone"
+
+[node name="part_arena" parent="objects" groups=["arena"] instance=ExtResource( 16 )]
+position = Vector2( 160, 168 )
+FILLER_ENEMY = "ant"
+enemy_spawn_data = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ) ]
+number_of_waves = 8
+number_of_extra_waves_per_gen = 4
+enemies_per_wave = 3
+time_between_waves = 5
+
+[node name="spawners" type="Node2D" parent="objects/part_arena"]
+
+[node name="part_entity_spawner" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( 0, -72 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner2" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( -56, -48 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner3" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( -96, 0 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner4" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( -56, 48 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner5" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( 0, 80 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner6" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( 56, 48 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner7" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( 96, 0 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="part_entity_spawner8" parent="objects/part_arena/spawners" instance=ExtResource( 8 )]
+position = Vector2( 56, -48 )
+entity_group = "enemies"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 40, 40 )
+
+[node name="end_level_method" parent="objects/part_arena" instance=ExtResource( 10 )]
+method = {
+"args": [ "change_scene_request", "village_saved_screen", true, 2.0 ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="ending_freeze_method" parent="objects/part_arena" instance=ExtResource( 10 )]
+method = {
+"args": [ "freeze_player" ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
+[node name="ending_slowmo_method" parent="objects/part_arena" instance=ExtResource( 10 )]
+method = {
+"args": [ 0.5 ],
+"caller": "game_functions",
+"method": "set_time_scale"
+}
+
+[node name="stop_slowmo_method" parent="objects/part_arena" instance=ExtResource( 10 )]
+method = {
+"args": [ 1.0 ],
+"caller": "game_functions",
+"method": "set_time_scale"
+}
+
+[node name="village_savior_archievement" parent="objects/part_arena" instance=ExtResource( 10 )]
+method = {
+"args": [ "archievement_made", "village_savior", false ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
+[node name="arena_start_delay" type="Timer" parent="objects/part_arena"]
+wait_time = 0.5
+one_shot = true
+script = ExtResource( 15 )
+
+[node name="delay_for_level_ending" type="Timer" parent="objects/part_arena"]
+wait_time = 1.4
+one_shot = true
+script = ExtResource( 15 )
+
+[node name="comp_event_receiver" parent="objects/part_arena" instance=ExtResource( 6 )]
+emitter = "game_events"
+event = "tutorial_finished"
+
+[node name="spawn_tutorial_enemy" parent="objects/part_arena" instance=ExtResource( 6 )]
+emitter = "game_events"
+event = "spawn_tutorial_ant"
+
+[node name="saving_flag_spawner" type="Node2D" parent="objects"]
+position = Vector2( 160, 168 )
+script = ExtResource( 14 )
+
+[node name="flag_spawner" parent="objects/saving_flag_spawner" instance=ExtResource( 8 )]
+entity_name = "saving_flag"
+entity_group = "saving_flags"
+deletion_signal = "deleted"
+respawn_radius = Vector2( 60, 60 )
+
+[node name="part_camera" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 127, 86 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="part_camera"]
+autoplay = "start"
+anims/RESET = SubResource( 1 )
+anims/start = SubResource( 2 )
+
+[connection signal="timeout" from="objects/rock_spawners/spawn_delay" to="objects/rock_spawners" method="spawn_tutorial_stones"]
+[connection signal="event_received" from="objects/rock_spawners/comp_event_receiver" to="objects/rock_spawners/spawn_delay" method="start_timer"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_freeze_method" method="call_method"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_slowmo_method" method="call_method"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/delay_for_level_ending" method="start_timer"]
+[connection signal="wave_started" from="objects/part_arena" to="objects/saving_flag_spawner" method="_on_part_arena_wave_started"]
+[connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
+[connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]
+[connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]
+[connection signal="event_received" from="objects/part_arena/comp_event_receiver" to="objects/part_arena/arena_start_delay" method="start_timer"]
+[connection signal="event_received" from="objects/part_arena/spawn_tutorial_enemy" to="objects/part_arena" method="spawn_new_enemy_uncounted"]
+[connection signal="entity_spawned" from="objects/saving_flag_spawner/flag_spawner" to="objects/saving_flag_spawner" method="_on_flag_spawner_entity_spawned"]
+
+[editable path="objects/part_arena/village_savior_archievement"]

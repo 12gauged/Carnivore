@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world/arena/ant_banner.png" type="Texture" id=1]
+
+[node name="ant_banner" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 6 )
+texture = ExtResource( 1 )

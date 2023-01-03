@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://entities/ant_soldier/ant_soldier.gd" type="Script" id=1]
 [ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://entities/ant_soldier/ant_soldier_spear_overlay.png" type="Texture" id=13]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=14]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=15]
-[ext_resource path="res://system/archievement_sensors/generation1/friendly_fire_challenge_sensor.gd" type="Script" id=16]
 [ext_resource path="res://system/parts/part_particle_emitter.tscn" type="PackedScene" id=17]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=18]
 [ext_resource path="res://particles/entity/entity_big_death_particle.tscn" type="PackedScene" id=19]
@@ -234,9 +233,6 @@ IGNORE_TAGS = [ "ANT_SOLDIER_SPEAR", "ENEMY_PROJECTILE" ]
 position = Vector2( 0, -1 )
 shape = SubResource( 2 )
 
-[node name="friendly_fire_archievement_sensor" type="Node2D" parent="part_hurtbox"]
-script = ExtResource( 16 )
-
 [node name="enemy_loot_spawner" parent="." instance=ExtResource( 21 )]
 
 [node name="enemy_loot_spawner2" parent="." instance=ExtResource( 21 )]
@@ -318,7 +314,6 @@ particle_id = "bounty_indicator"
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
-[connection signal="hit_detected" from="part_hurtbox" to="part_hurtbox/friendly_fire_archievement_sensor" method="_on_part_hurtbox_hit_detected"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="state_exited" from="part_state_handler/SPAWN" to="texture/spear" method="show"]

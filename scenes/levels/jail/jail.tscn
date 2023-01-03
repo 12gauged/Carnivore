@@ -1,116 +1,263 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/gui/text_box/tutorial_text_box.png" type="Texture" id=3]
-[ext_resource path="res://world/level1/tilemap/fences_tilemap.png" type="Texture" id=4]
+[ext_resource path="res://world/jail/jail_tileset.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/icons/small_star_icon.png" type="Texture" id=5]
 [ext_resource path="res://system/parts/level/part_player_camera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=8]
+[ext_resource path="res://system/parts/part_tag_detector.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world/gate.png" type="Texture" id=10]
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=15]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
+[sub_resource type="ConvexPolygonShape2D" id=16]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
+[sub_resource type="ConvexPolygonShape2D" id=17]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=7]
+[sub_resource type="ConvexPolygonShape2D" id=18]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=9]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=10]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="TileSet" id=11]
-0/name = "fences_tilemap.png 0"
+[sub_resource type="TileSet" id=19]
+0/name = "jail_tileset.png 0"
 0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 48, 48 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 1
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 176, Vector2( 0, 1 ), 146, Vector2( 0, 2 ), 50, Vector2( 1, 0 ), 56, Vector2( 2, 0 ), 152, Vector2( 2, 2 ), 26 ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 16, 16 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 4 )
 0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "jail_tileset.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 16, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "jail_tileset.png 2"
+2/texture = ExtResource( 4 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 32, 0, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "jail_tileset.png 3"
+3/texture = ExtResource( 4 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 32, 16, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 16 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 1, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 5 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 2, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 6 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 2, 1 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 7 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 2, 2 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 8 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 0, 2 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 9 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 0, 1 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 10 ),
+"shape": SubResource( 16 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-0/z_index = 0
+3/z_index = 0
+4/name = "jail_tileset.png 4"
+4/texture = ExtResource( 4 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 32, 32, 16, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "jail_tileset.png 5"
+5/texture = ExtResource( 4 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 16, 32, 16, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape = SubResource( 17 )
+5/shape_one_way = false
+5/shape_one_way_margin = 1.0
+5/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 17 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+5/z_index = 0
+6/name = "jail_tileset.png 6"
+6/texture = ExtResource( 4 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 0, 32, 16, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "jail_tileset.png 7"
+7/texture = ExtResource( 4 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 16, 16, 16 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape = SubResource( 18 )
+7/shape_one_way = false
+7/shape_one_way_margin = 1.0
+7/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 18 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+7/z_index = 0
+8/name = "jail_tileset.png 8"
+8/texture = ExtResource( 4 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 48, 0, 16, 16 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "jail_tileset.png 9"
+9/texture = ExtResource( 4 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 64, 0, 16, 16 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+10/name = "jail_tileset.png 10"
+10/texture = ExtResource( 4 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 48, 16, 16, 16 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
+10/shapes = [  ]
+10/z_index = 0
+11/name = "jail_tileset.png 11"
+11/texture = ExtResource( 4 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 64, 16, 16, 16 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
+12/name = "jail_tileset.png 12"
+12/texture = ExtResource( 4 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 48, 32, 16, 16 )
+12/tile_mode = 0
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape = SubResource( 15 )
+12/shape_one_way = false
+12/shape_one_way_margin = 1.0
+12/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 15 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+12/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 4, 5.5 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 4, 5.5 )
 
 [sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 12, 5 )
+extents = Vector2( 11.5202, 5 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 28, 15 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 28, 15 )
 
 [node name="jail" type="Node2D"]
 
-[node name="fences" type="TileMap" parent="."]
-tile_set = SubResource( 11 )
+[node name="jail_tilemap" type="TileMap" parent="."]
+tile_set = SubResource( 19 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
-cell_y_sort = true
-collision_layer = 129
-collision_mask = 129
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 0, 9, 0, 0, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 2, 65536, 0, 65536, 65550, 0, 65536, 131072, 0, 65536, 131086, 0, 65536, 196608, 0, 65536, 196622, 0, 65536, 262144, 0, 65536, 262158, 0, 65536, 327680, 0, 65536, 327694, 0, 65536, 393216, 0, 65536, 393230, 0, 65536, 458752, 0, 65536, 458766, 0, 65536, 524288, 0, 65536, 524302, 0, 65536, 589824, 0, 131072, 589825, 0, 1, 589826, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 589830, 0, 1, 589831, 0, 1, 589832, 0, 1, 589833, 0, 1, 589834, 0, 1, 589835, 0, 1, 589836, 0, 1, 589837, 0, 1, 589838, 0, 131074 )
+tile_data = PoolIntArray( -196608, 0, 0, -196607, 1, 0, -196606, 1, 0, -196605, 1, 0, -196604, 1, 0, -196603, 1, 0, -196602, 1, 0, -196601, 1, 0, -196600, 1, 0, -196599, 1, 0, -196598, 1, 0, -196597, 1, 0, -196596, 1, 0, -196595, 2, 0, -131072, 7, 0, -131070, 10, 0, -131068, 8, 0, -131067, 10, 0, -131063, 10, 0, -131061, 8, 0, -131059, 3, 0, -65536, 7, 0, -65535, 10, 0, -65534, 8, 0, -65533, 10, 0, -65532, 10, 0, -65531, 8, 0, -65528, 10, 0, -65527, 8, 0, -65526, 10, 0, -65525, 8, 0, -65524, 10, 0, -65523, 3, 0, 0, 7, 0, 1, 12, 0, 2, 12, 0, 3, 12, 0, 4, 12, 0, 5, 12, 0, 8, 12, 0, 9, 12, 0, 10, 12, 0, 11, 12, 0, 12, 12, 0, 13, 3, 0, 65536, 7, 0, 65538, 9, 0, 65544, 11, 0, 65549, 3, 0, 131072, 7, 0, 131085, 3, 0, 196608, 7, 0, 196614, 9, 0, 196620, 9, 0, 196621, 3, 0, 262144, 7, 0, 262157, 3, 0, 327680, 7, 0, 327693, 3, 0, 393216, 7, 0, 393217, 9, 0, 393224, 11, 0, 393229, 3, 0, 458752, 6, 0, 458753, 5, 0, 458754, 5, 0, 458755, 5, 0, 458756, 5, 0, 458757, 5, 0, 458758, 5, 0, 458759, 5, 0, 458760, 5, 0, 458761, 5, 0, 458762, 5, 0, 458763, 5, 0, 458764, 5, 0, 458765, 4, 0 )
 
 [node name="objects" type="YSort" parent="."]
 
@@ -120,53 +267,92 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 0, 
 position = Vector2( 120, 80 )
 
 [node name="player" parent="objects/entities" instance=ExtResource( 1 )]
+position = Vector2( -8, -24 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="objects/entities/player"]
 remote_path = NodePath("../../../../part_player_camera")
 
-[node name="gate" type="Polygon2D" parent="objects"]
-position = Vector2( -270.667, 72 )
-scale = Vector2( 2.08333, 1 )
-polygon = PoolVector2Array( 176, -96, 176, -56, 200, -56, 200, -96 )
+[node name="gate" type="StaticBody2D" parent="objects"]
+position = Vector2( 112, 8 )
 
-[node name="Area2D" type="Area2D" parent="objects/gate"]
-position = Vector2( 188, -65 )
+[node name="ColorRect" type="ColorRect" parent="objects/gate"]
+margin_left = -8.0
+margin_top = -40.0
+margin_right = 8.0
+margin_bottom = -13.0
+color = Color( 0, 0, 0, 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/gate/Area2D"]
+[node name="Sprite" type="Sprite" parent="objects/gate"]
+position = Vector2( 0, -8 )
+texture = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/gate"]
+position = Vector2( -12, -4.5 )
+shape = SubResource( 20 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="objects/gate"]
+position = Vector2( 12, -5 )
+shape = SubResource( 21 )
+
+[node name="part_tag_detector" parent="objects/gate" instance=ExtResource( 9 )]
+position = Vector2( 0, -10 )
+ACCEPT_TAGS = [ "PLAYER" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/gate/part_tag_detector"]
+position = Vector2( -7.62939e-06, 0 )
 shape = SubResource( 12 )
 
+[node name="comp_method_caller" parent="objects/gate/part_tag_detector" instance=ExtResource( 8 )]
+method = {
+"args": [ "change_scene_request", "arena", true, 0.2 ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="freeze_method" parent="objects/gate/part_tag_detector" instance=ExtResource( 8 )]
+method = {
+"args": [ "freeze_player" ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
 [node name="check_bounty" type="Node2D" parent="objects"]
-position = Vector2( 38, 6 )
+position = Vector2( 56, 8 )
 
 [node name="Sprite" type="Sprite" parent="objects/check_bounty"]
-position = Vector2( 6, -9 )
+position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 
 [node name="Area2D" type="Area2D" parent="objects/check_bounty"]
-position = Vector2( 7, 26 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/check_bounty/Area2D"]
+position = Vector2( 0, 24 )
 
 [node name="Sprite" type="Sprite" parent="objects/check_bounty/Area2D"]
 scale = Vector2( 0.690476, 1 )
 texture = ExtResource( 3 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/check_bounty/Area2D"]
+shape = SubResource( 13 )
+
 [node name="upgrades" type="Node2D" parent="objects"]
-position = Vector2( 195, 7 )
+position = Vector2( 168, 8 )
 
 [node name="Sprite" type="Sprite" parent="objects/upgrades"]
-position = Vector2( 0, -10 )
+position = Vector2( 0, -16 )
 scale = Vector2( 0.1875, 0.1875 )
 texture = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="objects/upgrades"]
-position = Vector2( 0, 26 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/upgrades/Area2D"]
+position = Vector2( 0, 24 )
 
 [node name="Sprite" type="Sprite" parent="objects/upgrades/Area2D"]
 scale = Vector2( 0.690476, 1 )
 texture = ExtResource( 3 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/upgrades/Area2D"]
+shape = SubResource( 14 )
+
 [node name="part_player_camera" parent="." instance=ExtResource( 6 )]
-position = Vector2( 120, 80 )
+position = Vector2( 112, 56 )
+
+[connection signal="tag_detected" from="objects/gate/part_tag_detector" to="objects/gate/part_tag_detector/comp_method_caller" method="call_method"]
+[connection signal="tag_detected" from="objects/gate/part_tag_detector" to="objects/gate/part_tag_detector/freeze_method" method="call_method"]
