@@ -12,7 +12,7 @@ func _ready():
 	connect("deleted", self, "_on_deleted")
 	
 	if !has_node("bounty_indicator_emitter"): return
-	$BountyIndicatorEmitter.add_custom_value("bounty_value", self.bounty_value)
+	BountyIndicatorEmitter.add_custom_value("bounty_value", self.bounty_value)
 	
 func _on_deleted():
 	player_events.emit_signal("bounty_increased", bounty_value)

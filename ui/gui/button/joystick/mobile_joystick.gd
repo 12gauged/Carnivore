@@ -6,8 +6,10 @@ extends TouchScreenButton
 ## Video I watched: https://www.youtube.com/watch?v=uGyEP2LUFPg&t=0s
 
 signal joystick_pressed
+# warning-ignore:unused_signal
 signal joystick_released
 signal joystick_in_use
+# warning-ignore:unused_signal
 signal joystick_returned
 
 export(String) var input_event = "player_movement_direction_updated"

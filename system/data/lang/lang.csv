@@ -35,7 +35,7 @@ ui.pause_screen.lose_progress,are you sure? all your progress will be lost.,tem 
 ui.death_screen.game_over,game over,fim de jogo,game over,game over
 ui.victory_screen.village_safe,the village is safe,a vila foi salva,le village est en sécurité,le village est sain et sauf
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
-tutorial.movement.desktop,"move with %s, %s, %s, and %s","mova-se com %s, %s, %s e %s",untranslated,untranslated
+tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
 tutorial.throw_stone,throw the stone with the joystick,jogue a pedra com o joystick,untranslated,untranslated
 tutorial.eating,eat the meat,coma a carne,untranslated,untranslated

@@ -62,5 +62,5 @@ func _on_saving_area_body_exited(_body):
 func _on_lifetime_timer_timeout():
 	BlinkAnimationPlayer.play("blink")
 
-func _on_blink_animation_player_animation_finished(anim_name):
+func _on_blink_animation_player_animation_finished(_anim_name):
 	queue_free()

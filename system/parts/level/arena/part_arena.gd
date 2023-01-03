@@ -179,8 +179,13 @@ func end_wave():
 	
 	enemy_kill_count = 0
 	enemy_id = 0
+	
 	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = floor(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
+	if game_data.initial_player_bounty < game_data.DEFAULT_BOUNTY + 10:
+		enemies_per_wave = min(15, enemies_per_wave)
+		max_enemy_number = min(2, max_enemy_number)
+	
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
 	player_events.emit_signal("force_exit_from_eat_state")
 	game_events.emit_signal("wave_finished")
