@@ -25,6 +25,13 @@ var return_acceleration = 20
 var threshold: int = 5
 var last_value: Vector2
 
+
+func _ready():
+	if game_data.current_platform == "mobile": return
+	set_process_input(false)
+	set_process(false)
+
+
 func _input(event: InputEvent):
 	
 	if read_touches: set_joystick_position_from_drag_and_touch(event)
@@ -35,7 +42,6 @@ func _input(event: InputEvent):
 	input_events.emit_signal(input_event, Vector2.ZERO)
 	
 	var signal_to_emit = "joystick_released" if get_button_position().length() > threshold else "joystick_returned"
-	print(signal_to_emit)
 	emit_signal(signal_to_emit)
 
 func _process(delta):

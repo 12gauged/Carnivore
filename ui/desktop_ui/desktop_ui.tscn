@@ -56,3 +56,12 @@ text = "use the joystick to move"
 align = 1
 valign = 1
 autowrap = true
+
+[node name="multiuse_timer" type="Timer" parent="tutorials"]
+one_shot = true
+
+[node name="text_cooldown_timer" type="Timer" parent="tutorials"]
+one_shot = true
+
+[connection signal="timeout" from="tutorials/multiuse_timer" to="tutorials" method="_on_multiuse_timer_timeout"]
+[connection signal="timeout" from="tutorials/text_cooldown_timer" to="tutorials" method="_on_text_cooldown_timer_timeout"]

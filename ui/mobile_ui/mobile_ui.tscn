@@ -70,7 +70,6 @@ play_backwards = true
 [node name="TouchScreenButton" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot" index="1"]
 normal = ExtResource( 5 )
 input_event = "player_shooting_direction_updated"
-read_touches = false
 
 [node name="pressed_method_caller" parent="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick" instance=ExtResource( 4 )]
 method = {
@@ -210,8 +209,6 @@ margin_top = 111.0
 margin_bottom = 111.0
 
 [node name="comp_event_caller" parent="movement_joystick/h_box_container/movement_joystick" instance=ExtResource( 8 )]
-
-[node name="comp_event_caller2" parent="movement_joystick/h_box_container/movement_joystick" instance=ExtResource( 8 )]
 
 [node name="bottom_margin" type="MarginContainer" parent="movement_joystick/h_box_container"]
 margin_top = 115.0

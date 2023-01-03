@@ -3,6 +3,7 @@ class_name Enemy
 
 export(int) var bounty_value = 5
 
+onready var BountyIndicatorEmitter = $bounty_indicator_emitter
 onready var Player = toolbox.get_node_in_group("player")
 onready var AI_TARGET = Player
 
@@ -11,7 +12,7 @@ func _ready():
 	connect("deleted", self, "_on_deleted")
 	
 	if !has_node("bounty_indicator_emitter"): return
-	$bounty_indicator_emitter.add_custom_value("bounty_value", self.bounty_value)
+	$BountyIndicatorEmitter.add_custom_value("bounty_value", self.bounty_value)
 	
 func _on_deleted():
 	player_events.emit_signal("bounty_increased", bounty_value)

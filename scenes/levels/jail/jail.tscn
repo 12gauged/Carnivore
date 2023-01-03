@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=2]
+
+[node name="jail" type="Node2D"]
+
+[node name="objects" type="YSort" parent="."]
+
+[node name="part_level_groups" parent="objects" instance=ExtResource( 2 )]
+
+[node name="entities" type="YSort" parent="objects"]
+position = Vector2( 120, 80 )
+
+[node name="player" parent="objects/entities" instance=ExtResource( 1 )]
