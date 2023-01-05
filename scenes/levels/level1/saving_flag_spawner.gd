@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const TUTORIAL_BOUNTY_OFFSET = 180
+const TUTORIAL_BOUNTY_OFFSET = 100
 const BOUNTY_OFFSET_MULTIPLIER = 0.5
 
 onready var FlagSpawner: Node2D = $flag_spawner

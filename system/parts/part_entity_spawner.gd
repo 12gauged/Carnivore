@@ -19,8 +19,10 @@ onready var Group = toolbox.get_node_in_group(entity_group)
 	
 	
 func _ready():
-	if auto_spawn: spawn_entity()
-	elif respawn: RespawnDelayTimer.start(respawn_delay)
+	if not auto_spawn: return
+	spawn_entity()
+	if !respawn: return
+	RespawnDelayTimer.call("start")
 
 
 func get_spawn_offset() -> Vector2:
@@ -62,6 +64,7 @@ func set_spawn_chance(value: int):
 	
 func allow_auto_spawning(): 
 	auto_spawn = true
+	RespawnDelayTimer.start()
 func stop_auto_spawning(): auto_spawn = false
 		
 		
@@ -69,5 +72,4 @@ func _on_instanced_entity_deleted():
 	if respawn: RespawnDelayTimer.start(respawn_delay)
 
 func _on_respawn_delay_timer_timeout():
-	if !auto_spawn: return
 	spawn_entity()

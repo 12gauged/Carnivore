@@ -2,6 +2,7 @@ extends Node
 
 const DEFAULT_BOUNTY = 20
 const default_player_data = {
+	"special_attack_tutorial_finished": false,
 	"bounty": DEFAULT_BOUNTY,
 }
 var player_data: Dictionary = default_player_data.duplicate(true)
@@ -55,7 +56,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	#player_data.bounty = 69420
+	player_data.bounty = 2600
 	
 func override_game_settings(value: Dictionary): game_settings = value.duplicate(true)
 func override_player_data(value: Dictionary): player_data = value.duplicate(true)

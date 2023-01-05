@@ -18,7 +18,9 @@ export(int) var time_between_waves = 6
 
 onready var wave_start_delay: Timer = $wave_start_delay
 
+const MAX_DIFFICULTY: int = 16
 const MAX_HEAVY_ENEMY_SPAWN_CHANCE: int = 60
+const TUTORIAL_WAVES: int = 6
 
 var arena_state: int = STOPPED
 enum {
@@ -60,8 +62,11 @@ func _ready():
 	game_data.current_arena_wave = 1
 	
 	var player_bounty: float = game_data.get_player_data("bounty")
-	difficulty = int(ceil(player_bounty / 170.0 * int(player_bounty > 100)))
+	difficulty = min(MAX_DIFFICULTY, int(ceil(player_bounty / 170.0 * int(player_bounty > 100))))
 	number_of_waves += difficulty
+	
+	number_of_waves = min(number_of_waves, TUTORIAL_WAVES) if player_bounty == game_data.DEFAULT_BOUNTY else number_of_waves
+	
 	debug_log.dprint("\nnumber_of_waves: %s\ndifficulty: %s" % [number_of_waves, difficulty])
 	
 	initial_max_enemy_number = max_enemy_number + ceil(max_enemy_counter_modifier * difficulty)

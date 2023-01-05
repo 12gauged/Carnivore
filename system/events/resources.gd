@@ -45,6 +45,7 @@ var resources: Dictionary = {
 		"jail": preload("res://scenes/levels/jail/jail.tscn"),
 		"arena": preload("res://scenes/levels/arena/arena.tscn"),
 		
+		"intro": preload("res://scenes/ui/intro/intro.tscn"),
 		"level1_comic": preload("res://scenes/levels/level1/level1_comic.tscn")
 	},
 	"entities": {

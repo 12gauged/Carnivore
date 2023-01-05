@@ -390,7 +390,7 @@ damage = 500
 delete_on_hit = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_mouth_hitbox"]
-position = Vector2( 6, 0 )
+position = Vector2( 7, 0 )
 shape = SubResource( 6 )
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 11 )]

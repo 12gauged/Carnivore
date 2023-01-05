@@ -259,6 +259,9 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 7 )
 
+[node name="click_sound" parent="pause_button/HBoxContainer/button_anchor/pause_button" index="1"]
+pause_mode = 2
+
 [node name="comp_event_caller" parent="pause_button/HBoxContainer/button_anchor/pause_button" instance=ExtResource( 8 )]
 event = "toggle_pause_request"
 

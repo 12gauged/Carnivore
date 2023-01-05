@@ -9,6 +9,8 @@ onready var HudElements = {
 
 func _ready():
 	# warning-ignore:return_value_discarded
+	gui_events.connect("hide_hud_except_controls", self, "_on_hide_hud_except_controls_request")
+	# warning-ignore:return_value_discarded
 	gui_events.connect("hide_hud", self, "_on_hide_hud_request")
 	# warning-ignore:return_value_discarded
 	gui_events.connect("show_hud", self, "_on_show_hud_request")

@@ -29,7 +29,8 @@ onready var callers: Dictionary = {
 	"input_events": input_events,
 	"game_functions": game_functions,
 	"game_data": game_data,
-	"json_data_manager": json_data_manager
+	"json_data_manager": json_data_manager,
+	"global_data_manager": global_data_manager
 }
 func call_global_method(method: Dictionary):
 	if !method.has("args"): 

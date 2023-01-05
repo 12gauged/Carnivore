@@ -28,6 +28,7 @@ onready var TextCooldownTimer: Timer = $text_cooldown_timer
 
 
 func _ready():
+	if game_data.current_platform == "mobile": return
 	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY:
 		end_tutorial()
 		return
@@ -56,7 +57,13 @@ func skip_tutorial_stage(text_to_show, new_stage, cooldown := 1.0):
 func end_tutorial():
 	self.visible = false
 	game_events.emit_signal("tutorial_finished")	
-
+	
+	if game_data.get_player_data("special_attack_tutorial_finished"): return
+	TutorialTextBox.visible = false
+	self.visible = true
+# warning-ignore:return_value_discarded
+	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
+	
 	
 
 func _on_player_movement_direction_updated():
@@ -77,13 +84,21 @@ func _on_meat_consumed():
 	MultiuseTimer.start(HUNGER_TUTORIAL_DURATION)
 	player_events.disconnect("meat_consumed", self, "_on_meat_consumed")
 	
+func _on_player_special_attack_available():
+	skip_tutorial_stage(special_tutorial_text, SPECIAL)	
+	
+func _on_player_entered_eat_state():
+	game_data.set_player_data("special_attack_tutorial_finished", true)
+	player_events.disconnect("special_attack_available", self, "_on_player_special_attack_available")
+	end_tutorial()
+	
 func _on_multiuse_timer_timeout():
 	match tutorial_stage:
-		MOVEMENT:
+		MOVEMENT: 
 			skip_tutorial_stage(pick_stone_tutorial_text, PICK_STONE)
-		HUNGER:
+			player_events.disconnect("player_moving", self, "_on_player_movement_direction_updated")
+		HUNGER: 
 			end_tutorial()
-			
 	
 func _on_text_cooldown_timer_timeout():
 	TutorialTextBox.visible = true
@@ -97,3 +112,6 @@ func _on_text_cooldown_timer_timeout():
 			game_events.emit_signal("spawn_tutorial_ant")
 			# warning-ignore:return_value_discarded
 			game_events.connect("tutorial_ant_dead", self, "_on_tutorial_ant_dead")
+		SPECIAL:
+			# warning-ignore:return_value_discarded
+			player_events.connect("entered_eat_state", self, "_on_player_entered_eat_state")

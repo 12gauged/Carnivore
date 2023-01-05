@@ -234,8 +234,10 @@ position = Vector2( 0, -1 )
 shape = SubResource( 2 )
 
 [node name="enemy_loot_spawner" parent="." instance=ExtResource( 21 )]
+position = Vector2( -7, 0 )
 
 [node name="enemy_loot_spawner2" parent="." instance=ExtResource( 21 )]
+position = Vector2( 7, 0 )
 
 [node name="part_state_handler" parent="." instance=ExtResource( 3 )]
 

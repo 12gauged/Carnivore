@@ -318,8 +318,10 @@ one_shot = true
 script = ExtResource( 18 )
 
 [node name="enemy_loot_spawner" parent="." instance=ExtResource( 17 )]
+position = Vector2( -7, 0 )
 
 [node name="enemy_loot_spawner2" parent="." instance=ExtResource( 17 )]
+position = Vector2( 7, 0 )
 
 [node name="part_state_handler" parent="." instance=ExtResource( 1 )]
 

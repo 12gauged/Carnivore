@@ -134,13 +134,13 @@ func exit_eat_state():
 
 func consume_meat():
 	if get_state() == "EAT": return
-	
+
 	HungerDecreaseTimer.stop()
 	if get_stat("hunger") < MAX_HUNGER:
 		update_stat("hunger", get_stat("hunger") + 1)
 		HungerDecreaseTimer.start()
 		return
-	
+
 	update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
 	if get_stat("energy") == MAX_ENERGY:
 		add_tag("FULL")
@@ -172,7 +172,6 @@ func reset_stat_decrease_timer(mode: String):
 	
 	if get_stat("energy") == MAX_ENERGY:
 		hunger_wait_time = HUNGER_DECREASE_DELAY_WHEN_FULL
-	debug_log.dprint("hunger_wait_time: %s" % hunger_wait_time)
 	
 	match mode:
 			"hunger": HungerDecreaseTimer.wait_time = hunger_wait_time

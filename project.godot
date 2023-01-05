@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/hud/input_hints/input_hint.gd"
 }, {
+"base": "Node2D",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://system/data/level_data.gd"
+}, {
 "base": "Control",
 "class": "MenuScreen",
 "language": "GDScript",
@@ -90,6 +95,7 @@ _global_script_class_icons={
 "GenericButtonIcon": "",
 "GenericCamera": "",
 "InputHint": "",
+"LevelData": "",
 "MenuScreen": "",
 "Projectile": "",
 "State": "",
@@ -123,7 +129,6 @@ debug_log="*res://scenes/ui/overlays/debug_log/debug_log.tscn"
 cache="*res://system/managers/cache.tscn"
 android_data_manager="*res://system/managers/android_data_manager.gd"
 global_data_manager="*res://system/managers/global_data_manager.gd"
-bounty_manager="*res://system/managers/bounty_manager.tscn"
 
 [display]
 

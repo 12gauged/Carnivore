@@ -731,30 +731,15 @@ method = {
 "method": "set_time_scale"
 }
 
-[node name="village_savior_archievement" parent="objects/part_arena" instance=ExtResource( 10 )]
-method = {
-"args": [ "archievement_made", "village_savior", false ],
-"caller": "player_events",
-"method": "emit_signal"
-}
-
 [node name="arena_start_delay" type="Timer" parent="objects/part_arena"]
-wait_time = 0.5
 one_shot = true
+autostart = true
 script = ExtResource( 15 )
 
 [node name="delay_for_level_ending" type="Timer" parent="objects/part_arena"]
 wait_time = 1.4
 one_shot = true
 script = ExtResource( 15 )
-
-[node name="comp_event_receiver" parent="objects/part_arena" instance=ExtResource( 6 )]
-emitter = "game_events"
-event = "tutorial_finished"
-
-[node name="spawn_tutorial_enemy" parent="objects/part_arena" instance=ExtResource( 6 )]
-emitter = "game_events"
-event = "spawn_tutorial_ant"
 
 [node name="saving_flag_spawner" type="Node2D" parent="objects"]
 position = Vector2( 160, 168 )
@@ -784,8 +769,4 @@ anims/start = SubResource( 2 )
 [connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]
-[connection signal="event_received" from="objects/part_arena/comp_event_receiver" to="objects/part_arena/arena_start_delay" method="start_timer"]
-[connection signal="event_received" from="objects/part_arena/spawn_tutorial_enemy" to="objects/part_arena" method="spawn_new_enemy_uncounted"]
 [connection signal="entity_spawned" from="objects/saving_flag_spawner/flag_spawner" to="objects/saving_flag_spawner" method="_on_flag_spawner_entity_spawned"]
-
-[editable path="objects/part_arena/village_savior_archievement"]

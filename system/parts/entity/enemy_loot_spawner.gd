@@ -10,7 +10,9 @@ var can_drop: bool = true
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	player_events.connect("entered_eat_state", self, "disable_dropping")
+	# warning-ignore:return_value_discarded
 	player_events.connect("exited_eat_state", self, "enable_dropping")
 	
 	if game_data.current_player_state == "EAT": disable_dropping()

@@ -10,6 +10,7 @@ var last_request_id: String
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	gui_events.connect("warning_request", self, "_on_warning_requested")
 	
 	

@@ -19,10 +19,12 @@ func _ready():
 	
 func _physics_process(_delta):
 	# only runs when continuous_hits is true
-	if !is_instance_valid(DetectedArea): return
+	var hurtboxes: Array = get_overlapping_areas()
+	if hurtboxes.empty(): return
 	if time_counter >= hit_delay:
-		DetectedArea.emit_signal("hit_detected", self)
-		time_counter = 0
+		for Hurtbox in hurtboxes:
+			Hurtbox.emit_signal("hit_detected", self)
+			time_counter = 0
 		return
 	time_counter += 0.1
 

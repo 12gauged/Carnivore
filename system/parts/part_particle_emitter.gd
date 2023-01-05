@@ -20,7 +20,7 @@ func emit_particle():
 func apply_custom_values(TargetNode, values: Dictionary):
 	if custom_values == {}: return
 	for key in values.keys():
-		print("setting %s to %s" % [key, values[key]])
+		#print("setting %s to %s" % [key, values[key]])
 		TargetNode.set(key, values[key])
 		
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://entities/frog/frog_arena_data.tres" type="Resource" id=10]
 [ext_resource path="res://system/data/level_data.gd" type="Script" id=11]
 [ext_resource path="res://world/level1/houses/mushroom_house_short.tscn" type="PackedScene" id=12]
+[ext_resource path="res://system/random_scripts/save_game.gd" type="Script" id=13]
 [ext_resource path="res://entities/fire_ant/fire_ant_arena_data.tres" type="Resource" id=14]
 [ext_resource path="res://entities/worm/worm_arena_data.tres" type="Resource" id=15]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=16]
@@ -388,9 +389,12 @@ entity_group = "enemies"
 deletion_signal = "deleted"
 respawn_radius = Vector2( 20, 20 )
 
+[node name="save_game" parent="objects/part_arena" instance=ExtResource( 7 )]
+script = ExtResource( 13 )
+
 [node name="end_level_method" parent="objects/part_arena" instance=ExtResource( 7 )]
 method = {
-"args": [ "change_scene_request", "jail", true, 2.0 ],
+"args": [ "change_scene_request", "jail", true, 0.1 ],
 "caller": "game_events",
 "method": "emit_signal"
 }
@@ -455,6 +459,7 @@ anims/start = SubResource( 2 )
 
 [connection signal="timeout" from="objects/rock_spawners/spawn_delay" to="objects/rock_spawners" method="spawn_tutorial_stones"]
 [connection signal="event_received" from="objects/rock_spawners/comp_event_receiver" to="objects/rock_spawners/spawn_delay" method="start_timer"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/save_game" method="save_game"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_freeze_method" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_slowmo_method" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/delay_for_level_ending" method="start_timer"]

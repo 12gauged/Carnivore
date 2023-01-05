@@ -8,6 +8,7 @@ var post_tutorial_bounty: int
 
 func _ready():
 	set_player_bounty(game_data.get_player_data("bounty"))
+	# warning-ignore:return_value_discarded
 	player_events.connect("bounty_increased", self, "_on_bounty_increased")
 	
 	post_tutorial_bounty = game_data.DEFAULT_BOUNTY + 10

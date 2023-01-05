@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/hud/status_bars/energy_bar/energy_bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/hud/status_bars/hunger_bar/hunger_bar.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ui/desktop_ui/desktop_ui.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/pause_screen/pause_screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=10]
+[ext_resource path="res://ui/hud/notifications/plant_caught_notification.gd" type="Script" id=11]
 [ext_resource path="res://ui/mobile_ui/mobile_ui.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=13]
 [ext_resource path="res://ui/hud/status_bars/bounty_label/bounty_label.gd" type="Script" id=14]
@@ -64,7 +65,7 @@ tracks/0/keys = {
 
 [node name="hud" type="CanvasLayer"]
 
-[node name="root" type="Control" parent="."]
+[node name="main_hud" type="Control" parent="."]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,36 +73,36 @@ mouse_filter = 2
 theme = ExtResource( 5 )
 script = ExtResource( 6 )
 
-[node name="top_elements" type="VBoxContainer" parent="root"]
+[node name="top_elements" type="VBoxContainer" parent="main_hud"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -120.0
 margin_right = 120.0
 margin_bottom = 35.0
 
-[node name="top_margin" type="MarginContainer" parent="root/top_elements"]
+[node name="top_margin" type="MarginContainer" parent="main_hud/top_elements"]
 margin_right = 240.0
 
-[node name="status_bars" type="CenterContainer" parent="root/top_elements"]
+[node name="status_bars" type="CenterContainer" parent="main_hud/top_elements"]
 margin_top = 4.0
 margin_right = 240.0
 margin_bottom = 14.0
 
-[node name="horizontal_margin" type="GridContainer" parent="root/top_elements/status_bars"]
+[node name="horizontal_margin" type="GridContainer" parent="main_hud/top_elements/status_bars"]
 margin_left = 67.0
 margin_right = 172.0
 margin_bottom = 10.0
 custom_constants/hseparation = 35
 columns = 3
 
-[node name="hunger_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
+[node name="hunger_bar" parent="main_hud/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
 anchor_left = 0.0
 anchor_right = 0.0
 margin_left = 0.0
 margin_right = 0.0
 margin_bottom = 10.0
 
-[node name="bounty_label" type="Label" parent="root/top_elements/status_bars/horizontal_margin"]
+[node name="bounty_label" type="Label" parent="main_hud/top_elements/status_bars/horizontal_margin"]
 modulate = Color( 1, 1, 0, 1 )
 margin_left = 35.0
 margin_right = 70.0
@@ -113,28 +114,28 @@ text = "100000"
 align = 1
 script = ExtResource( 14 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="root/top_elements/status_bars/horizontal_margin/bounty_label"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="main_hud/top_elements/status_bars/horizontal_margin/bounty_label"]
 anims/highlight = SubResource( 4 )
 anims/highlight_long = SubResource( 5 )
 
-[node name="energy_bar" parent="root/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
+[node name="energy_bar" parent="main_hud/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_left = 105.0
 margin_right = 105.0
 margin_bottom = 10.0
 
-[node name="wave_text_margin" type="MarginContainer" parent="root/top_elements"]
+[node name="wave_text_margin" type="MarginContainer" parent="main_hud/top_elements"]
 margin_top = 18.0
 margin_right = 240.0
 margin_bottom = 31.0
 custom_constants/margin_top = 13
 
-[node name="notifs" type="VBoxContainer" parent="root/top_elements"]
+[node name="notifs" type="VBoxContainer" parent="main_hud/top_elements"]
 margin_top = 35.0
 margin_right = 240.0
 margin_bottom = 45.0
 
-[node name="wave_notification" type="Label" parent="root/top_elements/notifs"]
+[node name="wave_notification" type="Label" parent="main_hud/top_elements/notifs"]
 margin_right = 240.0
 margin_bottom = 10.0
 theme = ExtResource( 5 )
@@ -143,10 +144,21 @@ align = 1
 uppercase = true
 script = ExtResource( 7 )
 
-[node name="notification_disappear_delay" type="Timer" parent="root/top_elements/notifs/wave_notification"]
+[node name="notification_disappear_delay" type="Timer" parent="main_hud/top_elements/notifs/wave_notification"]
 wait_time = 3.0
 
-[node name="top_left_elements" type="VBoxContainer" parent="root"]
+[node name="plant_caught_notification" type="Label" parent="main_hud/top_elements/notifs"]
+visible = false
+margin_top = 14.0
+margin_right = 240.0
+margin_bottom = 24.0
+theme = ExtResource( 5 )
+text = "hud.plant_caught"
+align = 1
+uppercase = true
+script = ExtResource( 11 )
+
+[node name="top_left_elements" type="VBoxContainer" parent="main_hud"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -20.0
@@ -154,7 +166,7 @@ margin_right = 96.0
 margin_bottom = 20.0
 size_flags_stretch_ratio = 0.5
 
-[node name="center_bottom_elements" type="VBoxContainer" parent="root"]
+[node name="center_bottom_elements" type="VBoxContainer" parent="main_hud"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -165,19 +177,19 @@ margin_right = 42.0
 grow_vertical = 0
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="root/center_bottom_elements"]
+[node name="HBoxContainer" type="HBoxContainer" parent="main_hud/center_bottom_elements"]
 margin_top = 19.0
 margin_right = 84.0
 margin_bottom = 19.0
 custom_constants/separation = 0
 alignment = 1
 
-[node name="health_bar" parent="root/center_bottom_elements/HBoxContainer" instance=ExtResource( 3 )]
+[node name="health_bar" parent="main_hud/center_bottom_elements/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 margin_left = 42.0
 margin_right = 42.0
 
-[node name="text_box_container" type="VBoxContainer" parent="root"]
+[node name="text_box_container" type="VBoxContainer" parent="main_hud"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -187,12 +199,12 @@ margin_top = -3.0
 margin_right = 120.0
 margin_bottom = 3.0
 
-[node name="MarginContainer" type="MarginContainer" parent="root/text_box_container"]
+[node name="MarginContainer" type="MarginContainer" parent="main_hud/text_box_container"]
 margin_right = 240.0
 margin_bottom = 5.0
 custom_constants/margin_top = 5
 
-[node name="text_box" parent="root/text_box_container" instance=ExtResource( 4 )]
+[node name="text_box" parent="main_hud/text_box_container" instance=ExtResource( 4 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -200,10 +212,10 @@ margin_top = 9.0
 margin_right = 240.0
 margin_bottom = 9.0
 
-[node name="mobile_ui" parent="root" instance=ExtResource( 12 )]
+[node name="mobile_ui" parent="main_hud" instance=ExtResource( 12 )]
 visible = false
 
-[node name="desktop_ui" parent="root" instance=ExtResource( 8 )]
+[node name="desktop_ui" parent="main_hud" instance=ExtResource( 8 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -218,7 +230,7 @@ __meta__ = {
 }
 platform = "desktop"
 
-[node name="darker_colors" type="ColorRect" parent="root"]
+[node name="darker_colors" type="ColorRect" parent="main_hud"]
 pause_mode = 2
 visible = false
 material = SubResource( 2 )
@@ -226,9 +238,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 10 )
 
-[node name="pause_screen" parent="root" instance=ExtResource( 9 )]
+[node name="pause_screen" parent="main_hud" instance=ExtResource( 9 )]
 visible = false
 
-[connection signal="timeout" from="root/top_elements/notifs/wave_notification/notification_disappear_delay" to="root/top_elements/notifs/wave_notification" method="_on_notification_disappear_delay_timeout"]
-[connection signal="paused" from="root/pause_screen" to="root/darker_colors" method="show"]
-[connection signal="resumed" from="root/pause_screen" to="root/darker_colors" method="hide"]
+[connection signal="timeout" from="main_hud/top_elements/notifs/wave_notification/notification_disappear_delay" to="main_hud/top_elements/notifs/wave_notification" method="_on_notification_disappear_delay_timeout"]
+[connection signal="paused" from="main_hud/pause_screen" to="main_hud/darker_colors" method="show"]
+[connection signal="resumed" from="main_hud/pause_screen" to="main_hud/darker_colors" method="hide"]

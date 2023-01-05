@@ -1,0 +1,237 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/gui/icons/skip_icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/ui/intro/skip_button.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("line0:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("line1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("line2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("line0:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("line1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.2, 4.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("line2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4.4, 6.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("comp_method_caller")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 10 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "call_method"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="intro" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="text_holder" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="text_holder"]
+margin_left = 90.0
+margin_right = 149.0
+margin_bottom = 135.0
+alignment = 1
+
+[node name="line0" type="Label" parent="text_holder/VBoxContainer"]
+margin_top = 48.0
+margin_right = 59.0
+margin_bottom = 58.0
+theme = ExtResource( 1 )
+text = "ui.intro.line0"
+align = 1
+
+[node name="line1" type="Label" parent="text_holder/VBoxContainer"]
+margin_top = 62.0
+margin_right = 59.0
+margin_bottom = 72.0
+theme = ExtResource( 1 )
+text = "ui.intro.line1"
+align = 1
+
+[node name="line2" type="Label" parent="text_holder/VBoxContainer"]
+margin_top = 76.0
+margin_right = 59.0
+margin_bottom = 86.0
+theme = ExtResource( 1 )
+text = "ui.intro.line2"
+align = 1
+
+[node name="comp_method_caller" parent="text_holder/VBoxContainer" instance=ExtResource( 2 )]
+method = {
+"args": [ "change_scene_request", "level1", true, 0.2 ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="text_holder/VBoxContainer"]
+autoplay = "default"
+anims/RESET = SubResource( 1 )
+anims/default = SubResource( 2 )
+
+[node name="button_holder" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="button_holder"]
+margin_left = 110.0
+margin_right = 130.0
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+script = ExtResource( 5 )
+
+[node name="skip_button" parent="button_holder/VBoxContainer" instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 110.0
+margin_bottom = 130.0
+
+[node name="icon" parent="button_holder/VBoxContainer/skip_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="button_holder/VBoxContainer"]
+margin_top = 130.0
+margin_right = 20.0
+margin_bottom = 135.0
+custom_constants/margin_bottom = 5
+
+[node name="disappear_animation_player" type="AnimationPlayer" parent="button_holder/VBoxContainer"]
+root_node = NodePath("../skip_button")
+anims/RESET = SubResource( 4 )
+anims/disappear = SubResource( 3 )
+
+[node name="disappear_timer" type="Timer" parent="button_holder/VBoxContainer"]
+one_shot = true
+
+[connection signal="pressed" from="button_holder/VBoxContainer/skip_button" to="text_holder/VBoxContainer/comp_method_caller" method="call_method"]
+[connection signal="timeout" from="button_holder/VBoxContainer/disappear_timer" to="button_holder/VBoxContainer" method="_on_disappear_timer_timeout"]
+
+[editable path="button_holder/VBoxContainer/skip_button"]

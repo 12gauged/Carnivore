@@ -2,6 +2,7 @@ extends VBoxContainer
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	gui_events.connect("warning_request_accepted", self, "_on_warning_request_accepted")
 
 
