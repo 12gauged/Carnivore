@@ -29,33 +29,57 @@ TAGS = [ "COMP_EXECUTER", "ENTITY", "DEBUG_GAMEPLAY_CHANGES" ]
 
 [node name="part_level_groups" parent="objects/entities" instance=ExtResource( 3 )]
 
+[node name="death_loot_spawner" parent="objects" instance=ExtResource( 6 )]
+position = Vector2( 113, 55 )
+entity_name = "meat_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+spawn_chance = 60
+respawn = true
+
+[node name="death_loot_spawner2" parent="objects" instance=ExtResource( 6 )]
+position = Vector2( 98, 76 )
+entity_name = "meat_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+spawn_chance = 60
+respawn = true
+respawn_delay = 0.5
+
+[node name="death_loot_spawner3" parent="objects" instance=ExtResource( 6 )]
+position = Vector2( 96, 28 )
+entity_name = "meat_drop"
+entity_group = "drops"
+deletion_signal = "interacted"
+auto_spawn = true
+spawn_chance = 60
+respawn = true
+
 [node name="part_enemy_spawner2" parent="objects" instance=ExtResource( 6 )]
-position = Vector2( 132, 61 )
+position = Vector2( 154, 65 )
 entity_name = "fire_ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
-auto_spawn = true
 
 [node name="part_enemy_spawner3" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 206, 58 )
 entity_name = "ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
-auto_spawn = true
 
 [node name="part_enemy_spawner4" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 179, 92 )
 entity_name = "ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
-auto_spawn = true
 
 [node name="part_enemy_spawner5" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 141, 109 )
 entity_name = "ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
-auto_spawn = true
 
 [node name="drop_spawner" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 32, 59 )

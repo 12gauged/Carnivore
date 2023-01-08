@@ -1,10 +1,22 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/gui/icons/skip_icon.png" type="Texture" id=4]
 [ext_resource path="res://scenes/ui/intro/skip_button.gd" type="Script" id=5]
+[ext_resource path="res://ui/gui/art/intro1.png" type="Texture" id=6]
+[ext_resource path="res://ui/gui/art/intro2.png" type="Texture" id=7]
+[ext_resource path="res://ui/gui/art/intro3.png" type="Texture" id=8]
+
+[sub_resource type="AnimatedTexture" id=5]
+frames = 3
+fps = 10.0
+frame_0/texture = ExtResource( 6 )
+frame_1/texture = ExtResource( 7 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 8 )
+frame_2/delay_sec = 0.0
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -44,10 +56,23 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("line3:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "default"
-length = 10.0
+length = 14.0
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("line0:modulate")
 tracks/0/interp = 1
@@ -55,10 +80,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1.5, 7, 8.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("line1:modulate")
@@ -67,10 +92,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2.2, 4.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 2, 3.5, 7, 8.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("line2:modulate")
@@ -79,24 +104,84 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 4.4, 6.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 4, 5.5, 7, 8.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("comp_method_caller")
+tracks/3/path = NodePath("go_to_level")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 10 ),
+"times": PoolRealArray( 12 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "call_method"
 } ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("line0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 8.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("line1:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 8.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("line2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 8.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("line3:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 8.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("line3:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 8.5, 10, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -145,44 +230,71 @@ tracks/1/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -67.5
+margin_right = 120.0
+margin_bottom = 67.5
+texture = SubResource( 5 )
+
 [node name="text_holder" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -120.0
+margin_right = 120.0
+margin_bottom = 135.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="text_holder"]
 margin_left = 90.0
 margin_right = 149.0
 margin_bottom = 135.0
-alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="text_holder/VBoxContainer"]
+margin_right = 59.0
+margin_bottom = 10.0
+custom_constants/margin_top = 10
 
 [node name="line0" type="Label" parent="text_holder/VBoxContainer"]
-margin_top = 48.0
+margin_top = 14.0
 margin_right = 59.0
-margin_bottom = 58.0
+margin_bottom = 24.0
 theme = ExtResource( 1 )
 text = "ui.intro.line0"
 align = 1
 
 [node name="line1" type="Label" parent="text_holder/VBoxContainer"]
-margin_top = 62.0
+margin_top = 28.0
 margin_right = 59.0
-margin_bottom = 72.0
+margin_bottom = 38.0
 theme = ExtResource( 1 )
 text = "ui.intro.line1"
 align = 1
 
 [node name="line2" type="Label" parent="text_holder/VBoxContainer"]
-margin_top = 76.0
+margin_top = 42.0
 margin_right = 59.0
-margin_bottom = 86.0
+margin_bottom = 52.0
 theme = ExtResource( 1 )
 text = "ui.intro.line2"
 align = 1
 
-[node name="comp_method_caller" parent="text_holder/VBoxContainer" instance=ExtResource( 2 )]
+[node name="line3" type="Label" parent="text_holder/VBoxContainer"]
+visible = false
+margin_top = 14.0
+margin_right = 59.0
+margin_bottom = 24.0
+theme = ExtResource( 1 )
+text = "ui.intro.line3"
+align = 1
+
+[node name="go_to_level" parent="text_holder/VBoxContainer" instance=ExtResource( 2 )]
 method = {
-"args": [ "change_scene_request", "level1", true, 0.2 ],
+"args": [ "change_scene_request", "level1", true, 0.1 ],
 "caller": "game_events",
 "method": "emit_signal"
 }
@@ -195,11 +307,16 @@ anims/default = SubResource( 2 )
 [node name="button_holder" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-alignment = 1
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="button_holder"]
+margin_right = 5.0
+margin_bottom = 135.0
+custom_constants/margin_left = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="button_holder"]
-margin_left = 110.0
-margin_right = 130.0
+margin_left = 5.0
+margin_right = 25.0
 margin_bottom = 135.0
 custom_constants/separation = 0
 alignment = 2
@@ -229,9 +346,10 @@ anims/RESET = SubResource( 4 )
 anims/disappear = SubResource( 3 )
 
 [node name="disappear_timer" type="Timer" parent="button_holder/VBoxContainer"]
+wait_time = 2.0
 one_shot = true
 
-[connection signal="pressed" from="button_holder/VBoxContainer/skip_button" to="text_holder/VBoxContainer/comp_method_caller" method="call_method"]
+[connection signal="pressed" from="button_holder/VBoxContainer/skip_button" to="text_holder/VBoxContainer/go_to_level" method="call_method"]
 [connection signal="timeout" from="button_holder/VBoxContainer/disappear_timer" to="button_holder/VBoxContainer" method="_on_disappear_timer_timeout"]
 
 [editable path="button_holder/VBoxContainer/skip_button"]

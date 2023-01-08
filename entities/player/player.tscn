@@ -26,6 +26,7 @@
 [ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.png" type="Texture" id=24]
 [ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.gd" type="Script" id=25]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=26]
+[ext_resource path="res://entities/player/drop_collector.gd" type="Script" id=27]
 [ext_resource path="res://system/random_scripts/particle_controller.gd" type="Script" id=29]
 [ext_resource path="res://system/random_scripts/collision_control.gd" type="Script" id=33]
 [ext_resource path="res://entities/player/visual/healing_particle.png" type="Texture" id=34]
@@ -241,10 +242,6 @@ height = 6.0
 radius = 6.0
 height = 8.0
 
-[sub_resource type="CapsuleShape2D" id=16]
-radius = 3.0
-height = 6.0
-
 [node name="player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 131
 collision_mask = 131
@@ -409,32 +406,16 @@ bus = "player_sounds"
 position = Vector2( 0, -7 )
 collision_layer = 32
 collision_mask = 32
+script = ExtResource( 27 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_drop_collector"]
 shape = SubResource( 8 )
-
-[node name="healing_area_detector" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="healing_area_detector"]
-rotation = 1.5708
-shape = SubResource( 16 )
-
-[node name="healing_timer" type="Timer" parent="healing_area_detector"]
-wait_time = 2.0
-one_shot = true
 
 [node name="hunger_decrease_delay" type="Timer" parent="."]
 wait_time = 4.0
 
 [node name="invincibility_timer" type="Timer" parent="."]
 wait_time = 1.2
-one_shot = true
-
-[node name="special_attack_input_delay" type="Timer" parent="."]
-process_mode = 0
-wait_time = 0.2
 one_shot = true
 
 [connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
@@ -465,9 +446,5 @@ one_shot = true
 [connection signal="detected" from="part_player_projectile_handler/part_input_detector" to="part_player_projectile_handler" method="shoot_projectile"]
 [connection signal="hit_detected" from="part_mouth_hitbox" to="." method="consume_enemy"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
-[connection signal="area_entered" from="healing_area_detector" to="." method="_on_healing_area_detector_area_entered"]
-[connection signal="area_exited" from="healing_area_detector" to="." method="_on_healing_area_detector_area_exited"]
-[connection signal="timeout" from="healing_area_detector/healing_timer" to="." method="_on_healing_timer_timeout"]
 [connection signal="timeout" from="hunger_decrease_delay" to="." method="_on_hunger_decrease_delay_timeout"]
 [connection signal="timeout" from="invincibility_timer" to="." method="_on_invincibility_timer_timeout"]
-[connection signal="timeout" from="special_attack_input_delay" to="." method="_on_special_attack_input_delay_timeout"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/desktop_ui/tutorial_controller_desktop.gd" type="Script" id=2]
 [ext_resource path="res://ui/gui/text_box/tutorial_text_box.png" type="Texture" id=3]
+[ext_resource path="res://ui/gui/mouse/mouse_indicator/mouse_indicator_left.png" type="Texture" id=4]
 
 [node name="desktop_ui" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 0
@@ -20,14 +20,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 custom_constants/separation = 0
-alignment = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="MarginContainer" type="MarginContainer" parent="tutorials/HBoxContainer"]
+margin_right = 1.0
+margin_bottom = 135.0
+custom_constants/margin_left = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="tutorials/HBoxContainer"]
-margin_left = 78.0
-margin_right = 162.0
+margin_left = 1.0
+margin_right = 85.0
 margin_bottom = 135.0
 mouse_filter = 2
 custom_constants/separation = 0
@@ -48,15 +52,18 @@ texture = ExtResource( 3 )
 [node name="Label" type="Label" parent="tutorials/HBoxContainer/VBoxContainer/TutorialTextBox"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
 theme = ExtResource( 1 )
-text = "use the joystick to move"
+text = "aaaaaaaa"
 align = 1
 valign = 1
 autowrap = true
+
+[node name="TextureRect" type="TextureRect" parent="tutorials/HBoxContainer/VBoxContainer/TutorialTextBox"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 4
+texture = ExtResource( 4 )
 
 [node name="multiuse_timer" type="Timer" parent="tutorials"]
 one_shot = true

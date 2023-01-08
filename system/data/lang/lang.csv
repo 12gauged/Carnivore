@@ -36,11 +36,13 @@ ui.death_screen.game_over,game over,fim de jogo,game over,game over
 ui.intro.line0,legend says,uma lenda diz,untranslated,untranslated
 ui.intro.line1,there's a violent plant,que existe uma planta violenta,untranslated,untranslated
 ui.intro.line2,living in the woods.,vivendo na floresta.,untranslated,untranslated
+ui.intro.line3,we'll capture it.,vamos capturá-la.,untranslated,untranslated
 ui.victory_screen.village_safe,the village is safe,a vila foi salva,le village est en sécurité,le village est sain et sauf
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
 tutorial.throw_stone,throw the stone with the joystick,jogue a pedra com o joystick,untranslated,untranslated
+tutorial.throw_stone.desktop,use the RIGHT MOUSE BUTTON to throw it,use BOTÃO DIREITO DO MOUSE para jogá-la,untranslated,untranslated
 tutorial.eating,eat the meat,coma a carne,untranslated,untranslated
 tutorial.hunger,don't get hungry!,não fique com fome!,untranslated,untranslated
 tutorial.special_attack,use your special attack!,use seu ataque especial!,untranslated,untranslated
