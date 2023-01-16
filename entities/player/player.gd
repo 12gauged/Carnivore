@@ -6,11 +6,11 @@ signal exited_eat_state
 signal healing
 
 
-const HUNGER_DECREASE_DELAY_WHEN_FULL = 1.5
-const DEFAULT_HUNGER_DECREASE_DELAY = 3.0
-var HUNGER_DECREASE_DELAY = DEFAULT_HUNGER_DECREASE_DELAY ## had to turn this bitch into a var because of the skill system
-var ENERGY_DECREASE_DELAY = 0.6 ## same as above
-const HUNGER_DECREASE_DELAY_TUTORIAL = 4.0
+const HUNGER_DECREASE_DELAY_WHEN_FULL: float = 1.5
+const DEFAULT_HUNGER_DECREASE_DELAY: float = 3.0
+var HUNGER_DECREASE_DELAY: float = DEFAULT_HUNGER_DECREASE_DELAY ## had to turn this bitch into a var because of the skill system
+var ENERGY_DECREASE_DELAY: float = 0.6 ## same as above
+const HUNGER_DECREASE_DELAY_TUTORIAL: float = 4.0
 
 const HUNGER_DAMAGE = 1
 const DAMAGE_CAMERA_SHAKE_DURATION = 0.3
@@ -32,7 +32,7 @@ func _ready():
 	
 	# creating new stats
 	stats["hunger"] = MAX_HUNGER / 2
-	stats["can_get_hungry"] = false
+	stats["can_get_hungry"] = true
 	stats["energy"] = 0
 	call_deferred("update_stat", "hunger", get_stat("hunger"), false)
 	
@@ -92,37 +92,34 @@ func _process(_delta):
 func process_constant_state(): pass
 
 func process_inconstant_state():
-	if get_state() in ["EAT", "DASH"]: return
+	if get_state() == "EAT": return
 	set_state("IDLE" if movement_direction == Vector2.ZERO else "MOVE")
+	
+func in_tutorial(): return game_data.player_data.bounty == game_data.DEFAULT_BOUNTY
+func energy_full(): return get_stat("energy") == MAX_ENERGY
+func has_skill(skill: String): return game_data.player_data.skills[skill]
 
 
-# Felipe seu burro
-# tira esses ifs
-#          - Felipe do Passado
+
+
+func start_hunger_decrease_timer(hunger_value: int):
+	if not get_stat("can_get_hungry"): return
+	var time := HUNGER_DECREASE_DELAY
+	
+	if has_skill("survivor_metabolism"):
+		time = HUNGER_DECREASE_DELAY * 2 if hunger_value <= 3 else time
+	if in_tutorial():
+		time += 0.2
+	if energy_full():
+		time -= 0.2
+		
+	print("player.gd: starting hunger decrease delay!\ntime: %s\n" % time)
+	HungerDecreaseTimer.start(time)
+
 
 func update_stat(id: String, value: int, animate: bool = true):
 	set_stat(id, value)
 	player_events.emit_signal("status_value_update", id, get_stat(id), animate)
-	
-	if game_data.player_data.skills.survivor_metabolism:
-		if id == "hunger":
-			if value == 3:
-				HUNGER_DECREASE_DELAY *= 2
-			elif value > 3:
-				HUNGER_DECREASE_DELAY = DEFAULT_HUNGER_DECREASE_DELAY
-		print("hunger decrease delay: %s" % HUNGER_DECREASE_DELAY)
-	
-	if id != "can_get_hungry": return
-	if game_data.get_player_data("bounty") == game_data.DEFAULT_BOUNTY:
-		print("using tutorial hunger!")
-		HungerDecreaseTimer.wait_time = HUNGER_DECREASE_DELAY_TUTORIAL
-		HungerDecreaseTimer.call("stop" if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped() else "start")
-		return
-	
-	if !get_stat("can_get_hungry") and !HungerDecreaseTimer.is_stopped():
-		HungerDecreaseTimer.stop()
-		return
-	HungerDecreaseTimer.start(HUNGER_DECREASE_DELAY)
 
 func start_invincibility():
 	set_stat("invincible", true)
@@ -146,7 +143,7 @@ func enter_eat_state():
 	set_movement_direction(Vector2.LEFT)
 	input_events.emit_signal("player_movement_direction_updated", Vector2.LEFT)
 	
-	if not game_data.player_data.skills.bloodthirsty: return
+	if not has_skill("bloodthirsty"): return
 	MAX_SPEED += (25.0 / float(DEFAULT_MAX_SPEED)) * 100.0
 	
 func exit_eat_state():
@@ -167,26 +164,23 @@ func exit_eat_state():
 
 func consume_meat():
 	if get_state() == "EAT": return
-
-	HungerDecreaseTimer.stop()
-	if get_stat("hunger") < MAX_HUNGER:
-		update_stat("hunger", get_stat("hunger") + 1)
-		HungerDecreaseTimer.start(HUNGER_DECREASE_DELAY)
-		return
-
-	update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
-	if get_stat("energy") == MAX_ENERGY:
-		add_tag("FULL")
-		player_events.emit_signal("special_attack_available")
-	else:
-		remove_tag("FULL")
-		
-	if game_data.player_data.skills.healing_meal:
-		if toolbox.EntityRNG.randi_range(1, 100) <= 35:
-			update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
-			emit_signal("healing")
+	if get_stat("energy") == MAX_ENERGY: return
 	
-	HungerDecreaseTimer.start(HUNGER_DECREASE_DELAY)
+	var stat_to_update = "hunger" if get_stat("hunger") < MAX_HUNGER else "energy"
+	var stat_cap = MAX_HUNGER if stat_to_update == "hunger" else MAX_ENERGY
+	update_stat(
+		stat_to_update,
+		min(get_stat(stat_to_update) + 1, stat_cap)
+	)
+	
+	start_hunger_decrease_timer(get_stat("hunger"))
+	
+	if get_stat("energy") == MAX_ENERGY:
+		player_events.emit_signal("special_attack_available")
+		add_tag("FULL")
+		return
+	remove_tag("FULL")
+	
 	
 func consume_enemy(EnemyNode):
 	## Trick to make the camera constantly shake
@@ -205,15 +199,9 @@ func consume_enemy(EnemyNode):
 	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
 		
 func reset_stat_decrease_timer(mode: String):
-	HungerDecreaseTimer.stop()
-	
-	var player_bounty = game_data.get_player_data("bounty")
-	var hunger_wait_time = HUNGER_DECREASE_DELAY_TUTORIAL if player_bounty == game_data.DEFAULT_BOUNTY else HUNGER_DECREASE_DELAY
-	var energy_wait_time = ENERGY_DECREASE_DELAY
-	
 	match mode:
-		"hunger": HungerDecreaseTimer.start(hunger_wait_time)
-		"energy": HungerDecreaseTimer.start(energy_wait_time)
+		"hunger": start_hunger_decrease_timer(get_stat("hunger"))
+		"energy": HungerDecreaseTimer.start(ENERGY_DECREASE_DELAY)
 	
 	
 func apply_damage(damage: int):
@@ -238,19 +226,20 @@ func set_movement_direction(value: Vector2):
 		
 
 func _on_hunger_decrease_delay_timeout():
+	remove_tag("FULL")
 	match get_state():
 		"EAT":
 			if get_stat("energy") <= 0: 
 				exit_eat_state()
 				return
 			update_stat("energy", int(max(get_stat("energy") - 1, 0)))
-			remove_tag("FULL")
+			HungerDecreaseTimer.start(ENERGY_DECREASE_DELAY)
 		_:
 			if get_stat("hunger") <= 0: 
 				apply_damage(1)
 				return
 			update_stat("hunger", int(max(get_stat("hunger") - 1, 0)))
-			remove_tag("FULL")
+			start_hunger_decrease_timer(get_stat("hunger"))
 			
 func _on_exit_from_eat_state_forced(): exit_eat_state()
 

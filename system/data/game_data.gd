@@ -68,6 +68,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
 	player_data.bounty = 2600
+	#player_data.skills.energy_efficiency = false
 	player_data.skills.survivor_metabolism = true
 	
 func override_game_settings(value: Dictionary): game_settings = value.duplicate(true)
