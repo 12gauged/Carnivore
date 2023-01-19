@@ -411,7 +411,7 @@ script = ExtResource( 27 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_drop_collector"]
 shape = SubResource( 8 )
 
-[node name="hunger_decrease_delay" type="Timer" parent="."]
+[node name="stat_decrease_delay" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
 
@@ -447,5 +447,5 @@ one_shot = true
 [connection signal="detected" from="part_player_projectile_handler/part_input_detector" to="part_player_projectile_handler" method="shoot_projectile"]
 [connection signal="hit_detected" from="part_mouth_hitbox" to="." method="consume_enemy"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
-[connection signal="timeout" from="hunger_decrease_delay" to="." method="_on_hunger_decrease_delay_timeout"]
+[connection signal="timeout" from="stat_decrease_delay" to="." method="_on_stat_decrease_delay_timeout"]
 [connection signal="timeout" from="invincibility_timer" to="." method="_on_invincibility_timer_timeout"]

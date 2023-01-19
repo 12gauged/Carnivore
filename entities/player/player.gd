@@ -19,7 +19,7 @@ const DAMAGE_CAMERA_SHAKE_INTENSITY = 0.8
 export(int) var MAX_HUNGER = 6
 export(int) var MAX_ENERGY = 6
 
-onready var HungerDecreaseTimer: Timer = $hunger_decrease_delay
+onready var StatDecreaseTimer: Timer = $stat_decrease_delay
 onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
 onready var AnimPlayer = $part_state_anim_handler/animation_player
@@ -34,7 +34,10 @@ func _ready():
 	stats["hunger"] = MAX_HUNGER / 2
 	stats["can_get_hungry"] = true
 	stats["energy"] = 0
+	stats["shields"] = 0 if not has_skill("hard_skin") else 3 * clamp((2 * int(has_skill("body_armor")) + 1), 1, 2)
 	call_deferred("update_stat", "hunger", get_stat("hunger"), false)
+	call_deferred("update_stat", "shields", get_stat("shields"), false)
+	
 	
 	## adds 20% of speed if you have the speed boost skill
 	MAX_SPEED = MAX_SPEED + 25.0 / float(MAX_SPEED) * 100.0 if game_data.player_data.skills.speed_boost else MAX_SPEED
@@ -81,10 +84,6 @@ func _input(event):
 
 
 func _process(_delta):
-	if last_time_TEMP != ceil(HungerDecreaseTimer.time_left): 
-		print(HungerDecreaseTimer.time_left)
-		last_time_TEMP = ceil(HungerDecreaseTimer.time_left)
-	
 	if get_state() in CONSTANT_STATES: process_constant_state()
 	else: process_inconstant_state()
 	TextureRes.flip_v = rotation_degrees > 90 and rotation_degrees < -90
@@ -102,7 +101,7 @@ func has_skill(skill: String): return game_data.player_data.skills[skill]
 
 
 
-func start_hunger_decrease_timer(hunger_value: int):
+func start_stat_decrease_timer(hunger_value: int):
 	if not get_stat("can_get_hungry"): return
 	var time := HUNGER_DECREASE_DELAY
 	
@@ -112,9 +111,13 @@ func start_hunger_decrease_timer(hunger_value: int):
 		time += 0.2
 	if energy_full():
 		time -= 0.2
-		
-	print("player.gd: starting hunger decrease delay!\ntime: %s\n" % time)
-	HungerDecreaseTimer.start(time)
+	
+	StatDecreaseTimer.start(time)
+	
+func reset_stat_decrease_timer(mode: String):
+	match mode:
+		"hunger": start_stat_decrease_timer(get_stat("hunger"))
+		"energy": StatDecreaseTimer.start(ENERGY_DECREASE_DELAY)
 
 
 func update_stat(id: String, value: int, animate: bool = true):
@@ -164,7 +167,6 @@ func exit_eat_state():
 
 func consume_meat():
 	if get_state() == "EAT": return
-	if get_stat("energy") == MAX_ENERGY: return
 	
 	var stat_to_update = "hunger" if get_stat("hunger") < MAX_HUNGER else "energy"
 	var stat_cap = MAX_HUNGER if stat_to_update == "hunger" else MAX_ENERGY
@@ -173,7 +175,7 @@ func consume_meat():
 		min(get_stat(stat_to_update) + 1, stat_cap)
 	)
 	
-	start_hunger_decrease_timer(get_stat("hunger"))
+	start_stat_decrease_timer(get_stat("hunger"))
 	
 	if get_stat("energy") == MAX_ENERGY:
 		player_events.emit_signal("special_attack_available")
@@ -197,11 +199,6 @@ func consume_enemy(EnemyNode):
 	# regenerates both hunger and health
 	update_stat("hunger", int(min(get_stat("hunger") + 1, MAX_HUNGER)))
 	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
-		
-func reset_stat_decrease_timer(mode: String):
-	match mode:
-		"hunger": start_hunger_decrease_timer(get_stat("hunger"))
-		"energy": HungerDecreaseTimer.start(ENERGY_DECREASE_DELAY)
 	
 	
 func apply_damage(damage: int):
@@ -209,11 +206,24 @@ func apply_damage(damage: int):
 	if damage >= get_stat("health"): 
 		die()
 		return
-	
+		
 	emit_signal("hurt")
-	update_stat("health", get_stat("health") - damage)
 	start_invincibility()
 	start_blinking()
+	
+	var value_to_update = "health" if get_stat("shields") <= 0 else "shields"
+	var health_after_damage = get_stat(value_to_update) - damage
+	if value_to_update == "shields": 
+		if health_after_damage < 0:
+			update_stat("health", abs(health_after_damage))
+			update_stat("shields", 0)
+			return
+	
+	update_stat(
+		value_to_update,
+		health_after_damage
+	)
+	
 	camera_events.emit_signal("camera_shake_request", DAMAGE_CAMERA_SHAKE_DURATION, DAMAGE_CAMERA_SHAKE_INTENSITY)
 	
 func set_movement_direction(value: Vector2):
@@ -225,7 +235,7 @@ func set_movement_direction(value: Vector2):
 		
 		
 
-func _on_hunger_decrease_delay_timeout():
+func _on_stat_decrease_delay_timeout():
 	remove_tag("FULL")
 	match get_state():
 		"EAT":
@@ -233,25 +243,23 @@ func _on_hunger_decrease_delay_timeout():
 				exit_eat_state()
 				return
 			update_stat("energy", int(max(get_stat("energy") - 1, 0)))
-			HungerDecreaseTimer.start(ENERGY_DECREASE_DELAY)
+			StatDecreaseTimer.start(ENERGY_DECREASE_DELAY)
 		_:
 			if get_stat("hunger") <= 0: 
 				apply_damage(1)
 				return
 			update_stat("hunger", int(max(get_stat("hunger") - 1, 0)))
-			start_hunger_decrease_timer(get_stat("hunger"))
+			start_stat_decrease_timer(get_stat("hunger"))
 			
 func _on_exit_from_eat_state_forced(): exit_eat_state()
 
 
 func _on_player_used_joystick(value):
-	if get_state() == "DASH": return
-	
 	set_movement_direction(value)
 	_on_player_movement_direction_updated(value)
 	
 func _on_player_movement_direction_updated(value): 
-	if get_state() in ["EAT", "DASH"] or value == Vector2.ZERO: return
+	if get_state() == "EAT" or value == Vector2.ZERO: return
 	player_events.emit_signal("player_moving" if value != Vector2.ZERO else "player_not_moving")
 	
 func _on_player_frozen(): FRICTION = DEFAULT_FRICTION * 0.145
