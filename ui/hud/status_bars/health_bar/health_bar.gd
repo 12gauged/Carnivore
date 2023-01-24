@@ -31,8 +31,9 @@ func set_status(value: int, animate: bool = true):
 
 
 func _on_status_value_update(stat_id: String, new_value: int, animate: bool = true):
-	var dark_grey = Color(0.25, 0.25, 0.25, 1.0)
-	IconContainer.modulate = dark_grey if stat_id == "shields" and new_value != 0 else Color.white
+	if stat_id in ["shields", "health"]:
+		var dark_grey = Color(0.25, 0.25, 0.25, 1.0)
+		IconContainer.modulate = dark_grey if stat_id == "shields" and new_value != 0 else Color.white
 	
 	if stat_id != tracked_stat_id: return
 	set_status(new_value, animate)
