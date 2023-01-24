@@ -114,9 +114,6 @@ func process_rooted_skill():
 			RootedSkillHealingTimer.start()
 			
 	
-	if RootedSkillHealingTimer.is_stopped(): return
-	print("player.gd: RootedSkillHealingTimer.time_left: %s" % RootedSkillHealingTimer.time_left)
-	
 	
 func process_healing_meal_skill():
 	if not has_skill("healing_meal"): return

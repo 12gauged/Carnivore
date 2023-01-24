@@ -6,7 +6,7 @@ const settings_file: String = save_dir + "settings.save"
 
 
 func setup():
-	debug_log.call_deferred("dprint", "loading on android")
+	debug_log.call_deferred("dprint", "android_data_manager.gd: loading on android")
 	load_game()
 	
 	var current_locale = game_data.get_game_setting("locale", "value")
@@ -52,7 +52,7 @@ func save_settings():
 	FileManager.open(settings_file, FileManager.WRITE)
 	FileManager.store_var(game_data.game_settings)
 	FileManager.close()
-	debug_log.call_deferred("dprint", "saving settings.")
+	debug_log.call_deferred("dprint", "android_data_manager.gd: saving settings.")
 	
 func save_player_data():
 	var FileManager: File = File.new()
@@ -61,7 +61,7 @@ func save_player_data():
 	FileManager.open(player_data_file, FileManager.WRITE)
 	FileManager.store_var(game_data.player_data)
 	FileManager.close()
-	debug_log.call_deferred("dprint", "saving player_data.")
+	debug_log.call_deferred("dprint", "android_data_manager.gd: saving player_data.")
 		
 func save_all():
 	save_settings()
@@ -73,11 +73,11 @@ func compare_dictionaries(dir1, dir2):
 			true:
 				for subvalue in dir2[value].keys():
 					if !subvalue in dir1[value].keys():
-						print("%s/%s not present in the loaded values. adding it in..." % [value, subvalue])
+						print("android_data_manager.gd: %s/%s not present in the loaded values. adding it in..." % [value, subvalue])
 						dir1[value][subvalue] = dir2[value][subvalue]
 			false:
 				if !value in dir1.keys():
-					print("%s not present in the loaded values. adding it in..." % value)
+					print("android_data_manager.gd: %s not present in the loaded values. adding it in..." % value)
 					dir1[value] = dir2[value]
 	print("\n")
 	return dir1

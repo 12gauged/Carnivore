@@ -11,7 +11,7 @@ var data_managers: Dictionary = {
 func _ready():
 	var OS_name: String = OS.get_name()
 	
-	debug_log.call_deferred("dprint", "working with %s\ndevice is set to: %s" % [OS_name, game_data.current_platform])
+	debug_log.call_deferred("dprint", "global_data_manager.gd: working with %s\ndevice is set to: %s" % [OS_name, game_data.current_platform])
 	
 	match OS_name:
 		"Android": current_data_manager = "android"
