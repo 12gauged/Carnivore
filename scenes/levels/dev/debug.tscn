@@ -35,7 +35,6 @@ entity_name = "meat_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 auto_spawn = true
-spawn_chance = 60
 respawn = true
 
 [node name="death_loot_spawner2" parent="objects" instance=ExtResource( 6 )]
@@ -44,7 +43,6 @@ entity_name = "meat_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 auto_spawn = true
-spawn_chance = 60
 respawn = true
 respawn_delay = 0.5
 
@@ -54,7 +52,6 @@ entity_name = "meat_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
 auto_spawn = true
-spawn_chance = 60
 respawn = true
 
 [node name="part_enemy_spawner2" parent="objects" instance=ExtResource( 6 )]

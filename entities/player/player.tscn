@@ -419,6 +419,10 @@ one_shot = true
 wait_time = 1.2
 one_shot = true
 
+[node name="rooted_skill_healing_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
 [connection signal="entered_eat_state" from="." to="texture/hands_overlay" method="hide"]
 [connection signal="frozen" from="." to="part_state_handler/*/comp_movement_keyboard" method="stop_execution"]
@@ -449,3 +453,4 @@ one_shot = true
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="timeout" from="stat_decrease_delay" to="." method="_on_stat_decrease_delay_timeout"]
 [connection signal="timeout" from="invincibility_timer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="rooted_skill_healing_timer" to="." method="_on_rooted_skill_healing_timer_timeout"]

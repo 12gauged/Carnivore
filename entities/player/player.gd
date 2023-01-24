@@ -22,6 +22,7 @@ export(int) var MAX_ENERGY = 6
 onready var StatDecreaseTimer: Timer = $stat_decrease_delay
 onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
+onready var RootedSkillHealingTimer: Timer = $rooted_skill_healing_timer
 onready var AnimPlayer = $part_state_anim_handler/animation_player
 onready var ProjectileHandler: Node2D = $part_player_projectile_handler
 
@@ -34,7 +35,7 @@ func _ready():
 	stats["hunger"] = MAX_HUNGER / 2
 	stats["can_get_hungry"] = true
 	stats["energy"] = 0
-	stats["shields"] = 0 if not has_skill("hard_skin") else 3 * clamp((2 * int(has_skill("body_armor")) + 1), 1, 2)
+	stats["shields"] = 0 if not has_skill("hard_skin") else 3 * int(clamp((2 * int(has_skill("body_armor")) + 1), 1, 2))
 	call_deferred("update_stat", "hunger", get_stat("hunger"), false)
 	call_deferred("update_stat", "shields", get_stat("shields"), false)
 	
@@ -94,11 +95,34 @@ func process_inconstant_state():
 	if get_state() == "EAT": return
 	set_state("IDLE" if movement_direction == Vector2.ZERO else "MOVE")
 	
+	process_rooted_skill()
+	
 func in_tutorial(): return game_data.player_data.bounty == game_data.DEFAULT_BOUNTY
 func energy_full(): return get_stat("energy") == MAX_ENERGY
 func has_skill(skill: String): return game_data.player_data.skills[skill]
 
 
+
+func process_rooted_skill():
+	if not has_skill("rooted"): return
+	if not get_state() in ["MOVE", "IDLE"]: return
+	match get_state():
+		"MOVE": 
+			if not RootedSkillHealingTimer.is_stopped():
+				continue
+			RootedSkillHealingTimer.start()
+		"IDLE": RootedSkillHealingTimer.stop()
+	
+	if RootedSkillHealingTimer.is_stopped(): return
+	print("player.gd: RootedSkillHealingTimer.time_left: %s" % RootedSkillHealingTimer.time_left)
+	
+	
+func process_healing_meal_skill():
+	if not has_skill("healing_meal"): return
+	if get_stat("shields") > 0: return
+	if not toolbox.EntityRNG.randi_range(1, 100) <= 25: return
+	
+	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
 
 
 func start_stat_decrease_timer(hunger_value: int):
@@ -172,10 +196,12 @@ func consume_meat():
 	var stat_cap = MAX_HUNGER if stat_to_update == "hunger" else MAX_ENERGY
 	update_stat(
 		stat_to_update,
-		min(get_stat(stat_to_update) + 1, stat_cap)
+		int(min(get_stat(stat_to_update) + 1, stat_cap))
 	)
 	
 	start_stat_decrease_timer(get_stat("hunger"))
+	
+	process_healing_meal_skill()
 	
 	if get_stat("energy") == MAX_ENERGY:
 		player_events.emit_signal("special_attack_available")
@@ -193,12 +219,13 @@ func consume_enemy(EnemyNode):
 	
 	if "PLAYER" in EnemyNode.TAGS: return
 	
-	if get_stat("health") < MAX_HEALTH:
-		emit_signal("healing")
-	
 	# regenerates both hunger and health
 	update_stat("hunger", int(min(get_stat("hunger") + 1, MAX_HUNGER)))
-	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
+	
+	if get_stat("shields") > 0: return
+	if get_stat("health") < MAX_HEALTH:
+		emit_signal("healing")
+		update_stat("health", get_stat("health") + 1)
 	
 	
 func apply_damage(damage: int):
@@ -215,7 +242,7 @@ func apply_damage(damage: int):
 	var health_after_damage = get_stat(value_to_update) - damage
 	if value_to_update == "shields": 
 		if health_after_damage < 0:
-			update_stat("health", abs(health_after_damage))
+			update_stat("health", int(abs(health_after_damage)))
 			update_stat("shields", 0)
 			return
 	
@@ -268,3 +295,8 @@ func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION
 
 func _on_player_state_changed(new_state, _old_state):
 	game_data.current_player_state = new_state
+
+
+func _on_rooted_skill_healing_timer_timeout():
+	if get_stat("shields") > 0: return
+	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
