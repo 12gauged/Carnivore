@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://entities/frog/frog_arena_data.tres" type="Resource" id=1]
 [ext_resource path="res://entities/worm/worm_arena_data.tres" type="Resource" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://system/data/level_data.gd" type="Script" id=19]
 [ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scenes/levels/arena/ant_banner.tscn" type="PackedScene" id=21]
+[ext_resource path="res://world/arena/bleachers.png" type="Texture" id=22]
+[ext_resource path="res://world/arena/bleachers_sides.png" type="Texture" id=23]
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
 points = PoolVector2Array( 0, 0, 5, 10, 16, 16, 0, 16 )
@@ -36,6 +38,9 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 6, 5, 0, 12 )
 
 [sub_resource type="ConvexPolygonShape2D" id=15]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 12, 10, 5, 0, 5 )
+
+[sub_resource type="ConvexPolygonShape2D" id=17]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -505,9 +510,16 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 28/navigation_offset = Vector2( 0, 0 )
 28/shape_offset = Vector2( 0, 0 )
 28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+28/shape = SubResource( 17 )
 28/shape_one_way = false
-28/shape_one_way_margin = 0.0
-28/shapes = [  ]
+28/shape_one_way_margin = 1.0
+28/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 17 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 28/z_index = 0
 29/name = "arena_tilemap.png 29"
 29/texture = ExtResource( 18 )
@@ -597,6 +609,26 @@ position = Vector2( 64, 32 )
 
 [node name="ant_banner2" parent="objects/decoration" instance=ExtResource( 21 )]
 position = Vector2( 256, 32 )
+
+[node name="bleachers" type="Node2D" parent="objects/decoration"]
+
+[node name="bleacher_side_left" type="Sprite" parent="objects/decoration/bleachers"]
+position = Vector2( -34, -24 )
+texture = ExtResource( 23 )
+centered = false
+
+[node name="bleachers" type="Sprite" parent="objects/decoration/bleachers"]
+position = Vector2( 32, -32 )
+texture = ExtResource( 22 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 256, 40 )
+
+[node name="bleacher_side_right" type="Sprite" parent="objects/decoration/bleachers"]
+position = Vector2( 288, -24 )
+texture = ExtResource( 23 )
+centered = false
+flip_h = true
 
 [node name="entities" type="YSort" parent="objects"]
 
