@@ -105,13 +105,14 @@ func has_skill(skill: String): return game_data.player_data.skills[skill]
 
 func process_rooted_skill():
 	if not has_skill("rooted"): return
+	if get_stat("health") == MAX_HEALTH: return
 	if not get_state() in ["MOVE", "IDLE"]: return
 	match get_state():
-		"MOVE": 
-			if not RootedSkillHealingTimer.is_stopped():
-				continue
+		"MOVE": RootedSkillHealingTimer.stop()
+		"IDLE": 
+			if not RootedSkillHealingTimer.is_stopped(): continue
 			RootedSkillHealingTimer.start()
-		"IDLE": RootedSkillHealingTimer.stop()
+			
 	
 	if RootedSkillHealingTimer.is_stopped(): return
 	print("player.gd: RootedSkillHealingTimer.time_left: %s" % RootedSkillHealingTimer.time_left)
@@ -300,3 +301,4 @@ func _on_player_state_changed(new_state, _old_state):
 func _on_rooted_skill_healing_timer_timeout():
 	if get_stat("shields") > 0: return
 	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
+	emit_signal("healing")
