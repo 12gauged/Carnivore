@@ -203,6 +203,7 @@ func consume_meat():
 	
 	if get_stat("energy") == MAX_ENERGY:
 		player_events.emit_signal("special_attack_available")
+	if get_stat("energy") == MAX_ENERGY and get_stat("hunger") == MAX_HUNGER:
 		add_tag("FULL")
 		return
 	remove_tag("FULL")
@@ -287,7 +288,8 @@ func _on_player_movement_direction_updated(value):
 	if get_state() == "EAT" or value == Vector2.ZERO: return
 	player_events.emit_signal("player_moving" if value != Vector2.ZERO else "player_not_moving")
 	
-func _on_player_frozen(): FRICTION = DEFAULT_FRICTION * 0.145
+func _on_player_frozen(): velocity = Vector2.ZERO
+func _on_player_frozen_slow_motion(): FRICTION = DEFAULT_FRICTION * 0.145
 func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION
 
 

@@ -401,7 +401,7 @@ method = {
 
 [node name="ending_freeze_method" parent="objects/part_arena" instance=ExtResource( 7 )]
 method = {
-"args": [ "freeze_player" ],
+"args": [ "freeze_player_slow_motion" ],
 "caller": "player_events",
 "method": "emit_signal"
 }
