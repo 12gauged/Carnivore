@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=2]
@@ -24,6 +24,12 @@
 [ext_resource path="res://world/level1/vegetation/trees/tree0.png" type="Texture" id=22]
 [ext_resource path="res://world/level1/tilemap/fences_tilemap.png" type="Texture" id=23]
 [ext_resource path="res://scenes/levels/level1/saving_flag_spawner.gd" type="Script" id=24]
+[ext_resource path="res://projectiles/spear/spear.png" type="Texture" id=25]
+[ext_resource path="res://entities/player/player_dead.png" type="Texture" id=26]
+[ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=27]
+[ext_resource path="res://system/random_scripts/animation_player_controller.gd" type="Script" id=28]
+[ext_resource path="res://entities/player/player_cage.png" type="Texture" id=29]
+[ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=30]
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -95,6 +101,252 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "fly"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ), Vector2( 0, -1 ), Vector2( 0, 1 ), Vector2( 0, -1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "spawn"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../entities/player_cutscene/spear:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -112, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../entities/player_cutscene/player:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../entities/player_cutscene/cage:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../entities/player_cutscene/cage/cage:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../entities/player_cutscene/ant_soldier:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, -8 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../entities/player_cutscene/spear:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.8, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 136, -120 ), Vector2( -184, 160 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../entities/player_cutscene:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../entities/player:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../entities/player_cutscene/player:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.8, 1, 1.1, 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -5, 0 ), Vector2( 2, 0 ), Vector2( -2, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../entities/player_cutscene/cage:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.8, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -128 ), Vector2( 0, -128 ), Vector2( 0, -5 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../entities/player_cutscene/cage/cage:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 2.2, 2.3, 2.4, 2.5, 2.6, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../entities/player_cutscene/cage/cage:vframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/7/type = "animation"
+tracks/7/path = NodePath("../entities/player_cutscene/ant_soldier/spawn_animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": PoolStringArray( "spawn", "fly" ),
+"times": PoolRealArray( 2.6, 4.3 )
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../entities/player_cutscene/ant_soldier:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 2.6, 4.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -112 ), Vector2( 32, -112 ), Vector2( 32, -8 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -307,6 +559,53 @@ position = Vector2( 128, 24 )
 
 [node name="part_camera_control" parent="objects/entities/player" instance=ExtResource( 8 )]
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="objects/entities/player"]
+remote_path = NodePath("../../player_cutscene")
+update_rotation = false
+update_scale = false
+
+[node name="player_cutscene" type="Node2D" parent="objects/entities"]
+position = Vector2( 128, 24 )
+script = ExtResource( 27 )
+visible_by_default = false
+
+[node name="player" type="Sprite" parent="objects/entities/player_cutscene"]
+position = Vector2( 0, -7 )
+texture = ExtResource( 26 )
+offset = Vector2( 5, 0 )
+
+[node name="ant_soldier" type="Sprite" parent="objects/entities/player_cutscene"]
+position = Vector2( 32, -8 )
+texture = ExtResource( 30 )
+offset = Vector2( 0, -1 )
+hframes = 6
+frame = 1
+
+[node name="spawn_animation" type="AnimationPlayer" parent="objects/entities/player_cutscene/ant_soldier"]
+anims/RESET = SubResource( 7 )
+anims/fly = SubResource( 8 )
+anims/spawn = SubResource( 9 )
+
+[node name="cage" type="Node2D" parent="objects/entities/player_cutscene"]
+position = Vector2( 0, -5 )
+
+[node name="cage" type="Sprite" parent="objects/entities/player_cutscene/cage"]
+position = Vector2( -16, -19 )
+texture = ExtResource( 29 )
+centered = false
+hframes = 6
+frame = 1
+
+[node name="spear" type="Node2D" parent="objects/entities/player_cutscene"]
+position = Vector2( -112, 96 )
+rotation = 2.35619
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="objects/entities/player_cutscene/spear"]
+texture = ExtResource( 25 )
+
 [node name="part_level_groups" parent="objects/entities" instance=ExtResource( 4 )]
 
 [node name="rock_spawners" type="YSort" parent="objects"]
@@ -401,7 +700,7 @@ method = {
 
 [node name="ending_freeze_method" parent="objects/part_arena" instance=ExtResource( 7 )]
 method = {
-"args": [ "freeze_player_slow_motion" ],
+"args": [ "freeze_player" ],
 "caller": "player_events",
 "method": "emit_signal"
 }
@@ -438,6 +737,12 @@ event = "tutorial_finished"
 emitter = "game_events"
 event = "spawn_tutorial_ant"
 
+[node name="ending_animation_player" type="AnimationPlayer" parent="objects/part_arena"]
+anims/RESET = SubResource( 6 )
+anims/default = SubResource( 5 )
+script = ExtResource( 28 )
+animation_to_play = "default"
+
 [node name="saving_flag_spawner" type="Node2D" parent="objects"]
 script = ExtResource( 24 )
 
@@ -461,8 +766,7 @@ anims/start = SubResource( 2 )
 [connection signal="event_received" from="objects/rock_spawners/comp_event_receiver" to="objects/rock_spawners/spawn_delay" method="start_timer"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/save_game" method="save_game"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_freeze_method" method="call_method"]
-[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_slowmo_method" method="call_method"]
-[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/delay_for_level_ending" method="start_timer"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_animation_player" method="play_anim"]
 [connection signal="wave_started" from="objects/part_arena" to="objects/saving_flag_spawner" method="_on_part_arena_wave_started"]
 [connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]

@@ -28,6 +28,11 @@ onready var TextCooldownTimer: Timer = $text_cooldown_timer
 
 
 func _ready():
+	if OS.is_debug_build():
+		game_events.emit_signal("spawn_tutorial_stone")
+		end_tutorial()
+		return
+	
 	if game_data.current_platform == "mobile": return
 	if game_data.get_player_data("bounty") > game_data.DEFAULT_BOUNTY:
 		end_tutorial()
