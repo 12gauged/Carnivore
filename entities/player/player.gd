@@ -31,6 +31,8 @@ var last_time_TEMP:= 0
 func _ready():
 	add_tag("PLAYER")
 	
+	self.visible = true # LAZINESS INFLUENCED BY THE TUTORIAL ENDING CUTSCENE
+	
 	# creating new stats
 	stats["hunger"] = MAX_HUNGER / 2
 	stats["can_get_hungry"] = true
@@ -281,6 +283,7 @@ func _on_exit_from_eat_state_forced(): exit_eat_state()
 
 
 func _on_player_used_joystick(value):
+	if frozen: return
 	set_movement_direction(value)
 	_on_player_movement_direction_updated(value)
 	

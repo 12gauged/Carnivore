@@ -42,11 +42,12 @@ tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
 tutorial.throw_stone,throw the stone with the joystick,jogue a pedra com o joystick,untranslated,untranslated
-tutorial.throw_stone.desktop,use the RIGHT MOUSE BUTTON to throw it,use BOTÃO DIREITO DO MOUSE para jogá-la,untranslated,untranslated
+tutorial.throw_stone.desktop,throw the stone,jogue a pedra,untranslated,untranslated
 tutorial.eating,eat the meat,coma a carne,untranslated,untranslated
 tutorial.hunger,don't get hungry!,não fique com fome!,untranslated,untranslated
 tutorial.special_attack,use your special attack!,use seu ataque especial!,untranslated,untranslated
 hud.wave_indicator,wave %s!,onda %s!,vague %s,vague %s!
 hud.plant_caught,the plant has been caught,a planta foi capturada,untranslated,untranslated
+hud.arena_ended,enough!,já chega!,untranslated,untranslated
 hud.defend_to_save,defend!,defenda!,untranslated,untranslated
 hud.saved,saved!,salvo!,untranslated,untranslated

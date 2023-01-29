@@ -18,8 +18,7 @@ func _input(event):
 	
 	if touch_counter == 1:
 		touch_counter = 0
-		SkipButton.visible = true
-		SkipButton.modulate.a = 1.0
+		DisappearAnimationPlayer.play("appear")
 		DisappearTimer.start()
 		return
 	touch_counter += 1

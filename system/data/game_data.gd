@@ -57,7 +57,7 @@ var current_level: String = "" setget set_current_level, get_current_level
 var current_level_time: Array = [] setget set_current_level_time, get_current_level_time
 var current_arena_wave: int = 1 setget set_current_wave, get_current_wave
 var current_player_state: String = ""
-var initial_player_bounty
+var initial_player_bounty: int = 0
 var level_player_bounty: int = 0
 var total_level_player_bounty: int = 0
 
@@ -68,7 +68,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
 	#player_data.bounty = 69420
-	player_data.skills.rooted = true
+	#player_data.skills.rooted = true
 #	player_data.skills.healing_meal = true
 #	player_data.skills.hard_skin = true
 #	player_data.skills.body_armor = true

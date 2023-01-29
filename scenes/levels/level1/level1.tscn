@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://system/random_scripts/animation_player_controller.gd" type="Script" id=28]
 [ext_resource path="res://entities/player/player_cage.png" type="Texture" id=29]
 [ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=30]
+[ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=31]
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -178,7 +179,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("../entities/player_cutscene/spear:position")
+tracks/0/path = NodePath("../entities/ending_cutscene/spear:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -190,7 +191,7 @@ tracks/0/keys = {
 "values": [ Vector2( -112, 96 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../entities/player_cutscene/player:offset")
+tracks/1/path = NodePath("../entities/ending_cutscene/player:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -202,7 +203,7 @@ tracks/1/keys = {
 "values": [ Vector2( 5, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../entities/player_cutscene/cage:position")
+tracks/2/path = NodePath("../entities/ending_cutscene/cage:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -214,7 +215,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, -5 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../entities/player_cutscene/cage/cage:frame")
+tracks/3/path = NodePath("../entities/ending_cutscene/cage/cage:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -226,7 +227,7 @@ tracks/3/keys = {
 "values": [ 1 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("../entities/player_cutscene/ant_soldier:position")
+tracks/4/path = NodePath("../entities/ending_cutscene/ant_soldier:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -242,7 +243,7 @@ tracks/4/keys = {
 resource_name = "default"
 length = 10.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("../entities/player_cutscene/spear:position")
+tracks/0/path = NodePath("../entities/ending_cutscene/spear:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -254,7 +255,7 @@ tracks/0/keys = {
 "values": [ Vector2( 136, -120 ), Vector2( -184, 160 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../entities/player_cutscene:visible")
+tracks/1/path = NodePath("../entities/ending_cutscene:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -278,7 +279,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../entities/player_cutscene/player:offset")
+tracks/3/path = NodePath("../entities/ending_cutscene/player:offset")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -290,31 +291,31 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -5, 0 ), Vector2( 2, 0 ), Vector2( -2, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("../entities/player_cutscene/cage:position")
+tracks/4/path = NodePath("../entities/ending_cutscene/cage:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1.8, 2.2 ),
+"times": PoolRealArray( 0, 1.8, 2.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -128 ), Vector2( 0, -128 ), Vector2( 0, -5 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("../entities/player_cutscene/cage/cage:frame")
+tracks/5/path = NodePath("../entities/ending_cutscene/cage/cage:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 2.2, 2.3, 2.4, 2.5, 2.6, 2.7 ),
+"times": PoolRealArray( 2.4, 2.5, 2.6, 2.7, 2.8, 2.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("../entities/player_cutscene/cage/cage:vframes")
+tracks/6/path = NodePath("../entities/ending_cutscene/cage/cage:vframes")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -326,26 +327,54 @@ tracks/6/keys = {
 "values": [  ]
 }
 tracks/7/type = "animation"
-tracks/7/path = NodePath("../entities/player_cutscene/ant_soldier/spawn_animation")
+tracks/7/path = NodePath("../entities/ending_cutscene/ant_soldier/spawn_animation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
 "clips": PoolStringArray( "spawn", "fly" ),
-"times": PoolRealArray( 2.6, 4.3 )
+"times": PoolRealArray( 3.3, 6.2 )
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("../entities/player_cutscene/ant_soldier:position")
+tracks/8/path = NodePath("../entities/ending_cutscene/ant_soldier:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0, 2.6, 4.3 ),
+"times": PoolRealArray( 0, 3.3, 6.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 32, -112 ), Vector2( 32, -112 ), Vector2( 32, -8 ) ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath("../entities/ending_cutscene/show_capture_notification")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 7.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "call_event"
+} ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath("end_level_method")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "call_method"
+} ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -560,51 +589,54 @@ position = Vector2( 128, 24 )
 [node name="part_camera_control" parent="objects/entities/player" instance=ExtResource( 8 )]
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="objects/entities/player"]
-remote_path = NodePath("../../player_cutscene")
+remote_path = NodePath("../../ending_cutscene")
 update_rotation = false
 update_scale = false
 
-[node name="player_cutscene" type="Node2D" parent="objects/entities"]
+[node name="ending_cutscene" type="Node2D" parent="objects/entities"]
 position = Vector2( 128, 24 )
 script = ExtResource( 27 )
 visible_by_default = false
 
-[node name="player" type="Sprite" parent="objects/entities/player_cutscene"]
+[node name="player" type="Sprite" parent="objects/entities/ending_cutscene"]
 position = Vector2( 0, -7 )
 texture = ExtResource( 26 )
 offset = Vector2( 5, 0 )
 
-[node name="ant_soldier" type="Sprite" parent="objects/entities/player_cutscene"]
+[node name="ant_soldier" type="Sprite" parent="objects/entities/ending_cutscene"]
 position = Vector2( 32, -8 )
 texture = ExtResource( 30 )
 offset = Vector2( 0, -1 )
 hframes = 6
 frame = 1
 
-[node name="spawn_animation" type="AnimationPlayer" parent="objects/entities/player_cutscene/ant_soldier"]
+[node name="spawn_animation" type="AnimationPlayer" parent="objects/entities/ending_cutscene/ant_soldier"]
 anims/RESET = SubResource( 7 )
 anims/fly = SubResource( 8 )
 anims/spawn = SubResource( 9 )
 
-[node name="cage" type="Node2D" parent="objects/entities/player_cutscene"]
+[node name="cage" type="Node2D" parent="objects/entities/ending_cutscene"]
 position = Vector2( 0, -5 )
 
-[node name="cage" type="Sprite" parent="objects/entities/player_cutscene/cage"]
+[node name="cage" type="Sprite" parent="objects/entities/ending_cutscene/cage"]
 position = Vector2( -16, -19 )
 texture = ExtResource( 29 )
 centered = false
 hframes = 6
 frame = 1
 
-[node name="spear" type="Node2D" parent="objects/entities/player_cutscene"]
+[node name="spear" type="Node2D" parent="objects/entities/ending_cutscene"]
 position = Vector2( -112, 96 )
 rotation = 2.35619
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="objects/entities/player_cutscene/spear"]
+[node name="Sprite" type="Sprite" parent="objects/entities/ending_cutscene/spear"]
 texture = ExtResource( 25 )
+
+[node name="show_capture_notification" parent="objects/entities/ending_cutscene" instance=ExtResource( 31 )]
+event = "show_plant_capture_notification"
 
 [node name="part_level_groups" parent="objects/entities" instance=ExtResource( 4 )]
 

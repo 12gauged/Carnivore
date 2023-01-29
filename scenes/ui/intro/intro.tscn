@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=2]
@@ -199,6 +199,34 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=6]
+resource_name = "appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "disappear"
 tracks/0/type = "value"
@@ -308,15 +336,11 @@ anims/default = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="button_holder"]
-margin_right = 5.0
-margin_bottom = 135.0
-custom_constants/margin_left = 5
+alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="button_holder"]
-margin_left = 5.0
-margin_right = 25.0
+margin_left = 215.0
+margin_right = 235.0
 margin_bottom = 135.0
 custom_constants/separation = 0
 alignment = 2
@@ -343,11 +367,18 @@ custom_constants/margin_bottom = 5
 [node name="disappear_animation_player" type="AnimationPlayer" parent="button_holder/VBoxContainer"]
 root_node = NodePath("../skip_button")
 anims/RESET = SubResource( 4 )
+anims/appear = SubResource( 6 )
 anims/disappear = SubResource( 3 )
 
 [node name="disappear_timer" type="Timer" parent="button_holder/VBoxContainer"]
-wait_time = 2.0
+wait_time = 4.0
 one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="button_holder"]
+margin_left = 235.0
+margin_right = 240.0
+margin_bottom = 135.0
+custom_constants/margin_left = 5
 
 [connection signal="pressed" from="button_holder/VBoxContainer/skip_button" to="text_holder/VBoxContainer/go_to_level" method="call_method"]
 [connection signal="timeout" from="button_holder/VBoxContainer/disappear_timer" to="button_holder/VBoxContainer" method="_on_disappear_timer_timeout"]

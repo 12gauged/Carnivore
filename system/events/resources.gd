@@ -20,7 +20,15 @@ var resources: Dictionary = {
 		"pickup_particle": preload("res://particles/pickup/pickup_particle.png"),
 		
 		"mushroom_house0": preload("res://world/level1/houses/mushroom_house_short.png"),
-		"mushroom_house1": preload("res://world/level1/houses/mushroom_house_tall.png")
+		"mushroom_house1": preload("res://world/level1/houses/mushroom_house_tall.png"),
+		"mouse_textures": {
+			0: preload("res://ui/gui/mouse/mouse_indicator/mouse_indicator_none.png"),
+			1: preload("res://ui/gui/mouse/mouse_indicator/mouse_indicator_left.png"),
+			2: preload("res://ui/gui/mouse/mouse_indicator/mouse_indicator_right.png"),
+			3: preload("res://ui/gui/mouse/mouse_indicator/mouse_indicator_middle.png"),
+			8: preload("res://ui/gui/mouse/mouse_indicator/mouse_indicator_xbutton1.png"),
+			9: preload("res://ui/gui/mouse/mouse_indicator/mouse_indicator_xbutton2.png")
+		}
 	},
 	"sounds": {
 		"sample": preload("res://sounds/audio_stream_sample.tscn"),
@@ -45,8 +53,7 @@ var resources: Dictionary = {
 		"jail": preload("res://scenes/levels/jail/jail.tscn"),
 		"arena": preload("res://scenes/levels/arena/arena.tscn"),
 		
-		"intro": preload("res://scenes/ui/intro/intro.tscn"),
-		"level1_comic": preload("res://scenes/levels/level1/level1_comic.tscn")
+		"intro": preload("res://scenes/ui/intro/intro.tscn")
 	},
 	"entities": {
 		"player": preload("res://entities/player/player.tscn"),

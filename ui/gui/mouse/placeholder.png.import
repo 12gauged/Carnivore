@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jail_tileset-sheet.png-3c78dbe270445521981f5afeb813384b.stex"
+path="res://.import/placeholder.png-17b60721d04bd766458e8487bd9a404c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://world/jail/jail_tileset-sheet.png"
-dest_files=[ "res://.import/jail_tileset-sheet.png-3c78dbe270445521981f5afeb813384b.stex" ]
+source_file="res://ui/gui/mouse/placeholder.png"
+dest_files=[ "res://.import/placeholder.png-17b60721d04bd766458e8487bd9a404c.stex" ]
 
 [params]
 

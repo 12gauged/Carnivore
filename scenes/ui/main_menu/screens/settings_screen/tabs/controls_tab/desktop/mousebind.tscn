@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/mouse/mouse_indicator/mouse_indicator_none.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/tabs/controls_tab/desktop/mousebind.gd" type="Script" id=3]
+[ext_resource path="res://ui/gui/mouse/placeholder.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/button/medium/button_medium.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Animation" id=1]
@@ -61,10 +62,17 @@ custom_constants/margin_right = 16
 margin_left = 210.0
 margin_right = 240.0
 size_flags_horizontal = 10
-texture_normal = ExtResource( 2 )
+texture_normal = ExtResource( 4 )
 texture_pressed = null
 texture_hover = null
 texture_disabled = null
+
+[node name="button_texture" type="TextureRect" parent="button_medium"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+stretch_mode = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )

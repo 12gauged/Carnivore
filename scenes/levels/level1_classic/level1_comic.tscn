@@ -1212,6 +1212,7 @@ frame = 2
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -1233,6 +1234,7 @@ frame = 2
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -1254,7 +1256,6 @@ frame = 2
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
-frame = 2
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -1276,7 +1277,7 @@ frame = 2
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -1298,6 +1299,7 @@ frame = 2
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -1319,6 +1321,7 @@ frame = 2
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
