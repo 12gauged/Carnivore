@@ -48,6 +48,7 @@ var resources: Dictionary = {
 		"main_menu": preload("res://scenes/ui/main_menu/main_menu.tscn"),
 		"death_screen": preload("res://scenes/ui/death_screen/death_screen.tscn"),
 		"village_saved_screen": preload("res://scenes/ui/village_saved_screen/village_saved_screen.tscn"),
+		"arena_ended_screen": preload("res://scenes/ui/arena_ended_screen/arena_ended_screen.tscn"),
 		
 		"level1": preload("res://scenes/levels/level1/level1.tscn"),
 		"jail": preload("res://scenes/levels/jail/jail.tscn"),

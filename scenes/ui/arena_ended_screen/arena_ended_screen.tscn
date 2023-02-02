@@ -1,0 +1,158 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/ui/arena_ended_screen/victory_text.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/arena_ended_screen/bounty_text.gd" type="Script" id=3]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ui/arena_ended_screen/arena_ended_screen.gd" type="Script" id=5]
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=7]
+[ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "flash"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="arena_ended_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 80.0
+margin_right = 159.0
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="victory_text" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 79.0
+margin_bottom = 32.0
+theme = ExtResource( 1 )
+text = "ui.victory_text"
+align = 1
+uppercase = true
+
+[node name="victory_subtitle" type="Label" parent="HBoxContainer/VBoxContainer"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+margin_top = 32.0
+margin_right = 79.0
+margin_bottom = 42.0
+theme = ExtResource( 1 )
+text = "You win. damn you."
+align = 1
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 79.0
+margin_bottom = 62.0
+custom_constants/margin_top = 20
+
+[node name="bounty" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 62.0
+margin_right = 79.0
+margin_bottom = 72.0
+theme = ExtResource( 1 )
+text = "ui.bounty"
+align = 1
+script = ExtResource( 3 )
+
+[node name="increase_timer" type="Timer" parent="HBoxContainer/VBoxContainer/bounty"]
+wait_time = 0.5
+one_shot = true
+
+[node name="yellow_flash" type="AnimationPlayer" parent="HBoxContainer/VBoxContainer/bounty"]
+anims/RESET = SubResource( 1 )
+anims/flash = SubResource( 2 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 79.0
+margin_bottom = 92.0
+custom_constants/margin_top = 20
+
+[node name="h_button_container" type="GridContainer" parent="HBoxContainer/VBoxContainer"]
+margin_left = 17.0
+margin_top = 92.0
+margin_right = 61.0
+margin_bottom = 112.0
+size_flags_horizontal = 4
+columns = 3
+
+[node name="home_button" parent="HBoxContainer/VBoxContainer/h_button_container" instance=ExtResource( 6 )]
+
+[node name="icon" parent="HBoxContainer/VBoxContainer/h_button_container/home_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 7 )
+
+[node name="comp_method_caller" parent="HBoxContainer/VBoxContainer/h_button_container/home_button" instance=ExtResource( 4 )]
+method = {
+"args": [ "change_scene_request", "jail" ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[node name="restart_button" parent="HBoxContainer/VBoxContainer/h_button_container" instance=ExtResource( 6 )]
+margin_left = 24.0
+margin_right = 44.0
+
+[node name="icon" parent="HBoxContainer/VBoxContainer/h_button_container/restart_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 8 )
+
+[node name="comp_method_caller" parent="HBoxContainer/VBoxContainer/h_button_container/restart_button" instance=ExtResource( 4 )]
+method = {
+"args": [ "change_scene_request", "var.game_data.current_level" ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
+[connection signal="bounty_animation_finished" from="HBoxContainer/VBoxContainer/bounty" to="." method="_on_bounty_bounty_animation_finished"]
+[connection signal="timeout" from="HBoxContainer/VBoxContainer/bounty/increase_timer" to="HBoxContainer/VBoxContainer/bounty" method="_on_increase_timer_timeout"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/home_button" to="." method="_on_any_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/home_button" to="HBoxContainer/VBoxContainer/h_button_container/home_button/comp_method_caller" method="call_method"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/restart_button" to="." method="_on_any_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/restart_button" to="HBoxContainer/VBoxContainer/h_button_container/restart_button/comp_method_caller" method="call_method"]
+
+[editable path="HBoxContainer/VBoxContainer/h_button_container/home_button"]
+[editable path="HBoxContainer/VBoxContainer/h_button_container/restart_button"]

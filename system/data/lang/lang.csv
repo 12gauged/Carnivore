@@ -37,7 +37,13 @@ ui.intro.line0,legend says,uma lenda diz,untranslated,untranslated
 ui.intro.line1,there's a violent plant,que existe uma planta violenta,untranslated,untranslated
 ui.intro.line2,living in the woods.,vivendo na floresta.,untranslated,untranslated
 ui.intro.line3,we'll capture it.,vamos capturá-la.,untranslated,untranslated
-ui.victory_screen.village_safe,the village is safe,a vila foi salva,le village est en sécurité,le village est sain et sauf
+ui.victory_text,victory,vitória,untranslated,untranslated
+ui.victory_text.you_win,you won. congrats i guess.,você ganhou. bom pra você.,untranslated,untranslated
+ui.victory_text.lucky,you were lucky.,você só teve sorte.,untranslated,untranslated
+ui.victory_text.almost_got_you,we almost got you.,quase te pegamos.,untranslated,untranslated
+ui.victory_text.impossible,impossible,impossível,untranslated,untranslated
+ui.bounty_text_during_animation,bounty: %s + %s,recompensa: %s + %s,untranslated,untranslated
+ui.bounty_text_after_animation,bounty: %s,recompensa: %s,untranslated,untranslated
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
