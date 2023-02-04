@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=3]
 [ext_resource path="res://scenes/ui/main_menu/screens/menu_screen.gd" type="Script" id=4]
 [ext_resource path="res://ui/gui/logo/12gauged.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui/main_menu/screens/credit.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/main_menu/screens/dev_credits.gd" type="Script" id=7]
+[ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=8]
 
 [node name="credits" type="Control"]
 anchor_right = 1.0
@@ -25,6 +28,7 @@ margin_top = 8.0
 margin_right = 171.0
 margin_bottom = 127.0
 custom_constants/vseparation = 0
+script = ExtResource( 7 )
 
 [node name="12gauged_logo" type="TextureRect" parent="center_container/v_grid_container"]
 margin_left = 23.0
@@ -32,6 +36,18 @@ margin_right = 80.0
 margin_bottom = 15.0
 size_flags_horizontal = 4
 texture = ExtResource( 5 )
+
+[node name="TextureButton" type="TextureButton" parent="center_container/v_grid_container/12gauged_logo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="go_to_the_truth" parent="center_container/v_grid_container/12gauged_logo" instance=ExtResource( 8 )]
+position = Vector2( 16, -1 )
+method = {
+"args": [ "change_scene_request", "the_truth", true, 5.0 ],
+"caller": "game_events",
+"method": "emit_signal"
+}
 
 [node name="margin_top" type="MarginContainer" parent="center_container/v_grid_container"]
 margin_top = 15.0
@@ -48,7 +64,7 @@ custom_colors/font_color = Color( 0.498039, 0.498039, 0.498039, 1 )
 text = "ui.credits.dev"
 align = 1
 
-[node name="devs" type="Label" parent="center_container/v_grid_container"]
+[node name="felipe_de_souza" type="Label" parent="center_container/v_grid_container"]
 margin_top = 33.0
 margin_right = 103.0
 margin_bottom = 43.0
@@ -56,6 +72,12 @@ theme = ExtResource( 1 )
 custom_constants/line_spacing = 0
 text = "Felipe de Souza"
 align = 1
+script = ExtResource( 6 )
+credit_id = "felipe"
+
+[node name="TextureButton" type="TextureButton" parent="center_container/v_grid_container/felipe_de_souza"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="margin_middle" type="MarginContainer" parent="center_container/v_grid_container"]
 margin_top = 43.0
@@ -72,16 +94,50 @@ custom_colors/font_color = Color( 0.498039, 0.498039, 0.498039, 1 )
 text = "ui.credits.translators"
 align = 1
 
-[node name="translators" type="Label" parent="center_container/v_grid_container"]
+[node name="evo" type="Label" parent="center_container/v_grid_container"]
 margin_top = 61.0
+margin_right = 103.0
+margin_bottom = 71.0
+theme = ExtResource( 1 )
+custom_constants/line_spacing = 0
+text = "Evo"
+align = 1
+script = ExtResource( 6 )
+credit_id = "evo"
+
+[node name="TextureButton" type="TextureButton" parent="center_container/v_grid_container/evo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="icedmi" type="Label" parent="center_container/v_grid_container"]
+margin_top = 71.0
+margin_right = 103.0
+margin_bottom = 81.0
+theme = ExtResource( 1 )
+custom_constants/line_spacing = 0
+text = "Icedmi"
+align = 1
+script = ExtResource( 6 )
+credit_id = "icedmi"
+
+[node name="TextureButton" type="TextureButton" parent="center_container/v_grid_container/icedmi"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="fryg" type="Label" parent="center_container/v_grid_container"]
+margin_top = 81.0
 margin_right = 103.0
 margin_bottom = 91.0
 theme = ExtResource( 1 )
 custom_constants/line_spacing = 0
-text = "Evo
-Icedmi
-Fryg"
+text = "Fryg"
 align = 1
+script = ExtResource( 6 )
+credit_id = "fryg"
+
+[node name="TextureButton" type="TextureButton" parent="center_container/v_grid_container/fryg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="margin_bottom" type="MarginContainer" parent="center_container/v_grid_container"]
 margin_top = 91.0
@@ -103,6 +159,11 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 3 )
 
+[connection signal="pressed" from="center_container/v_grid_container/12gauged_logo/TextureButton" to="center_container/v_grid_container/12gauged_logo/go_to_the_truth" method="call_method"]
+[connection signal="credit_pressed" from="center_container/v_grid_container/felipe_de_souza" to="center_container/v_grid_container" method="_on_credit_pressed"]
+[connection signal="credit_pressed" from="center_container/v_grid_container/evo" to="center_container/v_grid_container" method="_on_credit_pressed"]
+[connection signal="credit_pressed" from="center_container/v_grid_container/icedmi" to="center_container/v_grid_container" method="_on_credit_pressed"]
+[connection signal="credit_pressed" from="center_container/v_grid_container/fryg" to="center_container/v_grid_container" method="_on_credit_pressed"]
 [connection signal="button_pressed" from="center_container/v_grid_container/home_button" to="." method="_on_button_pressed"]
 
 [editable path="center_container/v_grid_container/home_button"]
