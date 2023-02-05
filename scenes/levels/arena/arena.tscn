@@ -748,7 +748,7 @@ texture = ExtResource( 26 )
 [node name="entities" type="YSort" parent="objects"]
 
 [node name="player" parent="objects/entities" instance=ExtResource( 11 )]
-position = Vector2( 127, 86 )
+position = Vector2( 160, 78 )
 
 [node name="part_camera_control" parent="objects/entities/player" instance=ExtResource( 7 )]
 
@@ -942,7 +942,7 @@ respawn_radius = Vector2( 60, 60 )
 
 [node name="part_camera" parent="." instance=ExtResource( 5 )]
 visible = false
-position = Vector2( 127, 86 )
+position = Vector2( 160, 78 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="part_camera"]
 autoplay = "start"

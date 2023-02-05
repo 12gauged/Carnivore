@@ -7,6 +7,7 @@ var bounty_value: int = 0
 
 
 func _ready():
+	print("bounty_indicator.gd: bounty_value: %s" % bounty_value)
 	NumberLabel.text = "+%s" % bounty_value
 	
 

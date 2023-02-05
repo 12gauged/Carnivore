@@ -52,7 +52,7 @@ func game_saved():
 func _on_saving_area_body_entered(_body):
 	LifetimeTimer.paused = true
 	player_inside_area = true
-	AreaSprite.modulate = GRAY
+	AreaSprite.modulate = Color.white
 
 func _on_saving_area_body_exited(_body):
 	LifetimeTimer.paused = false

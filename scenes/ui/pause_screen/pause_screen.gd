@@ -44,6 +44,11 @@ func _on_arena_ended():
 
 
 func _on_home_button_pressed():
+	if game_data.progress_safe:
+		ExitGameMethodCaller.call_method()
+		UnpauseMethodCaller.call_method()
+		return
+	
 	gui_events.emit_signal("warning_request", "lose_progress", "ui.pause_screen.lose_progress", true, true)
 	# warning-ignore:return_value_discarded
 	gui_events.connect("warning_request_accepted", self, "_on_warning_accepted")
