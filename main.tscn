@@ -57,8 +57,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
-
-[node name="debug_log" parent="." instance=ExtResource( 4 )]
+CurrentSceneNodePath = NodePath("current_scene")
+BlackOverlayNodePath = NodePath("black_overlay")
 
 [node name="current_scene" type="Control" parent="."]
 anchor_right = 1.0
@@ -66,6 +66,8 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="startup_screen" parent="current_scene" instance=ExtResource( 2 )]
+
+[node name="debug_log" parent="." instance=ExtResource( 4 )]
 
 [node name="black_overlay" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )

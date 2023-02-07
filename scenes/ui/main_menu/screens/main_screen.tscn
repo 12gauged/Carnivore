@@ -18,9 +18,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="center_elements" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -36,6 +33,8 @@ margin_top = 26.0
 margin_right = 170.0
 margin_bottom = 108.0
 mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 custom_constants/vseparation = 1
 custom_constants/hseparation = 0
 

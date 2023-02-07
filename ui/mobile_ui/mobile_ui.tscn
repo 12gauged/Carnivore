@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/button/joystick/mobile_joystick.tscn" type="PackedScene" id=2]
@@ -14,29 +14,18 @@
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=12]
 [ext_resource path="res://ui/mobile_ui/tutorial_controller_mobile.gd" type="Script" id=13]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=14]
+[ext_resource path="res://shaders/color_overlay.gdshader" type="Shader" id=15]
 [ext_resource path="res://ui/gui/button/small/button_small_pressed.png" type="Texture" id=16]
 [ext_resource path="res://ui/gui/button/small/button_small_normal.png" type="Texture" id=17]
 [ext_resource path="res://ui/mobile_ui/mobile_button_displacement.gd" type="Script" id=19]
 
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 15 )
+shader_param/overlay_color = Color( 0.25, 0.25, 0.25, 1 )
 
-void fragment() {
-	vec4 GRAY = vec4(0.25, 0.25, 0.25, 1.0);
-	vec4 BLACK = vec4(0.0, 0.0, 0.0, 1.0);
-	vec4 pixel_color = texture(SCREEN_TEXTURE, SCREEN_UV);
-	vec4 final_color;
-	
-	if (pixel_color == vec4(1.0, 1.0, 1.0, 1.0)) {
-		final_color = GRAY;
-	} else {
-		final_color = BLACK;
-	}
-	COLOR = final_color;
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 15 )
+shader_param/overlay_color = Color( 1, 1, 0, 1 )
 
 [node name="mobile_ui" type="Control"]
 anchor_right = 1.0
@@ -146,6 +135,7 @@ position = Vector2( -2, -2 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 16 )
 script = ExtResource( 11 )
+disabled = true
 
 [node name="comp_method_caller" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" instance=ExtResource( 4 )]
 method = {
@@ -155,12 +145,11 @@ method = {
 }
 
 [node name="grayscale_overlay" type="ColorRect" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button"]
-visible = false
-material = SubResource( 2 )
-margin_left = -1.0
-margin_top = -1.0
-margin_right = 17.0
-margin_bottom = 17.0
+material = SubResource( 3 )
+margin_left = -3.0
+margin_top = -3.0
+margin_right = 19.0
+margin_bottom = 19.0
 script = ExtResource( 14 )
 
 [node name="set_grayscale_event" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" instance=ExtResource( 10 )]
@@ -168,6 +157,23 @@ emitter = "player_events"
 event = "special_attack_available"
 
 [node name="set_normal_event" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" instance=ExtResource( 10 )]
+emitter = "player_events"
+event = "special_attack_unavailable"
+
+[node name="yellow_overlay" type="ColorRect" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button"]
+material = SubResource( 4 )
+margin_left = -3.0
+margin_top = -3.0
+margin_right = 19.0
+margin_bottom = 19.0
+script = ExtResource( 14 )
+visible_by_default = false
+
+[node name="set_yellowscale_event" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay" instance=ExtResource( 10 )]
+emitter = "player_events"
+event = "special_attack_tutorial_available"
+
+[node name="set_normal_event" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay" instance=ExtResource( 10 )]
 emitter = "player_events"
 event = "special_attack_unavailable"
 
@@ -286,6 +292,9 @@ margin_right = 120.0
 margin_bottom = 67.5
 mouse_filter = 2
 script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="tutorials"]
 anchor_bottom = 1.0
@@ -301,20 +310,20 @@ custom_constants/margin_left = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="tutorials/HBoxContainer"]
 margin_left = 1.0
-margin_right = 85.0
+margin_right = 97.0
 margin_bottom = 135.0
 mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="tutorials/HBoxContainer/VBoxContainer"]
-margin_right = 84.0
+margin_right = 96.0
 margin_bottom = 20.0
 mouse_filter = 2
 custom_constants/margin_top = 20
 
 [node name="TutorialTextBox" type="TextureRect" parent="tutorials/HBoxContainer/VBoxContainer"]
 margin_top = 20.0
-margin_right = 84.0
+margin_right = 96.0
 margin_bottom = 52.0
 mouse_filter = 2
 texture = ExtResource( 9 )
@@ -347,6 +356,10 @@ one_shot = true
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_grayscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" method="hide"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="disable"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/grayscale_overlay" method="show"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay/set_yellowscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="enable"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay/set_yellowscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay" method="show"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="disable"]
+[connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay/set_normal_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/yellow_overlay" method="hide"]
 [connection signal="joystick_in_use" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="tutorials" method="_on_movement_joystick_used"]
 [connection signal="joystick_pressed" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="pressed" from="pause_button/HBoxContainer/button_anchor/pause_button" to="pause_button/HBoxContainer/button_anchor/pause_button/comp_event_caller" method="call_event"]

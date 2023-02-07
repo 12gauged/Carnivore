@@ -34,6 +34,8 @@ signal force_exit_from_eat_state
 # warning-ignore:unused_signal
 signal special_attack_unavailable
 # warning-ignore:unused_signal
+signal special_attack_tutorial_available
+# warning-ignore:unused_signal
 signal special_attack_available
 
 # warning-ignore:unused_signal

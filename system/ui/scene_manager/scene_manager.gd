@@ -1,7 +1,10 @@
 extends Control
 
-onready var CurrentScene: Control = $current_scene
-onready var BlackOverlay: CanvasLayer = $black_overlay
+export(NodePath) var CurrentSceneNodePath
+export(NodePath) var BlackOverlayNodePath
+
+onready var BlackOverlay = get_node(BlackOverlayNodePath)
+onready var CurrentScene = get_node(CurrentSceneNodePath)
 
 var scene_ref: PackedScene
 

@@ -100,6 +100,7 @@ func process_inconstant_state():
 	process_rooted_skill()
 	
 func in_tutorial(): return game_data.player_data.bounty == game_data.DEFAULT_BOUNTY
+func special_attack_tutorial_finished(): return game_data.player_data.special_attack_tutorial_finished
 func energy_full(): return get_stat("energy") == MAX_ENERGY
 func has_skill(skill: String): return game_data.player_data.skills[skill]
 
@@ -204,7 +205,7 @@ func consume_meat():
 	process_healing_meal_skill()
 	
 	if get_stat("energy") == MAX_ENERGY:
-		player_events.emit_signal("special_attack_available")
+		player_events.emit_signal("special_attack_available" if special_attack_tutorial_finished() else "special_attack_tutorial_available")
 	if get_stat("energy") == MAX_ENERGY and get_stat("hunger") == MAX_HUNGER:
 		add_tag("FULL")
 		return

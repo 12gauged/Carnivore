@@ -9,7 +9,6 @@ export(Array) var enemy_spawn_data
 
 export(int) var number_of_waves = 1
 export(int) var number_of_extra_waves_per_gen = 0
-export(int) var max_enemy_number = 1
 export(float) var max_enemy_counter_modifier = 0.3
 export(int) var enemies_per_wave = 1
 export(float) var enemies_per_wave_modifier = 1.4
@@ -29,6 +28,7 @@ enum {
 	IN_BETWEEN_WAVES
 }
 
+var max_enemy_number: int
 var enemy_kill_count: int = 0
 var enemy_id: int = 0
 var enemy_data: Array
@@ -69,8 +69,11 @@ func _ready():
 	
 	debug_log.dprint("\nnumber_of_waves: %s\ndifficulty: %s" % [number_of_waves, difficulty])
 	
-	initial_max_enemy_number = max_enemy_number + ceil(max_enemy_counter_modifier * difficulty)
 	initial_enemies_per_wave_value = enemies_per_wave
+	
+	max_enemy_number = int(float(enemies_per_wave) * 0.5)
+	initial_max_enemy_number = max_enemy_number
+	
 	enemy_counter[FILLER_ENEMY] = 0
 	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
 	Spawners = get_node("spawners").get_children()
@@ -186,7 +189,7 @@ func end_wave():
 	enemy_id = 0
 	
 	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
-	max_enemy_number = floor(initial_max_enemy_number + max_enemy_counter_modifier * game_data.current_arena_wave)
+	max_enemy_number = enemies_per_wave * 0.5
 	if game_data.initial_player_bounty < game_data.DEFAULT_BOUNTY + 10:
 		enemies_per_wave = min(15, enemies_per_wave)
 		max_enemy_number = min(2, max_enemy_number)

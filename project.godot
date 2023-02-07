@@ -148,6 +148,7 @@ window/stretch/aspect="expand"
 shader=false
 pixel=false
 "pixel snap"=false
+stretch=false
 
 [importer_defaults]
 
