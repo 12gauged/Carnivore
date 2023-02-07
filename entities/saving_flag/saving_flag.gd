@@ -20,6 +20,7 @@ var player_inside_area: bool = false
 
 func _ready():
 	FlagOverlay.region_rect.size.y = 0
+	AreaSprite.modulate =  DARK_GRAY
 	
 	
 	

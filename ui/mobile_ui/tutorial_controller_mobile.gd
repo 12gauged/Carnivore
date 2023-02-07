@@ -54,7 +54,7 @@ func end_tutorial():
 	game_events.emit_signal("tutorial_finished")
 	
 	if game_data.get_player_data("special_attack_tutorial_finished"): return
-	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
+	player_events.connect("special_attack_tutorial_available", self, "_on_player_special_attack_available")
 	
 	
 

@@ -21,7 +21,7 @@ func _ready():
 			
 	if OS.is_debug_build() and player_platform != "mobile":
 		# debug values
-		# player_platform = "mobile"
+		#player_platform = "mobile"
 		pass
 	set_screen_scaling(player_platform)
 	game_data.set_current_platform(player_platform)

@@ -69,7 +69,7 @@ func end_tutorial():
 	TutorialTextBox.visible = false
 	self.visible = true
 	# warning-ignore:return_value_discarded
-	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
+	player_events.connect("special_attack_tutorial_available", self, "_on_player_special_attack_available")
 	
 	
 
