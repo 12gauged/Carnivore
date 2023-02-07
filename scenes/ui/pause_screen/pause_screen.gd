@@ -5,6 +5,8 @@ signal paused
 # warning-ignore:unused_signal
 signal resumed
 
+
+onready var PauseUIContainer = $pause_ui_container
 onready var ExitGameMethodCaller: Node2D = $pause_ui_container/go_to_main_menu_method_caller
 onready var UnpauseMethodCaller: Node2D = $pause_ui_container/unpause_method_caller
 onready var SettingsScreen: Control = $settings_ui_container/settings
@@ -23,7 +25,7 @@ func _ready():
 	SettingsScreen.hide_tab("storage_settings")
 
 func _input(event):
-	if event.is_action_pressed("controls_pause"):
+	if event.is_action_pressed("controls_pause") and PauseUIContainer.visible:
 		toggle_pause()
 
 func toggle_pause():

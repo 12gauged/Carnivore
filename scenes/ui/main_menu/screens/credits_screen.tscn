@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://scenes/ui/main_menu/screens/credit.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui/main_menu/screens/dev_credits.gd" type="Script" id=7]
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=8]
+
+[sub_resource type="InputEventKey" id=1]
+scancode = 16777217
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
 
 [node name="credits" type="Control"]
 anchor_right = 1.0
@@ -150,6 +156,7 @@ margin_left = 41.0
 margin_top = 99.0
 margin_right = 61.0
 margin_bottom = 119.0
+shortcut = SubResource( 2 )
 id = "main_screen"
 
 [node name="icon" parent="center_container/v_grid_container/home_button/center_container" index="0"]

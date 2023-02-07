@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ui/arena_ended_screen/victory_text.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=7]
 [ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=8]
+[ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sounds/entity/player/player_pickup.wav" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -44,6 +46,8 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
+
+[node name="sound_streams" type="Node2D" parent="." groups=["sound_streams"]]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -92,12 +96,18 @@ align = 1
 script = ExtResource( 3 )
 
 [node name="increase_timer" type="Timer" parent="HBoxContainer/VBoxContainer/bounty"]
-wait_time = 0.5
+wait_time = 0.1
 one_shot = true
 
 [node name="yellow_flash" type="AnimationPlayer" parent="HBoxContainer/VBoxContainer/bounty"]
 anims/RESET = SubResource( 1 )
 anims/flash = SubResource( 2 )
+
+[node name="part_sound_streamer" parent="HBoxContainer/VBoxContainer/bounty" instance=ExtResource( 9 )]
+position = Vector2( 39, 5 )
+stream = ExtResource( 10 )
+bus = "gui_sounds"
+volume = 0.206
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 72.0
@@ -149,6 +159,7 @@ method = {
 
 [connection signal="bounty_animation_finished" from="HBoxContainer/VBoxContainer/bounty" to="." method="_on_bounty_bounty_animation_finished"]
 [connection signal="timeout" from="HBoxContainer/VBoxContainer/bounty/increase_timer" to="HBoxContainer/VBoxContainer/bounty" method="_on_increase_timer_timeout"]
+[connection signal="timeout" from="HBoxContainer/VBoxContainer/bounty/increase_timer" to="HBoxContainer/VBoxContainer/bounty/part_sound_streamer" method="play_sound"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/home_button" to="." method="_on_any_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/home_button" to="HBoxContainer/VBoxContainer/h_button_container/home_button/comp_method_caller" method="call_method"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/restart_button" to="." method="_on_any_button_pressed"]
