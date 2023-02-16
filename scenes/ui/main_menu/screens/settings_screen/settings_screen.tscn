@@ -37,35 +37,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="home_button_container" type="HBoxContainer" parent="main_settings_container"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -20.0
-margin_top = -26.0
-margin_right = 20.0
-alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="main_settings_container/home_button_container"]
-margin_left = 10.0
-margin_right = 30.0
-margin_bottom = 26.0
-
-[node name="small_button" parent="main_settings_container/home_button_container/CenterContainer" instance=ExtResource( 1 )]
-margin_top = 3.0
-margin_bottom = 23.0
-shortcut_in_tooltip = false
-shortcut = SubResource( 2 )
-id = "main_screen"
-
-[node name="icon" parent="main_settings_container/home_button_container/CenterContainer/small_button/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 2 )
-
 [node name="elements" type="Control" parent="main_settings_container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -75,28 +46,24 @@ __meta__ = {
 }
 
 [node name="main_container" type="VBoxContainer" parent="main_settings_container/elements"]
-anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -120.0
-margin_top = -67.5
-margin_right = 120.0
-margin_bottom = 46.5
-custom_constants/separation = 1
+margin_top = -63.0
+margin_bottom = 63.0
+custom_constants/separation = 0
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="main_settings_container/elements/main_container"]
-margin_top = 2.0
 margin_right = 240.0
-margin_bottom = 4.0
+margin_bottom = 2.0
 mouse_filter = 1
 custom_constants/margin_top = 2
 
 [node name="tab_buttons" type="HBoxContainer" parent="main_settings_container/elements/main_container"]
-margin_top = 5.0
+margin_top = 2.0
 margin_right = 240.0
-margin_bottom = 25.0
+margin_bottom = 22.0
 alignment = 1
 script = ExtResource( 13 )
 
@@ -167,15 +134,15 @@ margin_bottom = 18.0
 texture = ExtResource( 15 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="main_settings_container/elements/main_container"]
-margin_top = 26.0
+margin_top = 22.0
 margin_right = 240.0
-margin_bottom = 28.0
+margin_bottom = 24.0
 custom_constants/margin_top = 2
 
 [node name="visuals" type="HBoxContainer" parent="main_settings_container/elements/main_container"]
-margin_top = 29.0
+margin_top = 24.0
 margin_right = 240.0
-margin_bottom = 109.0
+margin_bottom = 104.0
 alignment = 1
 
 [node name="texture_container" type="VBoxContainer" parent="main_settings_container/elements/main_container/visuals"]
@@ -265,15 +232,37 @@ margin_right = 140.0
 margin_bottom = 72.0
 
 [node name="MarginContainer3" type="MarginContainer" parent="main_settings_container/elements/main_container"]
-margin_top = 110.0
+margin_top = 104.0
 margin_right = 240.0
-margin_bottom = 112.0
-custom_constants/margin_top = 2
+margin_bottom = 106.0
+custom_constants/margin_bottom = 2
+
+[node name="home_button_container" type="HBoxContainer" parent="main_settings_container/elements/main_container"]
+margin_top = 106.0
+margin_right = 240.0
+margin_bottom = 126.0
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="main_settings_container/elements/main_container/home_button_container"]
+margin_left = 110.0
+margin_right = 130.0
+margin_bottom = 20.0
+
+[node name="small_button" parent="main_settings_container/elements/main_container/home_button_container/CenterContainer" instance=ExtResource( 1 )]
+shortcut_in_tooltip = false
+shortcut = SubResource( 2 )
+id = "main_screen"
+
+[node name="icon" parent="main_settings_container/elements/main_container/home_button_container/CenterContainer/small_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 2 )
 
 [node name="mobile_layout_editor" parent="." instance=ExtResource( 19 )]
 visible = false
 
-[connection signal="button_pressed" from="main_settings_container/home_button_container/CenterContainer/small_button" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/video_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/video_settings" to="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/audio_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
@@ -285,11 +274,12 @@ visible = false
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/storage_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/storage_settings" to="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 [connection signal="show_layout_editor" from="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer/mobile_controls_tab" to="." method="_on_show_mobile_layout_editor_request"]
+[connection signal="button_pressed" from="main_settings_container/elements/main_container/home_button_container/CenterContainer/small_button" to="." method="_on_button_pressed"]
 [connection signal="exited_layout_editor" from="mobile_layout_editor" to="." method="_on_hide_mobile_layout_editor_request"]
 
-[editable path="main_settings_container/home_button_container/CenterContainer/small_button"]
 [editable path="main_settings_container/elements/main_container/tab_buttons/video_settings"]
 [editable path="main_settings_container/elements/main_container/tab_buttons/audio_settings"]
 [editable path="main_settings_container/elements/main_container/tab_buttons/language_settings"]
 [editable path="main_settings_container/elements/main_container/tab_buttons/control_settings"]
 [editable path="main_settings_container/elements/main_container/tab_buttons/storage_settings"]
+[editable path="main_settings_container/elements/main_container/home_button_container/CenterContainer/small_button"]

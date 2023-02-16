@@ -50,3 +50,10 @@ signal black_overlay_anim_finished(animation)
 
 # warning-ignore:unused_signal
 signal toggle_pause_request
+
+# warning-ignore:unused_signal
+signal show_progress_menu
+# warning-ignore:unused_signal
+signal player_in_skill_tree_area
+# warning-ignore:unused_signal
+signal player_left_skill_tree_area

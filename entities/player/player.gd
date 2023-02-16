@@ -4,6 +4,7 @@ extends Entity
 signal entered_eat_state
 signal exited_eat_state
 signal healing
+signal charging
 
 
 const HUNGER_DECREASE_DELAY_WHEN_FULL: float = 1.5
@@ -22,7 +23,7 @@ export(int) var MAX_ENERGY = 6
 onready var StatDecreaseTimer: Timer = $stat_decrease_delay
 onready var SpriteMaterial: ShaderMaterial = $texture.material
 onready var InvincibilityTimer: Timer = $invincibility_timer
-onready var RootedSkillHealingTimer: Timer = $rooted_skill_healing_timer
+onready var RootedSkillChargingTimer: Timer = $rooted_skill_charging_timer
 onready var AnimPlayer = $part_state_anim_handler/animation_player
 onready var ProjectileHandler: Node2D = $part_player_projectile_handler
 
@@ -47,7 +48,7 @@ func _ready():
 	DEFAULT_MAX_SPEED = MAX_SPEED
 	
 	# increases the time it takes for the energy to go down if you have the energy efficiency skill
-	ENERGY_DECREASE_DELAY *= 1.75 if game_data.player_data.skills.energy_efficiency else 1.0
+	ENERGY_DECREASE_DELAY *= 1.75 if has_skill("energy_saver") else 1.0
 	
 	# warning-ignore:return_value_discarded
 	input_events.connect("player_movement_direction_updated", self, "_on_player_used_joystick")
@@ -108,13 +109,13 @@ func has_skill(skill: String): return game_data.player_data.skills[skill]
 
 func process_rooted_skill():
 	if not has_skill("rooted"): return
-	if get_stat("health") == MAX_HEALTH: return
+	if get_stat("energy") == MAX_ENERGY: return
 	if not get_state() in ["MOVE", "IDLE"]: return
 	match get_state():
-		"MOVE": RootedSkillHealingTimer.stop()
+		"MOVE": RootedSkillChargingTimer.stop()
 		"IDLE": 
-			if not RootedSkillHealingTimer.is_stopped(): continue
-			RootedSkillHealingTimer.start()
+			if not RootedSkillChargingTimer.is_stopped(): continue
+			RootedSkillChargingTimer.start()
 			
 	
 	
@@ -200,8 +201,9 @@ func consume_meat():
 		int(min(get_stat(stat_to_update) + 1, stat_cap))
 	)
 	
-	start_stat_decrease_timer(get_stat("hunger"))
+	if stat_to_update == "energy": emit_signal("charging")
 	
+	start_stat_decrease_timer(get_stat("hunger"))
 	process_healing_meal_skill()
 	
 	if get_stat("energy") == MAX_ENERGY:
@@ -303,7 +305,6 @@ func _on_player_state_changed(new_state, _old_state):
 	game_data.current_player_state = new_state
 
 
-func _on_rooted_skill_healing_timer_timeout():
-	if get_stat("shields") > 0: return
-	update_stat("health", int(min(get_stat("health") + 1, MAX_HEALTH)))
-	emit_signal("healing")
+func _on_rooted_skill_charging_timer_timeout():
+	update_stat("energy", int(min(get_stat("energy") + 1, MAX_ENERGY)))
+	emit_signal("charging")

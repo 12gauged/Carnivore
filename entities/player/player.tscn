@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://system/components/movement/comp_movement_keyboard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://ui/hud/input_hints/mobile/joysticks/shooting_joystick/direction_hint.gd" type="Script" id=25]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=26]
 [ext_resource path="res://entities/player/drop_collector.gd" type="Script" id=27]
+[ext_resource path="res://entities/player/visual/charging_particle.png" type="Texture" id=28]
 [ext_resource path="res://system/random_scripts/particle_controller.gd" type="Script" id=29]
 [ext_resource path="res://system/random_scripts/collision_control.gd" type="Script" id=33]
 [ext_resource path="res://entities/player/visual/healing_particle.png" type="Texture" id=34]
@@ -296,6 +297,23 @@ gravity = Vector2( 0, -20 )
 color_ramp = SubResource( 17 )
 script = ExtResource( 29 )
 
+[node name="charging_particle" type="CPUParticles2D" parent="texture"]
+modulate = Color( 1, 1, 0, 1 )
+emitting = false
+amount = 4
+lifetime = 0.6
+one_shot = true
+local_coords = false
+texture = ExtResource( 28 )
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2( 0, -1 )
+spread = 0.0
+gravity = Vector2( 0, -20 )
+initial_velocity = 20.0
+color_ramp = SubResource( 17 )
+script = ExtResource( 29 )
+
 [node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -6 )
 shape = SubResource( 1 )
@@ -419,10 +437,11 @@ one_shot = true
 wait_time = 1.2
 one_shot = true
 
-[node name="rooted_skill_healing_timer" type="Timer" parent="."]
-wait_time = 2.0
+[node name="rooted_skill_charging_timer" type="Timer" parent="."]
+wait_time = 1.8
 one_shot = true
 
+[connection signal="charging" from="." to="texture/charging_particle" method="emit"]
 [connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
 [connection signal="entered_eat_state" from="." to="texture/hands_overlay" method="hide"]
 [connection signal="frozen" from="." to="part_state_handler/*/comp_movement_keyboard" method="stop_execution"]
@@ -453,4 +472,4 @@ one_shot = true
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="timeout" from="stat_decrease_delay" to="." method="_on_stat_decrease_delay_timeout"]
 [connection signal="timeout" from="invincibility_timer" to="." method="_on_invincibility_timer_timeout"]
-[connection signal="timeout" from="rooted_skill_healing_timer" to="." method="_on_rooted_skill_healing_timer_timeout"]
+[connection signal="timeout" from="rooted_skill_charging_timer" to="." method="_on_rooted_skill_charging_timer_timeout"]

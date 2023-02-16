@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://scenes/levels/jail/barrel.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/levels/jail/table.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/levels/jail/chains.tscn" type="PackedScene" id=15]
+[ext_resource path="res://world/jail/skill_tree_area/skill_tree_area.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world/jail/skill_tree_area/vines_end.png" type="Texture" id=17]
+[ext_resource path="res://world/jail/skill_tree_area/vines_repeat.png" type="Texture" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=15]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
@@ -402,9 +405,8 @@ progress_safe = true
 tile_set = SubResource( 19 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
-show_collision = true
 format = 1
-tile_data = PoolIntArray( -196608, 0, 0, -196607, 1, 0, -196606, 1, 0, -196605, 1, 0, -196604, 1, 0, -196603, 1, 0, -196602, 1, 0, -196601, 1, 0, -196600, 1, 0, -196599, 1, 0, -196598, 1, 0, -196597, 1, 0, -196596, 1, 0, -196595, 2, 0, -131072, 7, 0, -131071, 13, 0, -131070, 10, 0, -131068, 8, 0, -131067, 10, 0, -131063, 10, 0, -131061, 8, 0, -131059, 3, 0, -65536, 7, 0, -65535, 10, 0, -65534, 19, 0, -65532, 19, 0, -65531, 8, 0, -65527, 19, 0, -65526, 10, 0, -65525, 19, 0, -65524, 10, 0, -65523, 3, 0, 0, 7, 0, 1, 12, 0, 2, 12, 0, 3, 12, 0, 4, 12, 0, 5, 12, 0, 8, 12, 0, 9, 12, 0, 10, 12, 0, 11, 12, 0, 12, 12, 0, 13, 15, 0, 14, 1, 0, 15, 1, 0, 16, 2, 0, 65536, 7, 0, 65538, 9, 0, 65541, 11, 0, 65544, 11, 0, 65546, 9, 0, 65549, 17, 0, 65550, 10, 0, 65551, 14, 0, 65552, 3, 0, 131072, 7, 0, 131077, 10, 0, 131085, 16, 0, 131087, 8, 0, 131088, 3, 0, 196608, 7, 0, 196610, 9, 0, 196614, 9, 0, 196620, 9, 0, 196621, 18, 0, 196622, 12, 0, 196623, 12, 0, 196624, 3, 0, 262144, 7, 0, 262145, 11, 0, 262154, 8, 0, 262160, 3, 0, 327680, 7, 0, 327683, 10, 0, 327693, 11, 0, 327696, 3, 0, 393216, 7, 0, 393217, 9, 0, 393224, 11, 0, 393231, 11, 0, 393232, 3, 0, 458752, 6, 0, 458753, 5, 0, 458754, 5, 0, 458755, 5, 0, 458756, 5, 0, 458757, 5, 0, 458758, 5, 0, 458759, 5, 0, 458760, 5, 0, 458761, 5, 0, 458762, 5, 0, 458763, 5, 0, 458764, 5, 0, 458765, 5, 0, 458766, 5, 0, 458767, 5, 0, 458768, 4, 0 )
+tile_data = PoolIntArray( -196608, 0, 0, -196607, 1, 0, -196606, 1, 0, -196605, 1, 0, -196604, 1, 0, -196603, 1, 0, -196602, 1, 0, -196601, 1, 0, -196600, 1, 0, -196599, 1, 0, -196598, 1, 0, -196597, 1, 0, -196596, 1, 0, -196595, 2, 0, -131072, 7, 0, -131071, 13, 0, -131070, 10, 0, -131068, 8, 0, -131067, 10, 0, -131063, 10, 0, -131061, 8, 0, -131059, 3, 0, -65536, 7, 0, -65535, 10, 0, -65534, 19, 0, -65532, 19, 0, -65531, 8, 0, -65527, 19, 0, -65526, 10, 0, -65525, 19, 0, -65524, 10, 0, -65523, 3, 0, 0, 7, 0, 1, 12, 0, 2, 12, 0, 3, 12, 0, 4, 12, 0, 5, 12, 0, 8, 12, 0, 9, 12, 0, 10, 12, 0, 11, 12, 0, 12, 12, 0, 13, 15, 0, 14, 1, 0, 15, 1, 0, 16, 2, 0, 65536, 7, 0, 65538, 9, 0, 65541, 11, 0, 65544, 11, 0, 65546, 9, 0, 65549, 17, 0, 65550, 10, 0, 65551, 14, 0, 65552, 3, 0, 131072, 7, 0, 131077, 10, 0, 131085, 16, 0, 131087, 8, 0, 131088, 3, 0, 196608, 7, 0, 196610, 9, 0, 196614, 9, 0, 196620, 9, 0, 196621, 18, 0, 196622, 12, 0, 196623, 12, 0, 196624, 3, 0, 262144, 7, 0, 262145, 11, 0, 262154, 8, 0, 262160, 3, 0, 327680, 7, 0, 327683, 10, 0, 327696, 3, 0, 393216, 7, 0, 393217, 9, 0, 393224, 11, 0, 393232, 3, 0, 458752, 6, 0, 458753, 5, 0, 458754, 5, 0, 458755, 5, 0, 458756, 5, 0, 458757, 5, 0, 458758, 5, 0, 458759, 5, 0, 458760, 5, 0, 458761, 5, 0, 458762, 5, 0, 458763, 5, 0, 458764, 5, 0, 458765, 5, 0, 458766, 5, 0, 458767, 5, 0, 458768, 4, 0 )
 
 [node name="objects" type="YSort" parent="."]
 
@@ -515,10 +517,39 @@ position = Vector2( 185, 20 )
 [node name="table" parent="objects" instance=ExtResource( 14 )]
 position = Vector2( 53, 15 )
 
+[node name="vines" type="Node2D" parent="objects"]
+
+[node name="vine" type="Sprite" parent="objects/vines"]
+position = Vector2( 208, 16 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 32 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine"]
+position = Vector2( 0, 32 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine2" type="Sprite" parent="objects/vines"]
+position = Vector2( 238, 16 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 16 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine2"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 17 )
+centered = false
+
 [node name="chains" type="YSort" parent="objects"]
 
 [node name="chains" parent="objects/chains" instance=ExtResource( 15 )]
-position = Vector2( 232, 35 )
+position = Vector2( 238, 36 )
+
+[node name="skill_tree_area" parent="objects" instance=ExtResource( 16 )]
+position = Vector2( 232, 88 )
 
 [node name="part_player_camera" parent="." instance=ExtResource( 6 )]
 position = Vector2( 112, 56 )

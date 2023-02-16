@@ -14,7 +14,6 @@ func emit_particle():
 	var NewParticle = Particle.instance()
 	
 	local_custom_values.merge(custom_values)
-	print("part_particle_emitter.gd: local_custom_values: %s" % local_custom_values)
 	apply_custom_values(NewParticle, local_custom_values)
 	
 	ParticleGroup.add_child(NewParticle)
