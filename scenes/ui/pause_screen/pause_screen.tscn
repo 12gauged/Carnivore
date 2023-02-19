@@ -62,6 +62,7 @@ script = ExtResource( 4 )
 [node name="pause_ui_container" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 10 )
 
 [node name="grid_container" type="GridContainer" parent="pause_ui_container"]
@@ -136,6 +137,14 @@ method = {
 "method": "emit_signal"
 }
 
+[node name="go_to_jail_method_caller" parent="pause_ui_container" instance=ExtResource( 5 )]
+position = Vector2( 79, 99 )
+method = {
+"args": [ "change_scene_request", "jail" ],
+"caller": "game_events",
+"method": "emit_signal"
+}
+
 [node name="unpause_method_caller" parent="pause_ui_container" instance=ExtResource( 5 )]
 position = Vector2( 79, 99 )
 method = {
@@ -149,6 +158,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 10 )
+visible_by_default = false
 
 [node name="settings" parent="settings_ui_container" instance=ExtResource( 9 )]
 mouse_filter = 1
@@ -215,6 +225,7 @@ custom_constants/margin_bottom = 2
 [connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/settings_button" to="pause_ui_container" method="hide"]
 [connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/settings_button" to="settings_ui_container" method="show"]
 [connection signal="pressed" from="pause_ui_container/grid_container/h_grid_container/home_button" to="." method="_on_home_button_pressed"]
+[connection signal="button_pressed" from="settings_ui_container/settings" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="debug_button_holder/VBoxContainer/HBoxContainer/small_button" to="debug_button_holder/VBoxContainer/HBoxContainer/small_button/comp_event_caller" method="call_event"]
 
 [editable path="pause_ui_container/grid_container/resume_button"]

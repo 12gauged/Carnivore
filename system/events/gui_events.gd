@@ -38,6 +38,10 @@ signal toggle_debug_log
 signal show_debug_log
 
 # warning-ignore:unused_signal
+signal show_interact_button
+signal controls_updated
+
+# warning-ignore:unused_signal
 signal mobile_button_displacement_updated(id, value)
 
 # warning-ignore:unused_signal

@@ -20,6 +20,7 @@ ui.settings.controls_up,walk up,andar para cima,untranslated,untranslated
 ui.settings.controls_right,walk right,andar para direita,untranslated,untranslated
 ui.settings.controls_down,walk down,andar para baixo,untranslated,untranslated
 ui.settings.controls_left,walk left,andar para esquerda,untranslated,untranslated
+ui.settings.controls_interact,interact,interagir,untranslated,untranslated
 ui.settings.controls_pause,pause,pausar,untranslated,untranslated
 ui.settings.controls_throw,throw,atirar,untranslated,untranslated
 ui.settings.controls_special,special,especial,untranslated,untranslated
@@ -44,6 +45,13 @@ ui.victory_text.almost_got_you,we almost got you.,quase te pegamos.,untranslated
 ui.victory_text.impossible,impossible,impossível,untranslated,untranslated
 ui.bounty_text_during_animation,bounty: %s + %s,recompensa: %s + %s,untranslated,untranslated
 ui.bounty_text_after_animation,bounty: %s,recompensa: %s,untranslated,untranslated
+ui.skill_menu.title.generic,skills,habilidades,untranslated,untranslated
+ui.skill_menu.title.hard_skin,hard skin,pele dura,untranslated,untranslated
+ui.skill_menu.title.healing_meal,healing meal,lanche curador,untranslated,untranslated
+ui.skill_menu.title.body_armor,body armor,armadura,untranslated,untranslated
+ui.skill_menu.title.survivor,survivor,sobrevivente,untranslated,untranslated
+ui.skill_menu.title.energy_saver,energy saver,economia,untranslated,untranslated
+ui.skill_menu.title.bloodthirst,bloodthirst,sede de sangue,untranslated,untranslated
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated

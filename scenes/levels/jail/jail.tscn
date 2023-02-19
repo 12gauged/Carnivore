@@ -400,6 +400,7 @@ extents = Vector2( 28, 15 )
 script = ExtResource( 11 )
 level_name = "jail"
 progress_safe = true
+skills_disabled = true
 
 [node name="jail_tilemap" type="TileMap" parent="."]
 tile_set = SubResource( 19 )

@@ -6,11 +6,12 @@ signal paused
 signal resumed
 
 
-onready var PauseUIContainer = $pause_ui_container
-onready var ExitGameMethodCaller: Node2D = $pause_ui_container/go_to_main_menu_method_caller
+onready var PauseUIContainer: CenterContainer = $pause_ui_container
+onready var GoToMainMenuMethodCaller: Node2D = $pause_ui_container/go_to_main_menu_method_caller
+onready var GoToJailMethodCaller: Node2D = $pause_ui_container/go_to_jail_method_caller
 onready var UnpauseMethodCaller: Node2D = $pause_ui_container/unpause_method_caller
+onready var SettingsUIContainer: Control = $settings_ui_container
 onready var SettingsScreen: Control = $settings_ui_container/settings
-var can_pause: bool = false
 
 func _ready(): 
 	# warning-ignore:return_value_discarded
@@ -29,25 +30,31 @@ func _input(event):
 		toggle_pause()
 
 func toggle_pause():
-	if !can_pause: return
+	if !game_data.can_pause: return
 	
 	game_functions.toggle_pause()
 	self.visible = game_functions.is_game_paused()
 	emit_signal("paused" if visible else "resumed")
 	
 	
+func exit_game():
+	match game_data.current_level:
+		"arena": GoToJailMethodCaller.call_method()
+		_: GoToMainMenuMethodCaller.call_method()
+	
+	
 func _on_black_overlay_anim_finished(anim_name): 
-	can_pause = anim_name == "fade_out"
+	game_data.can_pause = anim_name == "fade_out"
 func _on_scene_changed_without_fading(): 
-	can_pause = true
+	game_data.can_pause = true
 
 func _on_arena_ended():
-	can_pause = false
+	game_data.can_pause = false
 
 
 func _on_home_button_pressed():
 	if game_data.progress_safe:
-		ExitGameMethodCaller.call_method()
+		exit_game()
 		UnpauseMethodCaller.call_method()
 		return
 	
@@ -58,5 +65,11 @@ func _on_home_button_pressed():
 func _on_warning_accepted(warning_id: String):
 	if warning_id != "lose_progress": return
 	
-	ExitGameMethodCaller.call_method()
+	exit_game()
 	UnpauseMethodCaller.call_method()
+
+
+func _on_settings_button_pressed(id):
+	if id != "main_screen": return
+	SettingsUIContainer.visible = false
+	PauseUIContainer.visible = true

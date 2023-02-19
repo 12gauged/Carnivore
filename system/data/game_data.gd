@@ -5,7 +5,7 @@ const default_player_data = {
 	"special_attack_tutorial_finished": false,
 	"bounty": DEFAULT_BOUNTY,
 	"skills": {
-		"hard_skin": false,
+		"hard_skin": true,
 		"rooted": false,
 		"body_armor": false,
 		"speed_boost": false,
@@ -13,7 +13,7 @@ const default_player_data = {
 		"bloodthirsty": false,
 		"large_tongue": false,
 		"healing_meal": false,
-		"survivor_metabolism": false
+		"survivor": false
 	}
 }
 var player_data: Dictionary = default_player_data.duplicate(true)
@@ -40,6 +40,7 @@ var default_game_settings: Dictionary = {
 		"controls_down": OS.find_scancode_from_string("S"),
 		"controls_left": OS.find_scancode_from_string("A"),
 		"controls_pause": OS.find_scancode_from_string("ESCAPE"),
+		"controls_interact": OS.find_scancode_from_string("E"),
 		"controls_shoot": BUTTON_LEFT,
 		"controls_special": BUTTON_RIGHT
 	},
@@ -54,13 +55,14 @@ var game_settings: Dictionary = default_game_settings.duplicate(true)
 
 var current_platform: String = "desktop" setget set_current_platform, get_current_platform # TEMP
 var current_level: String = "" setget set_current_level, get_current_level
-var current_level_time: Array = [] setget set_current_level_time, get_current_level_time
 var current_arena_wave: int = 1 setget set_current_wave, get_current_wave
 var current_player_state: String = ""
 var initial_player_bounty: int = 0
 var level_player_bounty: int = 0
 var total_level_player_bounty: int = 0
 var progress_safe: bool = false
+var skills_disabled: bool = false
+var can_pause: bool = false
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 
@@ -69,7 +71,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
 	player_data.bounty = 69420
-	player_data.skills.rooted = true
+#	player_data.skills.survivor = true
 #	player_data.skills.healing_meal = true
 #	player_data.skills.hard_skin = true
 #	player_data.skills.body_armor = true
@@ -84,9 +86,6 @@ func get_current_platform() -> String: return current_platform
 
 func set_current_level(level_name: String): current_level = level_name
 func get_current_level() -> String: return current_level
-
-func set_current_level_time(time: Array): current_level_time = time
-func get_current_level_time() -> Array: return current_level_time
 
 func set_current_wave(wave_number: int): current_arena_wave = wave_number
 func get_current_wave() -> int: return current_arena_wave

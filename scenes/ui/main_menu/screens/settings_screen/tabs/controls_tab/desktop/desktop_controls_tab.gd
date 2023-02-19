@@ -44,6 +44,7 @@ func process_key_input(event):
 		update_keybind()
 		update_unavailable_keybinds()
 		selected_button.stop_flashing()
+		gui_events.emit_signal("controls_updated")
 		
 		
 func process_mouse_input(event):

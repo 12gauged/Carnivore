@@ -60,8 +60,8 @@ func set_joystick_position_from_drag_and_touch(event):
 			set_global_position(event.position - button_radius)
 			set_joystick_position()
 			ongoing_drag = event.get_index()
-			input_events.emit_signal(input_event, get_value())
 			emit_signal("joystick_in_use")
+			input_events.emit_signal(input_event, get_value())
 
 func set_joystick_position_from_drag(event):
 	if event is InputEventScreenDrag:

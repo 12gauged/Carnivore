@@ -108,6 +108,7 @@ func has_skill(skill: String): return game_data.player_data.skills[skill]
 
 
 func process_rooted_skill():
+	if game_data.skills_disabled: return
 	if not has_skill("rooted"): return
 	if get_stat("energy") == MAX_ENERGY: return
 	if not get_state() in ["MOVE", "IDLE"]: return
@@ -131,7 +132,7 @@ func start_stat_decrease_timer(hunger_value: int):
 	if not get_stat("can_get_hungry"): return
 	var time := HUNGER_DECREASE_DELAY
 	
-	if has_skill("survivor_metabolism"):
+	if has_skill("survivor"):
 		time = HUNGER_DECREASE_DELAY * 2 if hunger_value <= 3 else time
 	if in_tutorial():
 		time += 0.2
@@ -244,11 +245,11 @@ func apply_damage(damage: int):
 	
 	var value_to_update = "health" if get_stat("shields") <= 0 else "shields"
 	var health_after_damage = get_stat(value_to_update) - damage
-	if value_to_update == "shields": 
-		if health_after_damage < 0:
-			update_stat("health", int(abs(health_after_damage)))
-			update_stat("shields", 0)
-			return
+#	if value_to_update == "shields": 
+#		if health_after_damage < 0:
+#			update_stat("health", int(abs(health_after_damage)))
+#			update_stat("shields", 0)
+#			return
 	
 	update_stat(
 		value_to_update,
@@ -298,7 +299,8 @@ func _on_player_frozen():
 	velocity = Vector2.ZERO
 	set_state("IDLE")
 func _on_player_frozen_slow_motion(): FRICTION = DEFAULT_FRICTION * 0.145
-func _on_player_unfrozen(): FRICTION = DEFAULT_FRICTION
+func _on_player_unfrozen(): 
+	FRICTION = DEFAULT_FRICTION
 
 
 func _on_player_state_changed(new_state, _old_state):

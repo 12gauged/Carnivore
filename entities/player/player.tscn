@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://system/components/movement/comp_movement_keyboard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -42,22 +42,6 @@ colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
 height = 6.0
-
-[sub_resource type="Animation" id=9]
-resource_name = "DASH"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 7, 8 ]
-}
 
 [sub_resource type="Animation" id=5]
 resource_name = "EAT"
@@ -151,11 +135,22 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("hands_overlay:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "MOVE"
 length = 0.4
-step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -179,6 +174,30 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ -2.0, 2.0, -2.0, 2.0, -2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("hands_overlay:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 2, 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -231,6 +250,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 2.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("hands_overlay:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 1, 6 )
@@ -256,11 +287,10 @@ DEFAULT_STATE = "DEFAULT"
 
 [node name="texture" type="Sprite" parent="."]
 material = ExtResource( 20 )
-position = Vector2( 0, -7 )
+position = Vector2( -1.49012e-08, -7 )
 rotation = 0.0349066
 texture = ExtResource( 3 )
-hframes = 3
-vframes = 4
+hframes = 6
 
 [node name="step_particle" type="CPUParticles2D" parent="texture"]
 modulate = Color( 0.5, 0.5, 0.5, 1 )
@@ -275,12 +305,23 @@ gravity = Vector2( 0, 0 )
 scale_amount = 4.0
 scale_amount_curve = SubResource( 10 )
 
-[node name="hands_overlay" type="Sprite" parent="texture"]
+[node name="hands_up_overlay" type="Sprite" parent="texture"]
 visible = false
 material = ExtResource( 20 )
+position = Vector2( 1.49012e-08, -0.999999 )
 texture = ExtResource( 15 )
+hframes = 4
+frame = 3
 script = ExtResource( 16 )
 visible_by_default = false
+
+[node name="hands_overlay" type="Sprite" parent="texture"]
+material = ExtResource( 20 )
+position = Vector2( -2.98023e-08, 9.53674e-07 )
+texture = ExtResource( 15 )
+hframes = 4
+frame = 1
+script = ExtResource( 16 )
 
 [node name="healing_particle" type="CPUParticles2D" parent="texture"]
 modulate = Color( 0, 1, 0, 1 )
@@ -351,7 +392,6 @@ states = [ "IDLE", "MOVE", "MOVE_PROJECTILE" ]
 
 [node name="animation_player" type="AnimationPlayer" parent="part_state_anim_handler"]
 root_node = NodePath("../../texture")
-anims/DASH = SubResource( 9 )
 anims/EAT = SubResource( 5 )
 anims/IDLE = SubResource( 3 )
 anims/MOVE = SubResource( 4 )
@@ -443,7 +483,9 @@ one_shot = true
 
 [connection signal="charging" from="." to="texture/charging_particle" method="emit"]
 [connection signal="deleted" from="." to="change_to_death_screen" method="call_method"]
+[connection signal="entered_eat_state" from="." to="texture/hands_up_overlay" method="hide"]
 [connection signal="entered_eat_state" from="." to="texture/hands_overlay" method="hide"]
+[connection signal="exited_eat_state" from="." to="texture/hands_overlay" method="show"]
 [connection signal="frozen" from="." to="part_state_handler/*/comp_movement_keyboard" method="stop_execution"]
 [connection signal="frozen" from="." to="part_player_projectile_handler/part_input_detector" method="stop_execution"]
 [connection signal="healing" from="." to="texture/healing_particle" method="emit"]
@@ -461,11 +503,15 @@ one_shot = true
 [connection signal="executing" from="part_state_handler/EAT" to="part_mouth_hitbox" method="_enable_request"]
 [connection signal="component_value_update" from="part_state_handler/EAT/comp_movement_track_mouse" to="." method="set_movement_direction"]
 [connection signal="add_tag_request" from="part_player_projectile_handler" to="." method="add_tag"]
-[connection signal="hide_hand_overlay" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
-[connection signal="projectile_collected" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]
-[connection signal="projectile_thrown" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
+[connection signal="hide_hand_overlay" from="part_player_projectile_handler" to="texture/hands_up_overlay" method="hide"]
+[connection signal="hide_hand_overlay" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]
+[connection signal="projectile_collected" from="part_player_projectile_handler" to="texture/hands_up_overlay" method="show"]
+[connection signal="projectile_collected" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
+[connection signal="projectile_thrown" from="part_player_projectile_handler" to="texture/hands_up_overlay" method="hide"]
+[connection signal="projectile_thrown" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]
 [connection signal="remove_tag_request" from="part_player_projectile_handler" to="." method="remove_tag"]
-[connection signal="show_hand_overlay" from="part_player_projectile_handler" to="texture/hands_overlay" method="show"]
+[connection signal="show_hand_overlay" from="part_player_projectile_handler" to="texture/hands_up_overlay" method="show"]
+[connection signal="show_hand_overlay" from="part_player_projectile_handler" to="texture/hands_overlay" method="hide"]
 [connection signal="entity_spawned" from="part_player_projectile_handler/projectile_spawner" to="part_player_projectile_handler" method="_on_projectile_spawner_entity_spawned"]
 [connection signal="detected" from="part_player_projectile_handler/part_input_detector" to="part_player_projectile_handler" method="shoot_projectile"]
 [connection signal="hit_detected" from="part_mouth_hitbox" to="." method="consume_enemy"]

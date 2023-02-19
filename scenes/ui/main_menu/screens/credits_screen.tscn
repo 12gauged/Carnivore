@@ -156,6 +156,7 @@ margin_left = 41.0
 margin_top = 99.0
 margin_right = 61.0
 margin_bottom = 119.0
+shortcut_in_tooltip = false
 shortcut = SubResource( 2 )
 id = "main_screen"
 

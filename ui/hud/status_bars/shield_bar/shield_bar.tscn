@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/hud/status_bars/shield_bar/shield_icon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/hud/status_bars/shield_bar/shield_bar.gd" type="Script" id=2]
@@ -46,24 +46,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 0.313726, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 0.313726, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "low_health_flash_loop"
-length = 0.4
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("empty_bar/icons:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.25 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0, 0, 1 ), Color( 1, 0.368627, 0.368627, 1 ), Color( 0.313726, 0, 0, 1 ) ]
 }
 
 [node name="shield_bar" type="Control"]
@@ -118,4 +100,3 @@ bus = "gui_sounds"
 autoplay = "RESET"
 anims/RESET = SubResource( 1 )
 anims/flash = SubResource( 2 )
-anims/low_health_flash_loop = SubResource( 3 )
