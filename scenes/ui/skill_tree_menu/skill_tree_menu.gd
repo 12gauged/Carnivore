@@ -4,11 +4,24 @@ signal opened_menu
 signal exited_menu
 
 
+const DEFAULT_POINTS_TEXT = "points: %s"
+const DARK_RED = Color(0.6, 0.0, 0.0, 1.0)
+
+
 export(NodePath) var SkillButtonGroupPath
 onready var SkillButtonGroup = get_node(SkillButtonGroupPath)
 
 export(NodePath) var BuyButtonPath
 onready var BuyButton = get_node(BuyButtonPath)
+
+export(NodePath) var SkillTitlePath
+onready var SkillTitle: Label = get_node(SkillTitlePath)
+
+export(NodePath) var SkillDescriptionPath
+onready var SkillDescription: Label = get_node(SkillDescriptionPath)
+
+export(NodePath) var PointsLabelPath
+onready var PointsLabel: Label = get_node(PointsLabelPath)
 
 
 enum SKILLS {
@@ -49,6 +62,7 @@ func _ready():
 	player_events.connect("player_interacted_mobile", self, "_on_player_interacted_mobile")
 	SkillButtons = SkillButtonGroup.get_children()
 	BuyButton.visible = false
+	update_points_label()
 	check_skills()
 	
 func _input(event):
@@ -63,7 +77,17 @@ func check_skills():
 	for skill in game_data.player_data.skills:
 		if game_data.player_data.skills[skill]:
 			button_skill_bought(SkillButtons[skill_keys.find(skill)])
+			
+func update_points_label():
+	var skill_points = get_skill_points()
+	PointsLabel.text = DEFAULT_POINTS_TEXT % str(skill_points)
+	PointsLabel.modulate = Color.red if skill_points <= 0 else Color.yellow
+		
 	
+func get_skill_points() -> int: return game_data.get_player_data("skill_points")
+func set_skill_points(value: int): 
+	game_data.set_player_data("skill_points", value)
+	global_data_manager.save_player_data()
 	
 func close_menu():
 	self.visible = false
@@ -76,7 +100,6 @@ func open_menu():
 	player_events.emit_signal("freeze_player")
 	emit_signal("opened_menu")
 	
-	
 func button_skill_bought(TargetButton):
 	TargetButton.modulate = Color.yellow
 	TargetButton.mouse_filter = MOUSE_FILTER_IGNORE
@@ -88,31 +111,38 @@ func _player_entered_area(): player_in_skill_tree_area = true
 func _player_exited_area(): player_in_skill_tree_area = false
 func _on_home_button_pressed(): close_menu()
 
-
-
 func _on_player_interacted_mobile():
 	if not player_in_skill_tree_area: return
 	open_menu()
 
 
 func _on_skin_button_toggled(id, btn_pressed):
+	id = int(id)
+	
 	if is_instance_valid(SelectedButton) and SelectedButton.mouse_filter != MOUSE_FILTER_IGNORE: 
 		SelectedButton.pressed = false
 		SelectedButton.button_mask = BUTTON_MASK_LEFT
 		
 	if btn_pressed:
 		selected_button_id = int(id)
-		print("skill_tree_menu.gd: id: %s\nbtn_pressed: %s\n" % [id, btn_pressed])
+		SkillTitle.text = tr("ui.skill_menu.title.%s" % skill_keys[id])
+		SkillDescription.text = tr("ui.skill_menu.description.%s" % skill_keys[id])
 		
-	SelectedButton = SkillButtons[int(id)]
+	SelectedButton = SkillButtons[id]
 	SelectedButton.button_mask = 0
+	
 	BuyButton.visible = true
+	BuyButton.modulate = Color.white if get_skill_points() > 0 else DARK_RED
+	BuyButton.disabled = get_skill_points() <= 0
 	
 
 func _on_buy_button_pressed():
 	var chosen_skill = skill_keys[selected_button_id]
 	game_data.player_data.skills[chosen_skill] = true
+	set_skill_points(get_skill_points() - 1)
+	update_points_label()
 	button_skill_bought(SelectedButton)
+	BuyButton.visible = false
 	
 	
 	print("skill_tree_menu.gd: buying: %s" % chosen_skill)

@@ -695,6 +695,12 @@ stream_mode = 2
 position = Vector2( 64, 32 )
 
 [node name="ant_banner2" parent="objects/decoration" instance=ExtResource( 21 )]
+position = Vector2( 112, 32 )
+
+[node name="ant_banner3" parent="objects/decoration" instance=ExtResource( 21 )]
+position = Vector2( 208, 32 )
+
+[node name="ant_banner4" parent="objects/decoration" instance=ExtResource( 21 )]
 position = Vector2( 256, 32 )
 
 [node name="bleachers" type="Node2D" parent="objects/decoration"]

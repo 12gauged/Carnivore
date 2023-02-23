@@ -506,7 +506,7 @@ position = Vector2( -160, 160 )
 texture = ExtResource( 22 )
 
 [node name="tree0_1" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 200, -128 )
+position = Vector2( 196, -128 )
 texture = ExtResource( 22 )
 
 [node name="tree0_2" type="Sprite" parent="objects/decoration/trees"]
@@ -526,11 +526,15 @@ position = Vector2( -55, 180 )
 texture = ExtResource( 22 )
 
 [node name="tree0_5" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 276, -105 )
+position = Vector2( 280, -114 )
 texture = ExtResource( 22 )
 
 [node name="tree0_7" type="Sprite" parent="objects/decoration/trees"]
 position = Vector2( 387, 139 )
+texture = ExtResource( 22 )
+
+[node name="tree0_15" type="Sprite" parent="objects/decoration/trees"]
+position = Vector2( 475, 172 )
 texture = ExtResource( 22 )
 
 [node name="tree0_14" type="Sprite" parent="objects/decoration/trees"]
@@ -542,7 +546,7 @@ position = Vector2( -144, -80 )
 texture = ExtResource( 22 )
 
 [node name="tree0_12" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( -216, -136 )
+position = Vector2( -209, -142 )
 texture = ExtResource( 22 )
 
 [node name="tree0_13" type="Sprite" parent="objects/decoration/trees"]
@@ -553,8 +557,12 @@ texture = ExtResource( 22 )
 position = Vector2( 370, -75 )
 texture = ExtResource( 22 )
 
+[node name="tree0_16" type="Sprite" parent="objects/decoration/trees"]
+position = Vector2( 517, 20 )
+texture = ExtResource( 22 )
+
 [node name="tree1_0" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 7, -150 )
+position = Vector2( 18, -163 )
 texture = ExtResource( 21 )
 
 [node name="tree1_5" type="Sprite" parent="objects/decoration/trees"]
@@ -602,7 +610,7 @@ position = Vector2( 72, 248 )
 texture = ExtResource( 21 )
 
 [node name="tree1_14" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( -98, -148 )
+position = Vector2( -87, -164 )
 texture = ExtResource( 21 )
 
 [node name="tree1_15" type="Sprite" parent="objects/decoration/trees"]
@@ -622,11 +630,11 @@ position = Vector2( 435, -139 )
 texture = ExtResource( 21 )
 
 [node name="tree1_18" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 339, -151 )
+position = Vector2( 343, -167 )
 texture = ExtResource( 21 )
 
 [node name="tree1_19" type="Sprite" parent="objects/decoration/trees"]
-position = Vector2( 120, -168 )
+position = Vector2( 129, -174 )
 texture = ExtResource( 21 )
 
 [node name="entities" type="YSort" parent="objects"]

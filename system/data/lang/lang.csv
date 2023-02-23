@@ -52,6 +52,7 @@ ui.skill_menu.title.body_armor,body armor,armadura,untranslated,untranslated
 ui.skill_menu.title.survivor,survivor,sobrevivente,untranslated,untranslated
 ui.skill_menu.title.energy_saver,energy saver,economia,untranslated,untranslated
 ui.skill_menu.title.bloodthirst,bloodthirst,sede de sangue,untranslated,untranslated
+ui.skill_menu.title.speed_boost,speed boost,extra rápido,untranslated,untranslated
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated

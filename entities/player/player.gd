@@ -245,11 +245,6 @@ func apply_damage(damage: int):
 	
 	var value_to_update = "health" if get_stat("shields") <= 0 else "shields"
 	var health_after_damage = get_stat(value_to_update) - damage
-#	if value_to_update == "shields": 
-#		if health_after_damage < 0:
-#			update_stat("health", int(abs(health_after_damage)))
-#			update_stat("shields", 0)
-#			return
 	
 	update_stat(
 		value_to_update,
