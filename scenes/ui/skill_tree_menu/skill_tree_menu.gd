@@ -23,6 +23,18 @@ onready var SkillDescription: Label = get_node(SkillDescriptionPath)
 export(NodePath) var PointsLabelPath
 onready var PointsLabel: Label = get_node(PointsLabelPath)
 
+export(Dictionary) var SkillPathTextureNodes = {
+	"hard_skin": [],
+	"healing_meal": [],
+	"body_armor": [],
+	"survivor": [],
+	"energy_saver": [],
+	"bloodthirst": [],
+	"speed_boost": [],
+	"large_tongue": [],
+	"rooted": []
+}
+
 
 enum SKILLS {
 	HARD_SKIN,
@@ -121,8 +133,6 @@ func open_menu():
 	
 func buy_skill(TargetButton):
 	TargetButton.modulate = Color.yellow
-	TargetButton.mouse_filter = MOUSE_FILTER_IGNORE
-	TargetButton.pressed = false
 	
 	
 
@@ -150,7 +160,8 @@ func _on_skin_button_toggled(id, btn_pressed):
 	SelectedButton = SkillButtons[id]
 	SelectedButton.button_mask = 0
 	
-	BuyButton.visible = true
+	var skill_bought = game_data.get_player_data("skills")[skill_keys[id]]
+	BuyButton.visible = !skill_bought
 	BuyButton.modulate = Color.white if get_skill_points() > 0 else DARK_RED
 	BuyButton.disabled = get_skill_points() <= 0
 	
