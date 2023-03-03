@@ -7,6 +7,7 @@ export(String) var assigned_setting_value = ""
 func _ready():
 	# warning-ignore:return_value_discarded
 	connect("visibility_changed", self, "_on_visibility_changed")
+	# warning-ignore:return_value_discarded
 	gui_events.connect("mobile_button_displacement_updated", self, "_on_displacement_updated")
 	update_displacement(game_data.get_game_setting("mobile_button_displacement", assigned_setting_value))
 

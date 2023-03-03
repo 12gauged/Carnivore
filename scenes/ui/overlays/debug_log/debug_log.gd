@@ -14,6 +14,7 @@ func _input(event):
 
 
 func _ready(): 
+	# warning-ignore:return_value_discarded
 	gui_events.connect("toggle_debug_log", self, "_toggle_debug_log_request")
 	startup_logs()
 

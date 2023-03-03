@@ -39,6 +39,7 @@ signal show_debug_log
 
 # warning-ignore:unused_signal
 signal show_interact_button
+# warning-ignore:unused_signal
 signal controls_updated
 
 # warning-ignore:unused_signal

@@ -7,6 +7,7 @@ onready var KeyLabel = $desktop_interact_hint/interact_hint/key_label
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	gui_events.connect("controls_updated", self, "_on_controls_updated")
 	MobileInteractHint.visible = game_data.current_platform == "mobile"
 	DesktopInteractHint.visible = game_data.current_platform == "desktop"

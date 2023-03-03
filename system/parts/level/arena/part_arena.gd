@@ -62,7 +62,7 @@ func _ready():
 	game_data.current_arena_wave = 1
 	
 	var player_bounty: float = game_data.get_player_data("bounty")
-	difficulty = min(MAX_DIFFICULTY, int(ceil(player_bounty / 170.0 * int(player_bounty > 100))))
+	difficulty = int(min(MAX_DIFFICULTY, ceil(player_bounty / 170.0 * int(player_bounty > 100))))
 	number_of_waves += difficulty
 	
 	number_of_waves = min(number_of_waves, TUTORIAL_WAVES) if player_bounty == game_data.DEFAULT_BOUNTY else number_of_waves
@@ -194,8 +194,8 @@ func end_wave():
 	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = enemies_per_wave * 0.5
 	if game_data.initial_player_bounty < game_data.DEFAULT_BOUNTY + 10:
-		enemies_per_wave = min(15, enemies_per_wave)
-		max_enemy_number = min(2, max_enemy_number)
+		enemies_per_wave = int(min(15.0, float(enemies_per_wave)))
+		max_enemy_number = int(min(2.0, float(max_enemy_number)))
 	
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
 	game_events.emit_signal("wave_finished")
@@ -209,7 +209,7 @@ func end_arena():
 	
 	
 	
-func _on_enemy_killed(id): 
+func _on_enemy_killed(_id): 
 	dead_enemies.append("enemy")
 	living_enemies -= 1
 	

@@ -6,8 +6,8 @@ const BOUNTY_OFFSET_MULTIPLIER = 0.5
 
 onready var FlagSpawner: Node2D = $flag_spawner
 var can_spawn: bool = true
-var bounty_offset: int = 0
-var target_bounty: int = 0
+var bounty_offset: float = 0.0
+var target_bounty: float = 0.0
 var target_bounty_multiplier
 var initial_player_bounty = 0
 

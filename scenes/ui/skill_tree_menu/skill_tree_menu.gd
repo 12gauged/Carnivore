@@ -82,8 +82,11 @@ var SkillButtons: Array = []
 
 func _ready():
 	self.visible = false
+	# warning-ignore:return_value_discarded
 	gui_events.connect("player_in_skill_tree_area", self, "_player_entered_area")
+	# warning-ignore:return_value_discarded
 	gui_events.connect("player_left_skill_tree_area", self, "_player_exited_area")
+	# warning-ignore:return_value_discarded
 	player_events.connect("player_interacted_mobile", self, "_on_player_interacted_mobile")
 	SkillButtons = filter_texture_rect_nodes(SkillButtonGroup.get_children())
 	BuyButton.visible = false
@@ -99,7 +102,7 @@ func _input(event):
 	
 	
 func filter_texture_rect_nodes(NodeArray: Array):
-	var result: Array
+	var result: Array = []
 	for Obj in NodeArray:
 		if not Obj is TextureRect: result.append(Obj)
 	return result

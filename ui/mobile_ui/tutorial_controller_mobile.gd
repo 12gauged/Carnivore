@@ -54,6 +54,7 @@ func end_tutorial():
 	game_events.emit_signal("tutorial_finished")
 	
 	if game_data.get_player_data("special_attack_tutorial_finished"): return
+	# warning-ignore:return_value_discarded
 	player_events.connect("special_attack_tutorial_available", self, "_on_player_special_attack_available")
 	
 	
@@ -93,6 +94,7 @@ func _on_player_special_attack_available():
 	
 func _on_player_entered_eat_state():
 	game_data.set_player_data("special_attack_tutorial_finished", true)
+	# warning-ignore:return_value_discarded
 	player_events.connect("special_attack_available", self, "_on_player_special_attack_available")
 	end_tutorial()
 	
@@ -120,4 +122,5 @@ func _on_tutorial_text_show_cooldown_timeout():
 			game_events.connect("tutorial_ant_dead", self, "_on_tutorial_ant_dead")
 			emit_signal("request_shooting_joystick_animation")
 		SPECIAL:
+			# warning-ignore:return_value_discarded
 			player_events.connect("entered_eat_state", self, "_on_player_entered_eat_state")
