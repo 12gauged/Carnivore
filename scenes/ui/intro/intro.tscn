@@ -342,7 +342,7 @@ custom_constants/separation = 0
 alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="button_holder"]
-margin_left = 215.0
+margin_left = 213.0
 margin_right = 235.0
 margin_bottom = 135.0
 custom_constants/separation = 0
@@ -351,7 +351,7 @@ script = ExtResource( 5 )
 
 [node name="skip_button" parent="button_holder/VBoxContainer" instance=ExtResource( 3 )]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 110.0
+margin_top = 108.0
 margin_bottom = 130.0
 
 [node name="icon" parent="button_holder/VBoxContainer/skip_button/center_container" index="0"]
@@ -363,7 +363,7 @@ texture = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="button_holder/VBoxContainer"]
 margin_top = 130.0
-margin_right = 20.0
+margin_right = 22.0
 margin_bottom = 135.0
 custom_constants/margin_bottom = 5
 

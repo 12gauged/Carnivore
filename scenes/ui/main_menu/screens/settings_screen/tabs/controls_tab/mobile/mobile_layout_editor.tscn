@@ -277,7 +277,7 @@ margin_y = NodePath("../../top_margin")
 
 [node name="Sprite" type="Sprite" parent="pause_button/HBoxContainer/button_anchor/TouchScreenButton"]
 use_parent_material = true
-position = Vector2( 10, 10 )
+position = Vector2( 11, 11 )
 texture = ExtResource( 4 )
 
 [node name="right_margin" type="MarginContainer" parent="pause_button"]
@@ -322,12 +322,12 @@ autowrap = true
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TextureRect/VBoxContainer"]
 margin_top = 27.0
 margin_right = 97.0
-margin_bottom = 47.0
+margin_bottom = 49.0
 alignment = 1
 
 [node name="save_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
-margin_left = 14.0
-margin_right = 34.0
+margin_left = 11.0
+margin_right = 33.0
 
 [node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/save_button/center_container" index="0"]
 margin_left = 2.0
@@ -337,8 +337,8 @@ margin_bottom = 18.0
 texture = ExtResource( 12 )
 
 [node name="reset_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
-margin_left = 38.0
-margin_right = 58.0
+margin_left = 37.0
+margin_right = 59.0
 
 [node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/reset_button/center_container" index="0"]
 margin_left = 2.0
@@ -348,8 +348,8 @@ margin_bottom = 18.0
 texture = ExtResource( 16 )
 
 [node name="exit_button" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer" instance=ExtResource( 10 )]
-margin_left = 62.0
-margin_right = 82.0
+margin_left = 63.0
+margin_right = 85.0
 
 [node name="icon" parent="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/exit_button/center_container" index="0"]
 margin_left = 2.0
