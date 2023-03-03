@@ -56,9 +56,10 @@ respawn = true
 
 [node name="part_enemy_spawner2" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 154, 65 )
-entity_name = "worm"
+entity_name = "ant_soldier"
 entity_group = "enemies"
 deletion_signal = "deleted"
+auto_spawn = true
 
 [node name="part_enemy_spawner3" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 206, 58 )

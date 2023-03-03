@@ -62,7 +62,7 @@ func shoot_projectile():
 	spawn_projectile()
 	set_projectile("")
 	
-func set_target_direction(value: Vector2): target_direction = value
+func set_target_direction(value: Vector2): target_direction = value if value != Vector2.ZERO else Vector2.RIGHT
 func get_target_direction() -> Vector2: return target_direction
 	
 func set_projectile(type: String):
