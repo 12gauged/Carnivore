@@ -291,7 +291,7 @@ func _on_player_movement_direction_updated(value):
 	player_events.emit_signal("player_moving" if value != Vector2.ZERO else "player_not_moving")
 	
 func _on_player_frozen(): 
-	velocity = Vector2.ZERO
+	#velocity = Vector2.ZERO
 	set_state("IDLE")
 func _on_player_frozen_slow_motion(): FRICTION = DEFAULT_FRICTION * 0.145
 func _on_player_unfrozen(): 

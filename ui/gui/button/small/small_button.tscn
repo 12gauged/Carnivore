@@ -9,9 +9,10 @@
 [ext_resource path="res://system/random_scripts/audio_stream_player_signal_support.gd" type="Script" id=7]
 
 [node name="small_button" type="TextureButton"]
-margin_right = 20.0
-margin_bottom = 20.0
-size_flags_horizontal = 4
+margin_right = 22.0
+margin_bottom = 22.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )

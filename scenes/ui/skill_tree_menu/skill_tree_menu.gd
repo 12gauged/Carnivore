@@ -29,7 +29,7 @@ export(Dictionary) var SkillPathTextureNodes = {
 	"body_armor": [],
 	"survivor": [],
 	"energy_saver": [],
-	"bloodthirst": [],
+	"bloodthirsty": [],
 	"speed_boost": [],
 	"large_tongue": [],
 	"rooted": []
@@ -42,7 +42,7 @@ enum SKILLS {
 	BODY_ARMOR,
 	SURVIVOR,
 	ENERGY_SAVER,
-	BLOODTHIRST,
+	BLOODTHIRSTY,
 	SPEED_BOOST,
 	LARGE_TONGUE,
 	ROOTED
@@ -53,7 +53,7 @@ var skill_keys: Array = [
 	"body_armor",
 	"survivor",
 	"energy_saver",
-	"bloodthirst",
+	"bloodthirsty",
 	"speed_boost",
 	"large_tongue",
 	"rooted"
@@ -63,8 +63,8 @@ var skill_progression: Dictionary = {
 	"healing_meal": "body_armor",
 	"body_armor": "",
 	"survivor": "energy_saver",
-	"energy_saver": "bloodthirst",
-	"bloodthirst": "",
+	"energy_saver": "bloodthirsty",
+	"bloodthirsty": "",
 	"speed_boost": "large_tongue",
 	"large_tongue": "rooted",
 	"rooted": ""
@@ -83,7 +83,7 @@ func _ready():
 	gui_events.connect("player_in_skill_tree_area", self, "_player_entered_area")
 	gui_events.connect("player_left_skill_tree_area", self, "_player_exited_area")
 	player_events.connect("player_interacted_mobile", self, "_on_player_interacted_mobile")
-	SkillButtons = SkillButtonGroup.get_children()
+	SkillButtons = filter_texture_rect_nodes(SkillButtonGroup.get_children())
 	BuyButton.visible = false
 	update_points_label()
 	check_skills()
@@ -94,6 +94,13 @@ func _input(event):
 	if not event.is_action_pressed("controls_interact"): return
 	open_menu()
 	
+	
+	
+func filter_texture_rect_nodes(NodeArray: Array):
+	var result: Array
+	for Obj in NodeArray:
+		if not Obj is TextureRect: result.append(Obj)
+	return result
 	
 	
 func get_next_unlockable_skill(skill: String): return skill_progression[skill]
@@ -131,6 +138,10 @@ func open_menu():
 	player_events.emit_signal("freeze_player")
 	emit_signal("opened_menu")
 	
+func get_skill_visual_path(skill: String): return SkillPathTextureNodes[skill]
+func change_visual_path_color(skill: String):
+	for texture in get_skill_visual_path(skill):
+		get_node(texture).modulate = Color.yellow
 func buy_skill(TargetButton):
 	TargetButton.modulate = Color.yellow
 	
@@ -172,7 +183,11 @@ func _on_buy_button_pressed():
 	set_skill_points(get_skill_points() - 1)
 	update_points_label()
 	buy_skill(SelectedButton)
-	unlock_skill(get_next_unlockable_skill(chosen_skill))
+	
+	var next_skill = get_next_unlockable_skill(chosen_skill)
+	unlock_skill(next_skill)
+	change_visual_path_color(chosen_skill)
+	
 	BuyButton.visible = false
 	
 	

@@ -149,6 +149,7 @@ shader=false
 pixel=false
 "pixel snap"=false
 stretch=false
+debug=false
 
 [importer_defaults]
 

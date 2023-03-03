@@ -141,7 +141,6 @@ mouse_filter = 2
 script = ExtResource( 18 )
 
 [node name="special_attack_button" type="TextureRect" parent="special_attack/special_attack_vertical_container/button_anchor"]
-visible = false
 material = SubResource( 2 )
 margin_left = -10.0
 margin_top = -10.0
@@ -154,6 +153,7 @@ script = ExtResource( 14 )
 [node name="TouchScreenButton" type="TouchScreenButton" parent="special_attack/special_attack_vertical_container/button_anchor/special_attack_button"]
 show_behind_parent = true
 material = SubResource( 2 )
+position = Vector2( -1, -1 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 16 )
 script = ExtResource( 11 )
@@ -182,6 +182,7 @@ emitter = "player_events"
 event = "special_attack_tutorial_available"
 
 [node name="interact_button" type="TextureRect" parent="special_attack/special_attack_vertical_container/button_anchor"]
+visible = false
 margin_left = -10.0
 margin_top = -10.0
 margin_right = 10.0
@@ -191,6 +192,7 @@ stretch_mode = 4
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="special_attack/special_attack_vertical_container/button_anchor/interact_button"]
 show_behind_parent = true
+position = Vector2( -1, -1 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 16 )
 script = ExtResource( 11 )

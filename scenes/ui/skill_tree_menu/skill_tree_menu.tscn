@@ -34,7 +34,7 @@ SkillTitlePath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBox
 SkillDescriptionPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/skill_description")
 PointsLabelPath = NodePath("HBoxContainer/VBoxContainer/points_label")
 SkillPathTextureNodes = {
-"bloodthirst": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/EnergySaverToBloodthirst") ],
+"bloodthirsty": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/EnergySaverToBloodthirsty") ],
 "body_armor": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/HealingMealToBodyArmor") ],
 "energy_saver": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/SurvivorToEnergySaver") ],
 "hard_skin": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathCurveTop"), NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathUp") ],
@@ -57,7 +57,7 @@ alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 34.0
 margin_right = 206.0
-margin_bottom = 118.0
+margin_bottom = 120.0
 mouse_filter = 2
 alignment = 1
 
@@ -83,43 +83,42 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -82.0
-margin_top = -37.5
+margin_top = -37.0
 margin_right = 83.0
-margin_bottom = 39.5
+margin_bottom = 37.0
 mouse_filter = 2
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer"]
-margin_top = 4.0
 margin_right = 165.0
-margin_bottom = 72.0
+margin_bottom = 74.0
 mouse_filter = 2
 custom_constants/separation = 0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_right = 84.0
-margin_bottom = 68.0
+margin_right = 78.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 84.0
-margin_bottom = 34.0
+margin_right = 78.0
+margin_bottom = 47.0
 
 [node name="skill_title" type="Label" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 modulate = Color( 1, 1, 0, 1 )
-margin_right = 84.0
-margin_bottom = 10.0
+margin_right = 78.0
+margin_bottom = 23.0
 theme = ExtResource( 5 )
 text = "ui.skill_menu.title"
 align = 1
 autowrap = true
 
 [node name="skill_description" type="Label" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
-margin_top = 14.0
-margin_right = 84.0
-margin_bottom = 34.0
+margin_top = 27.0
+margin_right = 78.0
+margin_bottom = 47.0
 theme = ExtResource( 5 )
 custom_constants/line_spacing = 0
 text = "ui.skill_menu.description"
@@ -127,17 +126,15 @@ align = 1
 autowrap = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 34.0
-margin_right = 84.0
-margin_bottom = 68.0
+margin_top = 47.0
+margin_right = 78.0
+margin_bottom = 74.0
 size_flags_vertical = 3
 alignment = 2
 
 [node name="buy_button" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource( 3 )]
-margin_left = 32.0
-margin_top = 14.0
-margin_right = 52.0
-margin_bottom = 34.0
+margin_top = 5.0
+margin_bottom = 27.0
 texture_disabled = ExtResource( 17 )
 id = "buy_skill"
 
@@ -149,19 +146,19 @@ margin_bottom = 18.0
 texture = ExtResource( 15 )
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_left = 84.0
-margin_right = 89.0
-margin_bottom = 68.0
+margin_left = 78.0
+margin_right = 83.0
+margin_bottom = 74.0
 custom_constants/margin_left = 5
 
 [node name="SkillPath" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_left = 89.0
-margin_right = 101.0
-margin_bottom = 68.0
+margin_left = 83.0
+margin_right = 95.0
+margin_bottom = 74.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath"]
 margin_right = 12.0
-margin_bottom = 68.0
+margin_bottom = 74.0
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
@@ -180,7 +177,7 @@ texture = ExtResource( 18 )
 [node name="PathUp" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_top = 11.0
 margin_right = 12.0
-margin_bottom = 31.0
+margin_bottom = 34.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
 texture = ExtResource( 20 )
@@ -188,9 +185,9 @@ stretch_mode = 2
 
 [node name="Center" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_left = 3.0
-margin_top = 31.0
+margin_top = 34.0
 margin_right = 9.0
-margin_bottom = 37.0
+margin_bottom = 40.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 19 )
@@ -209,33 +206,33 @@ texture = ExtResource( 21 )
 stretch_mode = 2
 
 [node name="PathDown" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
-margin_top = 37.0
+margin_top = 40.0
 margin_right = 12.0
-margin_bottom = 57.0
+margin_bottom = 63.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
 texture = ExtResource( 20 )
 stretch_mode = 2
 
 [node name="PathCurveBottom" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
-margin_top = 57.0
+margin_top = 63.0
 margin_right = 12.0
-margin_bottom = 59.0
+margin_bottom = 65.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 18 )
 flip_v = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
-margin_top = 59.0
+margin_top = 65.0
 margin_right = 12.0
-margin_bottom = 68.0
+margin_bottom = 74.0
 custom_constants/margin_top = 9
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_left = 101.0
+margin_left = 95.0
 margin_right = 165.0
-margin_bottom = 68.0
+margin_bottom = 74.0
 mouse_filter = 2
 custom_constants/hseparation = 0
 columns = 5
@@ -253,17 +250,17 @@ margin_bottom = 18.0
 texture = ExtResource( 6 )
 
 [node name="HardSkinToHealingMeal" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
-margin_left = 20.0
-margin_right = 22.0
-margin_bottom = 20.0
+margin_left = 22.0
+margin_right = 24.0
+margin_bottom = 22.0
 size_flags_horizontal = 0
 size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="healing_meal" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 22.0
-margin_right = 42.0
+margin_left = 24.0
+margin_right = 46.0
 disabled = true
 toggle_mode = true
 id = "1"
@@ -277,17 +274,17 @@ margin_bottom = 18.0
 texture = ExtResource( 7 )
 
 [node name="HealingMealToBodyArmor" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
-margin_left = 42.0
-margin_right = 44.0
-margin_bottom = 20.0
+margin_left = 46.0
+margin_right = 48.0
+margin_bottom = 22.0
 size_flags_horizontal = 0
 size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="body_armor" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 44.0
-margin_right = 64.0
+margin_left = 48.0
+margin_right = 70.0
 disabled = true
 toggle_mode = true
 id = "2"
@@ -301,8 +298,8 @@ margin_bottom = 18.0
 texture = ExtResource( 10 )
 
 [node name="survivor" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 24.0
-margin_bottom = 44.0
+margin_top = 26.0
+margin_bottom = 48.0
 toggle_mode = true
 id = "3"
 toggle = true
@@ -315,20 +312,20 @@ margin_bottom = 18.0
 texture = ExtResource( 13 )
 
 [node name="SurvivorToEnergySaver" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
-margin_left = 20.0
-margin_top = 24.0
-margin_right = 22.0
-margin_bottom = 44.0
+margin_left = 22.0
+margin_top = 26.0
+margin_right = 24.0
+margin_bottom = 48.0
 size_flags_horizontal = 0
 size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="energy_saver" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 22.0
-margin_top = 24.0
-margin_right = 42.0
-margin_bottom = 44.0
+margin_left = 24.0
+margin_top = 26.0
+margin_right = 46.0
+margin_bottom = 48.0
 disabled = true
 toggle_mode = true
 id = "4"
@@ -341,21 +338,21 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 9 )
 
-[node name="EnergySaverToBloodthirst" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
-margin_left = 42.0
-margin_top = 24.0
-margin_right = 44.0
-margin_bottom = 44.0
+[node name="EnergySaverToBloodthirsty" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
+margin_left = 46.0
+margin_top = 26.0
+margin_right = 48.0
+margin_bottom = 48.0
 size_flags_horizontal = 0
 size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="bloodthirst" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 44.0
-margin_top = 24.0
-margin_right = 64.0
-margin_bottom = 44.0
+margin_left = 48.0
+margin_top = 26.0
+margin_right = 70.0
+margin_bottom = 48.0
 disabled = true
 toggle_mode = true
 id = "5"
@@ -369,8 +366,8 @@ margin_bottom = 18.0
 texture = ExtResource( 11 )
 
 [node name="speed_boost" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 48.0
-margin_bottom = 68.0
+margin_top = 52.0
+margin_bottom = 74.0
 toggle_mode = true
 id = "6"
 toggle = true
@@ -383,18 +380,18 @@ margin_bottom = 18.0
 texture = ExtResource( 12 )
 
 [node name="SpeedBoostToLargeTongue" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
-margin_left = 20.0
-margin_top = 48.0
-margin_right = 22.0
-margin_bottom = 68.0
+margin_left = 22.0
+margin_top = 52.0
+margin_right = 24.0
+margin_bottom = 74.0
 texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="large_tongue" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 22.0
-margin_top = 48.0
-margin_right = 42.0
-margin_bottom = 68.0
+margin_left = 24.0
+margin_top = 52.0
+margin_right = 46.0
+margin_bottom = 74.0
 disabled = true
 toggle_mode = true
 id = "7"
@@ -408,18 +405,18 @@ margin_bottom = 18.0
 texture = ExtResource( 8 )
 
 [node name="LargeTongueToRooted" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
-margin_left = 42.0
-margin_top = 48.0
-margin_right = 44.0
-margin_bottom = 68.0
+margin_left = 46.0
+margin_top = 52.0
+margin_right = 48.0
+margin_bottom = 74.0
 texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="rooted" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 44.0
-margin_top = 48.0
-margin_right = 64.0
-margin_bottom = 68.0
+margin_left = 48.0
+margin_top = 52.0
+margin_right = 70.0
+margin_bottom = 74.0
 disabled = true
 toggle_mode = true
 id = "8"
@@ -435,13 +432,13 @@ texture = ExtResource( 14 )
 [node name="home_button_holder" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 98.0
 margin_right = 172.0
-margin_bottom = 118.0
+margin_bottom = 120.0
 mouse_filter = 2
 alignment = 1
 
 [node name="home_button" parent="HBoxContainer/VBoxContainer/home_button_holder" instance=ExtResource( 3 )]
-margin_left = 76.0
-margin_right = 96.0
+margin_left = 75.0
+margin_right = 97.0
 size_flags_vertical = 4
 shortcut_in_tooltip = false
 shortcut = ExtResource( 16 )

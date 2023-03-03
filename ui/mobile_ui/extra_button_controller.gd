@@ -1,16 +1,12 @@
 extends Control
 
+onready var InteractButton = $interact_button
+onready var SpecialAttackButton = $special_attack_button
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	gui_events.connect("show_interact_button", self, "_show_interact_button")
+	
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _show_interact_button():
+	InteractButton.visible = true
+	SpecialAttackButton.visible = false
