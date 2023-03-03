@@ -46,6 +46,17 @@ var skill_keys: Array = [
 	"large_tongue",
 	"rooted"
 ]
+var skill_progression: Dictionary = {
+	"hard_skin": "healing_meal",
+	"healing_meal": "body_armor",
+	"body_armor": "",
+	"survivor": "energy_saver",
+	"energy_saver": "bloodthirst",
+	"bloodthirst": "",
+	"speed_boost": "large_tongue",
+	"large_tongue": "rooted",
+	"rooted": ""
+}
 
 
 
@@ -73,17 +84,25 @@ func _input(event):
 	
 	
 	
+func get_next_unlockable_skill(skill: String): return skill_progression[skill]
+func get_skill_button(skill: String): return SkillButtons[skill_keys.find(skill)]
+func unlock_skill(skill: String): 
+	if skill.empty(): return
+	get_skill_button(skill).enable()
 func check_skills():
 	for skill in game_data.player_data.skills:
 		if game_data.player_data.skills[skill]:
-			button_skill_bought(SkillButtons[skill_keys.find(skill)])
+			var SkillButton = get_skill_button(skill)
+			buy_skill(SkillButton)
+			unlock_skill(get_next_unlockable_skill(skill))
 			
 func update_points_label():
 	var skill_points = get_skill_points()
 	PointsLabel.text = DEFAULT_POINTS_TEXT % str(skill_points)
 	PointsLabel.modulate = Color.red if skill_points <= 0 else Color.yellow
 		
-	
+		
+
 func get_skill_points() -> int: return game_data.get_player_data("skill_points")
 func set_skill_points(value: int): 
 	game_data.set_player_data("skill_points", value)
@@ -100,7 +119,7 @@ func open_menu():
 	player_events.emit_signal("freeze_player")
 	emit_signal("opened_menu")
 	
-func button_skill_bought(TargetButton):
+func buy_skill(TargetButton):
 	TargetButton.modulate = Color.yellow
 	TargetButton.mouse_filter = MOUSE_FILTER_IGNORE
 	TargetButton.pressed = false
@@ -141,7 +160,8 @@ func _on_buy_button_pressed():
 	game_data.player_data.skills[chosen_skill] = true
 	set_skill_points(get_skill_points() - 1)
 	update_points_label()
-	button_skill_bought(SelectedButton)
+	buy_skill(SelectedButton)
+	unlock_skill(get_next_unlockable_skill(chosen_skill))
 	BuyButton.visible = false
 	
 	

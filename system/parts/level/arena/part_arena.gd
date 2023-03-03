@@ -195,9 +195,7 @@ func end_wave():
 		max_enemy_number = min(2, max_enemy_number)
 	
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
-	player_events.emit_signal("force_exit_from_eat_state")
 	game_events.emit_signal("wave_finished")
-	game_events.emit_signal("stop_wave_time_tracker")
 	wave_start_delay.start(time_between_waves)
 	emit_signal("wave_ended")
 	
