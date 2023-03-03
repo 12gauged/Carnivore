@@ -28,12 +28,12 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="v_grid_container" type="GridContainer" parent="center_container"]
+[node name="v_grid_container" type="VBoxContainer" parent="center_container"]
 margin_left = 68.0
-margin_top = 8.0
+margin_top = 7.0
 margin_right = 171.0
-margin_bottom = 127.0
-custom_constants/vseparation = 0
+margin_bottom = 128.0
+custom_constants/separation = 0
 script = ExtResource( 7 )
 
 [node name="12gauged_logo" type="TextureRect" parent="center_container/v_grid_container"]
@@ -151,16 +151,20 @@ margin_right = 103.0
 margin_bottom = 99.0
 custom_constants/margin_bottom = 8
 
-[node name="home_button" parent="center_container/v_grid_container" instance=ExtResource( 2 )]
-margin_left = 41.0
+[node name="HBoxContainer" type="HBoxContainer" parent="center_container/v_grid_container"]
 margin_top = 99.0
-margin_right = 61.0
-margin_bottom = 119.0
+margin_right = 103.0
+margin_bottom = 121.0
+alignment = 1
+
+[node name="home_button" parent="center_container/v_grid_container/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 40.0
+margin_right = 62.0
 shortcut_in_tooltip = false
 shortcut = SubResource( 2 )
 id = "main_screen"
 
-[node name="icon" parent="center_container/v_grid_container/home_button/center_container" index="0"]
+[node name="icon" parent="center_container/v_grid_container/HBoxContainer/home_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
@@ -172,6 +176,6 @@ texture = ExtResource( 3 )
 [connection signal="credit_pressed" from="center_container/v_grid_container/evo" to="center_container/v_grid_container" method="_on_credit_pressed"]
 [connection signal="credit_pressed" from="center_container/v_grid_container/icedmi" to="center_container/v_grid_container" method="_on_credit_pressed"]
 [connection signal="credit_pressed" from="center_container/v_grid_container/fryg" to="center_container/v_grid_container" method="_on_credit_pressed"]
-[connection signal="button_pressed" from="center_container/v_grid_container/home_button" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="center_container/v_grid_container/HBoxContainer/home_button" to="." method="_on_button_pressed"]
 
-[editable path="center_container/v_grid_container/home_button"]
+[editable path="center_container/v_grid_container/HBoxContainer/home_button"]

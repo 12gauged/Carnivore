@@ -29,7 +29,7 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 2 )
 SkillButtonGroupPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer")
-BuyButtonPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/buy_button")
+BuyButtonPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button")
 SkillTitlePath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/skill_title")
 SkillDescriptionPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/skill_description")
 PointsLabelPath = NodePath("HBoxContainer/VBoxContainer/points_label")
@@ -132,13 +132,19 @@ margin_bottom = 74.0
 size_flags_vertical = 3
 alignment = 2
 
-[node name="buy_button" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource( 3 )]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
 margin_top = 5.0
+margin_right = 78.0
 margin_bottom = 27.0
+alignment = 1
+
+[node name="buy_button" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 28.0
+margin_right = 50.0
 texture_disabled = ExtResource( 17 )
 id = "buy_skill"
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/buy_button/center_container" index="0"]
+[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
@@ -450,7 +456,7 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 4 )
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/buy_button" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
 [connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/hard_skin" to="." method="_on_skin_button_toggled"]
 [connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/healing_meal" to="." method="_on_skin_button_toggled"]
 [connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/body_armor" to="." method="_on_skin_button_toggled"]
@@ -462,7 +468,7 @@ texture = ExtResource( 4 )
 [connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/rooted" to="." method="_on_skin_button_toggled"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/home_button_holder/home_button" to="." method="_on_home_button_pressed"]
 
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/buy_button"]
+[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button"]
 [editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/hard_skin"]
 [editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/healing_meal"]
 [editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/body_armor"]
