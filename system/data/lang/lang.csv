@@ -13,7 +13,7 @@ ui.settings.camera_shake,camera shake,tremor de câmera,tremblement de la camér
 ui.settings.fullscreen,fullscreen,tela-cheia,plein-écran,plein-écran
 ui.settings.master_bus,master volume,volume geral,volume général,volume général
 ui.settings.music_bus,music,música,musique,musique
-ui.settings.player_bus,player sounds,sons do jogador,bruits du joueur,bruits du joueur 
+ui.settings.player_bus,player sounds,sons do jogador,bruits du joueur,"bruits du joueur "
 ui.settings.entity_bus,entity sounds,sons de entidades,bruits d’entités,bruits d’entités
 ui.settings.environment_bus,environment sounds,sons do ambiente,bruits d’ambiance,bruits d’ambiance
 ui.settings.controls_up,walk up,andar para cima,untranslated,untranslated
@@ -33,7 +33,7 @@ ui.exit,exit,sair,untranslated,untranslated
 ui.pause_screen.paused,paused,em pausa,en pause,en pause
 ui.pause_screen.resume,resume,continuar,reprendre,continuer
 ui.pause_screen.lose_progress,are you sure? all your progress will be lost.,tem certeza? todo seu progresso será perdido.,untranslated,untranslated
-ui.death_screen.game_over,game over,fim de jogo,game over,game over
+ui.death_screen.game_over,game over,game over,game over,game over
 ui.intro.line0,legend says,uma lenda diz,untranslated,untranslated
 ui.intro.line1,there's a violent plant,que existe uma planta violenta,untranslated,untranslated
 ui.intro.line2,living in the woods.,vivendo na floresta.,untranslated,untranslated
@@ -45,14 +45,27 @@ ui.victory_text.almost_got_you,we almost got you.,quase te pegamos.,untranslated
 ui.victory_text.impossible,impossible,impossível,untranslated,untranslated
 ui.bounty_text_during_animation,bounty: %s + %s,recompensa: %s + %s,untranslated,untranslated
 ui.bounty_text_after_animation,bounty: %s,recompensa: %s,untranslated,untranslated
-ui.skill_menu.title.generic,skills,habilidades,untranslated,untranslated
+ui.skill_menu.points,points: %s,pontos: %s,untranslated,untranslated
+ui.skill_menu.title,skills,habilidades,untranslated,untranslated
+ui.skill_menu.description,"skills can help you in the arena, use your points to buy them","as habilidades podem te ajudar na arena, use seus pontos para comprá-las",untranslated,untranslated
 ui.skill_menu.title.hard_skin,hard skin,pele dura,untranslated,untranslated
-ui.skill_menu.title.healing_meal,healing meal,lanche curador,untranslated,untranslated
+ui.skill_menu.description.hard_skin,your skin is hardened.\n+3 shields,sua pele endurece.\n+3 escudos,untranslated,untranslated
+ui.skill_menu.title.healing_meal,healing meal,lanche curativo,untranslated,untranslated
+ui.skill_menu.description.healing_meal,chance of healing when eating a meat,chance de se curar ao comer uma carne,untranslated,untranslated
 ui.skill_menu.title.body_armor,body armor,armadura,untranslated,untranslated
+ui.skill_menu.description.body_armor,your skin is hardened even more. +3 shields,sua pele fica ainda mais dura.\n+3 escudos,untranslated,untranslated
 ui.skill_menu.title.survivor,survivor,sobrevivente,untranslated,untranslated
+ui.skill_menu.description.survivor,hunger decreases slower when less than 4,a fome diminui mais devagar quando menor que 4,untranslated,untranslated
 ui.skill_menu.title.energy_saver,energy saver,economia,untranslated,untranslated
-ui.skill_menu.title.bloodthirst,bloodthirst,sede de sangue,untranslated,untranslated
+ui.skill_menu.description.energy_saver,your special attack lasts longer,seu ataque especial dura mais tempo,untranslated,untranslated
+ui.skill_menu.title.bloodthirsty,bloodthirsty,sede de sangue,untranslated,untranslated
+ui.skill_menu.description.bloodthirsty,moves faster when using the special attack,movimento mais rápido ao usar o ataque especial,untranslated,untranslated
 ui.skill_menu.title.speed_boost,speed boost,extra rápido,untranslated,untranslated
+ui.skill_menu.description.speed_boost,increases your movement speed,aumenta sua velocidade de movimento,untranslated,untranslated
+ui.skill_menu.title.large_tongue,large_tongue,língua grande,untranslated,untranslated
+ui.skill_menu.description.large_tongue,allows you to eat meat from afar,te permite comer carne de longe,untranslated,untranslated
+ui.skill_menu.title.rooted,rooted,enraizado,untranslated,untranslated
+ui.skill_menu.description.rooted,slowly regenerates your energy while standing still,regenera lentamente sua energia quando parado,untranslated,untranslated
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated

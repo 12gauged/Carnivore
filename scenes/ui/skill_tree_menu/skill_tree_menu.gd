@@ -4,7 +4,9 @@ signal opened_menu
 signal exited_menu
 
 
-const DEFAULT_POINTS_TEXT = "points: %s"
+const DEFAULT_TITLE = "ui.skill_menu.title"
+const DEFAULT_DESCRIPTION = "ui.skill_menu.description"
+const DEFAULT_POINTS_TEXT = "ui.skill_menu.points"
 const DARK_RED = Color(0.6, 0.0, 0.0, 1.0)
 
 
@@ -114,10 +116,11 @@ func check_skills():
 			var SkillButton = get_skill_button(skill)
 			buy_skill(SkillButton)
 			unlock_skill(get_next_unlockable_skill(skill))
+			change_visual_path_color(skill)
 			
 func update_points_label():
 	var skill_points = get_skill_points()
-	PointsLabel.text = DEFAULT_POINTS_TEXT % str(skill_points)
+	PointsLabel.text = tr(DEFAULT_POINTS_TEXT) % str(skill_points)
 	PointsLabel.modulate = Color.red if skill_points <= 0 else Color.yellow
 		
 		
@@ -132,11 +135,21 @@ func close_menu():
 	game_data.can_pause = true
 	player_events.emit_signal("unfreeze_player")
 	emit_signal("exited_menu")
+	# resets the menu
+	SkillTitle.text = DEFAULT_TITLE
+	SkillDescription.text = DEFAULT_DESCRIPTION
+	if not is_instance_valid(SelectedButton): return
+	SelectedButton.pressed = false
+	SelectedButton = null
 func open_menu():
 	self.visible = true
 	game_data.can_pause= false
 	player_events.emit_signal("freeze_player")
 	emit_signal("opened_menu")
+	# in case the player changes the language
+	SkillTitle.text = DEFAULT_TITLE
+	SkillDescription.text = DEFAULT_DESCRIPTION
+	PointsLabel.text = tr(DEFAULT_POINTS_TEXT) % str(get_skill_points())
 	
 func get_skill_visual_path(skill: String): return SkillPathTextureNodes[skill]
 func change_visual_path_color(skill: String):
