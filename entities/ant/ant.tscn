@@ -314,7 +314,7 @@ tracks/5/keys = {
 radius = 4.0
 height = 8.0
 
-[node name="ant" type="KinematicBody2D" groups=["enemy_instances"]]
+[node name="ant" type="KinematicBody2D"]
 script = ExtResource( 1 )
 MAX_HEALTH = 2
 MAX_SPEED = 30

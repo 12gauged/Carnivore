@@ -35,7 +35,7 @@ var enemy_data: Array
 var enemy_spawner_id = null
 var enemy_name: String
 var enemy_counter: Dictionary = {}
-var dead_enemies: int = 0
+var dead_enemies: Array = []
 var living_enemies: int = 0
 
 var last_max_enemy_number: int = 0
@@ -74,7 +74,7 @@ func _ready():
 	max_enemy_number = int(float(enemies_per_wave) * 0.5)
 	initial_max_enemy_number = max_enemy_number
 	
-	enemy_counter[FILLER_ENEMY] = 0
+	enemy_counter = {FILLER_ENEMY: 0}
 	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
 	Spawners = get_node("spawners").get_children()
 	
@@ -88,18 +88,20 @@ func _process(_delta):
 
 
 func process_enemy_deaths():
-	if dead_enemies == 0: return
+	if dead_enemies.empty(): return
 	enemy_kill_count += 1
 	if enemy_kill_count == enemies_per_wave:
 		end_wave()
-	dead_enemies -= 1
+	dead_enemies.pop_back()
 
 func free_all_enemies():
-	for AliveEnemy in get_tree().get_nodes_in_group("enemy_instances"):
+	for AliveEnemy in get_tree().get_nodes_in_group("enemies")[0].get_children():
 		if is_instance_valid(AliveEnemy):
 			AliveEnemy.queue_free()
 	enemy_id = 0
 	enemy_kill_count = 0
+	living_enemies = 0
+	enemy_counter = {FILLER_ENEMY: 0}
 			
 func spawn_first_enemies():
 	spawn_new_enemy()
@@ -187,6 +189,7 @@ func end_wave():
 	
 	enemy_kill_count = 0
 	enemy_id = 0
+	enemy_counter = {FILLER_ENEMY: 0}
 	
 	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = enemies_per_wave * 0.5
@@ -207,9 +210,8 @@ func end_arena():
 	
 	
 func _on_enemy_killed(id): 
-	dead_enemies += 1
+	dead_enemies.append("enemy")
 	living_enemies -= 1
-	enemy_counter[id] -= 1
 	
 func _on_tutorial_ant_killed():
 	game_events.emit_signal("tutorial_ant_dead")
