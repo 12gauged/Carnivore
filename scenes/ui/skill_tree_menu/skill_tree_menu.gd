@@ -144,6 +144,7 @@ func close_menu():
 	if not is_instance_valid(SelectedButton): return
 	SelectedButton.pressed = false
 	SelectedButton = null
+	BuyButton.visible = false
 func open_menu():
 	self.visible = true
 	game_data.can_pause= false
