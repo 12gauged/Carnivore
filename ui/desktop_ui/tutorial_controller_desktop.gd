@@ -107,6 +107,7 @@ func _on_player_special_attack_available():
 func _on_player_entered_eat_state():
 	game_data.set_player_data("special_attack_tutorial_finished", true)
 	player_events.disconnect("special_attack_available", self, "_on_player_special_attack_available")
+	player_events.disconnect("entered_eat_state", self, "_on_player_entered_eat_state")
 	end_tutorial()
 	
 func _on_multiuse_timer_timeout():

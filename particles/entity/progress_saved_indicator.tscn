@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/icons/storage_icon.png" type="Texture" id=2]
+[ext_resource path="res://particles/entity/progress_savded_indicator.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -59,6 +60,7 @@ tracks/1/keys = {
 }
 
 [node name="progress_saved_indicator" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="holder" type="Node2D" parent="."]
 position = Vector2( 0, -40 )
@@ -93,3 +95,5 @@ root_node = NodePath("../holder/Control/HBoxContainer")
 autoplay = "move"
 anims/RESET = SubResource( 1 )
 anims/move = SubResource( 2 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

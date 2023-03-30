@@ -1,0 +1,202 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/gui/icons/enemy_icon.png" type="Texture" id=3]
+[ext_resource path="res://ui/gui/icons/exit_icon.png" type="Texture" id=4]
+[ext_resource path="res://ui/gui/icons/disagree_icon.png" type="Texture" id=5]
+[ext_resource path="res://ui/gui/button/skill/skill_button_pressed.png" type="Texture" id=6]
+[ext_resource path="res://ui/gui/button/skill/skill_button_normal.png" type="Texture" id=7]
+[ext_resource path="res://ui/gui/button/skill/skill_button_disabled.png" type="Texture" id=8]
+[ext_resource path="res://ui/gui/button/skill/skill_button_hover.png" type="Texture" id=9]
+[ext_resource path="res://scenes/ui/progress_menu/ProgressMenu.gd" type="Script" id=10]
+
+[node name="ProgressMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -88.0
+margin_top = -67.5
+margin_right = 88.0
+margin_bottom = 67.5
+custom_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 7.0
+margin_right = 176.0
+margin_bottom = 17.0
+theme = ExtResource( 1 )
+text = "ui.progress"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 17.0
+margin_right = 176.0
+margin_bottom = 27.0
+custom_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 27.0
+margin_right = 176.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+scroll_vertical_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 278.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 3.0
+margin_right = 278.0
+margin_bottom = 25.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="enemy_icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+
+[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 3 )
+
+[node name="skill_button" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 32.0
+margin_right = 54.0
+margin_bottom = 22.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 8 )
+
+[node name="enemy_icon2" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 64.0
+margin_right = 86.0
+
+[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon2/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 3 )
+
+[node name="skill_button2" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 96.0
+margin_right = 118.0
+margin_bottom = 22.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 8 )
+
+[node name="enemy_icon3" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 128.0
+margin_right = 150.0
+
+[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon3/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 3 )
+
+[node name="skill_button3" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 160.0
+margin_right = 182.0
+margin_bottom = 22.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 8 )
+
+[node name="enemy_icon4" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 192.0
+margin_right = 214.0
+
+[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon4/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 3 )
+
+[node name="skill_button4" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 224.0
+margin_right = 246.0
+margin_bottom = 22.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 8 )
+
+[node name="exit_icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 256.0
+margin_right = 278.0
+
+[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/exit_icon/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 4 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 67.0
+margin_right = 176.0
+margin_bottom = 72.0
+custom_constants/margin_bottom = 5
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 176.0
+margin_bottom = 95.0
+theme = ExtResource( 1 )
+text = "description
+description"
+align = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 95.0
+margin_right = 176.0
+margin_bottom = 105.0
+custom_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 105.0
+margin_right = 176.0
+margin_bottom = 127.0
+alignment = 1
+
+[node name="exit_button" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 77.0
+margin_right = 99.0
+
+[node name="icon" parent="VBoxContainer/HBoxContainer/exit_button/center_container" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 5 )
+
+[connection signal="button_pressed" from="VBoxContainer/HBoxContainer/exit_button" to="." method="_on_exit_button_button_pressed"]
+
+[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon"]
+[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon2"]
+[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon3"]
+[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon4"]
+[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/exit_icon"]
+[editable path="VBoxContainer/HBoxContainer/exit_button"]

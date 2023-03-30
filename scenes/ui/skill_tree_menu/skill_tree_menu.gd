@@ -25,6 +25,7 @@ onready var SkillDescription: Label = get_node(SkillDescriptionPath)
 export(NodePath) var PointsLabelPath
 onready var PointsLabel: Label = get_node(PointsLabelPath)
 
+
 export(Dictionary) var SkillPathTextureNodes = {
 	"hard_skin": [],
 	"healing_meal": [],
@@ -120,6 +121,7 @@ func check_skills():
 			buy_skill(SkillButton)
 			unlock_skill(get_next_unlockable_skill(skill))
 			change_visual_path_color(skill)
+			if skill_progression.has(skill): change_visual_path_color(skill_progression[skill], Color.white)
 			
 func update_points_label():
 	var skill_points = get_skill_points()
@@ -156,9 +158,9 @@ func open_menu():
 	PointsLabel.text = tr(DEFAULT_POINTS_TEXT) % str(get_skill_points())
 	
 func get_skill_visual_path(skill: String): return SkillPathTextureNodes[skill]
-func change_visual_path_color(skill: String):
+func change_visual_path_color(skill: String, color: Color = Color.yellow):
 	for texture in get_skill_visual_path(skill):
-		get_node(texture).modulate = Color.yellow
+		get_node(texture).modulate = color
 func buy_skill(TargetButton):
 	TargetButton.modulate = Color.yellow
 	
@@ -204,6 +206,7 @@ func _on_buy_button_pressed():
 	var next_skill = get_next_unlockable_skill(chosen_skill)
 	unlock_skill(next_skill)
 	change_visual_path_color(chosen_skill)
+	if skill_progression.has(chosen_skill): change_visual_path_color(skill_progression[chosen_skill], Color.white)
 	
 	BuyButton.visible = false
 	

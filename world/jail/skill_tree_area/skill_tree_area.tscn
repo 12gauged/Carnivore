@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://world/jail/skill_tree_area/plant_behind.png" type="Texture" id=1]
 [ext_resource path="res://world/jail/skill_tree_area/pollen.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://system/random_scripts/area_signal_arg_remover.gd" type="Script" id=7]
 [ext_resource path="res://ui/hud/input_hints/interact_hint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=9]
+[ext_resource path="res://scenes/levels/jail/highlight.gd" type="Script" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -65,11 +66,13 @@ texture = ExtResource( 4 )
 position = Vector2( 2, -6 )
 z_index = -1
 texture = ExtResource( 5 )
+script = ExtResource( 10 )
 
 [node name="pollen" type="AnimatedSprite" parent="."]
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 2, -6 )
 frames = SubResource( 9 )
+frame = 7
 playing = true
 
 [node name="plant_behind" type="Node2D" parent="."]
@@ -78,6 +81,7 @@ position = Vector2( 11, -12 )
 [node name="Sprite" type="Sprite" parent="plant_behind"]
 position = Vector2( 2, -6 )
 texture = ExtResource( 1 )
+script = ExtResource( 10 )
 
 [node name="plant_front" type="Node2D" parent="."]
 position = Vector2( -19, -7 )
@@ -85,6 +89,7 @@ position = Vector2( -19, -7 )
 [node name="Sprite" type="Sprite" parent="plant_front"]
 position = Vector2( -1, -9 )
 texture = ExtResource( 3 )
+script = ExtResource( 10 )
 
 [node name="plant_front2" type="Node2D" parent="."]
 position = Vector2( 19, 9 )
@@ -92,6 +97,7 @@ position = Vector2( 19, 9 )
 [node name="Sprite" type="Sprite" parent="plant_front2"]
 position = Vector2( -1, -9 )
 texture = ExtResource( 3 )
+script = ExtResource( 10 )
 
 [node name="PlayerSensor" type="Area2D" parent="."]
 collision_layer = 0
@@ -116,9 +122,17 @@ visible_by_default = false
 [node name="interact_hint" parent="interact_hint_visibility_controller" instance=ExtResource( 8 )]
 position = Vector2( 0, -48 )
 
+[connection signal="body_detected" from="PlayerSensor" to="roots" method="_on_PlayerSensor_body_detected"]
+[connection signal="body_detected" from="PlayerSensor" to="plant_behind/Sprite" method="_on_PlayerSensor_body_detected"]
+[connection signal="body_detected" from="PlayerSensor" to="plant_front/Sprite" method="_on_PlayerSensor_body_detected"]
+[connection signal="body_detected" from="PlayerSensor" to="plant_front2/Sprite" method="_on_PlayerSensor_body_detected"]
 [connection signal="body_detected" from="PlayerSensor" to="PlayerSensor/player_entered_event_caller" method="call_event"]
 [connection signal="body_detected" from="PlayerSensor" to="interact_hint_visibility_controller" method="show"]
 [connection signal="body_entered" from="PlayerSensor" to="PlayerSensor" method="body_entered"]
 [connection signal="body_exited" from="PlayerSensor" to="PlayerSensor" method="body_exited"]
+[connection signal="body_left" from="PlayerSensor" to="roots" method="_on_PlayerSensor_body_left"]
+[connection signal="body_left" from="PlayerSensor" to="plant_behind/Sprite" method="_on_PlayerSensor_body_left"]
+[connection signal="body_left" from="PlayerSensor" to="plant_front/Sprite" method="_on_PlayerSensor_body_left"]
+[connection signal="body_left" from="PlayerSensor" to="plant_front2/Sprite" method="_on_PlayerSensor_body_left"]
 [connection signal="body_left" from="PlayerSensor" to="PlayerSensor/player_exited_event_caller" method="call_event"]
 [connection signal="body_left" from="PlayerSensor" to="interact_hint_visibility_controller" method="hide"]

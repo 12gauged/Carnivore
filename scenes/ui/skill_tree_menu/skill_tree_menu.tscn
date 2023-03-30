@@ -1,9 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://ui/gui/squares/settings_square.png" type="Texture" id=1]
+[ext_resource path="res://ui/gui/icons/disagree_icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/ui/skill_tree_menu/skill_tree_menu.gd" type="Script" id=2]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=4]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/gui/icons/skills/hard_skin.png" type="Texture" id=6]
 [ext_resource path="res://ui/gui/icons/skills/healing_meal.png" type="Texture" id=7]
@@ -28,156 +27,144 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 2 )
-SkillButtonGroupPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer")
-BuyButtonPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button")
-SkillTitlePath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/skill_title")
-SkillDescriptionPath = NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/skill_description")
-PointsLabelPath = NodePath("HBoxContainer/VBoxContainer/points_label")
+SkillButtonGroupPath = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/GridContainer")
+BuyButtonPath = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button")
+SkillTitlePath = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/skill_title")
+SkillDescriptionPath = NodePath("VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/skill_description")
+PointsLabelPath = NodePath("VBoxContainer/points_label")
 SkillPathTextureNodes = {
-"bloodthirsty": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/EnergySaverToBloodthirsty") ],
-"body_armor": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/HealingMealToBodyArmor") ],
-"energy_saver": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/SurvivorToEnergySaver") ],
-"hard_skin": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathCurveTop"), NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathUp") ],
-"healing_meal": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/HardSkinToHealingMeal") ],
-"large_tongue": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/SpeedBoostToLargeTongue") ],
-"rooted": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/LargeTongueToRooted") ],
-"speed_boost": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathDown"), NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathCurveBottom") ],
-"survivor": [ NodePath("HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/Center/PathCenter") ]
+"bloodthirsty": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/EnergySaverToBloodthirsty") ],
+"body_armor": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/HealingMealToBodyArmor") ],
+"energy_saver": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/SurvivorToEnergySaver") ],
+"hard_skin": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathCurveTop"), NodePath("VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathUp") ],
+"healing_meal": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/HardSkinToHealingMeal") ],
+"large_tongue": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/SpeedBoostToLargeTongue") ],
+"rooted": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/LargeTongueToRooted") ],
+"speed_boost": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathDown"), NodePath("VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/PathCurveBottom") ],
+"survivor": [ NodePath("VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/Center/PathCenter") ]
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -59.5
-margin_bottom = 58.5
-mouse_filter = 2
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 34.0
-margin_right = 206.0
-margin_bottom = 120.0
-mouse_filter = 2
-alignment = 1
-
-[node name="points_label" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_right = 172.0
-margin_bottom = 10.0
-theme = ExtResource( 5 )
-text = "points: %s"
-align = 1
-
-[node name="square" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
-margin_top = 14.0
-margin_right = 172.0
-margin_bottom = 94.0
-mouse_filter = 2
-size_flags_horizontal = 5
-size_flags_vertical = 5
-texture = ExtResource( 1 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -80.0
-margin_top = -37.0
-margin_right = 83.0
-margin_bottom = 37.0
+margin_left = -100.0
+margin_top = -67.5
+margin_right = 100.0
+margin_bottom = 67.5
 mouse_filter = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer"]
-margin_right = 163.0
-margin_bottom = 74.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 200.0
+
+[node name="points_label" type="Label" parent="VBoxContainer"]
+margin_top = 4.0
+margin_right = 200.0
+margin_bottom = 14.0
+theme = ExtResource( 5 )
+text = "points: %s"
+align = 1
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 200.0
+margin_bottom = 105.0
+mouse_filter = 2
+size_flags_vertical = 3
+custom_constants/separation = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_top = 6.0
+margin_right = 200.0
+margin_bottom = 80.0
 mouse_filter = 2
 custom_constants/separation = 0
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_right = 79.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 116.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 79.0
-margin_bottom = 51.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 116.0
+margin_bottom = 24.0
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
-margin_right = 79.0
-
-[node name="skill_title" type="Label" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="skill_title" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 modulate = Color( 1, 1, 0, 1 )
-margin_top = 4.0
-margin_right = 79.0
-margin_bottom = 27.0
+margin_right = 116.0
+margin_bottom = 10.0
 theme = ExtResource( 5 )
 text = "ui.skill_menu.title"
 align = 1
 valign = 1
 autowrap = true
+uppercase = true
 
-[node name="skill_description" type="Label" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
-margin_top = 31.0
-margin_right = 79.0
-margin_bottom = 51.0
+[node name="skill_description" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 116.0
+margin_bottom = 24.0
 size_flags_vertical = 1
 theme = ExtResource( 5 )
 custom_constants/line_spacing = 0
 text = "ui.skill_menu.description"
+align = 1
 autowrap = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 51.0
-margin_right = 79.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 116.0
 margin_bottom = 74.0
 size_flags_vertical = 3
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
-margin_top = 1.0
-margin_right = 79.0
-margin_bottom = 23.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 28.0
+margin_right = 116.0
+margin_bottom = 50.0
 alignment = 1
 
-[node name="buy_button" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 28.0
-margin_right = 50.0
+[node name="buy_button" parent="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 47.0
+margin_right = 69.0
 texture_disabled = ExtResource( 17 )
 id = "buy_skill"
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 15 )
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_left = 79.0
-margin_right = 81.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 116.0
+margin_right = 118.0
 margin_bottom = 74.0
 custom_constants/margin_left = 2
 
-[node name="SkillPath" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_left = 81.0
-margin_right = 93.0
+[node name="SkillPath" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 118.0
+margin_right = 130.0
 margin_bottom = 74.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath"]
 margin_right = 12.0
 margin_bottom = 74.0
 custom_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_right = 12.0
 margin_bottom = 9.0
 custom_constants/margin_top = 9
 
-[node name="PathCurveTop" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
+[node name="PathCurveTop" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_top = 9.0
 margin_right = 12.0
 margin_bottom = 11.0
@@ -185,7 +172,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 18 )
 
-[node name="PathUp" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
+[node name="PathUp" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_top = 11.0
 margin_right = 12.0
 margin_bottom = 34.0
@@ -194,7 +181,7 @@ size_flags_vertical = 3
 texture = ExtResource( 20 )
 stretch_mode = 2
 
-[node name="Center" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
+[node name="Center" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_left = 3.0
 margin_top = 34.0
 margin_right = 9.0
@@ -204,7 +191,7 @@ size_flags_vertical = 4
 texture = ExtResource( 19 )
 stretch_mode = 3
 
-[node name="PathCenter" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/Center"]
+[node name="PathCenter" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer/Center"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -216,7 +203,7 @@ margin_bottom = 6.5
 texture = ExtResource( 21 )
 stretch_mode = 2
 
-[node name="PathDown" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
+[node name="PathDown" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_top = 40.0
 margin_right = 12.0
 margin_bottom = 63.0
@@ -225,7 +212,7 @@ size_flags_vertical = 3
 texture = ExtResource( 20 )
 stretch_mode = 2
 
-[node name="PathCurveBottom" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
+[node name="PathCurveBottom" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_top = 63.0
 margin_right = 12.0
 margin_bottom = 65.0
@@ -234,33 +221,34 @@ size_flags_vertical = 0
 texture = ExtResource( 18 )
 flip_v = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer/SkillPath/VBoxContainer"]
 margin_top = 65.0
 margin_right = 12.0
 margin_bottom = 74.0
 custom_constants/margin_top = 9
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer"]
-margin_left = 93.0
-margin_right = 163.0
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 130.0
+margin_right = 200.0
 margin_bottom = 74.0
 mouse_filter = 2
 custom_constants/hseparation = 0
 columns = 5
 
-[node name="hard_skin" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="hard_skin" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 toggle_mode = true
 id = "0"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/hard_skin/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/hard_skin/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 6 )
 
-[node name="HardSkinToHealingMeal" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
+[node name="HardSkinToHealingMeal" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 22.0
 margin_right = 24.0
 margin_bottom = 22.0
@@ -269,7 +257,7 @@ size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
-[node name="healing_meal" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="healing_meal" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 24.0
 margin_right = 46.0
 disabled = true
@@ -277,14 +265,15 @@ toggle_mode = true
 id = "1"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/healing_meal/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/healing_meal/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 7 )
 
-[node name="HealingMealToBodyArmor" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
+[node name="HealingMealToBodyArmor" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 46.0
 margin_right = 48.0
 margin_bottom = 22.0
@@ -293,7 +282,7 @@ size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
-[node name="body_armor" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="body_armor" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 48.0
 margin_right = 70.0
 disabled = true
@@ -301,28 +290,29 @@ toggle_mode = true
 id = "2"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/body_armor/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/body_armor/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 10 )
 
-[node name="survivor" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="survivor" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_top = 26.0
 margin_bottom = 48.0
 toggle_mode = true
 id = "3"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/survivor/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/survivor/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 13 )
 
-[node name="SurvivorToEnergySaver" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
+[node name="SurvivorToEnergySaver" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 22.0
 margin_top = 26.0
 margin_right = 24.0
@@ -332,7 +322,7 @@ size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
-[node name="energy_saver" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="energy_saver" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 24.0
 margin_top = 26.0
 margin_right = 46.0
@@ -342,14 +332,15 @@ toggle_mode = true
 id = "4"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/energy_saver/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/energy_saver/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 9 )
 
-[node name="EnergySaverToBloodthirsty" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
+[node name="EnergySaverToBloodthirsty" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 46.0
 margin_top = 26.0
 margin_right = 48.0
@@ -359,7 +350,7 @@ size_flags_vertical = 5
 texture = ExtResource( 21 )
 stretch_mode = 4
 
-[node name="bloodthirst" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="bloodthirsty" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 48.0
 margin_top = 26.0
 margin_right = 70.0
@@ -369,28 +360,29 @@ toggle_mode = true
 id = "5"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/bloodthirst/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/bloodthirsty/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 11 )
 
-[node name="speed_boost" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="speed_boost" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_top = 52.0
 margin_bottom = 74.0
 toggle_mode = true
 id = "6"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/speed_boost/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/speed_boost/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 12 )
 
-[node name="SpeedBoostToLargeTongue" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
+[node name="SpeedBoostToLargeTongue" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 22.0
 margin_top = 52.0
 margin_right = 24.0
@@ -398,7 +390,7 @@ margin_bottom = 74.0
 texture = ExtResource( 21 )
 stretch_mode = 4
 
-[node name="large_tongue" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="large_tongue" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 24.0
 margin_top = 52.0
 margin_right = 46.0
@@ -408,14 +400,15 @@ toggle_mode = true
 id = "7"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/large_tongue/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/large_tongue/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 8 )
 
-[node name="LargeTongueToRooted" type="TextureRect" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer"]
+[node name="LargeTongueToRooted" type="TextureRect" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 46.0
 margin_top = 52.0
 margin_right = 48.0
@@ -423,7 +416,7 @@ margin_bottom = 74.0
 texture = ExtResource( 21 )
 stretch_mode = 4
 
-[node name="rooted" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="rooted" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 48.0
 margin_top = 52.0
 margin_right = 70.0
@@ -433,54 +426,68 @@ toggle_mode = true
 id = "8"
 toggle = true
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/rooted/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/rooted/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 14 )
 
-[node name="home_button_holder" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 98.0
-margin_right = 172.0
-margin_bottom = 120.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 200.0
+margin_bottom = 80.0
+
+[node name="home_button_holder" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 109.0
+margin_right = 200.0
+margin_bottom = 135.0
 mouse_filter = 2
+size_flags_vertical = 0
 alignment = 1
 
-[node name="home_button" parent="HBoxContainer/VBoxContainer/home_button_holder" instance=ExtResource( 3 )]
-margin_left = 75.0
-margin_right = 97.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/home_button_holder"]
+margin_left = 89.0
+margin_right = 111.0
+margin_bottom = 26.0
+
+[node name="exit_button" parent="VBoxContainer/home_button_holder/VBoxContainer" instance=ExtResource( 3 )]
 size_flags_vertical = 4
 shortcut_in_tooltip = false
 shortcut = ExtResource( 16 )
 
-[node name="icon" parent="HBoxContainer/VBoxContainer/home_button_holder/home_button/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/home_button_holder/VBoxContainer/exit_button/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
-texture = ExtResource( 4 )
+texture = ExtResource( 1 )
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/hard_skin" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/healing_meal" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/body_armor" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/survivor" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/energy_saver" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/bloodthirst" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/speed_boost" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/large_tongue" to="." method="_on_skin_button_toggled"]
-[connection signal="button_toggled" from="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/rooted" to="." method="_on_skin_button_toggled"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/home_button_holder/home_button" to="." method="_on_home_button_pressed"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/home_button_holder/VBoxContainer"]
+margin_top = 26.0
+margin_right = 22.0
+margin_bottom = 26.0
 
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/hard_skin"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/healing_meal"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/body_armor"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/survivor"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/energy_saver"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/bloodthirst"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/speed_boost"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/large_tongue"]
-[editable path="HBoxContainer/VBoxContainer/square/VBoxContainer/HBoxContainer/GridContainer/rooted"]
-[editable path="HBoxContainer/VBoxContainer/home_button_holder/home_button"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/hard_skin" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/healing_meal" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/body_armor" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/survivor" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/energy_saver" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/bloodthirsty" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/speed_boost" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/large_tongue" to="." method="_on_skin_button_toggled"]
+[connection signal="button_toggled" from="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/rooted" to="." method="_on_skin_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/home_button_holder/VBoxContainer/exit_button" to="." method="_on_home_button_pressed"]
+
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/buy_button"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/hard_skin"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/healing_meal"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/body_armor"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/survivor"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/energy_saver"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/bloodthirsty"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/speed_boost"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/large_tongue"]
+[editable path="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer/rooted"]
+[editable path="VBoxContainer/home_button_holder/VBoxContainer/exit_button"]

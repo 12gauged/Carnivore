@@ -1,6 +1,7 @@
 extends Node
 
 const DEFAULT_BOUNTY = 20
+
 const default_player_data = {
 	"special_attack_tutorial_finished": false,
 	"bounty": DEFAULT_BOUNTY,
@@ -64,6 +65,7 @@ var total_level_player_bounty: int = 0
 var progress_safe: bool = false
 var skills_disabled: bool = false
 var can_pause: bool = false
+var bounty_target: int = 0
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 
@@ -71,8 +73,8 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	player_data.bounty = 69420
-	player_data.skill_points = 69
+	player_data.bounty = 200
+	#player_data.skill_points = 69
 #	player_data.skills.survivor = true
 #	player_data.skills.healing_meal = true
 #	player_data.skills.hard_skin = true
@@ -85,6 +87,18 @@ func override_player_data(value: Dictionary): player_data = value.duplicate(true
 
 func set_current_platform(platform_name: String): current_platform = platform_name
 func get_current_platform() -> String: return current_platform
+
+const STARTING_BOUNTY_TARGET = 200
+
+func set_player_bounty_target(value: int): bounty_target = value
+func get_player_bounty_target(): return bounty_target
+func update_player_bounty_target():
+	if player_data.bounty == DEFAULT_BOUNTY:
+		bounty_target = STARTING_BOUNTY_TARGET
+		return
+	game_data.player_data.skill_points += 1
+	set_player_bounty_target(bounty_target * 3)
+	
 
 func set_current_level(level_name: String): current_level = level_name
 func get_current_level() -> String: return current_level

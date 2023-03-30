@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ui/main_menu/screens/settings_screen/settings_screen.gd" type="Script" id=3]
-[ext_resource path="res://ui/gui/squares/settings_square.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/icons/language.png" type="Texture" id=5]
 [ext_resource path="res://ui/gui/icons/video_icon.png" type="Texture" id=6]
 [ext_resource path="res://ui/gui/icons/audio_icon.png" type="Texture" id=7]
@@ -41,30 +40,32 @@ __meta__ = {
 }
 
 [node name="main_container" type="VBoxContainer" parent="main_settings_container/elements"]
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = -63.0
-margin_bottom = 63.0
+margin_left = -88.0
+margin_top = -67.5
+margin_right = 88.0
+margin_bottom = 68.5
 custom_constants/separation = 0
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="main_settings_container/elements/main_container"]
-margin_right = 240.0
+[node name="MarginContainer4" type="MarginContainer" parent="main_settings_container/elements/main_container"]
+margin_right = 176.0
 margin_bottom = 2.0
-mouse_filter = 1
 custom_constants/margin_top = 2
 
 [node name="tab_buttons" type="HBoxContainer" parent="main_settings_container/elements/main_container"]
 margin_top = 2.0
-margin_right = 240.0
-margin_bottom = 22.0
+margin_right = 176.0
+margin_bottom = 24.0
 alignment = 1
 script = ExtResource( 13 )
 
 [node name="video_settings" parent="main_settings_container/elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 62.0
-margin_right = 82.0
+margin_left = 25.0
+margin_right = 47.0
 toggle_mode = true
 pressed = true
 id = "video"
@@ -77,8 +78,8 @@ margin_bottom = 18.0
 texture = ExtResource( 6 )
 
 [node name="audio_settings" parent="main_settings_container/elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 86.0
-margin_right = 106.0
+margin_left = 51.0
+margin_right = 73.0
 toggle_mode = true
 id = "audio"
 
@@ -90,8 +91,8 @@ margin_bottom = 18.0
 texture = ExtResource( 7 )
 
 [node name="language_settings" parent="main_settings_container/elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 110.0
-margin_right = 130.0
+margin_left = 77.0
+margin_right = 99.0
 toggle_mode = true
 id = "language"
 
@@ -103,8 +104,8 @@ margin_bottom = 18.0
 texture = ExtResource( 5 )
 
 [node name="control_settings" parent="main_settings_container/elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 134.0
-margin_right = 154.0
+margin_left = 103.0
+margin_right = 125.0
 toggle_mode = true
 id = "controls"
 
@@ -116,8 +117,8 @@ margin_bottom = 18.0
 texture = ExtResource( 14 )
 
 [node name="storage_settings" parent="main_settings_container/elements/main_container/tab_buttons" instance=ExtResource( 1 )]
-margin_left = 158.0
-margin_right = 178.0
+margin_left = 129.0
+margin_right = 151.0
 toggle_mode = true
 id = "storage"
 
@@ -129,80 +130,57 @@ margin_bottom = 18.0
 texture = ExtResource( 15 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="main_settings_container/elements/main_container"]
-margin_top = 22.0
-margin_right = 240.0
-margin_bottom = 24.0
-custom_constants/margin_top = 2
-
-[node name="visuals" type="HBoxContainer" parent="main_settings_container/elements/main_container"]
 margin_top = 24.0
-margin_right = 240.0
+margin_right = 176.0
+margin_bottom = 34.0
+custom_constants/margin_top = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="main_settings_container/elements/main_container"]
+margin_top = 34.0
+margin_right = 176.0
 margin_bottom = 104.0
-alignment = 1
-
-[node name="texture_container" type="VBoxContainer" parent="main_settings_container/elements/main_container/visuals"]
-margin_left = 34.0
-margin_right = 206.0
-margin_bottom = 80.0
-alignment = 1
-
-[node name="background" type="TextureRect" parent="main_settings_container/elements/main_container/visuals/texture_container"]
-margin_right = 172.0
-margin_bottom = 80.0
-texture = ExtResource( 4 )
-
-[node name="ScrollContainer" type="ScrollContainer" parent="main_settings_container/elements/main_container/visuals/texture_container/background"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_vertical = 3
 theme = ExtResource( 8 )
 scroll_horizontal_enabled = false
 
-[node name="tabs" type="HBoxContainer" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer"]
-margin_right = 168.0
-margin_bottom = 48.0
+[node name="tabs" type="HBoxContainer" parent="main_settings_container/elements/main_container/ScrollContainer"]
+margin_right = 176.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 alignment = 1
 script = ExtResource( 11 )
 
-[node name="ScrollBlock" type="Control" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs"]
-margin_left = 12.0
-margin_right = 12.0
-margin_bottom = 48.0
+[node name="VBoxContainer" type="VBoxContainer" parent="main_settings_container/elements/main_container/ScrollContainer/tabs"]
+margin_left = 18.0
+margin_right = 158.0
+margin_bottom = 52.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs"]
-margin_left = 16.0
-margin_right = 156.0
-margin_bottom = 48.0
-
-[node name="MarginContainer" type="MarginContainer" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer"]
 margin_right = 140.0
 
-[node name="video_tab" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 9 )]
+[node name="video_tab" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 9 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 4.0
 margin_right = 140.0
 margin_bottom = 48.0
 
-[node name="audio_tab" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 10 )]
+[node name="audio_tab" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 10 )]
 visible = false
 margin_top = 4.0
 margin_right = 130.0
-margin_bottom = 130.0
+margin_bottom = 144.0
 
-[node name="language_tab" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 12 )]
+[node name="language_tab" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 12 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 4.0
-margin_right = 80.0
-margin_bottom = 110.0
+margin_top = 52.0
+margin_right = 140.0
+margin_bottom = 158.0
 
-[node name="storage_tab" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 16 )]
+[node name="storage_tab" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 16 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -210,7 +188,7 @@ margin_top = 4.0
 margin_right = 80.0
 margin_bottom = 24.0
 
-[node name="desktop_controls_tab" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 17 )]
+[node name="desktop_controls_tab" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 17 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -218,7 +196,7 @@ margin_top = 4.0
 margin_right = 155.0
 margin_bottom = 24.0
 
-[node name="mobile_controls_tab" parent="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 18 )]
+[node name="mobile_controls_tab" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer" instance=ExtResource( 18 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -226,22 +204,27 @@ margin_top = 52.0
 margin_right = 140.0
 margin_bottom = 72.0
 
+[node name="ScrollBlock" type="Control" parent="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer"]
+margin_top = 52.0
+margin_right = 140.0
+margin_bottom = 52.0
+
 [node name="MarginContainer3" type="MarginContainer" parent="main_settings_container/elements/main_container"]
 margin_top = 104.0
-margin_right = 240.0
-margin_bottom = 106.0
-custom_constants/margin_bottom = 2
+margin_right = 176.0
+margin_bottom = 112.0
+custom_constants/margin_top = 8
 
 [node name="home_button_container" type="HBoxContainer" parent="main_settings_container/elements/main_container"]
-margin_top = 106.0
-margin_right = 240.0
-margin_bottom = 126.0
+margin_top = 112.0
+margin_right = 176.0
+margin_bottom = 134.0
 alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="main_settings_container/elements/main_container/home_button_container"]
-margin_left = 110.0
-margin_right = 130.0
-margin_bottom = 20.0
+margin_left = 77.0
+margin_right = 99.0
+margin_bottom = 22.0
 
 [node name="small_button" parent="main_settings_container/elements/main_container/home_button_container/CenterContainer" instance=ExtResource( 1 )]
 shortcut_in_tooltip = false
@@ -255,20 +238,26 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 2 )
 
+[node name="MarginContainer5" type="MarginContainer" parent="main_settings_container/elements/main_container"]
+margin_top = 134.0
+margin_right = 176.0
+margin_bottom = 136.0
+custom_constants/margin_top = 2
+
 [node name="mobile_layout_editor" parent="." instance=ExtResource( 19 )]
 visible = false
 
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/video_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/video_settings" to="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/video_settings" to="main_settings_container/elements/main_container/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/audio_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/audio_settings" to="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/audio_settings" to="main_settings_container/elements/main_container/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/language_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/language_settings" to="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/language_settings" to="main_settings_container/elements/main_container/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/control_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/control_settings" to="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/control_settings" to="main_settings_container/elements/main_container/ScrollContainer/tabs" method="_on_tab_button_pressed"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/storage_settings" to="main_settings_container/elements/main_container/tab_buttons" method="_on_tab_button_toggled"]
-[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/storage_settings" to="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs" method="_on_tab_button_pressed"]
-[connection signal="show_layout_editor" from="main_settings_container/elements/main_container/visuals/texture_container/background/ScrollContainer/tabs/VBoxContainer/mobile_controls_tab" to="." method="_on_show_mobile_layout_editor_request"]
+[connection signal="button_pressed" from="main_settings_container/elements/main_container/tab_buttons/storage_settings" to="main_settings_container/elements/main_container/ScrollContainer/tabs" method="_on_tab_button_pressed"]
+[connection signal="show_layout_editor" from="main_settings_container/elements/main_container/ScrollContainer/tabs/VBoxContainer/mobile_controls_tab" to="." method="_on_show_mobile_layout_editor_request"]
 [connection signal="button_pressed" from="main_settings_container/elements/main_container/home_button_container/CenterContainer/small_button" to="." method="_on_button_pressed"]
 [connection signal="exited_layout_editor" from="mobile_layout_editor" to="." method="_on_hide_mobile_layout_editor_request"]
 

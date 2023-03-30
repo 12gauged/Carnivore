@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/battle_progress_bar_over.png-d040a03c3259e379383fc4607dbbba71.stex"
+path="res://.import/skill_button_pressed.png-32b2f82ca31bf4ea7d03578b25d6235c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/hud/status_bars/battle_progress_bar/battle_progress_bar_over.png"
-dest_files=[ "res://.import/battle_progress_bar_over.png-d040a03c3259e379383fc4607dbbba71.stex" ]
+source_file="res://ui/gui/button/skill/skill_button_pressed.png"
+dest_files=[ "res://.import/skill_button_pressed.png-32b2f82ca31bf4ea7d03578b25d6235c.stex" ]
 
 [params]
 
