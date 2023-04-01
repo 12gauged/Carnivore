@@ -7,7 +7,7 @@ const default_player_data = {
 	"bounty": DEFAULT_BOUNTY,
 	"skill_points": 0,
 	"skills": {
-		"hard_skin": true,
+		"hard_skin": false,
 		"rooted": false,
 		"body_armor": false,
 		"speed_boost": false,
@@ -74,7 +74,8 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
 	player_data.bounty = 200
-	#player_data.skill_points = 69
+	#player_data.skills.speed_boost = false
+	player_data.skill_points = 69
 #	player_data.skills.survivor = true
 #	player_data.skills.healing_meal = true
 #	player_data.skills.hard_skin = true

@@ -44,7 +44,7 @@ func _ready():
 	
 	
 	## adds 20% of speed if you have the speed boost skill
-	MAX_SPEED = MAX_SPEED + 25.0 / float(MAX_SPEED) * 100.0 if game_data.player_data.skills.speed_boost else MAX_SPEED
+	MAX_SPEED = MAX_SPEED + 15.0 / float(MAX_SPEED) * 100.0 if game_data.player_data.skills.speed_boost else MAX_SPEED
 	DEFAULT_MAX_SPEED = MAX_SPEED
 	
 	# increases the time it takes for the energy to go down if you have the energy efficiency skill

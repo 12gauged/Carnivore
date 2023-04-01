@@ -7,6 +7,7 @@ signal exited_menu
 const DEFAULT_TITLE = "ui.skill_menu.title"
 const DEFAULT_DESCRIPTION = "ui.skill_menu.description"
 const DEFAULT_POINTS_TEXT = "ui.skill_menu.points"
+const DISABLED_BUTTON_COLOR = Color(0.5, 0.5, 0.5, 1.0)
 const DARK_RED = Color(0.6, 0.0, 0.0, 1.0)
 
 
@@ -111,9 +112,6 @@ func filter_texture_rect_nodes(NodeArray: Array):
 	
 func get_next_unlockable_skill(skill: String): return skill_progression[skill]
 func get_skill_button(skill: String): return SkillButtons[skill_keys.find(skill)]
-func unlock_skill(skill: String): 
-	if skill.empty(): return
-	get_skill_button(skill).enable()
 func check_skills():
 	for skill in game_data.player_data.skills:
 		if game_data.player_data.skills[skill]:
@@ -148,6 +146,8 @@ func close_menu():
 	SelectedButton = null
 	BuyButton.visible = false
 func open_menu():
+	if self.visible: return
+	
 	self.visible = true
 	game_data.can_pause= false
 	player_events.emit_signal("freeze_player")
@@ -190,14 +190,26 @@ func _on_skin_button_toggled(id, btn_pressed):
 	SelectedButton = SkillButtons[id]
 	SelectedButton.button_mask = 0
 	
+	if SelectedButton.modulate == DISABLED_BUTTON_COLOR:
+		BuyButton.visible = true
+		disable_buy_button()
+		return
+	
 	var skill_bought = game_data.get_player_data("skills")[skill_keys[id]]
 	BuyButton.visible = !skill_bought
 	BuyButton.modulate = Color.white if get_skill_points() > 0 else DARK_RED
 	BuyButton.disabled = get_skill_points() <= 0
 	
+func disable_buy_button():
+	BuyButton.modulate = DARK_RED
+	BuyButton.disabled = true
+	
 
 func _on_buy_button_pressed():
 	var chosen_skill = skill_keys[selected_button_id]
+	
+	if get_skill_button(chosen_skill).modulate == DISABLED_BUTTON_COLOR: return
+	
 	game_data.player_data.skills[chosen_skill] = true
 	set_skill_points(get_skill_points() - 1)
 	update_points_label()
@@ -212,3 +224,7 @@ func _on_buy_button_pressed():
 	
 	
 	print("skill_tree_menu.gd: buying: %s" % chosen_skill)
+	
+func unlock_skill(skill: String): 
+	if skill.empty(): return
+	get_skill_button(skill).modulate = Color.white

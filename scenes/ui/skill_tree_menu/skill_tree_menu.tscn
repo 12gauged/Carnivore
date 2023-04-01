@@ -258,9 +258,9 @@ texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="healing_meal" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 24.0
 margin_right = 46.0
-disabled = true
 toggle_mode = true
 id = "1"
 toggle = true
@@ -283,9 +283,9 @@ texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="body_armor" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 48.0
 margin_right = 70.0
-disabled = true
 toggle_mode = true
 id = "2"
 toggle = true
@@ -323,11 +323,11 @@ texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="energy_saver" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 24.0
 margin_top = 26.0
 margin_right = 46.0
 margin_bottom = 48.0
-disabled = true
 toggle_mode = true
 id = "4"
 toggle = true
@@ -351,11 +351,11 @@ texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="bloodthirsty" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 48.0
 margin_top = 26.0
 margin_right = 70.0
 margin_bottom = 48.0
-disabled = true
 toggle_mode = true
 id = "5"
 toggle = true
@@ -391,11 +391,11 @@ texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="large_tongue" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 24.0
 margin_top = 52.0
 margin_right = 46.0
 margin_bottom = 74.0
-disabled = true
 toggle_mode = true
 id = "7"
 toggle = true
@@ -417,11 +417,11 @@ texture = ExtResource( 21 )
 stretch_mode = 4
 
 [node name="rooted" parent="VBoxContainer/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 margin_left = 48.0
 margin_top = 52.0
 margin_right = 70.0
 margin_bottom = 74.0
-disabled = true
 toggle_mode = true
 id = "8"
 toggle = true

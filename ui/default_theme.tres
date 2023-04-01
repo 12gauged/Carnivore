@@ -1,10 +1,27 @@
-[gd_resource type="Theme" load_steps=13 format=2]
+[gd_resource type="Theme" load_steps=17 format=2]
 
 [ext_resource path="res://ui/gui/sliders/slider_vertical/slider_vertical_background.png" type="Texture" id=1]
 [ext_resource path="res://ui/gui/sliders/slider_normal/slider_normal_grabber.png" type="Texture" id=2]
 [ext_resource path="res://ui/gui/sliders/slider_normal/slider_normal_background.png" type="Texture" id=3]
 [ext_resource path="res://ui/gui/sliders/slider_normal/slider_normal_grabber_disabled.png" type="Texture" id=4]
+[ext_resource path="res://ui/gui/sliders/slider_horizontal/slider_horizontal_grabber_normal.png" type="Texture" id=5]
 [ext_resource path="res://ui/gui/sliders/slider_vertical/slider_vertical_grabber_normal.png" type="Texture" id=6]
+[ext_resource path="res://ui/gui/sliders/slider_horizontal/slider_horizontal_background.png" type="Texture" id=7]
+
+[sub_resource type="StyleBoxTexture" id=13]
+texture = ExtResource( 5 )
+region_rect = Rect2( 2, 0, 2, 10 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 1.0
+
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 76, 10 )
+margin_left = 3.0
+margin_right = 3.0
+margin_top = 1.0
+margin_bottom = 1.0
 
 [sub_resource type="StyleBoxTexture" id=9]
 
@@ -41,6 +58,10 @@ font_data = SubResource( 1 )
 
 [resource]
 default_font = SubResource( 2 )
+HScrollBar/styles/grabber = SubResource( 13 )
+HScrollBar/styles/grabber_highlight = SubResource( 13 )
+HScrollBar/styles/grabber_pressed = SubResource( 13 )
+HScrollBar/styles/scroll = SubResource( 14 )
 HSlider/icons/grabber = ExtResource( 2 )
 HSlider/icons/grabber_disabled = ExtResource( 4 )
 HSlider/icons/grabber_highlight = ExtResource( 2 )
