@@ -254,7 +254,7 @@ func apply_damage(damage: int):
 	camera_events.emit_signal("camera_shake_request", DAMAGE_CAMERA_SHAKE_DURATION, DAMAGE_CAMERA_SHAKE_INTENSITY)
 	
 func set_movement_direction(value: Vector2):
-	if get_state() in ["EAT", "DASH"]:
+	if get_state() == "EAT":
 		if value == Vector2.ZERO:
 			return
 	movement_direction = value
@@ -290,11 +290,10 @@ func _on_player_movement_direction_updated(value):
 	if get_state() == "EAT" or value == Vector2.ZERO: return
 	player_events.emit_signal("player_moving" if value != Vector2.ZERO else "player_not_moving")
 	
-func _on_player_frozen(): 
-	#velocity = Vector2.ZERO
+func _on_player_frozen():
 	set_state("IDLE")
 func _on_player_frozen_slow_motion(): FRICTION = DEFAULT_FRICTION * 0.145
-func _on_player_unfrozen(): 
+func _on_player_unfrozen():
 	FRICTION = DEFAULT_FRICTION
 
 

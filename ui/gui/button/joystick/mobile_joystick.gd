@@ -64,18 +64,19 @@ func set_joystick_position_from_drag_and_touch(event):
 			input_events.emit_signal(input_event, get_value())
 
 func set_joystick_position_from_drag(event):
-	if event is InputEventScreenDrag:
-		distance_from_pivot = get_distance_from_pivot(event.position)
-		if distance_from_pivot <= joystick_boundary * global_scale.x or event.get_index() == ongoing_drag:
-			set_global_position(event.position - button_radius)
-			set_joystick_position()
-			ongoing_drag = event.get_index()
-			
-			if get_button_position().length() > threshold:
-				emit_signal("joystick_pressed")
-				emit_signal("joystick_in_use")
-				input_events.emit_signal(input_event, get_value())
-				return
+	if not event is InputEventScreenDrag: return
+	
+	distance_from_pivot = get_distance_from_pivot(event.position)
+	if distance_from_pivot <= joystick_boundary * global_scale.x or event.get_index() == ongoing_drag:
+		set_global_position(event.position - button_radius)
+		set_joystick_position()
+		ongoing_drag = event.get_index()
+		
+		if get_button_position().length() > threshold:
+			emit_signal("joystick_pressed")
+			emit_signal("joystick_in_use")
+			input_events.emit_signal(input_event, get_value())
+			return
 
 
 func set_joystick_position() -> void:

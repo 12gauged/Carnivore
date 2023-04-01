@@ -157,9 +157,13 @@ func open_menu():
 	SkillDescription.text = DEFAULT_DESCRIPTION
 	PointsLabel.text = tr(DEFAULT_POINTS_TEXT) % str(get_skill_points())
 	
-func get_skill_visual_path(skill: String): return SkillPathTextureNodes[skill]
+func get_skill_visual_path(skill: String): 
+	if not skill in SkillPathTextureNodes: return null
+	return SkillPathTextureNodes[skill]
 func change_visual_path_color(skill: String, color: Color = Color.yellow):
-	for texture in get_skill_visual_path(skill):
+	var chosen_skill = get_skill_visual_path(skill)
+	if chosen_skill == null: return
+	for texture in chosen_skill:
 		get_node(texture).modulate = color
 func buy_skill(TargetButton):
 	TargetButton.modulate = Color.yellow

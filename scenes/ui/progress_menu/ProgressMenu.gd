@@ -34,9 +34,11 @@ func on_player_far_from_table(): player_near_table = false
 func open_menu():
 	if self.visible: return
 	self.visible = true
+	game_data.can_pause= false
 	emit_signal("opened_menu")
 func close_menu():
 	self.visible = false
+	game_data.can_pause = true
 	emit_signal("exited_menu")
 
 

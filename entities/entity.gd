@@ -155,14 +155,12 @@ func _on_damage_received(Hitbox: DetectionBox):
 	
 func freeze():
 	set_process(false)
-	set_process_input(false)
 	frozen = true
-	movement_direction = Vector2.ZERO
+	set_movement_direction(Vector2.ZERO)
 	emit_signal("frozen")
 	
 func unfreeze():
 	set_process(true)
-	set_process_input(true)
 	frozen = false
 	emit_signal("unfrozen")
 	
