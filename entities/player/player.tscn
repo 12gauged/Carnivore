@@ -415,7 +415,8 @@ offset = Vector2( 8, 0 )
 [node name="projectile_holder" type="Node2D" parent="part_player_projectile_handler"]
 position = Vector2( 0, -11 )
 
-[node name="projectile_texture" type="Sprite" parent="part_player_projectile_handler/projectile_holder"]
+[node name="projectile_texture" type="AnimatedSprite" parent="part_player_projectile_handler/projectile_holder"]
+playing = true
 
 [node name="projectile_spawner" parent="part_player_projectile_handler" instance=ExtResource( 13 )]
 entity_group = "projectiles"

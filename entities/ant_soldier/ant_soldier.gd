@@ -9,6 +9,7 @@ func _on_entity_spawned(InstancedEntity):
 	
 func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
+	if Hitbox.damage_type == "fire": set_on_fire()
 	var damage = Hitbox.damage
 	
 	if Hitbox.delete_on_hit: 

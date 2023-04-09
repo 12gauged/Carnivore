@@ -4,6 +4,7 @@ signal deleted
 
 const SPRITE_SIZE_Y = 21
 const PROGRESS_MODIFIER = 2
+const DARKER_GRAY = Color(0.15, 0.15, 0.15, 1.0)
 const DARK_GRAY = Color(0.25, 0.25, 0.25, 1.0)
 const GRAY = Color(0.5, 0.5, 0.5, 1.0)
 
@@ -20,7 +21,7 @@ var player_inside_area: bool = false
 
 func _ready():
 	FlagOverlay.region_rect.size.y = 0
-	AreaSprite.modulate =  DARK_GRAY
+	AreaSprite.modulate =  DARKER_GRAY
 	
 	
 	

@@ -8,7 +8,7 @@ signal show_hand_overlay
 signal hide_hand_overlay
 
 onready var ShotDelayTimer: Timer = $shot_delay_timer
-onready var ProjectileTexture: Sprite = $projectile_holder/projectile_texture
+onready var ProjectileTexture: AnimatedSprite = $projectile_holder/projectile_texture
 onready var ProjectileHolder: Node2D = $projectile_holder
 onready var ProjectileSpawner = $projectile_spawner
 
@@ -29,6 +29,8 @@ var projectile_kill_tracker: Dictionary = {}
 const DEFAULT_SPEED = 450
 const projectile_speeds: Dictionary = {
 	"stone_projectile": DEFAULT_SPEED,
+	"spear_projectile": DEFAULT_SPEED,
+	"fireball_projectile": DEFAULT_SPEED,
 	"healing_plant_seed": 0,
 }
 		
@@ -62,7 +64,9 @@ func shoot_projectile():
 	spawn_projectile()
 	set_projectile("")
 	
-func set_target_direction(value: Vector2): target_direction = value if value != Vector2.ZERO else Vector2.RIGHT
+func set_target_direction(value: Vector2): 
+	target_direction = value if value != Vector2.ZERO else Vector2.RIGHT
+	ProjectileTexture.flip_h = target_direction.x < 0.0
 func get_target_direction() -> Vector2: return target_direction
 	
 func set_projectile(type: String):
@@ -71,7 +75,7 @@ func set_projectile(type: String):
 	projectile_type = type
 	
 	var texture = resources.get_resource("sprites", projectile_type) if !projectile_type.empty() else null
-	ProjectileTexture.texture = texture
+	ProjectileTexture.frames = texture
 	
 	if projectile_type != "": 
 		emit_signal("projectile_collected")

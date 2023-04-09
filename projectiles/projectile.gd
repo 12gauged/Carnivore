@@ -1,6 +1,7 @@
 extends Node2D
 class_name Projectile
 
+signal collided_no_args()
 signal collided(hurtbox, projectile)
 signal deleted(projectile)
 
@@ -37,3 +38,4 @@ func _on_lifetime_timer_timeout():
 
 func _on_part_hitbox_hit_detected(Hurtbox): 
 	emit_signal("collided", Hurtbox, self)
+	emit_signal("collided_no_args")

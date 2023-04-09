@@ -15,8 +15,11 @@ var resources: Dictionary = {
 		
 		"meat_drop": preload("res://entities/drops/meat/meat.png"),
 		"stone_drop": preload("res://entities/drops/stone/stone_drop.png"),
+		"fireball_drop": preload("res://entities/drops/fireball/fireball_drop.png"),
 		
-		"stone_projectile": preload("res://projectiles/stone/stone_projectile.png"),
+		"stone_projectile": preload("res://projectiles/stone/stone_projectile_held.tres"),
+		"spear_projectile": preload("res://projectiles/spear/spear_projectile_held.tres"),
+		"fireball_projectile": preload("res://projectiles/fireball/fireball_projectile_held.tres"),
 		"pickup_particle": preload("res://particles/pickup/pickup_particle.png"),
 		
 		"mushroom_house0": preload("res://world/level1/houses/mushroom_house_short.png"),
@@ -68,11 +71,16 @@ var resources: Dictionary = {
 		
 		"stone_projectile": preload("res://projectiles/stone/stone_projectile.tscn"),
 		"spear_projectile": preload("res://projectiles/spear/spear_projectile.tscn"),
+		"spear_projectile_player": preload("res://projectiles/spear/spear_projectile_player.tscn"),
 		"fire_area": preload("res://projectiles/fire_area/fire_area.tscn"),
+		"fire_area_player": preload("res://projectiles/fire_area/fire_area_player.tscn"),
+		"fireball_projectile": preload("res://projectiles/fireball/fireball_projectile.tscn"),
 		
 		"saving_flag": preload("res://entities/saving_flag/saving_flag.tscn"),
 		
 		"stone_drop": preload("res://entities/drops/stone/stone_drop.tscn"),
+		"spear_drop": preload("res://entities/drops/spear/spear_drop.tscn"),
+		"fireball_drop": preload("res://entities/drops/fireball/fireball_drop.tscn"),
 		"meat_drop": preload("res://entities/drops/meat/meat.tscn")
 	},
 	"particles": {

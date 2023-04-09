@@ -17,9 +17,12 @@ export(int) var time_between_waves = 6
 
 onready var wave_start_delay: Timer = $wave_start_delay
 
+const WAVE_CAP: int = 15
+const MIN_WAVES: int = 10
 const MAX_DIFFICULTY: int = 16
 const MAX_HEAVY_ENEMY_SPAWN_CHANCE: int = 60
 const TUTORIAL_WAVES: int = 6
+const ENEMY_CAP: int = 15
 
 var arena_state: int = STOPPED
 enum {
@@ -62,10 +65,13 @@ func _ready():
 	game_data.current_arena_wave = 1
 	
 	var player_bounty: float = game_data.get_player_data("bounty")
-	difficulty = int(min(MAX_DIFFICULTY, ceil(player_bounty / 170.0 * int(player_bounty > 100))))
+	difficulty = int(min(MAX_DIFFICULTY, ceil(player_bounty / 500.0 * int(player_bounty > 100))))
 	number_of_waves += difficulty
 	
-	number_of_waves = min(number_of_waves, TUTORIAL_WAVES) if player_bounty == game_data.DEFAULT_BOUNTY else number_of_waves
+	number_of_waves = clamp(MIN_WAVES, number_of_waves, WAVE_CAP)
+	if player_bounty == game_data.DEFAULT_BOUNTY:
+		number_of_waves = TUTORIAL_WAVES
+	
 	
 	debug_log.dprint("\nnumber_of_waves: %s\ndifficulty: %s" % [number_of_waves, difficulty])
 	
@@ -90,7 +96,7 @@ func _process(_delta):
 func process_enemy_deaths():
 	if dead_enemies.empty(): return
 	enemy_kill_count += 1
-	if enemy_kill_count == enemies_per_wave:
+	if enemy_kill_count >= enemies_per_wave and toolbox.get_node_in_group("enemies").get_children().empty():
 		end_wave()
 	dead_enemies.pop_back()
 
@@ -108,6 +114,8 @@ func spawn_first_enemies():
 	last_max_enemy_number = max_enemy_number
 
 func spawn_new_enemy(count_enemy := true):
+	if enemy_kill_count >= enemies_per_wave: return
+	
 	toolbox.SystemRNG.randomize()
 	enemy_name = get_random_enemy()
 	
@@ -193,6 +201,7 @@ func end_wave():
 	
 	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = enemies_per_wave * 0.5
+	max_enemy_number = min(max_enemy_number, ENEMY_CAP)
 	if game_data.initial_player_bounty < game_data.DEFAULT_BOUNTY + 10:
 		enemies_per_wave = int(min(15.0, float(enemies_per_wave)))
 		max_enemy_number = int(min(2.0, float(max_enemy_number)))

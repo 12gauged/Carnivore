@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=2]
@@ -21,10 +21,26 @@
 [ext_resource path="res://particles/entity/entity_big_death_particle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sounds/entity/enemy/enemy_big_death.wav" type="AudioStream" id=20]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=21]
+[ext_resource path="res://projectiles/fire_area/fire_area_particle2.png" type="Texture" id=22]
+[ext_resource path="res://projectiles/fire_area/fire_area_particle3.png" type="Texture" id=23]
+[ext_resource path="res://projectiles/fire_area/fire_area_particle1.png" type="Texture" id=24]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 2.95636
 height = 8.08675
+
+[sub_resource type="AnimatedTexture" id=9]
+frames = 3
+fps = 8.0
+frame_0/texture = ExtResource( 24 )
+frame_1/texture = ExtResource( 22 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 23 )
+frame_2/delay_sec = 0.0
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.73913, 1 )
+colors = PoolColorArray( 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1 )
 
 [sub_resource type="CircleShape2D" id=6]
 radius = 7.0
@@ -291,6 +307,27 @@ rotation = 1.5795
 shape = SubResource( 5 )
 disabled = true
 
+[node name="fire_particles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, -4 )
+emitting = false
+amount = 2
+lifetime = 0.6
+preprocess = 20.0
+explosiveness = 0.1
+lifetime_randomness = 0.1
+texture = SubResource( 9 )
+emission_shape = 2
+emission_rect_extents = Vector2( 8, 8 )
+gravity = Vector2( 0, 0 )
+color = Color( 1, 0.937255, 0, 1 )
+color_ramp = SubResource( 10 )
+
+[node name="duration_timer" type="Timer" parent="fire_particles"]
+one_shot = true
+
+[node name="damage_delay" type="Timer" parent="fire_particles"]
+one_shot = true
+
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
 TAGS = [ "ENEMY" ]
 IGNORE_TAGS = [ "FROG", "ENEMY_PROJECTILE" ]
@@ -313,7 +350,7 @@ rotation = 1.5708
 shape = SubResource( 7 )
 
 [node name="disable_timer" type="Timer" parent="part_hitbox"]
-wait_time = 0.025
+wait_time = 0.05
 one_shot = true
 script = ExtResource( 18 )
 
@@ -396,6 +433,7 @@ particle_id = "bounty_indicator"
 [connection signal="self_give" from="." to="part_state_handler/JUMP/comp_movement_jump" method="set_owner"]
 [connection signal="state_changed" from="." to="part_state_handler" method="_on_state_changed"]
 [connection signal="state_changed" from="." to="part_state_anim_handler" method="set_state"]
+[connection signal="timeout" from="fire_particles/duration_timer" to="." method="on_fire_particles_duration_timer_out"]
 [connection signal="hit_detected" from="part_hurtbox" to="." method="_on_damage_received"]
 [connection signal="timeout" from="part_hitbox/disable_timer" to="part_hitbox" method="_disable_request"]
 [connection signal="go_to_next_state_request" from="part_state_handler" to="." method="go_to_next_state"]

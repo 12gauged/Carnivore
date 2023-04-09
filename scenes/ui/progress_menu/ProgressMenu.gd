@@ -35,10 +35,12 @@ func open_menu():
 	if self.visible: return
 	self.visible = true
 	game_data.can_pause= false
+	player_events.emit_signal("freeze_player")
 	emit_signal("opened_menu")
 func close_menu():
 	self.visible = false
 	game_data.can_pause = true
+	player_events.emit_signal("unfreeze_player")
 	emit_signal("exited_menu")
 
 

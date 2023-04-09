@@ -3,6 +3,7 @@ extends DetectionBox
 signal hit_detected(Hurtbox)
 
 export(int) var damage
+export(String, "normal", "fire") var damage_type
 export(bool) var override_invincibility = false
 export(bool) var continuous_hits = false
 export(bool) var delete_on_hit = true
@@ -23,6 +24,7 @@ func _physics_process(_delta):
 	if hurtboxes.empty(): return
 	if time_counter >= hit_delay:
 		for Hurtbox in hurtboxes:
+			if !is_area_valid(Hurtbox): continue
 			Hurtbox.emit_signal("hit_detected", self)
 			time_counter = 0
 		return
