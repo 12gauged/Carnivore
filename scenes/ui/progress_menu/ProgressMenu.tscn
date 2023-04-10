@@ -30,161 +30,200 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 7.0
+margin_top = 9.0
 margin_right = 176.0
-margin_bottom = 17.0
+margin_bottom = 19.0
 theme = ExtResource( 1 )
 text = "ui.progress"
 align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 17.0
+margin_top = 19.0
 margin_right = 176.0
-margin_bottom = 27.0
+margin_bottom = 29.0
 custom_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 27.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 29.0
 margin_right = 176.0
-margin_bottom = 67.0
+margin_bottom = 89.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_top = 18.0
+margin_right = 86.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "description
+description"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 90.0
+margin_right = 176.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 0, 40 )
 mouse_filter = 1
 size_flags_horizontal = 3
 theme = ExtResource( 1 )
-scroll_vertical_enabled = false
+scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
-margin_right = 296.0
-margin_bottom = 30.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer"]
+margin_right = 76.0
+margin_bottom = 286.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 4.0
-margin_right = 296.0
-margin_bottom = 26.0
-alignment = 1
-
-[node name="enemy_icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+[node name="enemy_icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_left = 27.0
+margin_right = 49.0
 mouse_filter = 1
+size_flags_horizontal = 4
 
-[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 3 )
 
-[node name="skill_button" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 26.0
-margin_right = 48.0
-margin_bottom = 22.0
+[node name="skill_button" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_left = 27.0
+margin_top = 26.0
+margin_right = 49.0
+margin_bottom = 48.0
 mouse_filter = 1
+size_flags_horizontal = 4
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 8 )
 
-[node name="skill_button5" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 52.0
-margin_right = 74.0
-margin_bottom = 22.0
+[node name="skill_button5" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_left = 27.0
+margin_top = 52.0
+margin_right = 49.0
+margin_bottom = 74.0
 mouse_filter = 1
+size_flags_horizontal = 4
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 8 )
 
-[node name="enemy_icon2" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 78.0
-margin_right = 100.0
+[node name="enemy_icon2" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_left = 27.0
+margin_top = 78.0
+margin_right = 49.0
+margin_bottom = 100.0
 mouse_filter = 1
+size_flags_horizontal = 4
 
-[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon2/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon2/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 3 )
 
-[node name="skill_button2" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 104.0
-margin_right = 126.0
-margin_bottom = 22.0
+[node name="skill_button2" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_left = 27.0
+margin_top = 104.0
+margin_right = 49.0
+margin_bottom = 126.0
 mouse_filter = 1
+size_flags_horizontal = 4
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 8 )
 
-[node name="skill_button6" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 130.0
-margin_right = 152.0
-margin_bottom = 22.0
+[node name="skill_button6" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_left = 27.0
+margin_top = 130.0
+margin_right = 49.0
+margin_bottom = 152.0
 mouse_filter = 1
+size_flags_horizontal = 4
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 8 )
 
-[node name="enemy_icon3" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 156.0
-margin_right = 178.0
+[node name="enemy_icon3" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_left = 27.0
+margin_top = 156.0
+margin_right = 49.0
+margin_bottom = 178.0
 mouse_filter = 1
+size_flags_horizontal = 4
 
-[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon3/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon3/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 3 )
 
-[node name="skill_button3" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 182.0
-margin_right = 204.0
-margin_bottom = 22.0
+[node name="skill_button3" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_left = 27.0
+margin_top = 182.0
+margin_right = 49.0
+margin_bottom = 204.0
 mouse_filter = 1
+size_flags_horizontal = 4
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 8 )
 
-[node name="skill_button7" type="TextureButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 208.0
-margin_right = 230.0
-margin_bottom = 22.0
+[node name="skill_button7" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_left = 27.0
+margin_top = 208.0
+margin_right = 49.0
+margin_bottom = 230.0
 mouse_filter = 1
+size_flags_horizontal = 4
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 8 )
 
-[node name="enemy_icon4" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 234.0
-margin_right = 256.0
+[node name="enemy_icon4" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_left = 27.0
+margin_top = 234.0
+margin_right = 49.0
+margin_bottom = 256.0
 mouse_filter = 1
+size_flags_horizontal = 4
 
-[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon4/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon4/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 3 )
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 260.0
-margin_right = 270.0
-margin_bottom = 22.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_top = 260.0
+margin_right = 76.0
+margin_bottom = 260.0
 mouse_filter = 2
 custom_constants/margin_right = 10
 
-[node name="exit_icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 274.0
-margin_right = 296.0
+[node name="exit_icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_left = 27.0
+margin_top = 264.0
+margin_right = 49.0
+margin_bottom = 286.0
 mouse_filter = 1
+size_flags_horizontal = 4
 
-[node name="icon" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/exit_icon/center_container" index="0"]
+[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/exit_icon/center_container" index="0"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 18.0
@@ -192,30 +231,21 @@ margin_bottom = 18.0
 texture = ExtResource( 4 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 67.0
+margin_top = 89.0
 margin_right = 176.0
-margin_bottom = 72.0
+margin_bottom = 94.0
 custom_constants/margin_bottom = 5
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
-margin_top = 72.0
-margin_right = 176.0
-margin_bottom = 95.0
-theme = ExtResource( 1 )
-text = "description
-description"
-align = 1
-
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 95.0
+margin_top = 94.0
 margin_right = 176.0
-margin_bottom = 105.0
+margin_bottom = 104.0
 custom_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 105.0
+margin_top = 104.0
 margin_right = 176.0
-margin_bottom = 127.0
+margin_bottom = 126.0
 alignment = 1
 
 [node name="exit_button" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
@@ -231,9 +261,9 @@ texture = ExtResource( 5 )
 
 [connection signal="button_pressed" from="VBoxContainer/HBoxContainer/exit_button" to="." method="_on_exit_button_button_pressed"]
 
-[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon"]
-[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon2"]
-[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon3"]
-[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/enemy_icon4"]
-[editable path="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/exit_icon"]
+[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon"]
+[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon2"]
+[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon3"]
+[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon4"]
+[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/exit_icon"]
 [editable path="VBoxContainer/HBoxContainer/exit_button"]

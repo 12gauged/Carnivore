@@ -846,7 +846,7 @@ enemy_spawn_data = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ), ExtRe
 number_of_waves = 8
 number_of_extra_waves_per_gen = 4
 enemies_per_wave = 3
-time_between_waves = 3
+time_between_waves = 2
 
 [node name="spawners" type="Node2D" parent="objects/part_arena"]
 position = Vector2( 0, -16 )
