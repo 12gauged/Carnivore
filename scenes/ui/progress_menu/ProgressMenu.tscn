@@ -1,14 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/gui/icons/enemy_icon.png" type="Texture" id=3]
-[ext_resource path="res://ui/gui/icons/exit_icon.png" type="Texture" id=4]
 [ext_resource path="res://ui/gui/icons/disagree_icon.png" type="Texture" id=5]
-[ext_resource path="res://ui/gui/button/skill/skill_button_pressed.png" type="Texture" id=6]
-[ext_resource path="res://ui/gui/button/skill/skill_button_normal.png" type="Texture" id=7]
-[ext_resource path="res://ui/gui/button/skill/skill_button_disabled.png" type="Texture" id=8]
-[ext_resource path="res://ui/gui/button/skill/skill_button_hover.png" type="Texture" id=9]
 [ext_resource path="res://scenes/ui/progress_menu/ProgressMenu.gd" type="Script" id=10]
 
 [node name="ProgressMenu" type="Control"]
@@ -30,222 +24,195 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 9.0
 margin_right = 176.0
-margin_bottom = 19.0
+margin_bottom = 10.0
 theme = ExtResource( 1 )
 text = "ui.progress"
 align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 19.0
+margin_top = 10.0
 margin_right = 176.0
-margin_bottom = 29.0
+margin_bottom = 20.0
 custom_constants/margin_bottom = 10
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 29.0
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 20.0
 margin_right = 176.0
-margin_bottom = 89.0
-rect_min_size = Vector2( 0, 60 )
+margin_bottom = 103.0
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="ProgressSteps" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 166.0
+margin_bottom = 148.0
 size_flags_horizontal = 3
+
+[node name="ProgressStep" type="PanelContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps"]
+margin_right = 166.0
+margin_bottom = 34.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 164.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
 alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2"]
-margin_top = 18.0
-margin_right = 86.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep/VBoxContainer"]
+margin_right = 162.0
+margin_bottom = 10.0
+size_flags_vertical = 1
 theme = ExtResource( 1 )
-text = "description
-description"
+text = "title"
 align = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 90.0
-margin_right = 176.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 0, 40 )
-mouse_filter = 1
-size_flags_horizontal = 3
+[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep/VBoxContainer"]
+margin_top = 10.0
+margin_right = 162.0
+margin_bottom = 20.0
 theme = ExtResource( 1 )
-scroll_horizontal_enabled = false
+text = "what you get"
+align = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer"]
-margin_right = 76.0
-margin_bottom = 286.0
+[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep/VBoxContainer"]
+margin_top = 20.0
+margin_right = 162.0
+margin_bottom = 30.0
+theme = ExtResource( 1 )
+text = "status"
+align = 1
+
+[node name="ProgressStep2" type="PanelContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps"]
+margin_top = 38.0
+margin_right = 166.0
+margin_bottom = 72.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 164.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+custom_constants/separation = 0
 alignment = 1
 
-[node name="enemy_icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_left = 27.0
-margin_right = 49.0
-mouse_filter = 1
-size_flags_horizontal = 4
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep2/VBoxContainer"]
+margin_right = 162.0
+margin_bottom = 10.0
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+text = "title"
+align = 1
 
-[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon/center_container" index="0"]
+[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep2/VBoxContainer"]
+margin_top = 10.0
+margin_right = 162.0
+margin_bottom = 20.0
+theme = ExtResource( 1 )
+text = "what you get"
+align = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep2/VBoxContainer"]
+margin_top = 20.0
+margin_right = 162.0
+margin_bottom = 30.0
+theme = ExtResource( 1 )
+text = "status"
+align = 1
+
+[node name="ProgressStep3" type="PanelContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps"]
+margin_top = 76.0
+margin_right = 166.0
+margin_bottom = 110.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep3"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 3 )
+margin_right = 164.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+alignment = 1
 
-[node name="skill_button" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
-margin_left = 27.0
-margin_top = 26.0
-margin_right = 49.0
-margin_bottom = 48.0
-mouse_filter = 1
-size_flags_horizontal = 4
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 6 )
-texture_hover = ExtResource( 9 )
-texture_disabled = ExtResource( 8 )
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep3/VBoxContainer"]
+margin_right = 162.0
+margin_bottom = 10.0
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+text = "title"
+align = 1
 
-[node name="skill_button5" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
-margin_left = 27.0
-margin_top = 52.0
-margin_right = 49.0
-margin_bottom = 74.0
-mouse_filter = 1
-size_flags_horizontal = 4
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 6 )
-texture_hover = ExtResource( 9 )
-texture_disabled = ExtResource( 8 )
+[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep3/VBoxContainer"]
+margin_top = 10.0
+margin_right = 162.0
+margin_bottom = 20.0
+theme = ExtResource( 1 )
+text = "what you get"
+align = 1
 
-[node name="enemy_icon2" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_left = 27.0
-margin_top = 78.0
-margin_right = 49.0
-margin_bottom = 100.0
-mouse_filter = 1
-size_flags_horizontal = 4
+[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep3/VBoxContainer"]
+margin_top = 20.0
+margin_right = 162.0
+margin_bottom = 30.0
+theme = ExtResource( 1 )
+text = "status"
+align = 1
 
-[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon2/center_container" index="0"]
+[node name="ProgressStep4" type="PanelContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps"]
+margin_top = 114.0
+margin_right = 166.0
+margin_bottom = 148.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep4"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 3 )
+margin_right = 164.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+alignment = 1
 
-[node name="skill_button2" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
-margin_left = 27.0
-margin_top = 104.0
-margin_right = 49.0
-margin_bottom = 126.0
-mouse_filter = 1
-size_flags_horizontal = 4
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 6 )
-texture_hover = ExtResource( 9 )
-texture_disabled = ExtResource( 8 )
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep4/VBoxContainer"]
+margin_right = 162.0
+margin_bottom = 10.0
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+text = "title"
+align = 1
 
-[node name="skill_button6" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
-margin_left = 27.0
-margin_top = 130.0
-margin_right = 49.0
-margin_bottom = 152.0
-mouse_filter = 1
-size_flags_horizontal = 4
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 6 )
-texture_hover = ExtResource( 9 )
-texture_disabled = ExtResource( 8 )
+[node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep4/VBoxContainer"]
+margin_top = 10.0
+margin_right = 162.0
+margin_bottom = 20.0
+theme = ExtResource( 1 )
+text = "what you get"
+align = 1
 
-[node name="enemy_icon3" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_left = 27.0
-margin_top = 156.0
-margin_right = 49.0
-margin_bottom = 178.0
-mouse_filter = 1
-size_flags_horizontal = 4
-
-[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon3/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 3 )
-
-[node name="skill_button3" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
-margin_left = 27.0
-margin_top = 182.0
-margin_right = 49.0
-margin_bottom = 204.0
-mouse_filter = 1
-size_flags_horizontal = 4
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 6 )
-texture_hover = ExtResource( 9 )
-texture_disabled = ExtResource( 8 )
-
-[node name="skill_button7" type="TextureButton" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
-margin_left = 27.0
-margin_top = 208.0
-margin_right = 49.0
-margin_bottom = 230.0
-mouse_filter = 1
-size_flags_horizontal = 4
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 6 )
-texture_hover = ExtResource( 9 )
-texture_disabled = ExtResource( 8 )
-
-[node name="enemy_icon4" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_left = 27.0
-margin_top = 234.0
-margin_right = 49.0
-margin_bottom = 256.0
-mouse_filter = 1
-size_flags_horizontal = 4
-
-[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon4/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 3 )
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer"]
-margin_top = 260.0
-margin_right = 76.0
-margin_bottom = 260.0
-mouse_filter = 2
-custom_constants/margin_right = 10
-
-[node name="exit_icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_left = 27.0
-margin_top = 264.0
-margin_right = 49.0
-margin_bottom = 286.0
-mouse_filter = 1
-size_flags_horizontal = 4
-
-[node name="icon" parent="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/exit_icon/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 4 )
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 89.0
-margin_right = 176.0
-margin_bottom = 94.0
-custom_constants/margin_bottom = 5
+[node name="Label3" type="Label" parent="VBoxContainer/ScrollContainer/ProgressSteps/ProgressStep4/VBoxContainer"]
+margin_top = 20.0
+margin_right = 162.0
+margin_bottom = 30.0
+theme = ExtResource( 1 )
+text = "status"
+align = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 94.0
+margin_top = 103.0
 margin_right = 176.0
-margin_bottom = 104.0
+margin_bottom = 113.0
 custom_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 104.0
+margin_top = 113.0
 margin_right = 176.0
-margin_bottom = 126.0
+margin_bottom = 135.0
 alignment = 1
 
 [node name="exit_button" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
@@ -261,9 +228,4 @@ texture = ExtResource( 5 )
 
 [connection signal="button_pressed" from="VBoxContainer/HBoxContainer/exit_button" to="." method="_on_exit_button_button_pressed"]
 
-[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon"]
-[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon2"]
-[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon3"]
-[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/enemy_icon4"]
-[editable path="VBoxContainer/HBoxContainer2/ScrollContainer/VBoxContainer/exit_icon"]
 [editable path="VBoxContainer/HBoxContainer/exit_button"]
