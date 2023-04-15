@@ -18,7 +18,7 @@ var resources: Dictionary = {
 		"fireball_drop": preload("res://entities/drops/fireball/fireball_drop.png"),
 		
 		"stone_projectile": preload("res://projectiles/stone/stone_projectile_held.tres"),
-		"spear_projectile": preload("res://projectiles/spear/spear_projectile_held.tres"),
+		"spear_projectile_player": preload("res://projectiles/spear/spear_projectile_held.tres"),
 		"fireball_projectile": preload("res://projectiles/fireball/fireball_projectile_held.tres"),
 		"pickup_particle": preload("res://particles/pickup/pickup_particle.png"),
 		

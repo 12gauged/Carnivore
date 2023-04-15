@@ -17,6 +17,7 @@ texture = ExtResource( 2 )
 
 [node name="part_hitbox" parent="." instance=ExtResource( 1 )]
 damage = 2
+damage_type = "normal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hitbox"]
 shape = SubResource( 1 )

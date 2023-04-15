@@ -66,6 +66,8 @@ ui.skill_menu.title.large_tongue,large_tongue,língua grande,untranslated,untran
 ui.skill_menu.description.large_tongue,allows you to eat meat from afar,te permite comer carne de longe,untranslated,untranslated
 ui.skill_menu.title.rooted,rooted,enraizado,untranslated,untranslated
 ui.skill_menu.description.rooted,slowly regenerates your energy while standing still,regenera lentamente sua energia quando parado,untranslated,untranslated
+ui.progress_menu.title,progress,progresso,untranslated,untranslated
+ui.progress_menu.bounty,current bounty: %s,recompensa atual: %s,untranslated,untranslated
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated
@@ -79,3 +81,6 @@ hud.plant_caught,the plant has been caught,a planta foi capturada,untranslated,u
 hud.arena_ended,enough!,já chega!,untranslated,untranslated
 hud.defend_to_save,defend!,defenda!,untranslated,untranslated
 hud.saved,saved!,salvo!,untranslated,untranslated
+enemy.frog,frog,sapo,untranslated,untranslated
+enemy.fire_ant,fire-ant,formiga-de-fogo,untranslated,untranslated
+enemy.ant_soldier,soldier-ant,formiga-soldado,untranslated,untranslated

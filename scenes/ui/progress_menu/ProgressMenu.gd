@@ -5,6 +5,12 @@ signal opened_menu
 signal exited_menu
 
 
+const DEFAULT_BOUNTY_LABEL_TEXT = "ui.progress_menu.bounty"
+
+
+onready var BountyLabel = $VBoxContainer/BountyLabel
+
+
 
 var player_near_table: bool = false
 
@@ -34,6 +40,7 @@ func on_player_far_from_table(): player_near_table = false
 func open_menu():
 	if self.visible: return
 	self.visible = true
+	BountyLabel.text = tr(DEFAULT_BOUNTY_LABEL_TEXT) % str(game_data.get_player_data("bounty"))
 	game_data.can_pause= false
 	player_events.emit_signal("freeze_player")
 	emit_signal("opened_menu")

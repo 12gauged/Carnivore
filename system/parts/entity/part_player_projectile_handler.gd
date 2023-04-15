@@ -29,7 +29,7 @@ var projectile_kill_tracker: Dictionary = {}
 const DEFAULT_SPEED = 450
 const projectile_speeds: Dictionary = {
 	"stone_projectile": DEFAULT_SPEED,
-	"spear_projectile": DEFAULT_SPEED,
+	"spear_projectile_player": DEFAULT_SPEED,
 	"fireball_projectile": DEFAULT_SPEED,
 	"healing_plant_seed": 0,
 }
@@ -82,6 +82,7 @@ func set_projectile(type: String):
 		emit_signal("add_tag_request", "HOLDING_PROJECTILE")
 
 func spawn_projectile():
+	print(projectile_type)
 	ProjectileSpawner.entity_name = projectile_type
 	ProjectileSpawner.spawn_entity()
 

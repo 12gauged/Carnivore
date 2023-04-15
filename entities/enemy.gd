@@ -3,8 +3,8 @@ class_name Enemy
 
 export(int) var bounty_value = 5
 
-const FIRE_DURATION: float = 2.5
-const FIRE_DAMAGE_DELAY: float = 1.0
+const FIRE_DURATION: float = 3.0
+const FIRE_DAMAGE_DELAY: float = 0.6
 
 onready var FireParticles: CPUParticles2D = $fire_particles
 onready var FireParticlesDurationTimer: Timer = $fire_particles/duration_timer
@@ -31,7 +31,7 @@ func fire_damage():
 	if !on_fire: return
 	if !FireDamageDelay.is_stopped(): return
 	FireDamageDelay.start(FIRE_DAMAGE_DELAY)
-	apply_damage(1)
+	apply_damage(2)
 	
 	
 func _on_deleted():
@@ -54,6 +54,7 @@ func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
 	if Hitbox.damage_type == "fire": set_on_fire()
 	
+	print("enemy.gd: damage: %s" % Hitbox.damage)
 	var damage = Hitbox.damage
 	apply_damage(damage)
 

@@ -7,7 +7,7 @@
 [ext_resource path="res://ui/gui/sliders/slider_horizontal/slider_horizontal_grabber_normal.png" type="Texture" id=5]
 [ext_resource path="res://ui/gui/sliders/slider_vertical/slider_vertical_grabber_normal.png" type="Texture" id=6]
 [ext_resource path="res://ui/gui/sliders/slider_horizontal/slider_horizontal_background.png" type="Texture" id=7]
-[ext_resource path="res://ui/gui/squares/settings_square.png" type="Texture" id=8]
+[ext_resource path="res://ui/gui/squares/square_template.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxTexture" id=13]
 texture = ExtResource( 5 )
@@ -34,11 +34,11 @@ region_rect = Rect2( 0, 0, 104, 8 )
 
 [sub_resource type="StyleBoxTexture" id=15]
 texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 172, 80 )
-margin_left = 2.0
-margin_right = 2.0
-margin_top = 2.0
-margin_bottom = 2.0
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 3.0
+margin_right = 3.0
+margin_top = 3.0
+margin_bottom = 3.0
 
 [sub_resource type="StyleBoxTexture" id=11]
 texture = ExtResource( 6 )
@@ -51,6 +51,8 @@ margin_bottom = 2.0
 [sub_resource type="StyleBoxTexture" id=12]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 10, 76 )
+margin_left = 2.0
+margin_right = 2.0
 margin_top = 3.0
 margin_bottom = 3.0
 
