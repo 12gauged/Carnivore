@@ -68,6 +68,9 @@ ui.skill_menu.title.rooted,rooted,enraizado,untranslated,untranslated
 ui.skill_menu.description.rooted,slowly regenerates your energy while standing still,regenera lentamente sua energia quando parado,untranslated,untranslated
 ui.progress_menu.title,progress,progresso,untranslated,untranslated
 ui.progress_menu.bounty,current bounty: %s,recompensa atual: %s,untranslated,untranslated
+ui.progress_menu.new_enemy,new enemy,novo inimigo,untranslated,untranslated
+ui.progress_menu.freedom,freedom!,liberdade!,untranslated,untranslated
+ui.progress_menu.exit,leave this place,saia desse lugar,untranslated,untranslated
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated

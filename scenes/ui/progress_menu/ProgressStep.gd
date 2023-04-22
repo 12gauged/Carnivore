@@ -12,10 +12,12 @@ enum STATES {
 
 
 export(STATES) var state = STATES.LOCKED setget set_state
+export(String) var type = "TypeLabel"
 export(String) var title = "TitleLabel"
 export(Resource) var EnemyData
+export(int) var NeededBounty = 0
 
-
+onready var TypeLabel = $VBoxContainer/Type
 onready var TitleLabel = $VBoxContainer/Title
 onready var CompletionLabel = $VBoxContainer/Completion
 
@@ -29,10 +31,13 @@ var current_bounty: int
 
 
 func _ready():
+	set_type(type)
 	set_title(title)
 	
-	if EnemyData == null: return
-	set_needed_bounty(EnemyData.min_bounty)
+	if EnemyData != null:
+		set_needed_bounty(EnemyData.min_bounty)
+	else:
+		set_needed_bounty(NeededBounty)
 	set_current_bounty(game_data.get_player_data("bounty"))
 	
 	if current_bounty >= needed_bounty:
@@ -45,6 +50,9 @@ func _ready():
 
 
 
+func set_type(value: String):
+	TypeLabel.text = value
+	type = value
 func set_title(value: String):
 	TitleLabel.text = value
 	title = value

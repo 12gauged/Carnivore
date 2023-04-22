@@ -516,7 +516,7 @@ position = Vector2( 200, 20 )
 position = Vector2( 185, 20 )
 
 [node name="table" parent="objects" instance=ExtResource( 14 )]
-position = Vector2( 53, 15 )
+position = Vector2( 56, 15 )
 
 [node name="vines" type="Node2D" parent="objects"]
 
