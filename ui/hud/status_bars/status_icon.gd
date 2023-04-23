@@ -10,6 +10,7 @@ onready var last_value: int = initial_value
 func _ready():
 	# warning-ignore:return_value_discarded
 	player_events.connect("status_value_update", self, "_on_player_status_value_update")
+	hide()
 
 
 func play_empty_anim(): 

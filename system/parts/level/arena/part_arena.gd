@@ -68,7 +68,7 @@ func _ready():
 	difficulty = int(min(MAX_DIFFICULTY, ceil(player_bounty / 500.0 * int(player_bounty > 100))))
 	number_of_waves += difficulty
 	
-	number_of_waves = clamp(MIN_WAVES, number_of_waves, WAVE_CAP)
+	number_of_waves = clamp(number_of_waves, MIN_WAVES, WAVE_CAP)
 	if player_bounty == game_data.DEFAULT_BOUNTY:
 		number_of_waves = TUTORIAL_WAVES
 	

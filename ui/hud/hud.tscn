@@ -1,41 +1,23 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://ui/hud/status_bars/energy_bar/energy_bar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/hud/status_bars/hunger_bar/hunger_bar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/hud/status_bars/health_bar/health_bar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/gui/text_box/text_box.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/hud/status_bars/projectile_inventory/projectile_inventory.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/hud/notifications/wave_notification.gd" type="Script" id=2]
+[ext_resource path="res://ui/hud/notifications/arena_ended_notification.gd" type="Script" id=3]
+[ext_resource path="res://ui/hud/status_bars/hunger_bar/hunger_bar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/hud/hud_control.gd" type="Script" id=6]
-[ext_resource path="res://ui/hud/notifications/wave_notification.gd" type="Script" id=7]
+[ext_resource path="res://ui/hud/status_bars/energy_bar/energy_bar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/desktop_ui/desktop_ui.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/pause_screen/pause_screen.tscn" type="PackedScene" id=9]
-[ext_resource path="res://ui/hud/overlay.gd" type="Script" id=10]
-[ext_resource path="res://ui/hud/notifications/arena_ended_notification.gd" type="Script" id=11]
-[ext_resource path="res://ui/mobile_ui/mobile_ui.tscn" type="PackedScene" id=12]
-[ext_resource path="res://ui/platform_exclusive_feature.gd" type="Script" id=13]
+[ext_resource path="res://ui/hud/status_bars/health_bar/health_bar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/mobile_ui/mobile_ui.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/hud/overlay.gd" type="Script" id=12]
+[ext_resource path="res://ui/hud/notifications/plant_captured_notification.gd" type="Script" id=13]
 [ext_resource path="res://ui/hud/status_bars/bounty_label/bounty_label.gd" type="Script" id=14]
-[ext_resource path="res://ui/hud/status_bars/shield_bar/shield_bar.tscn" type="PackedScene" id=15]
-[ext_resource path="res://ui/hud/notifications/plant_captured_notification.gd" type="Script" id=16]
 [ext_resource path="res://scenes/ui/skill_tree_menu/skill_tree_menu.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/ui/progress_menu/ProgressMenu.tscn" type="PackedScene" id=18]
 
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-
-uniform float gray_amount = 4.0;
-
-
-void fragment() {
-	vec4 final_color = texture(SCREEN_TEXTURE, SCREEN_UV);
-	final_color.rgb /= gray_amount;
-	COLOR = final_color;
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 3 )
-shader_param/gray_amount = 4.0
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=7]
 resource_name = "highlight"
 length = 1.5
 tracks/0/type = "value"
@@ -51,7 +33,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 resource_name = "highlight_long"
 length = 2.0
 tracks/0/type = "value"
@@ -67,77 +49,74 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float gray_amount = 4.0;
+
+
+void fragment() {
+	vec4 final_color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	final_color.rgb /= gray_amount;
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 3 )
+shader_param/gray_amount = 4.0
+
 [node name="hud" type="CanvasLayer"]
 
 [node name="main_hud" type="Control" parent="."]
-material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-theme = ExtResource( 5 )
 script = ExtResource( 6 )
 
 [node name="top_elements" type="VBoxContainer" parent="main_hud"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -120.0
+margin_top = 2.0
 margin_right = 120.0
-margin_bottom = 35.0
+margin_bottom = 12.0
+alignment = 1
 
-[node name="top_margin" type="MarginContainer" parent="main_hud/top_elements"]
-margin_right = 240.0
-
-[node name="status_bars" type="CenterContainer" parent="main_hud/top_elements"]
-margin_top = 4.0
-margin_right = 240.0
-margin_bottom = 14.0
-
-[node name="horizontal_margin" type="GridContainer" parent="main_hud/top_elements/status_bars"]
-margin_left = 67.0
-margin_right = 172.0
+[node name="status_bars" type="HBoxContainer" parent="main_hud/top_elements"]
+margin_left = 44.0
+margin_right = 195.0
 margin_bottom = 10.0
-custom_constants/hseparation = 35
-columns = 3
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_constants/separation = 10
 
-[node name="hunger_bar" parent="main_hud/top_elements/status_bars/horizontal_margin" instance=ExtResource( 2 )]
-anchor_left = 0.0
-anchor_right = 0.0
-margin_left = 0.0
-margin_right = 0.0
-margin_bottom = 10.0
+[node name="health_bar" parent="main_hud/top_elements/status_bars" instance=ExtResource( 10 )]
+size_flags_horizontal = 1
 
-[node name="bounty_label" type="Label" parent="main_hud/top_elements/status_bars/horizontal_margin"]
+[node name="bounty_label" type="Label" parent="main_hud/top_elements/status_bars"]
 modulate = Color( 1, 1, 0, 1 )
-margin_left = 35.0
-margin_right = 70.0
+margin_left = 58.0
+margin_right = 93.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 35, 0 )
 size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource( 5 )
 text = "100000"
 align = 1
 script = ExtResource( 14 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="main_hud/top_elements/status_bars/horizontal_margin/bounty_label"]
-anims/highlight = SubResource( 4 )
-anims/highlight_long = SubResource( 5 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="main_hud/top_elements/status_bars/bounty_label"]
+anims/highlight = SubResource( 7 )
+anims/highlight_long = SubResource( 8 )
 
-[node name="energy_bar" parent="main_hud/top_elements/status_bars/horizontal_margin" instance=ExtResource( 1 )]
-anchor_right = 0.0
-margin_left = 105.0
-margin_right = 105.0
-margin_bottom = 10.0
-
-[node name="wave_text_margin" type="MarginContainer" parent="main_hud/top_elements"]
-margin_top = 18.0
-margin_right = 240.0
-margin_bottom = 31.0
-custom_constants/margin_top = 13
+[node name="hunger_bar" parent="main_hud/top_elements/status_bars" instance=ExtResource( 4 )]
+margin_left = 103.0
+margin_right = 151.0
 
 [node name="notifs" type="VBoxContainer" parent="main_hud/top_elements"]
-margin_top = 35.0
+margin_top = 14.0
 margin_right = 240.0
-margin_bottom = 45.0
+margin_bottom = 24.0
 
 [node name="wave_notification" type="Label" parent="main_hud/top_elements/notifs"]
 margin_right = 240.0
@@ -146,7 +125,7 @@ theme = ExtResource( 5 )
 text = "hud.wave_indicator"
 align = 1
 uppercase = true
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 
 [node name="notification_disappear_delay" type="Timer" parent="main_hud/top_elements/notifs/wave_notification"]
 wait_time = 3.0
@@ -160,7 +139,7 @@ theme = ExtResource( 5 )
 text = "hud.arena_ended"
 align = 1
 uppercase = true
-script = ExtResource( 11 )
+script = ExtResource( 3 )
 
 [node name="plant_captured_notification" type="Label" parent="main_hud/top_elements/notifs"]
 visible = false
@@ -171,80 +150,42 @@ theme = ExtResource( 5 )
 text = "hud.plant_caught"
 align = 1
 uppercase = true
-script = ExtResource( 16 )
+script = ExtResource( 13 )
 
-[node name="top_left_elements" type="VBoxContainer" parent="main_hud"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -20.0
-margin_right = 96.0
-margin_bottom = 20.0
-size_flags_stretch_ratio = 0.5
-
-[node name="center_bottom_elements" type="VBoxContainer" parent="main_hud"]
+[node name="bottom_elements" type="HBoxContainer" parent="main_hud"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -42.0
-margin_top = -19.0
-margin_right = 42.0
-grow_vertical = 0
-alignment = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="main_hud/center_bottom_elements"]
-margin_top = 19.0
-margin_right = 84.0
-margin_bottom = 19.0
-custom_constants/separation = 0
+margin_left = -68.0
+margin_top = -10.0
+margin_right = 68.0
+margin_bottom = -2.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
 alignment = 1
 
-[node name="health_bars" type="Control" parent="main_hud/center_bottom_elements/HBoxContainer"]
-margin_left = 42.0
-margin_right = 42.0
+[node name="energy_bar" parent="main_hud/bottom_elements" instance=ExtResource( 7 )]
+margin_left = 9.0
+margin_right = 57.0
+size_flags_horizontal = 6
 
-[node name="health_bar" parent="main_hud/center_bottom_elements/HBoxContainer/health_bars" instance=ExtResource( 3 )]
-anchor_right = 0.0
-
-[node name="shield_bar" parent="main_hud/center_bottom_elements/HBoxContainer/health_bars" instance=ExtResource( 15 )]
-
-[node name="text_box_container" type="VBoxContainer" parent="main_hud"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -120.0
-margin_top = -3.0
-margin_right = 120.0
-margin_bottom = 3.0
-
-[node name="MarginContainer" type="MarginContainer" parent="main_hud/text_box_container"]
-margin_right = 240.0
-margin_bottom = 5.0
-custom_constants/margin_top = 5
-
-[node name="text_box" parent="main_hud/text_box_container" instance=ExtResource( 4 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 9.0
-margin_right = 240.0
-margin_bottom = 9.0
-
-[node name="mobile_ui" parent="main_hud" instance=ExtResource( 12 )]
-visible = false
+[node name="projectile_inventory" parent="main_hud/bottom_elements" instance=ExtResource( 1 )]
+margin_left = 81.0
+margin_right = 125.0
+size_flags_horizontal = 6
 
 [node name="desktop_ui" parent="main_hud" instance=ExtResource( 8 )]
-script = ExtResource( 13 )
-platform = "desktop"
+
+[node name="mobile_ui" parent="main_hud" instance=ExtResource( 11 )]
 
 [node name="darker_colors" type="ColorRect" parent="main_hud"]
 pause_mode = 2
 visible = false
-material = SubResource( 2 )
+material = SubResource( 9 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 10 )
+script = ExtResource( 12 )
 
 [node name="pause_screen" parent="." instance=ExtResource( 9 )]
 visible = false

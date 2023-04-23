@@ -54,7 +54,6 @@ func _on_damage_received(Hitbox: DetectionBox):
 	if get_stat("invincible") == true and !Hitbox.override_invincibility: return
 	if Hitbox.damage_type == "fire": set_on_fire()
 	
-	print("enemy.gd: damage: %s" % Hitbox.damage)
 	var damage = Hitbox.damage
 	apply_damage(damage)
 

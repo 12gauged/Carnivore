@@ -50,6 +50,7 @@ var default_game_settings: Dictionary = {
 		"movement_joystick": Vector2(35, 20),
 		"shooting_joystick": Vector2(45, 25),
 		"special_attack": Vector2(14, 14),
+		"switch_projectile": Vector2(6, 36),
 		"pause_button": Vector2(12, 12)
 	}
 }

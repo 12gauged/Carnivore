@@ -30,10 +30,16 @@ const DEFAULT_SPEED = 450
 const projectile_speeds: Dictionary = {
 	"stone_projectile": DEFAULT_SPEED,
 	"spear_projectile_player": DEFAULT_SPEED,
-	"fireball_projectile": DEFAULT_SPEED,
-	"healing_plant_seed": 0,
+	"fireball_projectile": DEFAULT_SPEED
 }
-		
+
+var held_projectile: String = ""
+var inventory: Dictionary = {
+	"stone_projectile": false,
+	"fireball_projectile": false,
+	"spear_projectile_player": false
+}
+
 func _ready():
 	# warning-ignore:return_value_discarded
 	input_events.connect("player_shooting_joystick_released", self, "_on_player_shooting_joystick_released")
@@ -45,10 +51,24 @@ func _ready():
 	player_events.connect("exited_eat_state", self, "_on_player_exited_eat_state")
 	# warning-ignore:return_value_discarded
 	player_events.connect("projectile_collected", self, "_on_projectile_collected")
+	player_events.connect("switch_projectile_request", self, "_on_switch_projectile_request")
 	
 	
 func _input(event):
 	if event is InputEventMouseMotion: set_target_direction(global_position.direction_to(get_global_mouse_position()))
+	if event is InputEventKey:
+		if event.is_action_pressed("inventory_1"): hold_projectile("stone_projectile")
+		if event.is_action_pressed("inventory_2"): hold_projectile("fireball_projectile")
+		if event.is_action_pressed("inventory_3"): hold_projectile("spear_projectile_player")
+	
+	
+	
+func hold_projectile(type):
+	if not inventory[type]: return
+	set_projectile(type)
+	set_held_projectile(type)
+	
+	
 	
 func shoot_projectile():
 	if on_eat_state: return
@@ -60,8 +80,15 @@ func shoot_projectile():
 	camera_events.emit_signal("camera_shake_request", 0.2, 1)
 	player_events.emit_signal("projectile_thrown")
 	emit_signal("projectile_thrown")
-	emit_signal("remove_tag_request", "HOLDING_PROJECTILE")
+	emit_signal("remove_tag_request", projectile_type)
 	spawn_projectile()
+	
+	set_held_projectile("")
+	inventory[projectile_type] = false
+	
+	if not true in inventory.values(): # no projectiles left
+		player_events.emit_signal("no_projectiles")
+	
 	set_projectile("")
 	
 func set_target_direction(value: Vector2): 
@@ -79,16 +106,37 @@ func set_projectile(type: String):
 	
 	if projectile_type != "": 
 		emit_signal("projectile_collected")
-		emit_signal("add_tag_request", "HOLDING_PROJECTILE")
+		emit_signal("add_tag_request", projectile_type)
+		
+		
+func set_held_projectile(value: String):
+	held_projectile = value
+	player_events.emit_signal("held_projectile_updated", held_projectile)	
+
+
+
+		
+		
+		
 
 func spawn_projectile():
-	print(projectile_type)
 	ProjectileSpawner.entity_name = projectile_type
 	ProjectileSpawner.spawn_entity()
 
 
-func _on_projectile_collected(projectile): set_projectile(projectile)
+func _on_projectile_collected(projectile):
+	if true in inventory.values():
+		player_events.emit_signal("has_projectiles")
 	
+	
+	inventory[projectile] = true
+	player_events.emit_signal("projectile_inventory_updated", inventory)
+	if held_projectile == "":
+		hold_projectile(projectile)
+		set_held_projectile(projectile)
+		
+		
+		
 func _on_projectile_spawner_entity_spawned(ProjectileNode):
 	ProjectileNode.call_deferred("set_hitbox_tags", ["PLAYER_PROJECTILE"])
 	ProjectileNode.set_direction(get_target_direction())
@@ -119,3 +167,23 @@ func _on_player_shooting_direction_updated(value):
 
 func _on_player_shooting_joystick_released():
 	shoot_projectile()
+	
+	
+	
+func _on_switch_projectile_request():
+	print("projectile handler")
+	
+	var next_projectile
+	var next_projectile_id
+	var current_projectile = inventory.keys().find(held_projectile)
+	
+	if current_projectile > 0:
+		next_projectile_id = current_projectile + 1 if current_projectile < len(inventory.keys()) - 1 else 0
+		if inventory[inventory.keys()[next_projectile_id]] == false: # doesn't have that projectile
+			next_projectile_id = next_projectile_id + 1
+			if next_projectile_id == len(inventory.keys()): next_projectile_id = 0
+	else:
+		next_projectile_id = inventory.values().find(true)
+		
+	next_projectile = inventory.keys()[next_projectile_id]
+	hold_projectile(next_projectile)

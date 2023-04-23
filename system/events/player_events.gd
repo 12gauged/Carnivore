@@ -12,6 +12,15 @@ signal set_stat_value(stat_id, value)
 signal projectile_collected(projectile)
 # warning-ignore:unused_signal
 signal projectile_thrown()
+# warning-ignore:unused_signal
+signal projectile_inventory_updated(inventory)
+# warning-ignore:unused_signal
+signal held_projectile_updated(held_projectile)
+# warning-ignore:unused_signal
+signal switch_projectile_request()
+
+signal no_projectiles
+signal has_projectiles
 
 # warning-ignore:unused_signal
 signal freeze_player

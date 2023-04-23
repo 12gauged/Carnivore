@@ -1,48 +1,107 @@
 extends Control
-class_name StatusBar
 
-const SPRITE_WIDTH = 8
 
-export(String) var tracked_stat_id 
+signal full
 
-onready var IconContainer: GridContainer = $empty_bar/icons
-var Icons: Array = []
-var last_status_value: int
 
+export(String, "hunger", "energy", "health", "shields") var id = ""
+export(bool) var has_shader = false
+export(Color) var full_color = Color.white
+export(int) var critical = 0
+
+onready var IconContainer = $icons
+onready var Icons = IconContainer.get_children()
+onready var IncreaseSoundEffect = $increase_sound_effect
+onready var RedFlashAnimPlayer = $red_flash_anim_player
+
+var last_value = 0
 
 
 func _ready():
-	# warning-ignore:return_value_discarded
 	player_events.connect("status_value_update", self, "_on_status_value_update")
-	Icons = IconContainer.get_children()
-	last_status_value = get_first_status_value()
-
-
-
-func get_first_status_value() -> int: return len(Icons)
-func play_increase_sound(): if is_instance_valid(get_node("increase_sound_effect")): $increase_sound_effect.play()
-func play_full_sound(): if is_instance_valid(get_node("full_sound_effect")): $full_sound_effect.play()
-
-func set_status(value: int, animate: bool = true):
-	var status_difference = value - last_status_value
+	if has_shader: stop_shader()
 	
-	if status_difference < 0:
-		for i in range(abs(status_difference)):
-			var icon_id = last_status_value - (i + 1)
-			if animate: Icons[icon_id].play_empty_anim()
-			else: Icons[icon_id].visible = false
-			
-	elif status_difference > 0:
-		for i in range(status_difference):
-			var icon_id = value - (i + 1)
-			if animate: Icons[icon_id].play_fill_anim()
-			else: Icons[icon_id].visible = true
-		play_increase_sound()
-		
-	last_status_value = value
+	
+	
+func _on_status_value_update(stat_id, value, animate):
+	if stat_id != id: return
+	
+	play_bar_animation(value)
+	play_shader_anim(value)
+	
+	if animate: update_icons_with_animation(value)
+	else: update_icons(value)
+	
+	if full(value): 
+		emit_signal("full")
+		self.modulate = full_color
+	
+	last_value = value if value != last_value else last_value	
 
+	
+	
+	
+	
+func play_bar_animation(value):
+	if full(value): return
+	var anim = "flash_loop" if value <= critical else "RESET"
+	RedFlashAnimPlayer.play(anim)
+	
+	
+func update_icons(value):
+	if value > last_value: increase_bar(value)
+	else: decrease_bar(value)
+	
+func increase_bar(value):
+	for i in range(value):
+		Icons[i].show()
 
+func decrease_bar(value):
+	if value >= len(Icons): return
+	for i in range(value):
+		if i < value: continue
+		Icons[i].hide()
+	
+	
+	
+func update_icons_with_animation(value):
+	if value > last_value: increase_bar_animated(value)
+	else: decrease_bar_animated(value)
+	
+func increase_bar_animated(value):
+	IncreaseSoundEffect.play()
+	for i in range(value):
+		Icons[i].play_fill_anim()
 		
-func _on_status_value_update(stat_id: String, new_value: int, animate: bool = true):
-	if stat_id != tracked_stat_id: return
-	set_status(new_value, animate)
+func decrease_bar_animated(value):
+	if value >= len(Icons): return	
+	for i in range(6):
+		if i < value: continue
+		if not Icons[i].visible: continue
+		Icons[i].play_empty_anim()
+	
+	
+	
+	
+func play_shader_anim(value):
+	if not has_shader: return
+	if full(value):
+		init_shader()
+		return
+	stop_shader()
+	
+
+func init_shader():
+	for Icon in Icons:
+		Icon.material.set_shader_param("active", true)
+func stop_shader():
+	for Icon in Icons:
+		Icon.material.set_shader_param("active", false)
+	
+	
+	
+func full(value): return value == len(Icons)
+		
+		
+		
+		

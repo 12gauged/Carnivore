@@ -140,7 +140,7 @@ stream = ExtResource( 6 )
 bus = "player_sounds"
 
 [node name="comp_interactable" parent="." instance=ExtResource( 3 )]
-IGNORE_TAGS = [ "EAT", "HOLDING_PROJECTILE" ]
+IGNORE_TAGS = [ "EAT", "stone_projectile" ]
 method_to_execute = {
 "args": [ "projectile_collected", "stone_projectile" ],
 "caller": "player_events",

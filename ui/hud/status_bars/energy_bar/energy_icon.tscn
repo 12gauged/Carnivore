@@ -89,9 +89,7 @@ tracks/0/keys = {
 }
 
 [node name="energy_icon" type="TextureRect"]
-visible = false
 material = SubResource( 6 )
-use_parent_material = true
 margin_right = 8.0
 margin_bottom = 8.0
 texture = ExtResource( 1 )

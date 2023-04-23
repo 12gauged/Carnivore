@@ -13,12 +13,6 @@ func set_shader_color(color):
 	outline_material.set_shader_param("overlay_color", color)
 
 
-func _on_set_normal_event_event_received(): 
-	debug_log.dprint("special_attack_button_visuals.gd: normal")
-	set_shader_color(Color.white)
-func _on_set_yellowscale_event_event_received(): 
-	debug_log.dprint("special_attack_button_visuals.gd: yellow")
-	set_shader_color(Color.yellow)
-func _on_set_grayscale_event_event_received(): 
-	debug_log.dprint("special_attack_button_visuals.gd: gray")
-	set_shader_color(dark_gray)
+func _on_set_normal_event_event_received(): set_shader_color(Color.white)
+func _on_set_yellowscale_event_event_received(): set_shader_color(Color.yellow)
+func _on_set_grayscale_event_event_received(): set_shader_color(dark_gray)

@@ -41,6 +41,7 @@ func _ready():
 	stats["shields"] = 0 if not has_skill("hard_skin") else 3 * int(clamp((2 * int(has_skill("body_armor")) + 1), 1, 2))
 	call_deferred("update_stat", "hunger", get_stat("hunger"), false)
 	call_deferred("update_stat", "shields", get_stat("shields"), false)
+	call_deferred("update_stat", "health", get_stat("health"), false)
 	
 	
 	## adds 20% of speed if you have the speed boost skill
@@ -272,11 +273,11 @@ func _on_stat_decrease_delay_timeout():
 			update_stat("energy", int(max(get_stat("energy") - 1, 0)))
 			StatDecreaseTimer.start(ENERGY_DECREASE_DELAY)
 		_:
+			start_stat_decrease_timer(get_stat("hunger"))
 			if get_stat("hunger") <= 0: 
 				apply_damage(1)
 				return
 			update_stat("hunger", int(max(get_stat("hunger") - 1, 0)))
-			start_stat_decrease_timer(get_stat("hunger"))
 			
 func _on_exit_from_eat_state_forced(): exit_eat_state()
 
