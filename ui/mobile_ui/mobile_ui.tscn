@@ -42,22 +42,22 @@ void fragment() {
 	COLOR = final_color;
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/overlay_color = Color( 1, 1, 1, 1 )
-
-[sub_resource type="ShaderMaterial" id=6]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/overlay_color = Color( 1, 1, 1, 1 )
-
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/overlay_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/overlay_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/overlay_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/overlay_color = Color( 1, 1, 1, 1 )
@@ -133,77 +133,6 @@ custom_constants/margin_right = 45
 script = ExtResource( 19 )
 margin_axis = "-x"
 assigned_setting_value = "shooting_joystick"
-
-[node name="switch_projectile" type="HBoxContainer" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -34.0
-custom_constants/separation = 0
-alignment = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="switch_projectile"]
-margin_left = 12.0
-margin_right = 28.0
-margin_bottom = 135.0
-custom_constants/separation = 0
-alignment = 2
-
-[node name="switch_projectile_button" type="TextureRect" parent="switch_projectile/VBoxContainer"]
-material = SubResource( 5 )
-margin_top = 83.0
-margin_right = 16.0
-margin_bottom = 99.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 20 )
-stretch_mode = 4
-script = ExtResource( 14 )
-
-[node name="TouchScreenButton" type="TouchScreenButton" parent="switch_projectile/VBoxContainer/switch_projectile_button"]
-show_behind_parent = true
-material = SubResource( 6 )
-position = Vector2( -3, -3 )
-normal = ExtResource( 17 )
-pressed = ExtResource( 16 )
-script = ExtResource( 11 )
-
-[node name="comp_method_caller" parent="switch_projectile/VBoxContainer/switch_projectile_button/TouchScreenButton" instance=ExtResource( 4 )]
-method = {
-"args": [ "switch_projectile_request" ],
-"caller": "player_events",
-"method": "emit_signal"
-}
-
-[node name="set_grayscale_event" parent="switch_projectile/VBoxContainer/switch_projectile_button" instance=ExtResource( 10 )]
-position = Vector2( 2, 2 )
-platform = "mobile"
-emitter = "player_events"
-event = "no_projectiles"
-
-[node name="set_normal_event" parent="switch_projectile/VBoxContainer/switch_projectile_button" instance=ExtResource( 10 )]
-position = Vector2( 2, 2 )
-platform = "mobile"
-emitter = "player_events"
-event = "has_projectiles"
-
-[node name="bottom_margin" type="MarginContainer" parent="switch_projectile/VBoxContainer"]
-margin_top = 99.0
-margin_right = 16.0
-margin_bottom = 135.0
-custom_constants/margin_bottom = 36
-script = ExtResource( 19 )
-margin_axis = "-y"
-assigned_setting_value = "switch_projectile"
-
-[node name="right_margin" type="MarginContainer" parent="switch_projectile"]
-margin_left = 28.0
-margin_right = 34.0
-margin_bottom = 135.0
-custom_constants/margin_right = 6
-script = ExtResource( 19 )
-margin_axis = "-x"
-assigned_setting_value = "switch_projectile"
 
 [node name="special_attack" type="HBoxContainer" parent="."]
 anchor_left = 1.0
@@ -309,6 +238,82 @@ custom_constants/margin_right = 14
 script = ExtResource( 19 )
 margin_axis = "-x"
 assigned_setting_value = "special_attack"
+
+[node name="switch_projectile" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -27.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( -434, -7 )
+mouse_filter = 2
+custom_constants/separation = 0
+alignment = 2
+
+[node name="switch_projectile_vertical_container" type="VBoxContainer" parent="switch_projectile"]
+margin_left = 13.0
+margin_right = 13.0
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="button_anchor" type="Control" parent="switch_projectile/switch_projectile_vertical_container"]
+margin_top = 93.0
+margin_bottom = 93.0
+mouse_filter = 2
+
+[node name="special_attack_button" type="TextureRect" parent="switch_projectile/switch_projectile_vertical_container/button_anchor"]
+material = SubResource( 8 )
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
+texture = ExtResource( 20 )
+stretch_mode = 4
+script = ExtResource( 14 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button"]
+show_behind_parent = true
+material = SubResource( 9 )
+position = Vector2( -1, -1 )
+normal = ExtResource( 17 )
+pressed = ExtResource( 16 )
+script = ExtResource( 11 )
+disabled = true
+
+[node name="comp_method_caller" parent="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/TouchScreenButton" instance=ExtResource( 4 )]
+method = {
+"args": [ "switch_projectile_request" ],
+"caller": "player_events",
+"method": "emit_signal"
+}
+
+[node name="set_grayscale_event" parent="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button" instance=ExtResource( 10 )]
+position = Vector2( 2, 2 )
+emitter = "player_events"
+event = "no_projectiles"
+
+[node name="set_normal_event" parent="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button" instance=ExtResource( 10 )]
+position = Vector2( 2, 2 )
+emitter = "player_events"
+event = "has_projectiles"
+
+[node name="bottom_margin" type="MarginContainer" parent="switch_projectile/switch_projectile_vertical_container"]
+margin_top = 93.0
+margin_bottom = 135.0
+custom_constants/margin_bottom = 42
+script = ExtResource( 19 )
+margin_axis = "-y"
+assigned_setting_value = "switch_projectile"
+
+[node name="right_margin" type="MarginContainer" parent="switch_projectile"]
+margin_left = 13.0
+margin_right = 27.0
+margin_bottom = 135.0
+custom_constants/margin_right = 14
+script = ExtResource( 19 )
+margin_axis = "-x"
+assigned_setting_value = "switch_projectile"
 
 [node name="movement_joystick" type="HBoxContainer" parent="."]
 anchor_bottom = 1.0
@@ -472,11 +477,6 @@ one_shot = true
 [connection signal="joystick_in_use" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="tutorials" method="_on_shooting_joystick_in_use"]
 [connection signal="joystick_released" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/released_method_caller" method="call_method"]
 [connection signal="joystick_returned" from="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/returned_method_caller" method="call_method"]
-[connection signal="released" from="switch_projectile/VBoxContainer/switch_projectile_button/TouchScreenButton" to="switch_projectile/VBoxContainer/switch_projectile_button/TouchScreenButton/comp_method_caller" method="call_method"]
-[connection signal="event_received" from="switch_projectile/VBoxContainer/switch_projectile_button/set_grayscale_event" to="switch_projectile/VBoxContainer/switch_projectile_button" method="_on_set_grayscale_event_event_received"]
-[connection signal="event_received" from="switch_projectile/VBoxContainer/switch_projectile_button/set_grayscale_event" to="switch_projectile/VBoxContainer/switch_projectile_button/TouchScreenButton" method="disable"]
-[connection signal="event_received" from="switch_projectile/VBoxContainer/switch_projectile_button/set_normal_event" to="switch_projectile/VBoxContainer/switch_projectile_button" method="_on_set_normal_event_event_received"]
-[connection signal="event_received" from="switch_projectile/VBoxContainer/switch_projectile_button/set_normal_event" to="switch_projectile/VBoxContainer/switch_projectile_button/TouchScreenButton" method="enable"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="released" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/set_grayscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button" method="_on_set_grayscale_event_event_received"]
@@ -487,6 +487,11 @@ one_shot = true
 [connection signal="event_received" from="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/set_yellowscale_event" to="special_attack/special_attack_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="enable"]
 [connection signal="pressed" from="special_attack/special_attack_vertical_container/button_anchor/interact_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/interact_button/TouchScreenButton/comp_method_caller" method="call_method"]
 [connection signal="released" from="special_attack/special_attack_vertical_container/button_anchor/interact_button/TouchScreenButton" to="special_attack/special_attack_vertical_container/button_anchor/interact_button/TouchScreenButton/comp_method_caller" method="call_method"]
+[connection signal="released" from="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/TouchScreenButton" to="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/TouchScreenButton/comp_method_caller" method="call_method"]
+[connection signal="event_received" from="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/set_grayscale_event" to="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button" method="_on_set_grayscale_event_event_received"]
+[connection signal="event_received" from="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/set_grayscale_event" to="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="disable"]
+[connection signal="event_received" from="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/set_normal_event" to="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button" method="_on_set_normal_event_event_received"]
+[connection signal="event_received" from="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/set_normal_event" to="switch_projectile/switch_projectile_vertical_container/button_anchor/special_attack_button/TouchScreenButton" method="enable"]
 [connection signal="joystick_in_use" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="tutorials" method="_on_movement_joystick_used"]
 [connection signal="joystick_pressed" from="movement_joystick/h_box_container/movement_joystick/background/button_pivot/TouchScreenButton" to="shooting_joystick/shooting_joystick_vertical_container/shooting_joystick/pressed_method_caller" method="call_method"]
 [connection signal="pressed" from="pause_button/HBoxContainer/button_anchor/pause_button" to="pause_button/HBoxContainer/button_anchor/pause_button/comp_event_caller" method="call_event"]

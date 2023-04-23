@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://ui/mobile_ui/mobile_button_displacement.gd" type="Script" id=1]
 [ext_resource path="res://ui/gui/button/small/button_small_normal.png" type="Texture" id=2]
@@ -13,25 +13,8 @@
 [ext_resource path="res://ui/gui/text_box/box_rectangle_wide.png" type="Texture" id=11]
 [ext_resource path="res://ui/gui/icons/agree_icon.png" type="Texture" id=12]
 [ext_resource path="res://ui/gui/icons/disagree_icon.png" type="Texture" id=13]
-[ext_resource path="res://entities/player/player.png" type="Texture" id=14]
-[ext_resource path="res://world/level1/tilemap/level1_tilemap.tscn" type="PackedScene" id=15]
+[ext_resource path="res://ui/gui/icons/switch_icon.png" type="Texture" id=14]
 [ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=16]
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 14 )
-region = Rect2( 24, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 14 )
-region = Rect2( 48, 0, 24, 24 )
-
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -78,24 +61,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -162, -27 )
 script = ExtResource( 5 )
-
-[node name="level1_tilemap" parent="." instance=ExtResource( 15 )]
-tile_data = PoolIntArray( 65538, 1, 0, 65547, 1, 0, 131072, 2, 0, 131085, 2, 0, 196609, 2, 0, 196611, 0, 0, 196612, 2, 0, 196620, 3, 0, 262144, 1, 0, 262147, 2, 0, 262148, 0, 0, 262154, 3, 0, 262155, 0, 0, 262157, 1, 0, 327689, 2, 0, 327690, 0, 0, 393222, 1, 0, 458756, 2, 0, 458760, 2, 0 )
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="player_anchor" type="Control" parent="CenterContainer"]
-margin_left = 120.0
-margin_top = 67.0
-margin_right = 120.0
-margin_bottom = 67.0
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="CenterContainer/player_anchor"]
-modulate = Color( 0.25, 0.25, 0.25, 1 )
-frames = SubResource( 9 )
-playing = true
 
 [node name="movement_joystick" type="HBoxContainer" parent="."]
 anchor_bottom = 1.0
@@ -217,7 +182,7 @@ margin_y = NodePath("../../bottom_margin")
 
 [node name="Sprite" type="Sprite" parent="special_attack/special_attack_vertical_container/button_anchor/TouchScreenButton"]
 use_parent_material = true
-position = Vector2( 10, 10 )
+position = Vector2( 11, 11 )
 texture = ExtResource( 7 )
 
 [node name="bottom_margin" type="MarginContainer" parent="special_attack/special_attack_vertical_container"]
@@ -238,6 +203,60 @@ custom_constants/margin_right = 14
 script = ExtResource( 1 )
 margin_axis = "-x"
 assigned_setting_value = "special_attack"
+
+[node name="switch_projectile" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -27.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( -434, -7 )
+custom_constants/separation = 0
+alignment = 2
+
+[node name="special_attack_vertical_container" type="VBoxContainer" parent="switch_projectile"]
+margin_left = 13.0
+margin_right = 13.0
+margin_bottom = 135.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="button_anchor" type="Control" parent="switch_projectile/special_attack_vertical_container"]
+margin_top = 93.0
+margin_bottom = 93.0
+mouse_filter = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="switch_projectile/special_attack_vertical_container/button_anchor"]
+material = SubResource( 12 )
+position = Vector2( -10, -10 )
+normal = ExtResource( 2 )
+script = ExtResource( 9 )
+margin_x = NodePath("../../../right_margin")
+margin_y = NodePath("../../bottom_margin")
+
+[node name="Sprite" type="Sprite" parent="switch_projectile/special_attack_vertical_container/button_anchor/TouchScreenButton"]
+use_parent_material = true
+position = Vector2( 11, 11 )
+texture = ExtResource( 14 )
+
+[node name="bottom_margin" type="MarginContainer" parent="switch_projectile/special_attack_vertical_container"]
+margin_top = 93.0
+margin_bottom = 135.0
+mouse_filter = 2
+custom_constants/margin_bottom = 42
+script = ExtResource( 1 )
+margin_axis = "-y"
+assigned_setting_value = "switch_projectile"
+
+[node name="right_margin" type="MarginContainer" parent="switch_projectile"]
+margin_left = 13.0
+margin_right = 27.0
+margin_bottom = 135.0
+mouse_filter = 2
+custom_constants/margin_right = 14
+script = ExtResource( 1 )
+margin_axis = "-x"
+assigned_setting_value = "switch_projectile"
 
 [node name="pause_button" type="HBoxContainer" parent="."]
 anchor_left = 1.0
@@ -360,6 +379,7 @@ texture = ExtResource( 13 )
 [connection signal="button_pressed" from="movement_joystick/h_box_container/fake_movement_joystick/TouchScreenButton" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="shooting_joystick/shooting_joystick_vertical_container/fake_shooting_joystick/TouchScreenButton" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="special_attack/special_attack_vertical_container/button_anchor/TouchScreenButton" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="switch_projectile/special_attack_vertical_container/button_anchor/TouchScreenButton" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="pause_button/HBoxContainer/button_anchor/TouchScreenButton" to="." method="_on_button_pressed"]
 [connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/save_button" to="." method="_on_exit_and_save_button_pressed"]
 [connection signal="button_pressed" from="VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/reset_button" to="." method="_on_reset_button_pressed"]
