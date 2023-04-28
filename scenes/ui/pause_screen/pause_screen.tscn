@@ -67,9 +67,9 @@ script = ExtResource( 10 )
 
 [node name="grid_container" type="GridContainer" parent="pause_ui_container"]
 margin_left = 44.0
-margin_top = 36.0
+margin_top = 35.0
 margin_right = 195.0
-margin_bottom = 98.0
+margin_bottom = 99.0
 rect_pivot_offset = Vector2( 44, 40 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -101,10 +101,10 @@ margin_right = 106.0
 text = "ui.pause_screen.resume"
 
 [node name="h_grid_container" type="GridContainer" parent="pause_ui_container/grid_container"]
-margin_left = 53.0
+margin_left = 51.0
 margin_top = 42.0
-margin_right = 97.0
-margin_bottom = 62.0
+margin_right = 99.0
+margin_bottom = 64.0
 size_flags_horizontal = 4
 columns = 2
 
@@ -119,8 +119,8 @@ margin_bottom = 18.0
 texture = ExtResource( 6 )
 
 [node name="home_button" parent="pause_ui_container/grid_container/h_grid_container" instance=ExtResource( 7 )]
-margin_left = 24.0
-margin_right = 44.0
+margin_left = 26.0
+margin_right = 48.0
 
 [node name="icon" parent="pause_ui_container/grid_container/h_grid_container/home_button/center_container" index="0"]
 margin_left = 2.0
@@ -176,6 +176,7 @@ mouse_filter = 2
 script = ExtResource( 11 )
 
 [node name="debug_button_holder" type="Control" parent="."]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -40.0
@@ -189,19 +190,19 @@ custom_constants/separation = 0
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="debug_button_holder/VBoxContainer"]
-margin_top = 18.0
+margin_top = 16.0
 margin_right = 40.0
 margin_bottom = 38.0
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="debug_button_holder/VBoxContainer/HBoxContainer"]
 margin_right = 5.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 custom_constants/margin_left = 5
 
 [node name="small_button" parent="debug_button_holder/VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
 margin_left = 5.0
-margin_right = 25.0
+margin_right = 27.0
 
 [node name="icon" parent="debug_button_holder/VBoxContainer/HBoxContainer/small_button/center_container" index="0"]
 margin_left = 2.0

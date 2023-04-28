@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://ui/hud/status_bars/projectile_inventory/projectile_inventory.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/hud/notifications/wave_notification.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=12]
 [ext_resource path="res://ui/hud/notifications/plant_captured_notification.gd" type="Script" id=13]
 [ext_resource path="res://ui/hud/status_bars/bounty_label/bounty_label.gd" type="Script" id=14]
+[ext_resource path="res://scenes/ui/arena_ended_screen/arena_ended_screen.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/ui/skill_tree_menu/skill_tree_menu.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/ui/progress_menu/ProgressMenu.tscn" type="PackedScene" id=18]
 
@@ -68,6 +69,7 @@ shader_param/gray_amount = 4.0
 [node name="hud" type="CanvasLayer"]
 
 [node name="main_hud" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
@@ -195,6 +197,8 @@ visible = false
 
 [node name="ProgressMenu" parent="." instance=ExtResource( 18 )]
 visible = false
+
+[node name="arena_ended_screen" parent="." instance=ExtResource( 15 )]
 
 [connection signal="timeout" from="main_hud/top_elements/notifs/wave_notification/notification_disappear_delay" to="main_hud/top_elements/notifs/wave_notification" method="_on_notification_disappear_delay_timeout"]
 [connection signal="paused" from="pause_screen" to="main_hud/darker_colors" method="show"]

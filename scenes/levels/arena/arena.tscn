@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://entities/frog/frog_arena_data.tres" type="Resource" id=1]
 [ext_resource path="res://entities/worm/worm_arena_data.tres" type="Resource" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=11]
 [ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/levels/level1/rock_spawners.gd" type="Script" id=13]
-[ext_resource path="res://scenes/levels/level1/saving_flag_spawner.gd" type="Script" id=14]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=15]
 [ext_resource path="res://system/parts/level/arena/part_arena.tscn" type="PackedScene" id=16]
 [ext_resource path="res://system/parts/level/music_manager.tscn" type="PackedScene" id=17]
@@ -937,16 +936,6 @@ wait_time = 1.4
 one_shot = true
 script = ExtResource( 15 )
 
-[node name="saving_flag_spawner" type="Node2D" parent="objects"]
-position = Vector2( 160, 168 )
-script = ExtResource( 14 )
-
-[node name="flag_spawner" parent="objects/saving_flag_spawner" instance=ExtResource( 8 )]
-entity_name = "saving_flag"
-entity_group = "saving_flags"
-deletion_signal = "deleted"
-respawn_radius = Vector2( 60, 60 )
-
 [node name="part_camera" parent="." instance=ExtResource( 5 )]
 visible = false
 position = Vector2( 160, 78 )
@@ -961,8 +950,6 @@ anims/start = SubResource( 2 )
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_freeze_method" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_slowmo_method" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/delay_for_level_ending" method="start_timer"]
-[connection signal="wave_started" from="objects/part_arena" to="objects/saving_flag_spawner" method="_on_part_arena_wave_started"]
 [connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]
-[connection signal="entity_spawned" from="objects/saving_flag_spawner/flag_spawner" to="objects/saving_flag_spawner" method="_on_flag_spawner_entity_spawned"]

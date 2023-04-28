@@ -87,15 +87,16 @@ func _ready():
 		
 func _process(_delta): 
 	if arena_state != RUNNING: return
+	process_enemy_deaths()
 	if living_enemies < max_enemy_number and enemy_id < enemies_per_wave:
 		spawn_new_enemy()
-	process_enemy_deaths()
 
 
 
 func process_enemy_deaths():
 	if dead_enemies.empty(): return
 	enemy_kill_count += 1
+	living_enemies -= 1
 	if enemy_kill_count >= enemies_per_wave and toolbox.get_node_in_group("enemies").get_children().empty():
 		end_wave()
 	dead_enemies.pop_back()
@@ -220,7 +221,6 @@ func end_arena():
 	
 func _on_enemy_killed(_id): 
 	dead_enemies.append("enemy")
-	living_enemies -= 1
 	
 func _on_tutorial_ant_killed():
 	game_events.emit_signal("tutorial_ant_dead")

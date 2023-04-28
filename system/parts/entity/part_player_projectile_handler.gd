@@ -171,19 +171,19 @@ func _on_player_shooting_joystick_released():
 	
 	
 func _on_switch_projectile_request():
-	print("projectile handler")
-	
 	var next_projectile
-	var next_projectile_id
+	var next_projectile_id: int
 	var current_projectile = inventory.keys().find(held_projectile)
 	
-	if current_projectile > 0:
-		next_projectile_id = current_projectile + 1 if current_projectile < len(inventory.keys()) - 1 else 0
-		if inventory[inventory.keys()[next_projectile_id]] == false: # doesn't have that projectile
-			next_projectile_id = next_projectile_id + 1
-			if next_projectile_id == len(inventory.keys()): next_projectile_id = 0
+	
+	if current_projectile != -1:
+		next_projectile_id = (current_projectile + 1) % len(inventory.keys())
+		if inventory[inventory.keys()[next_projectile_id]] == false:
+			next_projectile_id = current_projectile + inventory.keys().find(true)
+			next_projectile_id = next_projectile_id % len(inventory.keys())
 	else:
-		next_projectile_id = inventory.values().find(true)
+		next_projectile = inventory.values().find(true)
+		
 		
 	next_projectile = inventory.keys()[next_projectile_id]
 	hold_projectile(next_projectile)
