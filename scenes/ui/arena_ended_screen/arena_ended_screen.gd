@@ -34,4 +34,4 @@ func _on_arena_ended():
 	emit_signal("screen_visible")
 	game_events.emit_signal("stop_music")
 	player_events.emit_signal("freeze_player")
-	gui_events.emit_signal("hide_hud")
+	gui_events.emit_signal("hide_full_hud")

@@ -14,6 +14,8 @@ signal show_hud
 signal hide_hud
 # warning-ignore:unused_signal
 signal hide_hud_except_controls
+# warning-ignore:unused_signal
+signal hide_full_hud
 
 # warning-ignore:unused_signal
 signal text_box_request(texts)

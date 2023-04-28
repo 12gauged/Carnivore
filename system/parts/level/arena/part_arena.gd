@@ -32,18 +32,19 @@ enum {
 }
 
 var max_enemy_number: int
-var enemy_kill_count: int = 0
 var enemy_id: int = 0
 var enemy_data: Array
 var enemy_spawner_id = null
 var enemy_name: String
 var enemy_counter: Dictionary = {}
 var dead_enemies: Array = []
-var living_enemies: int = 0
 
 var last_max_enemy_number: int = 0
 var initial_max_enemy_number: int = 0
 var initial_enemies_per_wave_value: int = 0
+
+var enemies_to_spawn: int = 0
+
 var SpawnedEnemy: Enemy
 var Spawners: Array = []
 var SpawnedEnemies: Array = []
@@ -56,10 +57,11 @@ var difficulty: int
 
 func _input(event):
 	if !OS.is_debug_build(): return
-		
 	if event.is_action_pressed("debug_f2"):
 		end_wave()
 		free_all_enemies()
+		
+		
 
 func _ready():
 	game_data.current_arena_wave = 1
@@ -77,48 +79,27 @@ func _ready():
 	
 	initial_enemies_per_wave_value = enemies_per_wave
 	
-	max_enemy_number = int(float(enemies_per_wave) * 0.5)
+	max_enemy_number = max(int(float(enemies_per_wave) * 0.25), 1)
 	initial_max_enemy_number = max_enemy_number
 	
 	enemy_counter = {FILLER_ENEMY: 0}
 	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
 	Spawners = get_node("spawners").get_children()
-	
-	number_of_waves = 1
-	
-		
-func _process(_delta): 
-	if arena_state != RUNNING: return
-	process_enemy_deaths()
-	if living_enemies < max_enemy_number and enemy_id < enemies_per_wave:
-		spawn_new_enemy()
 
 
 
-func process_enemy_deaths():
-	if dead_enemies.empty(): return
-	enemy_kill_count += 1
-	living_enemies -= 1
-	if enemy_kill_count >= enemies_per_wave and toolbox.get_node_in_group("enemies").get_children().empty():
-		end_wave()
-	dead_enemies.pop_back()
 
 func free_all_enemies():
 	for AliveEnemy in get_tree().get_nodes_in_group("enemies")[0].get_children():
 		if is_instance_valid(AliveEnemy):
 			AliveEnemy.queue_free()
 	enemy_id = 0
-	enemy_kill_count = 0
-	living_enemies = 0
 	enemy_counter = {FILLER_ENEMY: 0}
 			
-func spawn_first_enemies():
-	spawn_new_enemy()
-	last_max_enemy_number = max_enemy_number
+
+
 
 func spawn_new_enemy(count_enemy := true):
-	if enemy_kill_count >= enemies_per_wave: return
-	
 	toolbox.SystemRNG.randomize()
 	enemy_name = get_random_enemy()
 	
@@ -126,36 +107,31 @@ func spawn_new_enemy(count_enemy := true):
 		AvailableSpawners = Spawners.duplicate()
 		if is_instance_valid(ChosenSpawner): AvailableSpawners.remove(AvailableSpawners.find(ChosenSpawner))
 	
-	# gets a random spawner
 	enemy_spawner_id = toolbox.SystemRNG.randi_range(0, len(AvailableSpawners) - 1)
-	# Picks up the spawner from the array
 	ChosenSpawner = AvailableSpawners[enemy_spawner_id]
-	# configures the spawner and spawns the entity
 	ChosenSpawner.set_entity(enemy_name)
 	SpawnedEnemy = ChosenSpawner.spawn_entity()
-	# discards the used spawner
 	AvailableSpawners.remove(enemy_spawner_id)
 	
 	if !count_enemy: return SpawnedEnemy
 	
+	enemy_id += 1
+	enemy_counter[enemy_name] += 1
+	
 	# warning-ignore:return_value_discarded
 	SpawnedEnemy.connect("dead", self, "_on_enemy_killed")
 	
-	living_enemies += 1
-	enemy_id += 1
-	enemy_counter[enemy_name] += 1
 	
 func spawn_new_enemy_uncounted(): ## used only in the tutorial
 	var NewEnemy = spawn_new_enemy(false)
 	NewEnemy.call_deferred("enable_highlight") ## method only exists in the ant script
 	NewEnemy.connect("deleted", self, "_on_tutorial_ant_killed")
 	
+	
 func get_random_enemy() -> String:
 	var result: String = FILLER_ENEMY
 	var EnemyData = enemy_spawn_data[toolbox.SystemRNG.randi_range(0, ENEMY_SPAWN_DATA_LEN)]
-	
 	var check_results = check_enemy_conditions(EnemyData) 
-	
 	result = check_results if check_results != "" else result
 	return result
 	
@@ -173,12 +149,11 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 	if !toolbox.SystemRNG.randi_range(0, 100) <= data.spawn_chance - 1 + floor(difficulty * spawn_chance_modifier): return ""
 	return data.entity_name
 	
-	
+func get_spawner_count() -> int: return len(Spawners)
 func trigger_spawner(spawner_id: int, entity_name: String):
 	return Spawners[spawner_id].spawn_entity(entity_name)
-	
-	
-func get_spawner_count() -> int: return len(Spawners)
+
+
 
 
 func start_arena():
@@ -191,6 +166,14 @@ func start_wave():
 	arena_state = RUNNING
 	emit_signal("wave_started")
 	player_events.emit_signal("set_stat_value", "can_get_hungry", true)
+	enemies_to_spawn = enemies_per_wave	
+	spawn_first_enemies()
+	
+func spawn_first_enemies():
+	for _i in range(max_enemy_number):
+		spawn_new_enemy()
+	
+
 
 
 func end_wave():
@@ -201,7 +184,6 @@ func end_wave():
 	game_data.current_arena_wave += 1
 	arena_state = IN_BETWEEN_WAVES
 	
-	enemy_kill_count = 0
 	enemy_id = 0
 	enemy_counter = {FILLER_ENEMY: 0}
 	
@@ -226,7 +208,15 @@ func end_arena():
 	
 	
 	
-func _on_enemy_killed(_id): dead_enemies.append("enemy")
+func _on_enemy_killed(_id): 
+	if enemies_to_spawn > 0:
+		enemies_to_spawn -= 1
+		spawn_new_enemy()
+	elif toolbox.get_node_in_group("enemies").get_child_count() == 1:
+		end_wave()
+	
+	
+	
 func _on_tutorial_ant_killed(): game_events.emit_signal("tutorial_ant_dead")
 
 func _on_arena_start_request(): start_wave()

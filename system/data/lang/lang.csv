@@ -84,6 +84,7 @@ hud.plant_caught,the plant has been caught,a planta foi capturada,untranslated,u
 hud.arena_ended,enough!,já chega!,untranslated,untranslated
 hud.defend_to_save,defend!,defenda!,untranslated,untranslated
 hud.saved,saved!,salvo!,untranslated,untranslated
+enemy.worm,worm,minhoca,untranslated,untranslated
 enemy.frog,frog,sapo,untranslated,untranslated
 enemy.fire_ant,fire-ant,formiga-de-fogo,untranslated,untranslated
 enemy.ant_soldier,soldier-ant,formiga-soldado,untranslated,untranslated

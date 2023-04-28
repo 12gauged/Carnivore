@@ -13,6 +13,8 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	gui_events.connect("hide_hud", self, "_on_hide_hud_request")
 	# warning-ignore:return_value_discarded
+	gui_events.connect("hide_full_hud", self, "_on_hide_full_hud_request")
+	# warning-ignore:return_value_discarded
 	gui_events.connect("show_hud", self, "_on_show_hud_request")
 	
 	
@@ -25,4 +27,5 @@ func set_hud_element_visibility(element: String, value: bool):
 	
 
 func _on_hide_hud_request(): set_hud_element_visibility("all", false)
+func _on_hide_full_hud_request(): self.visible = false 
 func _on_show_hud_request(): set_hud_element_visibility("all", true)

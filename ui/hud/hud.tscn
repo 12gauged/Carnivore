@@ -114,10 +114,16 @@ anims/highlight_long = SubResource( 8 )
 margin_left = 103.0
 margin_right = 151.0
 
-[node name="notifs" type="VBoxContainer" parent="main_hud/top_elements"]
+[node name="MarginContainer" type="MarginContainer" parent="main_hud/top_elements"]
 margin_top = 14.0
 margin_right = 240.0
-margin_bottom = 24.0
+margin_bottom = 20.0
+custom_constants/margin_top = 6
+
+[node name="notifs" type="VBoxContainer" parent="main_hud/top_elements"]
+margin_top = 24.0
+margin_right = 240.0
+margin_bottom = 34.0
 
 [node name="wave_notification" type="Label" parent="main_hud/top_elements/notifs"]
 margin_right = 240.0

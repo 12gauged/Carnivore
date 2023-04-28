@@ -27,6 +27,8 @@ var return_acceleration = 20
 var threshold: int = 5
 var last_value: Vector2
 
+var can_use: bool = true
+
 
 func _ready():
 	if game_data.current_platform == "mobile": return
@@ -36,8 +38,9 @@ func _ready():
 
 func _input(event: InputEvent):
 	
-	if read_touches: set_joystick_position_from_drag_and_touch(event)
-	else: set_joystick_position_from_drag(event)
+	if can_use:
+		if read_touches: set_joystick_position_from_drag_and_touch(event)
+		else: set_joystick_position_from_drag(event)
 	
 	if not(event is InputEventScreenTouch and !event.is_pressed() and event.get_index() == ongoing_drag): return
 	ongoing_drag = -1

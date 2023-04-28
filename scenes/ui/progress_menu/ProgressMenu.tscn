@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://entities/frog/frog_arena_data.tres" type="Resource" id=6]
 [ext_resource path="res://entities/fire_ant/fire_ant_arena_data.tres" type="Resource" id=7]
 [ext_resource path="res://entities/ant_soldier/ant_soldier_arena_data.tres" type="Resource" id=8]
+[ext_resource path="res://entities/worm/worm_arena_data.tres" type="Resource" id=9]
 [ext_resource path="res://scenes/ui/progress_menu/ProgressMenu.gd" type="Script" id=10]
 
 [node name="ProgressMenu" type="Control"]
@@ -85,8 +86,8 @@ margin_right = 116.0
 margin_bottom = 41.0
 state = 1
 type = "ui.progress_menu.new_enemy"
-title = "enemy.frog"
-EnemyData = ExtResource( 6 )
+title = "enemy.worm"
+EnemyData = ExtResource( 9 )
 
 [node name="ProgressStepFrog" parent="VBoxContainer/ScrollContainer/ProgressSteps" instance=ExtResource( 3 )]
 modulate = Color( 1, 1, 1, 1 )
