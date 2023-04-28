@@ -29,9 +29,9 @@ __meta__ = {
 
 [node name="grid_container" type="GridContainer" parent="center_elements"]
 margin_left = 70.0
-margin_top = 26.0
+margin_top = 25.0
 margin_right = 170.0
-margin_bottom = 108.0
+margin_bottom = 109.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -82,10 +82,10 @@ method = {
 }
 
 [node name="button_container" type="GridContainer" parent="center_elements/grid_container"]
-margin_left = 25.0
+margin_left = 23.0
 margin_top = 62.0
-margin_right = 75.0
-margin_bottom = 82.0
+margin_right = 77.0
+margin_bottom = 84.0
 size_flags_horizontal = 4
 custom_constants/hseparation = 10
 columns = 5
@@ -101,8 +101,8 @@ margin_bottom = 18.0
 texture = ExtResource( 5 )
 
 [node name="credits_button" parent="center_elements/grid_container/button_container" instance=ExtResource( 1 )]
-margin_left = 30.0
-margin_right = 50.0
+margin_left = 32.0
+margin_right = 54.0
 id = "credits_screen"
 
 [node name="icon" parent="center_elements/grid_container/button_container/credits_button/center_container" index="0"]
@@ -144,19 +144,19 @@ custom_constants/separation = 0
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 18.0
+margin_top = 16.0
 margin_right = 40.0
 margin_bottom = 38.0
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer"]
 margin_right = 5.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 custom_constants/margin_left = 5
 
 [node name="small_button" parent="Control/VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
 margin_left = 5.0
-margin_right = 25.0
+margin_right = 27.0
 
 [node name="icon" parent="Control/VBoxContainer/HBoxContainer/small_button/center_container" index="0"]
 margin_left = 2.0
