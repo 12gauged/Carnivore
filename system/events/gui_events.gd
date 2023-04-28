@@ -1,9 +1,12 @@
 extends Node
 
+
+####################################################
 ## all the warnings are so godot 
 ## doesnt show warnings on the debugger
-
 ## these signals are used, just not in this script
+####################################################
+
 
 # warning-ignore:unused_signal
 signal show_hud
@@ -28,6 +31,9 @@ signal warning_request_rejected(id)
 signal show_input_hint(input_hint_id)
 # warning-ignore:unused_signal
 signal hide_input_hint(input_hint_id)
+
+# warning-ignore:unused_signal
+signal show_arena_ended_screen
 
 # warning-ignore:unused_signal
 signal show_plant_capture_notification

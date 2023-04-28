@@ -900,8 +900,8 @@ respawn_radius = Vector2( 20, 20 )
 
 [node name="end_level_method" parent="objects/part_arena" instance=ExtResource( 10 )]
 method = {
-"args": [ "change_scene_request", "arena_ended_screen", true, 2.0 ],
-"caller": "game_events",
+"args": [ "show_arena_ended_screen" ],
+"caller": "gui_events",
 "method": "emit_signal"
 }
 
@@ -952,4 +952,3 @@ anims/start = SubResource( 2 )
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/delay_for_level_ending" method="start_timer"]
 [connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]
-[connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]

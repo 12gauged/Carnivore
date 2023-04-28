@@ -17,7 +17,7 @@ onready var IncreaseTimer: Timer = $increase_timer
 
 var bounty_counter: float = 0.0
 
-func _ready():
+func _on_screen_visible():
 	self.text = tr(DEFAULT_TEXT) % [initial_bounty, bounty_counter]
 	yield(get_tree().create_timer(START_DELAY), "timeout")
 	IncreaseTimer.start()
@@ -31,7 +31,7 @@ func _on_increase_timer_timeout():
 		
 	bounty_counter = int(min(bounty_counter + acquired_bounty / NUMBER_OF_ADDITIONS, acquired_bounty))
 	self.text = tr(DEFAULT_TEXT) % [initial_bounty, bounty_counter]
+	print("bop")
 	
-	#var timer_duration: float = max(stepify(IncreaseTimer.wait_tim, 0.05), MINIMUM_INCREASE_DELAY)
 	IncreaseTimer.start()
 	

@@ -16,8 +16,13 @@ onready var TRACK_LIST_LEN = len(track_list) - 1
 var track_id: int = 0
 var track_loop: bool = false
 
-func _ready(): 
+func _ready():
+	game_events.connect("stop_music", self, "stop_music")
 	play_music()
+	
+	
+func stop_music():
+	music_player.stop()
 
 
 func play_music():

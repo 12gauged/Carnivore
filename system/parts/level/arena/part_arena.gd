@@ -84,6 +84,8 @@ func _ready():
 	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
 	Spawners = get_node("spawners").get_children()
 	
+	number_of_waves = 1
+	
 		
 func _process(_delta): 
 	if arena_state != RUNNING: return
@@ -175,18 +177,21 @@ func check_enemy_conditions(data: EntityArenaData) -> String:
 func trigger_spawner(spawner_id: int, entity_name: String):
 	return Spawners[spawner_id].spawn_entity(entity_name)
 	
+	
 func get_spawner_count() -> int: return len(Spawners)
+
 
 func start_arena():
 	if arena_state != STOPPED: return
 	arena_state = RUNNING
 	start_wave()
 
+
 func start_wave():
 	arena_state = RUNNING
 	emit_signal("wave_started")
 	player_events.emit_signal("set_stat_value", "can_get_hungry", true)
-	game_events.emit_signal("start_wave_time_tracker")
+
 
 func end_wave():
 	if game_data.current_arena_wave == number_of_waves:
@@ -203,6 +208,7 @@ func end_wave():
 	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = enemies_per_wave * 0.5
 	max_enemy_number = min(max_enemy_number, ENEMY_CAP)
+	
 	if game_data.initial_player_bounty < game_data.DEFAULT_BOUNTY + 10:
 		enemies_per_wave = int(min(15.0, float(enemies_per_wave)))
 		max_enemy_number = int(min(2.0, float(max_enemy_number)))
@@ -212,6 +218,7 @@ func end_wave():
 	wave_start_delay.start(time_between_waves)
 	emit_signal("wave_ended")
 	
+	
 func end_arena():
 	emit_signal("arena_ended")
 	game_events.emit_signal("arena_ended")
@@ -219,14 +226,8 @@ func end_arena():
 	
 	
 	
-func _on_enemy_killed(_id): 
-	dead_enemies.append("enemy")
-	
-func _on_tutorial_ant_killed():
-	game_events.emit_signal("tutorial_ant_dead")
+func _on_enemy_killed(_id): dead_enemies.append("enemy")
+func _on_tutorial_ant_killed(): game_events.emit_signal("tutorial_ant_dead")
 
-func _on_arena_start_request(): 
-	start_wave()
-
-func _on_wave_start_delay_timeout():
-	start_wave()
+func _on_arena_start_request(): start_wave()
+func _on_wave_start_delay_timeout():start_wave()

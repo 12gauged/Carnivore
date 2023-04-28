@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ui/arena_ended_screen/victory_text.gd" type="Script" id=2]
@@ -10,6 +10,23 @@
 [ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=8]
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sounds/entity/player/player_pickup.wav" type="AudioStream" id=10]
+[ext_resource path="res://ui/hud/overlay.gd" type="Script" id=11]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float gray_amount = 4.0;
+
+
+void fragment() {
+	vec4 final_color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	final_color.rgb /= gray_amount;
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/gray_amount = 4.0
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -42,10 +59,88 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="arena_ended_screen" type="Control"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
+
+[node name="darker_colors" type="ColorRect" parent="."]
+pause_mode = 2
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
 
 [node name="sound_streams" type="Node2D" parent="." groups=["sound_streams"]]
 
@@ -156,7 +251,12 @@ method = {
 "method": "emit_signal"
 }
 
-[connection signal="bounty_animation_finished" from="HBoxContainer/VBoxContainer/bounty" to="." method="_on_bounty_bounty_animation_finished"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/fade_in = SubResource( 6 )
+anims/fade_out = SubResource( 7 )
+
+[connection signal="screen_visible" from="." to="HBoxContainer/VBoxContainer/bounty" method="_on_screen_visible"]
 [connection signal="timeout" from="HBoxContainer/VBoxContainer/bounty/increase_timer" to="HBoxContainer/VBoxContainer/bounty" method="_on_increase_timer_timeout"]
 [connection signal="timeout" from="HBoxContainer/VBoxContainer/bounty/increase_timer" to="HBoxContainer/VBoxContainer/bounty/part_sound_streamer" method="play_sound"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/home_button" to="." method="_on_any_button_pressed"]

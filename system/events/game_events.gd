@@ -18,8 +18,4 @@ signal spawn_tutorial_ant
 signal tutorial_ant_dead
 
 # warning-ignore:unused_signal
-signal wave_time_updated(value)
-# warning-ignore:unused_signal
-signal start_wave_time_tracker
-# warning-ignore:unused_signal
-signal stop_wave_time_tracker
+signal stop_music

@@ -50,7 +50,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
 
 uniform float gray_amount = 4.0;
@@ -63,13 +63,12 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 3 )
+shader = SubResource( 10 )
 shader_param/gray_amount = 4.0
 
 [node name="hud" type="CanvasLayer"]
 
 [node name="main_hud" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
@@ -207,3 +206,4 @@ visible = false
 [connection signal="opened_menu" from="skill_tree_menu" to="main_hud/darker_colors" method="show"]
 [connection signal="exited_menu" from="ProgressMenu" to="main_hud/darker_colors" method="hide"]
 [connection signal="opened_menu" from="ProgressMenu" to="main_hud/darker_colors" method="show"]
+[connection signal="screen_visible" from="arena_ended_screen" to="main_hud/darker_colors" method="show"]
