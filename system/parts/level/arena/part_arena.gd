@@ -79,7 +79,7 @@ func _ready():
 	
 	initial_enemies_per_wave_value = enemies_per_wave
 	
-	max_enemy_number = max(int(float(enemies_per_wave) * 0.25), 1)
+	max_enemy_number = int(max(int(float(enemies_per_wave) * 0.25), 1.0))
 	initial_max_enemy_number = max_enemy_number
 	
 	enemy_counter = {FILLER_ENEMY: 0}
@@ -189,7 +189,7 @@ func end_wave():
 	
 	enemies_per_wave = ceil(initial_enemies_per_wave_value + enemies_per_wave_modifier * game_data.current_arena_wave)
 	max_enemy_number = enemies_per_wave * 0.5
-	max_enemy_number = min(max_enemy_number, ENEMY_CAP)
+	max_enemy_number = int(min(float(max_enemy_number), float(ENEMY_CAP)))
 	
 	if game_data.initial_player_bounty < game_data.DEFAULT_BOUNTY + 10:
 		enemies_per_wave = int(min(15.0, float(enemies_per_wave)))

@@ -7,8 +7,8 @@ signal healing
 signal charging
 
 
-const HUNGER_DECREASE_DELAY_WHEN_FULL: float = 1.5
-const DEFAULT_HUNGER_DECREASE_DELAY: float = 3.0
+const HUNGER_DECREASE_DELAY_WHEN_FULL: float = 1.0
+const DEFAULT_HUNGER_DECREASE_DELAY: float = 1.5
 var HUNGER_DECREASE_DELAY: float = DEFAULT_HUNGER_DECREASE_DELAY ## had to turn this bitch into a var because of the skill system
 var ENERGY_DECREASE_DELAY: float = 0.6 ## same as above
 const HUNGER_DECREASE_DELAY_TUTORIAL: float = 4.0
@@ -151,6 +151,17 @@ func reset_stat_decrease_timer(mode: String):
 func update_stat(id: String, value: int, animate: bool = true):
 	set_stat(id, value)
 	player_events.emit_signal("status_value_update", id, get_stat(id), animate)
+	
+	if id != "can_get_hungry": return
+	var can_get_hungry: bool = bool(value)
+	if can_get_hungry:
+		print("player.gd: enabled hunger!")
+		start_stat_decrease_timer(get_stat("hunger"))
+		return
+	print("player.gd: disabled hunger!")
+	StatDecreaseTimer.stop()
+		
+		
 
 func start_invincibility():
 	set_stat("invincible", true)

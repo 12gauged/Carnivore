@@ -113,6 +113,7 @@ anims/highlight_long = SubResource( 8 )
 [node name="hunger_bar" parent="main_hud/top_elements/status_bars" instance=ExtResource( 4 )]
 margin_left = 103.0
 margin_right = 151.0
+critical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="main_hud/top_elements"]
 margin_top = 14.0
@@ -185,6 +186,9 @@ size_flags_horizontal = 6
 [node name="desktop_ui" parent="main_hud" instance=ExtResource( 8 )]
 
 [node name="mobile_ui" parent="main_hud" instance=ExtResource( 11 )]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="darker_colors" type="ColorRect" parent="main_hud"]
 pause_mode = 2
@@ -204,6 +208,7 @@ visible = false
 visible = false
 
 [node name="arena_ended_screen" parent="." instance=ExtResource( 15 )]
+visible = false
 
 [connection signal="timeout" from="main_hud/top_elements/notifs/wave_notification/notification_disappear_delay" to="main_hud/top_elements/notifs/wave_notification" method="_on_notification_disappear_delay_timeout"]
 [connection signal="paused" from="pause_screen" to="main_hud/darker_colors" method="show"]

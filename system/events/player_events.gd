@@ -19,7 +19,9 @@ signal held_projectile_updated(held_projectile)
 # warning-ignore:unused_signal
 signal switch_projectile_request()
 
+# warning-ignore:unused_signal
 signal no_projectiles
+# warning-ignore:unused_signal
 signal has_projectiles
 
 # warning-ignore:unused_signal

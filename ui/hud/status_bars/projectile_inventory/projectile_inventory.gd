@@ -17,7 +17,9 @@ var inventory: Dictionary = {
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	player_events.connect("projectile_inventory_updated", self, "_on_projectile_inventory_updated")
+	# warning-ignore:return_value_discarded
 	player_events.connect("held_projectile_updated", self, "_on_held_projectile_updated")
 	
 	for projectile in inventory:
@@ -25,8 +27,8 @@ func _ready():
 	
 	
 	
-func _on_projectile_inventory_updated(inventory):
-	for projectile in inventory:
+func _on_projectile_inventory_updated(updated_inventory):
+	for projectile in updated_inventory:
 		if inventory[projectile]: set_obtained(projectile)
 		
 func _on_held_projectile_updated(new_projectile):
