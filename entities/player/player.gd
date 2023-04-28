@@ -44,7 +44,6 @@ func _ready():
 	call_deferred("update_stat", "health", get_stat("health"), false)
 	
 	
-	## adds 20% of speed if you have the speed boost skill
 	MAX_SPEED = MAX_SPEED + 15.0 / float(MAX_SPEED) * 100.0 if game_data.player_data.skills.speed_boost else MAX_SPEED
 	DEFAULT_MAX_SPEED = MAX_SPEED
 	
@@ -255,13 +254,15 @@ func apply_damage(damage: int):
 	start_invincibility()
 	start_blinking()
 	
-	var value_to_update = "health" if get_stat("shields") <= 0 else "shields"
-	var health_after_damage = get_stat(value_to_update) - damage
+	var new_shields = get_stat("shields")
+	var new_health = get_stat("health")
+	var damage_to_health = abs(min(new_shields - damage, 0))
+
+	new_shields = max(new_shields - damage, 0)
+	new_health = new_health - damage_to_health
 	
-	update_stat(
-		value_to_update,
-		health_after_damage
-	)
+	update_stat("shields", new_shields)
+	update_stat("health", new_health)
 	
 	camera_events.emit_signal("camera_shake_request", DAMAGE_CAMERA_SHAKE_DURATION, DAMAGE_CAMERA_SHAKE_INTENSITY)
 	

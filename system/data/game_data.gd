@@ -77,6 +77,9 @@ func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN d
 	player_data.bounty = 2000
 	player_data.skill_points = 69
 	
+	player_data.skills.hard_skin = true
+	#player_data.skills.body_armor = true
+	
 func override_game_settings(value: Dictionary): game_settings = value.duplicate(true)
 func override_player_data(value: Dictionary): player_data = value.duplicate(true)
 
