@@ -1,23 +1,24 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/gui/text_box/tutorial_text_box.png" type="Texture" id=3]
+[ext_resource path="res://world/jail/jail_gate.png" type="Texture" id=3]
 [ext_resource path="res://world/jail/jail_tileset.png" type="Texture" id=4]
-[ext_resource path="res://ui/gui/icons/small_star_icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/levels/jail/gate.gd" type="Script" id=5]
 [ext_resource path="res://system/parts/level/part_player_camera.tscn" type="PackedScene" id=6]
-[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://world/jail/table_1.png" type="Texture" id=7]
 [ext_resource path="res://system/components/callers/comp_method_caller.tscn" type="PackedScene" id=8]
 [ext_resource path="res://system/parts/part_tag_detector.tscn" type="PackedScene" id=9]
 [ext_resource path="res://world/gate.png" type="Texture" id=10]
 [ext_resource path="res://scenes/levels/jail/jail.gd" type="Script" id=11]
-[ext_resource path="res://scenes/levels/jail/box.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world/jail/table_0.png" type="Texture" id=12]
 [ext_resource path="res://scenes/levels/jail/barrel.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/levels/jail/table.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/levels/jail/chains.tscn" type="PackedScene" id=15]
 [ext_resource path="res://world/jail/skill_tree_area/skill_tree_area.tscn" type="PackedScene" id=16]
 [ext_resource path="res://world/jail/skill_tree_area/vines_end.png" type="Texture" id=17]
 [ext_resource path="res://world/jail/skill_tree_area/vines_repeat.png" type="Texture" id=18]
+[ext_resource path="res://world/jail/spear_stand.png" type="Texture" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=15]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
@@ -34,7 +35,46 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=25]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
 
+[sub_resource type="ConvexPolygonShape2D" id=30]
+points = PoolVector2Array( 16, 5, 0, 5, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=31]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
+
 [sub_resource type="ConvexPolygonShape2D" id=16]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=26]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 4, 0, 4 )
+
+[sub_resource type="ConvexPolygonShape2D" id=33]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=34]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=35]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=27]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=28]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=29]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=36]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=37]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=32]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=38]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=17]
@@ -370,7 +410,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 19/texture = ExtResource( 4 )
 19/tex_offset = Vector2( 0, 0 )
 19/modulate = Color( 1, 1, 1, 1 )
-19/region = Rect2( 96, 16, 16, 16 )
+19/region = Rect2( 96, 0, 16, 16 )
 19/tile_mode = 0
 19/occluder_offset = Vector2( 0, 0 )
 19/navigation_offset = Vector2( 0, 0 )
@@ -380,21 +420,625 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 19/shape_one_way_margin = 0.0
 19/shapes = [  ]
 19/z_index = 0
+20/name = "jail_tileset.png 20"
+20/texture = ExtResource( 4 )
+20/tex_offset = Vector2( 0, 0 )
+20/modulate = Color( 1, 1, 1, 1 )
+20/region = Rect2( 96, 16, 16, 16 )
+20/tile_mode = 0
+20/occluder_offset = Vector2( 0, 0 )
+20/navigation_offset = Vector2( 0, 0 )
+20/shape_offset = Vector2( 0, 0 )
+20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+20/shape_one_way = false
+20/shape_one_way_margin = 0.0
+20/shapes = [  ]
+20/z_index = 0
+21/name = "jail_tileset.png 21"
+21/texture = ExtResource( 4 )
+21/tex_offset = Vector2( 0, 0 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 96, 32, 16, 16 )
+21/tile_mode = 0
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape_one_way = false
+21/shape_one_way_margin = 0.0
+21/shapes = [  ]
+21/z_index = 0
+22/name = "jail_tileset.png 22"
+22/texture = ExtResource( 4 )
+22/tex_offset = Vector2( 0, 0 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 96, 48, 16, 16 )
+22/tile_mode = 0
+22/occluder_offset = Vector2( 0, 0 )
+22/navigation_offset = Vector2( 0, 0 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape = SubResource( 30 )
+22/shape_one_way = false
+22/shape_one_way_margin = 1.0
+22/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 30 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+22/z_index = 0
+23/name = "jail_tileset.png 23"
+23/texture = ExtResource( 4 )
+23/tex_offset = Vector2( 0, 0 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 112, 0, 16, 16 )
+23/tile_mode = 0
+23/occluder_offset = Vector2( 0, 0 )
+23/navigation_offset = Vector2( 0, 0 )
+23/shape_offset = Vector2( 0, 0 )
+23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape_one_way = false
+23/shape_one_way_margin = 0.0
+23/shapes = [  ]
+23/z_index = 0
+24/name = "jail_tileset.png 24"
+24/texture = ExtResource( 4 )
+24/tex_offset = Vector2( 0, 0 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 112, 16, 16, 16 )
+24/tile_mode = 0
+24/occluder_offset = Vector2( 0, 0 )
+24/navigation_offset = Vector2( 0, 0 )
+24/shape_offset = Vector2( 0, 0 )
+24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape_one_way = false
+24/shape_one_way_margin = 0.0
+24/shapes = [  ]
+24/z_index = 0
+25/name = "jail_tileset.png 25"
+25/texture = ExtResource( 4 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 112, 32, 16, 16 )
+25/tile_mode = 0
+25/occluder_offset = Vector2( 0, 0 )
+25/navigation_offset = Vector2( 0, 0 )
+25/shape_offset = Vector2( 0, 0 )
+25/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+25/shape_one_way = false
+25/shape_one_way_margin = 0.0
+25/shapes = [  ]
+25/z_index = 0
+26/name = "jail_tileset.png 26"
+26/texture = ExtResource( 4 )
+26/tex_offset = Vector2( 0, 0 )
+26/modulate = Color( 1, 1, 1, 1 )
+26/region = Rect2( 112, 48, 16, 16 )
+26/tile_mode = 0
+26/occluder_offset = Vector2( 0, 0 )
+26/navigation_offset = Vector2( 0, 0 )
+26/shape_offset = Vector2( 0, 0 )
+26/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+26/shape = SubResource( 31 )
+26/shape_one_way = false
+26/shape_one_way_margin = 1.0
+26/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 31 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+26/z_index = 0
+27/name = "jail_tileset.png 27"
+27/texture = ExtResource( 4 )
+27/tex_offset = Vector2( 0, 0 )
+27/modulate = Color( 1, 1, 1, 1 )
+27/region = Rect2( 128, 0, 16, 16 )
+27/tile_mode = 0
+27/occluder_offset = Vector2( 0, 0 )
+27/navigation_offset = Vector2( 0, 0 )
+27/shape_offset = Vector2( 0, 0 )
+27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape_one_way = false
+27/shape_one_way_margin = 0.0
+27/shapes = [  ]
+27/z_index = 0
+28/name = "jail_tileset.png 28"
+28/texture = ExtResource( 4 )
+28/tex_offset = Vector2( 0, 0 )
+28/modulate = Color( 1, 1, 1, 1 )
+28/region = Rect2( 144, 0, 16, 16 )
+28/tile_mode = 0
+28/occluder_offset = Vector2( 0, 0 )
+28/navigation_offset = Vector2( 0, 0 )
+28/shape_offset = Vector2( 0, 0 )
+28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+28/shape_one_way = false
+28/shape_one_way_margin = 0.0
+28/shapes = [  ]
+28/z_index = 0
+29/name = "jail_tileset.png 29"
+29/texture = ExtResource( 4 )
+29/tex_offset = Vector2( 0, 0 )
+29/modulate = Color( 1, 1, 1, 1 )
+29/region = Rect2( 160, 0, 16, 16 )
+29/tile_mode = 0
+29/occluder_offset = Vector2( 0, 0 )
+29/navigation_offset = Vector2( 0, 0 )
+29/shape_offset = Vector2( 0, 0 )
+29/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+29/shape_one_way = false
+29/shape_one_way_margin = 0.0
+29/shapes = [  ]
+29/z_index = 0
+30/name = "jail_tileset.png 30"
+30/texture = ExtResource( 4 )
+30/tex_offset = Vector2( 0, 0 )
+30/modulate = Color( 1, 1, 1, 1 )
+30/region = Rect2( 128, 16, 16, 16 )
+30/tile_mode = 0
+30/occluder_offset = Vector2( 0, 0 )
+30/navigation_offset = Vector2( 0, 0 )
+30/shape_offset = Vector2( 0, 0 )
+30/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+30/shape_one_way = false
+30/shape_one_way_margin = 0.0
+30/shapes = [  ]
+30/z_index = 0
+31/name = "jail_tileset.png 31"
+31/texture = ExtResource( 4 )
+31/tex_offset = Vector2( 0, 0 )
+31/modulate = Color( 1, 1, 1, 1 )
+31/region = Rect2( 128, 32, 16, 16 )
+31/tile_mode = 0
+31/occluder_offset = Vector2( 0, 0 )
+31/navigation_offset = Vector2( 0, 0 )
+31/shape_offset = Vector2( 0, 0 )
+31/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+31/shape = SubResource( 26 )
+31/shape_one_way = false
+31/shape_one_way_margin = 1.0
+31/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 26 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+31/z_index = 0
+32/name = "jail_tileset.png 32"
+32/texture = ExtResource( 4 )
+32/tex_offset = Vector2( 0, 0 )
+32/modulate = Color( 1, 1, 1, 1 )
+32/region = Rect2( 128, 48, 16, 16 )
+32/tile_mode = 0
+32/occluder_offset = Vector2( 0, 0 )
+32/navigation_offset = Vector2( 0, 0 )
+32/shape_offset = Vector2( 0, 0 )
+32/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+32/shape_one_way = false
+32/shape_one_way_margin = 0.0
+32/shapes = [  ]
+32/z_index = 0
+33/name = "jail_tileset.png 33"
+33/texture = ExtResource( 4 )
+33/tex_offset = Vector2( 0, 0 )
+33/modulate = Color( 1, 1, 1, 1 )
+33/region = Rect2( 48, 48, 16, 16 )
+33/tile_mode = 0
+33/occluder_offset = Vector2( 0, 0 )
+33/navigation_offset = Vector2( 0, 0 )
+33/shape_offset = Vector2( 0, 0 )
+33/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+33/shape_one_way = false
+33/shape_one_way_margin = 0.0
+33/shapes = [  ]
+33/z_index = 0
+34/name = "jail_tileset.png 34"
+34/texture = ExtResource( 4 )
+34/tex_offset = Vector2( 0, 0 )
+34/modulate = Color( 1, 1, 1, 1 )
+34/region = Rect2( 0, 64, 16, 16 )
+34/tile_mode = 0
+34/occluder_offset = Vector2( 0, 0 )
+34/navigation_offset = Vector2( 0, 0 )
+34/shape_offset = Vector2( 0, 0 )
+34/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+34/shape_one_way = false
+34/shape_one_way_margin = 0.0
+34/shapes = [  ]
+34/z_index = 0
+35/name = "jail_tileset.png 35"
+35/texture = ExtResource( 4 )
+35/tex_offset = Vector2( 0, 0 )
+35/modulate = Color( 1, 1, 1, 1 )
+35/region = Rect2( 16, 64, 16, 16 )
+35/tile_mode = 0
+35/occluder_offset = Vector2( 0, 0 )
+35/navigation_offset = Vector2( 0, 0 )
+35/shape_offset = Vector2( 0, 0 )
+35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+35/shape = SubResource( 33 )
+35/shape_one_way = false
+35/shape_one_way_margin = 1.0
+35/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 33 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+35/z_index = 0
+36/name = "jail_tileset.png 36"
+36/texture = ExtResource( 4 )
+36/tex_offset = Vector2( 0, 0 )
+36/modulate = Color( 1, 1, 1, 1 )
+36/region = Rect2( 32, 64, 16, 16 )
+36/tile_mode = 0
+36/occluder_offset = Vector2( 0, 0 )
+36/navigation_offset = Vector2( 0, 0 )
+36/shape_offset = Vector2( 0, 0 )
+36/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+36/shape_one_way = false
+36/shape_one_way_margin = 0.0
+36/shapes = [  ]
+36/z_index = 0
+37/name = "jail_tileset.png 37"
+37/texture = ExtResource( 4 )
+37/tex_offset = Vector2( 0, 0 )
+37/modulate = Color( 1, 1, 1, 1 )
+37/region = Rect2( 0, 80, 16, 16 )
+37/tile_mode = 0
+37/occluder_offset = Vector2( 0, 0 )
+37/navigation_offset = Vector2( 0, 0 )
+37/shape_offset = Vector2( 0, 0 )
+37/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+37/shape = SubResource( 34 )
+37/shape_one_way = false
+37/shape_one_way_margin = 1.0
+37/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 34 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+37/z_index = 0
+38/name = "jail_tileset.png 38"
+38/texture = ExtResource( 4 )
+38/tex_offset = Vector2( 0, 0 )
+38/modulate = Color( 1, 1, 1, 1 )
+38/region = Rect2( 32, 80, 16, 16 )
+38/tile_mode = 0
+38/occluder_offset = Vector2( 0, 0 )
+38/navigation_offset = Vector2( 0, 0 )
+38/shape_offset = Vector2( 0, 0 )
+38/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+38/shape = SubResource( 35 )
+38/shape_one_way = false
+38/shape_one_way_margin = 1.0
+38/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 35 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+38/z_index = 0
+39/name = "jail_tileset.png 39"
+39/texture = ExtResource( 4 )
+39/tex_offset = Vector2( 0, 0 )
+39/modulate = Color( 1, 1, 1, 1 )
+39/region = Rect2( 0, 96, 16, 16 )
+39/tile_mode = 0
+39/occluder_offset = Vector2( 0, 0 )
+39/navigation_offset = Vector2( 0, 0 )
+39/shape_offset = Vector2( 0, 0 )
+39/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+39/shape = SubResource( 27 )
+39/shape_one_way = false
+39/shape_one_way_margin = 1.0
+39/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 27 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+39/z_index = 0
+40/name = "jail_tileset.png 40"
+40/texture = ExtResource( 4 )
+40/tex_offset = Vector2( 0, 0 )
+40/modulate = Color( 1, 1, 1, 1 )
+40/region = Rect2( 16, 96, 16, 16 )
+40/tile_mode = 0
+40/occluder_offset = Vector2( 0, 0 )
+40/navigation_offset = Vector2( 0, 0 )
+40/shape_offset = Vector2( 0, 0 )
+40/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+40/shape = SubResource( 28 )
+40/shape_one_way = false
+40/shape_one_way_margin = 1.0
+40/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 28 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+40/z_index = 0
+41/name = "jail_tileset.png 41"
+41/texture = ExtResource( 4 )
+41/tex_offset = Vector2( 0, 0 )
+41/modulate = Color( 1, 1, 1, 1 )
+41/region = Rect2( 32, 96, 16, 16 )
+41/tile_mode = 0
+41/occluder_offset = Vector2( 0, 0 )
+41/navigation_offset = Vector2( 0, 0 )
+41/shape_offset = Vector2( 0, 0 )
+41/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+41/shape = SubResource( 29 )
+41/shape_one_way = false
+41/shape_one_way_margin = 1.0
+41/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 29 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 36 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 37 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+41/z_index = 0
+42/name = "jail_tileset.png 42"
+42/texture = ExtResource( 4 )
+42/tex_offset = Vector2( 0, 0 )
+42/modulate = Color( 1, 1, 1, 1 )
+42/region = Rect2( 48, 64, 16, 16 )
+42/tile_mode = 0
+42/occluder_offset = Vector2( 0, 0 )
+42/navigation_offset = Vector2( 0, 0 )
+42/shape_offset = Vector2( 0, 0 )
+42/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+42/shape_one_way = false
+42/shape_one_way_margin = 0.0
+42/shapes = [  ]
+42/z_index = 0
+43/name = "jail_tileset.png 43"
+43/texture = ExtResource( 4 )
+43/tex_offset = Vector2( 0, 0 )
+43/modulate = Color( 1, 1, 1, 1 )
+43/region = Rect2( 64, 64, 16, 16 )
+43/tile_mode = 0
+43/occluder_offset = Vector2( 0, 0 )
+43/navigation_offset = Vector2( 0, 0 )
+43/shape_offset = Vector2( 0, 0 )
+43/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+43/shape_one_way = false
+43/shape_one_way_margin = 0.0
+43/shapes = [  ]
+43/z_index = 0
+44/name = "jail_tileset.png 44"
+44/texture = ExtResource( 4 )
+44/tex_offset = Vector2( 0, 0 )
+44/modulate = Color( 1, 1, 1, 1 )
+44/region = Rect2( 80, 64, 16, 16 )
+44/tile_mode = 0
+44/occluder_offset = Vector2( 0, 0 )
+44/navigation_offset = Vector2( 0, 0 )
+44/shape_offset = Vector2( 0, 0 )
+44/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+44/shape_one_way = false
+44/shape_one_way_margin = 0.0
+44/shapes = [  ]
+44/z_index = 0
+45/name = "jail_tileset.png 45"
+45/texture = ExtResource( 4 )
+45/tex_offset = Vector2( 0, 0 )
+45/modulate = Color( 1, 1, 1, 1 )
+45/region = Rect2( 48, 80, 16, 16 )
+45/tile_mode = 0
+45/occluder_offset = Vector2( 0, 0 )
+45/navigation_offset = Vector2( 0, 0 )
+45/shape_offset = Vector2( 0, 0 )
+45/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+45/shape = SubResource( 32 )
+45/shape_one_way = false
+45/shape_one_way_margin = 1.0
+45/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 32 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+45/z_index = 0
+46/name = "jail_tileset.png 46"
+46/texture = ExtResource( 4 )
+46/tex_offset = Vector2( 0, 0 )
+46/modulate = Color( 1, 1, 1, 1 )
+46/region = Rect2( 80, 80, 16, 16 )
+46/tile_mode = 0
+46/occluder_offset = Vector2( 0, 0 )
+46/navigation_offset = Vector2( 0, 0 )
+46/shape_offset = Vector2( 0, 0 )
+46/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+46/shape = SubResource( 38 )
+46/shape_one_way = false
+46/shape_one_way_margin = 1.0
+46/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 38 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+46/z_index = 0
+47/name = "jail_tileset.png 47"
+47/texture = ExtResource( 4 )
+47/tex_offset = Vector2( 0, 0 )
+47/modulate = Color( 1, 1, 1, 1 )
+47/region = Rect2( 48, 96, 16, 16 )
+47/tile_mode = 0
+47/occluder_offset = Vector2( 0, 0 )
+47/navigation_offset = Vector2( 0, 0 )
+47/shape_offset = Vector2( 0, 0 )
+47/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+47/shape_one_way = false
+47/shape_one_way_margin = 0.0
+47/shapes = [  ]
+47/z_index = 0
+48/name = "jail_tileset.png 48"
+48/texture = ExtResource( 4 )
+48/tex_offset = Vector2( 0, 0 )
+48/modulate = Color( 1, 1, 1, 1 )
+48/region = Rect2( 80, 96, 16, 16 )
+48/tile_mode = 0
+48/occluder_offset = Vector2( 0, 0 )
+48/navigation_offset = Vector2( 0, 0 )
+48/shape_offset = Vector2( 0, 0 )
+48/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+48/shape_one_way = false
+48/shape_one_way_margin = 0.0
+48/shapes = [  ]
+48/z_index = 0
+49/name = "jail_tileset.png 49"
+49/texture = ExtResource( 4 )
+49/tex_offset = Vector2( 0, 0 )
+49/modulate = Color( 1, 1, 1, 1 )
+49/region = Rect2( 64, 96, 16, 16 )
+49/tile_mode = 0
+49/occluder_offset = Vector2( 0, 0 )
+49/navigation_offset = Vector2( 0, 0 )
+49/shape_offset = Vector2( 0, 0 )
+49/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+49/shape_one_way = false
+49/shape_one_way_margin = 0.0
+49/shapes = [  ]
+49/z_index = 0
+50/name = "jail_tileset.png 50"
+50/texture = ExtResource( 4 )
+50/tex_offset = Vector2( 0, 0 )
+50/modulate = Color( 1, 1, 1, 1 )
+50/region = Rect2( 144, 48, 16, 16 )
+50/tile_mode = 0
+50/occluder_offset = Vector2( 0, 0 )
+50/navigation_offset = Vector2( 0, 0 )
+50/shape_offset = Vector2( 0, 0 )
+50/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+50/shape_one_way = false
+50/shape_one_way_margin = 0.0
+50/shapes = [  ]
+50/z_index = 0
+51/name = "jail_tileset.png 51"
+51/texture = ExtResource( 4 )
+51/tex_offset = Vector2( 0, 0 )
+51/modulate = Color( 1, 1, 1, 1 )
+51/region = Rect2( 160, 48, 16, 16 )
+51/tile_mode = 0
+51/occluder_offset = Vector2( 0, 0 )
+51/navigation_offset = Vector2( 0, 0 )
+51/shape_offset = Vector2( 0, 0 )
+51/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+51/shape_one_way = false
+51/shape_one_way_margin = 0.0
+51/shapes = [  ]
+51/z_index = 0
+52/name = "jail_tileset.png 52"
+52/texture = ExtResource( 4 )
+52/tex_offset = Vector2( 0, 0 )
+52/modulate = Color( 1, 1, 1, 1 )
+52/region = Rect2( 96, 64, 16, 16 )
+52/tile_mode = 0
+52/occluder_offset = Vector2( 0, 0 )
+52/navigation_offset = Vector2( 0, 0 )
+52/shape_offset = Vector2( 0, 0 )
+52/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+52/shape_one_way = false
+52/shape_one_way_margin = 0.0
+52/shapes = [  ]
+52/z_index = 0
+53/name = "jail_tileset.png 53"
+53/texture = ExtResource( 4 )
+53/tex_offset = Vector2( 0, 0 )
+53/modulate = Color( 1, 1, 1, 1 )
+53/region = Rect2( 96, 80, 16, 16 )
+53/tile_mode = 0
+53/occluder_offset = Vector2( 0, 0 )
+53/navigation_offset = Vector2( 0, 0 )
+53/shape_offset = Vector2( 0, 0 )
+53/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+53/shape_one_way = false
+53/shape_one_way_margin = 0.0
+53/shapes = [  ]
+53/z_index = 0
+54/name = "jail_tileset.png 54"
+54/texture = ExtResource( 4 )
+54/tex_offset = Vector2( 0, 0 )
+54/modulate = Color( 1, 1, 1, 1 )
+54/region = Rect2( 96, 96, 16, 16 )
+54/tile_mode = 0
+54/occluder_offset = Vector2( 0, 0 )
+54/navigation_offset = Vector2( 0, 0 )
+54/shape_offset = Vector2( 0, 0 )
+54/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+54/shape_one_way = false
+54/shape_one_way_margin = 0.0
+54/shapes = [  ]
+54/z_index = 0
+55/name = "jail_tileset.png 55"
+55/texture = ExtResource( 4 )
+55/tex_offset = Vector2( 0, 0 )
+55/modulate = Color( 1, 1, 1, 1 )
+55/region = Rect2( 64, 32, 16, 16 )
+55/tile_mode = 0
+55/occluder_offset = Vector2( 0, 0 )
+55/navigation_offset = Vector2( 0, 0 )
+55/shape_offset = Vector2( 0, 0 )
+55/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+55/shape_one_way = false
+55/shape_one_way_margin = 0.0
+55/shapes = [  ]
+55/z_index = 0
+56/name = "jail_tileset.png 56"
+56/texture = ExtResource( 4 )
+56/tex_offset = Vector2( 0, 0 )
+56/modulate = Color( 1, 1, 1, 1 )
+56/region = Rect2( 64, 48, 16, 16 )
+56/tile_mode = 0
+56/occluder_offset = Vector2( 0, 0 )
+56/navigation_offset = Vector2( 0, 0 )
+56/shape_offset = Vector2( 0, 0 )
+56/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+56/shape_one_way = false
+56/shape_one_way_margin = 0.0
+56/shapes = [  ]
+56/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=20]
-extents = Vector2( 4, 5.5 )
+extents = Vector2( 2.5, 5.5 )
 
 [sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 4, 5.5 )
+extents = Vector2( 2.5, 5.5 )
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 11.25, 5.5 )
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 11.5202, 5 )
-
-[sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 28, 15 )
-
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 28, 15 )
 
 [node name="jail" type="Node2D"]
 script = ExtResource( 11 )
@@ -406,8 +1050,9 @@ skills_disabled = true
 tile_set = SubResource( 19 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+show_collision = true
 format = 1
-tile_data = PoolIntArray( -196608, 0, 0, -196607, 1, 0, -196606, 1, 0, -196605, 1, 0, -196604, 1, 0, -196603, 1, 0, -196602, 1, 0, -196601, 1, 0, -196600, 1, 0, -196599, 1, 0, -196598, 1, 0, -196597, 1, 0, -196596, 1, 0, -196595, 2, 0, -131072, 7, 0, -131071, 13, 0, -131070, 10, 0, -131068, 8, 0, -131067, 10, 0, -131063, 10, 0, -131061, 8, 0, -131059, 3, 0, -65536, 7, 0, -65535, 10, 0, -65534, 19, 0, -65532, 19, 0, -65531, 8, 0, -65527, 19, 0, -65526, 10, 0, -65525, 19, 0, -65524, 10, 0, -65523, 3, 0, 0, 7, 0, 1, 12, 0, 2, 12, 0, 3, 12, 0, 4, 12, 0, 5, 12, 0, 8, 12, 0, 9, 12, 0, 10, 12, 0, 11, 12, 0, 12, 12, 0, 13, 15, 0, 14, 1, 0, 15, 1, 0, 16, 2, 0, 65536, 7, 0, 65538, 9, 0, 65541, 11, 0, 65544, 11, 0, 65546, 9, 0, 65549, 17, 0, 65550, 10, 0, 65551, 14, 0, 65552, 3, 0, 131072, 7, 0, 131077, 10, 0, 131085, 16, 0, 131087, 8, 0, 131088, 3, 0, 196608, 7, 0, 196610, 9, 0, 196614, 9, 0, 196620, 9, 0, 196621, 18, 0, 196622, 12, 0, 196623, 12, 0, 196624, 3, 0, 262144, 7, 0, 262145, 11, 0, 262154, 8, 0, 262160, 3, 0, 327680, 7, 0, 327683, 10, 0, 327696, 3, 0, 393216, 7, 0, 393217, 9, 0, 393224, 11, 0, 393232, 3, 0, 458752, 6, 0, 458753, 5, 0, 458754, 5, 0, 458755, 5, 0, 458756, 5, 0, 458757, 5, 0, 458758, 5, 0, 458759, 5, 0, 458760, 5, 0, 458761, 5, 0, 458762, 5, 0, 458763, 5, 0, 458764, 5, 0, 458765, 5, 0, 458766, 5, 0, 458767, 5, 0, 458768, 4, 0 )
+tile_data = PoolIntArray( -917483, 46, 0, -917479, 45, 0, -851947, 46, 0, -851944, 9, 0, -851943, 45, 0, -786411, 46, 0, -786407, 45, 0, -720875, 46, 0, -720874, 9, 0, -720871, 45, 0, -655339, 46, 0, -655337, 11, 0, -655335, 45, 0, -524303, 34, 0, -524302, 49, 0, -524301, 49, 0, -524300, 49, 0, -524299, 49, 0, -524298, 49, 0, -524297, 49, 0, -524296, 49, 0, -524295, 49, 0, -524294, 49, 0, -524293, 49, 0, -524292, 49, 0, -524291, 49, 0, -524290, 49, 0, -524289, 49, 0, -589824, 49, 0, -589823, 49, 0, -589822, 49, 0, -589821, 49, 0, -589820, 49, 0, -589819, 49, 0, -589818, 49, 0, -589817, 49, 0, -589816, 49, 0, -589815, 49, 0, -589814, 49, 0, -589813, 49, 0, -589812, 49, 0, -589811, 49, 0, -589810, 49, 0, -589809, 49, 0, -589808, 49, 0, -589807, 49, 0, -589806, 49, 0, -589805, 49, 0, -589804, 49, 0, -589803, 48, 0, -589799, 47, 0, -589798, 49, 0, -589797, 49, 0, -589796, 49, 0, -589795, 49, 0, -589794, 49, 0, -589793, 49, 0, -589792, 49, 0, -589791, 49, 0, -589790, 49, 0, -589789, 49, 0, -589788, 49, 0, -589787, 49, 0, -589786, 49, 0, -589785, 49, 0, -589784, 49, 0, -589783, 49, 0, -589782, 49, 0, -589781, 49, 0, -458767, 37, 0, -458766, 13, 0, -458763, 8, 0, -458754, 8, 0, -524279, 8, 0, -524277, 8, 0, -524267, 53, 0, -524263, 25, 0, -524260, 8, 0, -524254, 10, 0, -524250, 8, 0, -524246, 8, 0, -393231, 37, 0, -393228, 8, 0, -393226, 10, 0, -393225, 10, 0, -393224, 8, 0, -393223, 10, 0, -393219, 10, 0, -393217, 8, 0, -458750, 8, 0, -458749, 8, 0, -458748, 10, 0, -458746, 10, 0, -458745, 8, 0, -458744, 10, 0, -458743, 10, 0, -458742, 8, 0, -458741, 10, 0, -458737, 10, 0, -458736, 8, 0, -458731, 52, 0, -458730, 11, 0, -458729, 9, 0, -458727, 16, 0, -458725, 10, 0, -458723, 10, 0, -458721, 8, 0, -458720, 10, 0, -458718, 8, 0, -458716, 10, 0, -458715, 55, 0, -458712, 10, 0, -458711, 8, 0, -458709, 10, 0, -327695, 37, 0, -327694, 12, 0, -327693, 33, 0, -327692, 12, 0, -327691, 12, 0, -327690, 12, 0, -327689, 56, 0, -327688, 12, 0, -327687, 33, 0, -327686, 33, 0, -327685, 12, 0, -327684, 56, 0, -327683, 12, 0, -327682, 56, 0, -327681, 33, 0, -393216, 12, 0, -393215, 12, 0, -393214, 55, 0, -393213, 12, 0, -393212, 33, 0, -393211, 12, 0, -393210, 33, 0, -393209, 12, 0, -393208, 12, 0, -393207, 12, 0, -393206, 33, 0, -393205, 12, 0, -393204, 33, 0, -393203, 12, 0, -393202, 12, 0, -393201, 12, 0, -393200, 33, 0, -393199, 12, 0, -393198, 56, 0, -393197, 12, 0, -393196, 12, 0, -393195, 54, 0, -393191, 26, 0, -393190, 12, 0, -393189, 55, 0, -393188, 12, 0, -393187, 33, 0, -393186, 12, 0, -393185, 12, 0, -393184, 12, 0, -393183, 56, 0, -393182, 12, 0, -393181, 12, 0, -393180, 55, 0, -393179, 12, 0, -393178, 12, 0, -393177, 56, 0, -393176, 56, 0, -393175, 12, 0, -393174, 55, 0, -393173, 12, 0, -262159, 37, 0, -262158, 9, 0, -262153, 11, 0, -262148, 9, 0, -327679, 11, 0, -327669, 11, 0, -327665, 9, 0, -327661, 11, 0, -327660, 9, 0, -327656, 11, 0, -327650, 11, 0, -327649, 9, 0, -196623, 37, 0, -196621, 11, 0, -196618, 9, 0, -196612, 11, 0, -196611, 11, 0, -262139, 11, 0, -262137, 11, 0, -262136, 9, 0, -262132, 11, 0, -262131, 11, 0, -262123, 11, 0, -262116, 9, 0, -262111, 11, 0, -262110, 9, 0, -131087, 39, 0, -131086, 1, 0, -131085, 19, 0, -131084, 27, 0, -131083, 28, 0, -131082, 28, 0, -131081, 28, 0, -131080, 28, 0, -131079, 28, 0, -131078, 23, 0, -131077, 1, 0, -131076, 50, 0, -131075, 43, 0, -131074, 43, 0, -131073, 43, 0, -196608, 51, 0, -196607, 1, 0, -196606, 1, 0, -196605, 19, 0, -196604, 27, 0, -196603, 28, 0, -196602, 28, 0, -196601, 28, 0, -196600, 28, 0, -196599, 28, 0, -196598, 23, 0, -196597, 50, 0, -196596, 43, 0, -196595, 43, 0, -196594, 43, 0, -196593, 51, 0, -196592, 1, 0, -196591, 19, 0, -196590, 27, 0, -196589, 28, 0, -196588, 28, 0, -196587, 28, 0, -196586, 28, 0, -196585, 28, 0, -196584, 23, 0, -196583, 1, 0, -196582, 50, 0, -196581, 43, 0, -196580, 43, 0, -196579, 43, 0, -196578, 51, 0, -196577, 1, 0, -196576, 19, 0, -196575, 27, 0, -196574, 28, 0, -196573, 28, 0, -196572, 28, 0, -196571, 28, 0, -196570, 28, 0, -196569, 23, 0, -196568, 1, 0, -196567, 50, 0, -196566, 43, 0, -196565, 43, 0, -65551, 37, 0, -65549, 20, 0, -65548, 30, 0, -65547, 30, 0, -65546, 30, 0, -65545, 30, 0, -65544, 30, 0, -65543, 30, 0, -65542, 17, 0, -65541, 10, 0, -65540, 38, 0, -131072, 37, 0, -131071, 13, 0, -131069, 20, 0, -131068, 30, 0, -131067, 30, 0, -131066, 30, 0, -131065, 30, 0, -131064, 30, 0, -131063, 30, 0, -131062, 25, 0, -131061, 38, 0, -131057, 37, 0, -131056, 13, 0, -131055, 20, 0, -131054, 30, 0, -131053, 30, 0, -131052, 30, 0, -131051, 30, 0, -131050, 30, 0, -131049, 30, 0, -131048, 25, 0, -131046, 38, 0, -131042, 37, 0, -131041, 13, 0, -131040, 20, 0, -131039, 30, 0, -131038, 30, 0, -131037, 30, 0, -131036, 30, 0, -131035, 30, 0, -131034, 30, 0, -131033, 25, 0, -131031, 38, 0, -15, 37, 0, -14, 10, 0, -13, 20, 0, -12, 30, 0, -11, 30, 0, -10, 30, 0, -8, 30, 0, -7, 30, 0, -6, 24, 0, -5, 10, 0, -4, 38, 0, -65536, 37, 0, -65535, 10, 0, -65534, 8, 0, -65533, 20, 0, -65532, 30, 0, -65531, 30, 0, -65530, 30, 0, -65528, 30, 0, -65527, 30, 0, -65526, 24, 0, -65525, 38, 0, -65521, 37, 0, -65520, 10, 0, -65519, 20, 0, -65518, 30, 0, -65517, 30, 0, -65516, 30, 0, -65514, 30, 0, -65513, 30, 0, -65512, 24, 0, -65511, 10, 0, -65510, 38, 0, -65506, 37, 0, -65505, 10, 0, -65504, 20, 0, -65503, 30, 0, -65502, 30, 0, -65501, 30, 0, -65499, 30, 0, -65498, 30, 0, -65497, 24, 0, -65496, 10, 0, -65495, 38, 0, 65521, 37, 0, 65522, 12, 0, 65523, 22, 0, 65524, 31, 0, 65525, 31, 0, 65526, 31, 0, 65528, 31, 0, 65529, 31, 0, 65530, 26, 0, 65531, 12, 0, 65532, 47, 0, 65533, 49, 0, 65534, 49, 0, 65535, 36, 0, 0, 37, 0, 1, 12, 0, 2, 12, 0, 3, 22, 0, 4, 31, 0, 5, 31, 0, 8, 31, 0, 9, 31, 0, 10, 26, 0, 11, 47, 0, 12, 49, 0, 13, 49, 0, 14, 36, 0, 15, 37, 0, 16, 12, 0, 17, 22, 0, 18, 31, 0, 19, 31, 0, 20, 31, 0, 22, 31, 0, 23, 31, 0, 24, 26, 0, 25, 12, 0, 26, 47, 0, 27, 49, 0, 28, 49, 0, 29, 36, 0, 30, 37, 0, 31, 12, 0, 32, 22, 0, 33, 31, 0, 34, 31, 0, 35, 31, 0, 37, 31, 0, 38, 31, 0, 39, 26, 0, 40, 12, 0, 41, 47, 0, 42, 49, 0, 43, 49, 0, 44, 36, 0, 131057, 37, 0, 131060, 11, 0, 131065, 9, 0, 131067, 9, 0, 131068, 17, 0, 131069, 10, 0, 131071, 38, 0, 65536, 37, 0, 65538, 9, 0, 65546, 9, 0, 65547, 17, 0, 65548, 10, 0, 65550, 38, 0, 65551, 37, 0, 65557, 11, 0, 65562, 17, 0, 65563, 10, 0, 65565, 38, 0, 65566, 37, 0, 65573, 11, 0, 65574, 9, 0, 65577, 17, 0, 65578, 10, 0, 65580, 38, 0, 196593, 37, 0, 196595, 9, 0, 196604, 16, 0, 196606, 10, 0, 196607, 38, 0, 131072, 37, 0, 131083, 16, 0, 131085, 10, 0, 131086, 38, 0, 131087, 37, 0, 131088, 9, 0, 131096, 11, 0, 131098, 16, 0, 131100, 10, 0, 131101, 38, 0, 131102, 37, 0, 131103, 9, 0, 131104, 11, 0, 131113, 16, 0, 131115, 10, 0, 131116, 38, 0, 262129, 37, 0, 262137, 11, 0, 262140, 18, 0, 262141, 12, 0, 262142, 12, 0, 262143, 38, 0, 196608, 37, 0, 196610, 9, 0, 196614, 9, 0, 196618, 9, 0, 196619, 18, 0, 196620, 12, 0, 196621, 12, 0, 196622, 45, 0, 196623, 37, 0, 196627, 11, 0, 196634, 26, 0, 196635, 12, 0, 196636, 12, 0, 196637, 45, 0, 196638, 37, 0, 196642, 9, 0, 196649, 18, 0, 196650, 12, 0, 196651, 12, 0, 196652, 45, 0, 327665, 37, 0, 327668, 9, 0, 327672, 9, 0, 327679, 38, 0, 262144, 37, 0, 262145, 11, 0, 262158, 45, 0, 262159, 37, 0, 262173, 45, 0, 262174, 37, 0, 262179, 11, 0, 262185, 11, 0, 262188, 45, 0, 393201, 37, 0, 393202, 9, 0, 393204, 11, 0, 393211, 11, 0, 393214, 11, 0, 393215, 38, 0, 327680, 37, 0, 327694, 45, 0, 327695, 37, 0, 327697, 9, 0, 327709, 45, 0, 327710, 37, 0, 327718, 9, 0, 327722, 9, 0, 327724, 45, 0, 458737, 37, 0, 458738, 11, 0, 458749, 9, 0, 458751, 38, 0, 393216, 37, 0, 393217, 9, 0, 393224, 11, 0, 393230, 45, 0, 393231, 37, 0, 393237, 9, 0, 393240, 11, 0, 393242, 9, 0, 393245, 45, 0, 393246, 37, 0, 393247, 9, 0, 393248, 11, 0, 393251, 11, 0, 393252, 9, 0, 393255, 11, 0, 393260, 45, 0, 524273, 39, 0, 524274, 40, 0, 524275, 40, 0, 524276, 40, 0, 524277, 40, 0, 524278, 40, 0, 524279, 40, 0, 524280, 40, 0, 524281, 40, 0, 524282, 40, 0, 524283, 40, 0, 524284, 40, 0, 524285, 40, 0, 524286, 40, 0, 524287, 41, 0, 458752, 39, 0, 458753, 40, 0, 458754, 40, 0, 458755, 40, 0, 458756, 40, 0, 458757, 40, 0, 458758, 40, 0, 458759, 40, 0, 458760, 40, 0, 458761, 40, 0, 458762, 40, 0, 458763, 40, 0, 458764, 40, 0, 458765, 40, 0, 458766, 41, 0, 458767, 39, 0, 458768, 40, 0, 458769, 40, 0, 458770, 40, 0, 458771, 40, 0, 458772, 40, 0, 458773, 40, 0, 458774, 40, 0, 458775, 40, 0, 458776, 40, 0, 458777, 40, 0, 458778, 40, 0, 458779, 40, 0, 458780, 40, 0, 458781, 41, 0, 458782, 39, 0, 458783, 40, 0, 458784, 40, 0, 458785, 40, 0, 458786, 40, 0, 458787, 40, 0, 458788, 40, 0, 458789, 40, 0, 458790, 40, 0, 458791, 40, 0, 458792, 40, 0, 458793, 40, 0, 458794, 40, 0, 458795, 40, 0, 458796, 41, 0 )
 
 [node name="objects" type="YSort" parent="."]
 
@@ -424,18 +1069,26 @@ remote_path = NodePath("../../../../part_player_camera")
 
 [node name="gate" type="StaticBody2D" parent="objects"]
 position = Vector2( 112, 8 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="objects/gate"]
 position = Vector2( 0, -8 )
-texture = ExtResource( 10 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/gate"]
-position = Vector2( -12, -4.5 )
+position = Vector2( -13.5, -4.5 )
 shape = SubResource( 20 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="objects/gate"]
-position = Vector2( 12, -5 )
+position = Vector2( 13.5, -5 )
 shape = SubResource( 21 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="objects/gate"]
+position = Vector2( -0.25, -11 )
+shape = SubResource( 39 )
 
 [node name="part_tag_detector" parent="objects/gate" instance=ExtResource( 9 )]
 position = Vector2( 0, -10 )
@@ -447,8 +1100,8 @@ shape = SubResource( 12 )
 
 [node name="comp_method_caller" parent="objects/gate/part_tag_detector" instance=ExtResource( 8 )]
 method = {
-"args": [ "change_scene_request", "arena", true, 0.2 ],
-"caller": "game_events",
+"args": [ "warning_request", "go_to_arena", "jail.go_to_arena", true, true ],
+"caller": "gui_events",
 "method": "emit_signal"
 }
 
@@ -459,66 +1112,32 @@ method = {
 "method": "emit_signal"
 }
 
-[node name="check_bounty" type="Node2D" parent="objects"]
-visible = false
-position = Vector2( 56, 8 )
-
-[node name="Sprite" type="Sprite" parent="objects/check_bounty"]
-position = Vector2( 0, -9 )
-texture = ExtResource( 5 )
-
-[node name="Area2D" type="Area2D" parent="objects/check_bounty"]
-position = Vector2( 0, 35 )
-
-[node name="Sprite" type="Sprite" parent="objects/check_bounty/Area2D"]
-scale = Vector2( 0.690476, 1 )
-texture = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/check_bounty/Area2D"]
-shape = SubResource( 13 )
-
-[node name="upgrades" type="Node2D" parent="objects"]
-visible = false
-position = Vector2( 149, -2 )
-
-[node name="Sprite" type="Sprite" parent="objects/upgrades"]
-position = Vector2( 0, -16 )
-scale = Vector2( 0.1875, 0.1875 )
-texture = ExtResource( 7 )
-
-[node name="Area2D" type="Area2D" parent="objects/upgrades"]
-position = Vector2( 0, 34 )
-
-[node name="Sprite" type="Sprite" parent="objects/upgrades/Area2D"]
-scale = Vector2( 0.690476, 1 )
-texture = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/upgrades/Area2D"]
-shape = SubResource( 14 )
-
-[node name="boxes" type="YSort" parent="objects"]
-
-[node name="box3" parent="objects/boxes" instance=ExtResource( 12 )]
-position = Vector2( 25, 109 )
-
-[node name="box4" parent="objects/boxes" instance=ExtResource( 12 )]
-position = Vector2( 44, 109 )
-
 [node name="barrels" type="YSort" parent="objects"]
-
-[node name="barrel" parent="objects/barrels" instance=ExtResource( 13 )]
-position = Vector2( 24, 18 )
+position = Vector2( -32, 0 )
 
 [node name="barrel2" parent="objects/barrels" instance=ExtResource( 13 )]
 position = Vector2( 200, 20 )
 
 [node name="barrel3" parent="objects/barrels" instance=ExtResource( 13 )]
-position = Vector2( 185, 20 )
+position = Vector2( -40, 24 )
+
+[node name="barrel4" parent="objects/barrels" instance=ExtResource( 13 )]
+position = Vector2( -56, 24 )
+
+[node name="barrel5" parent="objects/barrels" instance=ExtResource( 13 )]
+position = Vector2( 8, 72 )
+
+[node name="barrel6" parent="objects/barrels" instance=ExtResource( 13 )]
+position = Vector2( 352, -72 )
+
+[node name="barrel7" parent="objects/barrels" instance=ExtResource( 13 )]
+position = Vector2( 368, -72 )
 
 [node name="table" parent="objects" instance=ExtResource( 14 )]
-position = Vector2( 56, 15 )
+position = Vector2( 40, 8 )
 
 [node name="vines" type="Node2D" parent="objects"]
+position = Vector2( -32, 0 )
 
 [node name="vine" type="Sprite" parent="objects/vines"]
 position = Vector2( 208, 16 )
@@ -544,15 +1163,202 @@ position = Vector2( 0, 16 )
 texture = ExtResource( 17 )
 centered = false
 
+[node name="vine_unreachable0" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 80, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 32 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable0"]
+position = Vector2( 0, 32 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable5" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -152, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 32 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable5"]
+position = Vector2( 0, 32 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable3" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 336, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 32 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable3"]
+position = Vector2( 0, 32 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable9" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 464, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 32 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable9"]
+position = Vector2( 0, 32 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable1" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 112, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 16 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable1"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable6" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -136, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 16 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable6"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable7" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -184, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 16 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable7"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable2" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 320, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 16 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable2"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable8" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 448, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 16 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable8"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="vine_unreachable4" type="Sprite" parent="objects/vines"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 352, -128 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 16 )
+
+[node name="vine_end" type="Sprite" parent="objects/vines/vine_unreachable4"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 17 )
+centered = false
+
 [node name="chains" type="YSort" parent="objects"]
+position = Vector2( -32, 0 )
 
 [node name="chains" parent="objects/chains" instance=ExtResource( 15 )]
 position = Vector2( 238, 36 )
 
 [node name="skill_tree_area" parent="objects" instance=ExtResource( 16 )]
-position = Vector2( 232, 88 )
+position = Vector2( 200, 88 )
+
+[node name="unreachable_gates" type="Node2D" parent="objects"]
+
+[node name="unreachable_gate" type="Sprite" parent="objects/unreachable_gates"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -144, 0 )
+texture = ExtResource( 3 )
+
+[node name="unreachable_gate3" type="Sprite" parent="objects/unreachable_gates"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 336, 0 )
+texture = ExtResource( 3 )
+
+[node name="unreachable_gate4" type="Sprite" parent="objects/unreachable_gates"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, 0 )
+texture = ExtResource( 3 )
+
+[node name="unreachable_passage" type="Sprite" parent="objects/unreachable_gates"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -88, -96 )
+texture = ExtResource( 10 )
+
+[node name="unreachable_passage2" type="Sprite" parent="objects/unreachable_gates"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 216, -96 )
+texture = ExtResource( 10 )
+
+[node name="unreachable_tables" type="Node2D" parent="objects"]
+
+[node name="Table1" type="Sprite" parent="objects/unreachable_tables"]
+position = Vector2( -211, 40 )
+texture = ExtResource( 7 )
+
+[node name="Table3" type="Sprite" parent="objects/unreachable_tables"]
+position = Vector2( 509, 88 )
+texture = ExtResource( 7 )
+
+[node name="Table0" type="Sprite" parent="objects/unreachable_tables"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -200, -80 )
+texture = ExtResource( 12 )
+
+[node name="Table2" type="Sprite" parent="objects/unreachable_tables"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 440, 64 )
+texture = ExtResource( 12 )
+
+[node name="spear_stands" type="Node2D" parent="objects"]
+
+[node name="SpearStand" type="Sprite" parent="objects/spear_stands"]
+position = Vector2( 424, -88 )
+texture = ExtResource( 19 )
+
+[node name="Node2D" type="Node2D" parent="objects"]
 
 [node name="part_player_camera" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 112, 56 )
 
 [connection signal="tag_detected" from="objects/gate/part_tag_detector" to="objects/gate/part_tag_detector/comp_method_caller" method="call_method"]

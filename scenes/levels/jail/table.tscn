@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://world/jail/table.png" type="Texture" id=1]
+[ext_resource path="res://world/jail/table_0.png" type="Texture" id=1]
 [ext_resource path="res://system/random_scripts/visibility_controller.gd" type="Script" id=2]
 [ext_resource path="res://system/components/callers/comp_event_caller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/hud/input_hints/interact_hint.tscn" type="PackedScene" id=4]

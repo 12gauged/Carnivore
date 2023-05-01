@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/table.png-211472be465209baa16949b03684662f.stex"
+path="res://.import/torch.png-b39253bd7e5ede4ee86763b6b68d23a6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://world/jail/table.png"
-dest_files=[ "res://.import/table.png-211472be465209baa16949b03684662f.stex" ]
+source_file="res://world/jail/torch.png"
+dest_files=[ "res://.import/torch.png-b39253bd7e5ede4ee86763b6b68d23a6.stex" ]
 
 [params]
 

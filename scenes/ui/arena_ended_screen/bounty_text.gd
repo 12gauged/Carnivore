@@ -18,11 +18,15 @@ onready var IncreaseTimer: Timer = $increase_timer
 var bounty_counter: float = 0.0
 
 func _on_screen_visible():
+	initial_bounty = game_data.initial_player_bounty
+	acquired_bounty = game_data.level_player_bounty
 	self.text = tr(DEFAULT_TEXT) % [initial_bounty, bounty_counter]
 	yield(get_tree().create_timer(START_DELAY), "timeout")
 	IncreaseTimer.start()
 
 func _on_increase_timer_timeout():
+	print("..            : bounty_counter = ", bounty_counter)
+	print("..            : acquired_bounty = ", acquired_bounty)
 	if bounty_counter >= acquired_bounty:
 		self.text = tr(FINISHED_TEXT) % [initial_bounty + acquired_bounty]
 		YellowFlash.play("flash")
@@ -31,7 +35,9 @@ func _on_increase_timer_timeout():
 		
 	bounty_counter = int(min(bounty_counter + acquired_bounty / NUMBER_OF_ADDITIONS, acquired_bounty))
 	self.text = tr(DEFAULT_TEXT) % [initial_bounty, bounty_counter]
-	print("bop")
+	print("bounty_text.gd: counting")
+	print("..            : NUMBER_OF_ADDITIONS = ", NUMBER_OF_ADDITIONS)
+	print("\n")
 	
 	IncreaseTimer.start()
 	

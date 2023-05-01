@@ -48,7 +48,7 @@ func call_global_method(method: Dictionary):
 		2: callers[caller].call(method_ref, args[0], args[1])
 		3: callers[caller].call(method_ref, args[0], args[1], args[2])
 		4: callers[caller].call(method_ref, args[0], args[1], args[2], args[3])
-		5: callers[caller].call(method_ref, args[0], args[1], args[2], args[4], args[5])
+		5: callers[caller].call(method_ref, args[0], args[1], args[2], args[3], args[4])
 	
 func format_args(args: Array) -> Array:
 	var formatted_args = args.duplicate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://ui/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ui/arena_ended_screen/victory_text.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://scenes/ui/arena_ended_screen/arena_ended_screen.gd" type="Script" id=5]
 [ext_resource path="res://ui/gui/button/small/small_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/gui/icons/home_icon.png" type="Texture" id=7]
-[ext_resource path="res://ui/gui/icons/restart_icon.png" type="Texture" id=8]
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sounds/entity/player/player_pickup.wav" type="AudioStream" id=10]
 [ext_resource path="res://ui/hud/overlay.gd" type="Script" id=11]
@@ -210,9 +209,9 @@ margin_bottom = 91.0
 custom_constants/margin_top = 20
 
 [node name="h_button_container" type="GridContainer" parent="HBoxContainer/VBoxContainer"]
-margin_left = 15.0
+margin_left = 28.0
 margin_top = 91.0
-margin_right = 63.0
+margin_right = 50.0
 margin_bottom = 113.0
 size_flags_horizontal = 4
 columns = 3
@@ -233,24 +232,6 @@ method = {
 "method": "emit_signal"
 }
 
-[node name="restart_button" parent="HBoxContainer/VBoxContainer/h_button_container" instance=ExtResource( 6 )]
-margin_left = 26.0
-margin_right = 48.0
-
-[node name="icon" parent="HBoxContainer/VBoxContainer/h_button_container/restart_button/center_container" index="0"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 8 )
-
-[node name="comp_method_caller" parent="HBoxContainer/VBoxContainer/h_button_container/restart_button" instance=ExtResource( 4 )]
-method = {
-"args": [ "change_scene_request", "var.game_data.current_level" ],
-"caller": "game_events",
-"method": "emit_signal"
-}
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/fade_in = SubResource( 6 )
@@ -261,8 +242,5 @@ anims/fade_out = SubResource( 7 )
 [connection signal="timeout" from="HBoxContainer/VBoxContainer/bounty/increase_timer" to="HBoxContainer/VBoxContainer/bounty/part_sound_streamer" method="play_sound"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/home_button" to="." method="_on_any_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/home_button" to="HBoxContainer/VBoxContainer/h_button_container/home_button/comp_method_caller" method="call_method"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/restart_button" to="." method="_on_any_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/h_button_container/restart_button" to="HBoxContainer/VBoxContainer/h_button_container/restart_button/comp_method_caller" method="call_method"]
 
 [editable path="HBoxContainer/VBoxContainer/h_button_container/home_button"]
-[editable path="HBoxContainer/VBoxContainer/h_button_container/restart_button"]

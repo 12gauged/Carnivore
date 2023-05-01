@@ -112,25 +112,31 @@ margin_right = 18.0
 margin_bottom = 18.0
 texture = ExtResource( 4 )
 
-[node name="version_label_container" type="Control" parent="."]
+[node name="version_label_container" type="HBoxContainer" parent="."]
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -238.0
+margin_top = -10.0
+alignment = 2
 
 [node name="version_label" type="Label" parent="version_label_container"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -120.0
-margin_top = -14.0
-margin_right = 120.0
+margin_left = 216.0
+margin_right = 234.0
+margin_bottom = 10.0
 theme = ExtResource( 8 )
-text = "v0.5"
+text = "v0.6"
 align = 1
 valign = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="version_label_container"]
+margin_left = 238.0
+margin_right = 238.0
+margin_bottom = 10.0
+
 [node name="Control" type="Control" parent="."]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -40.0

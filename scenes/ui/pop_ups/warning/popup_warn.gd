@@ -1,6 +1,11 @@
 extends Control
 
 
+signal warn_visible
+signal warn_invisible
+
+
+
 onready var Text = $CenterContainer/popup_warn/VBoxContainer/Label
 onready var AgreeButton = $CenterContainer/popup_warn/VBoxContainer2/button_holder/agree
 onready var DisagreeButton = $CenterContainer/popup_warn/VBoxContainer2/button_holder/disagree
@@ -17,8 +22,12 @@ func _ready():
 func _on_button_pressed(id): # id can either be "rejected" or "accepted"
 	gui_events.emit_signal("warning_request_%s" % id, last_request_id)
 	self.visible = false
+	emit_signal("warn_invisible")
+	game_functions.resume_game()
 	
 func _on_warning_requested(id: String, text: String, show_agree_button: bool, show_disagree_button: bool):
+	game_functions.pause_game()
+	emit_signal("warn_visible")
 	self.visible = true
 	DisagreeButton.visible = show_disagree_button
 	AgreeButton.visible = show_agree_button
