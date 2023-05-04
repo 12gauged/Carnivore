@@ -35,6 +35,7 @@ var resources: Dictionary = {
 	},
 	"sounds": {
 		"sample": preload("res://sounds/audio_stream_sample.tscn"),
+		"normal_sample": preload("res://sounds/normal_audio_stream_sample.tscn"),
 		"enemy_hit": preload("res://sounds/entity/enemy/enemy_hit.wav"),
 		"player_bite": preload("res://sounds/entity/player/player_bite.wav"),
 		"player_hit": preload("res://sounds/entity/player/player_hit.wav"),

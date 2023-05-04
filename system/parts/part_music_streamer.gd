@@ -5,23 +5,20 @@ signal music_finished
 
 
 export(AudioStream) var music
-onready var StreamSample = resources.get_resource("music", "music_sample")
-onready var StreamGroup = toolbox.get_node_in_group("sound_streams")
 
-var NewStreamSample : AudioStreamPlayer
+onready var Stream = $stream
 
 func play():
-	NewStreamSample = StreamSample.instance()
-	NewStreamSample.stream = music
-	NewStreamSample.bus = "music"
-	StreamGroup.add_child(NewStreamSample)
-	NewStreamSample.play()
-	# warning-ignore:return_value_discarded
-	NewStreamSample.connect("finished", self, "_on_stream_finished")
+	Stream.stream = music
+	Stream.bus = "music"
+	Stream.play()
 	
 func stop():
-	if NewStreamSample == null: return
-	NewStreamSample.queue_free()
+	Stream.stop()
+	
+	
+func set_volume(value: float): Stream.volume_db = linear2db(value)
+func get_volume() -> float: return db2linear(Stream.volume_db)
 	
 	
 func _on_stream_finished(): emit_signal("music_finished")

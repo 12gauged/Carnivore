@@ -88,7 +88,6 @@ func _ready():
 
 
 
-
 func free_all_enemies():
 	for AliveEnemy in get_tree().get_nodes_in_group("enemies")[0].get_children():
 		if is_instance_valid(AliveEnemy):
@@ -204,6 +203,7 @@ func end_wave():
 func end_arena():
 	emit_signal("arena_ended")
 	game_events.emit_signal("arena_ended")
+	player_events.emit_signal("set_stat_value", "can_get_hungry", false)	
 	arena_state = STOPPED
 	
 	

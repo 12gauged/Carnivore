@@ -190,7 +190,7 @@ align = 1
 script = ExtResource( 3 )
 
 [node name="increase_timer" type="Timer" parent="HBoxContainer/VBoxContainer/bounty"]
-wait_time = 0.1
+wait_time = 0.07
 one_shot = true
 
 [node name="yellow_flash" type="AnimationPlayer" parent="HBoxContainer/VBoxContainer/bounty"]
@@ -201,6 +201,7 @@ anims/flash = SubResource( 2 )
 position = Vector2( 39, 5 )
 stream = ExtResource( 10 )
 bus = "gui_sounds"
+sample_type = "Normal"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 71.0

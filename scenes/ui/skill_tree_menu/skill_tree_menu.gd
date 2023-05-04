@@ -89,18 +89,11 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	gui_events.connect("player_left_skill_tree_area", self, "_player_exited_area")
 	# warning-ignore:return_value_discarded
-	player_events.connect("player_interacted_mobile", self, "_on_player_interacted_mobile")
+	player_events.connect("player_interacted", self, "_on_player_interacted")
 	SkillButtons = filter_texture_rect_nodes(SkillButtonGroup.get_children())
 	BuyButton.visible = false
 	update_points_label()
 	check_skills()
-	
-func _input(event):
-	if not player_in_skill_tree_area: return
-	if not event is InputEventKey: return
-	if not event.is_action_pressed("controls_interact"): return
-	open_menu()
-	
 	
 	
 func filter_texture_rect_nodes(NodeArray: Array):
@@ -174,7 +167,7 @@ func _player_entered_area(): player_in_skill_tree_area = true
 func _player_exited_area(): player_in_skill_tree_area = false
 func _on_home_button_pressed(): close_menu()
 
-func _on_player_interacted_mobile():
+func _on_player_interacted():
 	if not player_in_skill_tree_area: return
 	open_menu()
 

@@ -6,3 +6,4 @@
 script = ExtResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_part_tag_detector_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_part_tag_detector_body_exited"]

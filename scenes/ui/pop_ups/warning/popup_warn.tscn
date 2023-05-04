@@ -40,9 +40,13 @@ margin_top = 4.0
 margin_right = -4.0
 margin_bottom = -27.0
 
-[node name="Label" type="Label" parent="CenterContainer/popup_warn/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/popup_warn/VBoxContainer"]
 margin_right = 92.0
-margin_bottom = 10.0
+
+[node name="Label" type="Label" parent="CenterContainer/popup_warn/VBoxContainer"]
+margin_top = 4.0
+margin_right = 92.0
+margin_bottom = 14.0
 theme = ExtResource( 1 )
 text = "text"
 align = 1

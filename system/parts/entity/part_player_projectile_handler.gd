@@ -34,11 +34,8 @@ const projectile_speeds: Dictionary = {
 }
 
 var held_projectile: String = ""
-var inventory: Dictionary = {
-	"stone_projectile": false,
-	"fireball_projectile": false,
-	"spear_projectile_player": false
-}
+var special_projectile: String = ""
+var normal_projectile: String = ""
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -51,25 +48,18 @@ func _ready():
 	player_events.connect("exited_eat_state", self, "_on_player_exited_eat_state")
 	# warning-ignore:return_value_discarded
 	player_events.connect("projectile_collected", self, "_on_projectile_collected")
+	# warning-ignore:return_value_discarded
 	player_events.connect("switch_projectile_request", self, "_on_switch_projectile_request")
 	
 	
 func _input(event):
 	if event is InputEventMouseMotion: set_target_direction(global_position.direction_to(get_global_mouse_position()))
 	if event is InputEventKey:
-		if event.is_action_pressed("inventory_1"): hold_projectile("stone_projectile")
-		if event.is_action_pressed("inventory_2"): hold_projectile("fireball_projectile")
-		if event.is_action_pressed("inventory_3"): hold_projectile("spear_projectile_player")
-	
-	
-	
-func hold_projectile(type):
-	if not inventory[type]: return
-	set_projectile(type)
-	set_held_projectile(type)
-	
-	
-	
+		if event.is_action_pressed("controls_switch_projectile"): 
+			_on_switch_projectile_request()
+
+
+
 func shoot_projectile():
 	if on_eat_state: return
 	if projectile_type.empty(): return
@@ -80,33 +70,38 @@ func shoot_projectile():
 	camera_events.emit_signal("camera_shake_request", 0.2, 1)
 	player_events.emit_signal("projectile_thrown")
 	emit_signal("projectile_thrown")
-	emit_signal("remove_tag_request", projectile_type)
+	emit_signal("remove_tag_request", "has_special_projectile")
 	spawn_projectile()
 	
-	set_held_projectile("")
-	inventory[projectile_type] = false
-	
-	if not true in inventory.values(): # no projectiles left
-		player_events.emit_signal("no_projectiles")
+	if held_projectile == special_projectile:
+		special_projectile = ""
+	elif held_projectile == normal_projectile:
+		normal_projectile = ""
 	
 	set_projectile("")
+	
+	player_events.emit_signal("no_projectiles")
 	
 func set_target_direction(value: Vector2): 
 	target_direction = value if value != Vector2.ZERO else Vector2.RIGHT
 	ProjectileTexture.flip_h = target_direction.x < 0.0
 func get_target_direction() -> Vector2: return target_direction
 	
-func set_projectile(type: String):
+	
+	
+	
+func set_projectile(new_projectile_type: String):
 	if on_eat_state: return
 	
-	projectile_type = type
+	projectile_type = new_projectile_type
 	
 	var texture = resources.get_resource("sprites", projectile_type) if !projectile_type.empty() else null
 	ProjectileTexture.frames = texture
 	
-	if projectile_type != "": 
+	if projectile_type != "":
 		emit_signal("projectile_collected")
-		emit_signal("add_tag_request", projectile_type)
+		
+	set_held_projectile(projectile_type)
 		
 		
 func set_held_projectile(value: String):
@@ -115,9 +110,6 @@ func set_held_projectile(value: String):
 
 
 
-		
-		
-		
 
 func spawn_projectile():
 	ProjectileSpawner.entity_name = projectile_type
@@ -125,16 +117,14 @@ func spawn_projectile():
 
 
 func _on_projectile_collected(projectile):
-	if true in inventory.values():
-		player_events.emit_signal("has_projectiles")
-	
-	
-	inventory[projectile] = true
-	player_events.emit_signal("projectile_inventory_updated", inventory)
-	if held_projectile == "":
-		hold_projectile(projectile)
-		set_held_projectile(projectile)
-		
+	if projectile == "stone_projectile":
+		set_projectile(projectile)
+		normal_projectile = "stone_projectile"
+		return
+	if special_projectile.empty():
+		special_projectile = projectile
+		emit_signal("add_tag_request", "has_special_projectile")		
+		print(self.name + ": special_projectile = ", special_projectile)
 		
 		
 func _on_projectile_spawner_entity_spawned(ProjectileNode):
@@ -171,19 +161,8 @@ func _on_player_shooting_joystick_released():
 	
 	
 func _on_switch_projectile_request():
-	var next_projectile
-	var next_projectile_id: int
-	var current_projectile = inventory.keys().find(held_projectile)
-	
-	
-	if current_projectile != -1:
-		next_projectile_id = (current_projectile + 1) % len(inventory.keys())
-		if inventory[inventory.keys()[next_projectile_id]] == false:
-			next_projectile_id = current_projectile + inventory.keys().find(true)
-			next_projectile_id = next_projectile_id % len(inventory.keys())
+	if not special_projectile.empty() and held_projectile != special_projectile:
+		set_projectile(special_projectile)
 	else:
-		next_projectile = inventory.values().find(true)
-		
-		
-	next_projectile = inventory.keys()[next_projectile_id]
-	hold_projectile(next_projectile)
+		if not normal_projectile.empty():
+			set_projectile(normal_projectile)

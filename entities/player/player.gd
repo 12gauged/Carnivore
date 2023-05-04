@@ -77,7 +77,6 @@ func _input(event):
 		if event.is_action_pressed("debug_f6"): update_stat("health", int(max(get_stat("health") - 1, 0)))
 		if event.is_action_pressed("debug_f7"): player_events.emit_signal("freeze_player")
 		
-	if get_stat("energy") <= 0: return
 	
 	match event.get_class():
 		"InputEventMouseButton":
@@ -85,6 +84,9 @@ func _input(event):
 			if get_state() == "EAT": continue
 			if get_stat("energy") < MAX_ENERGY: continue
 			enter_eat_state()
+		"InputEventKey":
+			if not event.is_action_pressed("controls_interact"): continue
+			player_events.emit_signal("player_interacted")
 
 
 func _process(_delta):
@@ -154,10 +156,8 @@ func update_stat(id: String, value: int, animate: bool = true):
 	if id != "can_get_hungry": return
 	var can_get_hungry: bool = bool(value)
 	if can_get_hungry:
-		print("player.gd: enabled hunger!")
 		start_stat_decrease_timer(get_stat("hunger"))
 		return
-	print("player.gd: disabled hunger!")
 	StatDecreaseTimer.stop()
 		
 		

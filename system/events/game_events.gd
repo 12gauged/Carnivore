@@ -18,4 +18,6 @@ signal spawn_tutorial_ant
 signal tutorial_ant_dead
 
 # warning-ignore:unused_signal
+signal stop_music_fade_out
+# warning-ignore:unused_signal
 signal stop_music

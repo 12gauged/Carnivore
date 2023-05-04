@@ -1,8 +1,10 @@
 extends HBoxContainer
 
 
-onready var shield_bar = $shield_bar
-onready var health_bar = $health_bar
+export(NodePath) var ShieldBarPath
+onready var shield_bar = get_node(ShieldBarPath)
+export(NodePath) var HealthBarPath
+onready var health_bar = get_node(HealthBarPath)
 
 
 

@@ -32,7 +32,7 @@ signal freeze_player_slow_motion
 signal unfreeze_player()
 
 # warning-ignore:unused_signal
-signal player_interacted_mobile
+signal player_interacted
 # warning-ignore:unused_signal
 signal player_moving
 # warning-ignore:unused_signal

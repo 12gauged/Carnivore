@@ -19,16 +19,8 @@ var player_near_table: bool = false
 func _ready():
 	gui_events.connect("player_near_table", self, "on_player_near_table")
 	gui_events.connect("player_far_from_table", self, "on_player_far_from_table")
-	player_events.connect("player_interacted_mobile", self, "_on_player_interacted_mobile")
+	player_events.connect("player_interacted", self, "_on_player_interacted")
 	close_menu()
-
-
-
-func _input(event):
-	if not player_near_table: return
-	if not event is InputEventKey: return
-	if not event.is_action_pressed("controls_interact"): return
-	open_menu()
 	
 	
 
@@ -51,7 +43,7 @@ func close_menu():
 	emit_signal("exited_menu")
 
 
-func _on_player_interacted_mobile():
+func _on_player_interacted():
 	if not player_near_table: return
 	open_menu()
 func _on_exit_button_button_pressed(_id):

@@ -71,6 +71,7 @@ ui.progress_menu.bounty,current bounty: %s,recompensa atual: %s,untranslated,unt
 ui.progress_menu.new_enemy,new enemy,novo inimigo,untranslated,untranslated
 ui.progress_menu.freedom,freedom!,liberdade!,untranslated,untranslated
 ui.progress_menu.exit,leave this place,saia desse lugar,untranslated,untranslated
+ui.jail.go_to_arena,go to the arena?,ir para a arena?,untranslated,untranslated
 tutorial.movement,move using the joystick,mova-se usando o joystick,untranslated,untranslated
 tutorial.movement.desktop,"move with\n%s, %s, %s, and %s","mova-se com\n%s, %s, %s e %s",untranslated,untranslated
 tutorial.pick_stone,pick up a stone,pegue uma pedra,untranslated,untranslated

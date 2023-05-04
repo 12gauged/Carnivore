@@ -2,8 +2,7 @@
 
 [ext_resource path="res://sounds/audio_stream_sample.gd" type="Script" id=1]
 
-[node name="music_stream_sample" type="AudioStreamPlayer"]
-pause_mode = 1
+[node name="normal_audio_stream_sample" type="AudioStreamPlayer"]
 script = ExtResource( 1 )
 
 [connection signal="finished" from="." to="." method="_on_audio_stream_sample_finished"]

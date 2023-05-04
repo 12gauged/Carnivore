@@ -72,7 +72,7 @@ script = ExtResource( 10 )
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 2, -6 )
 frames = SubResource( 9 )
-frame = 7
+frame = 1
 playing = true
 
 [node name="plant_behind" type="Node2D" parent="."]

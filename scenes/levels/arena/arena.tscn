@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://entities/frog/frog_arena_data.tres" type="Resource" id=1]
 [ext_resource path="res://entities/worm/worm_arena_data.tres" type="Resource" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=11]
 [ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/levels/level1/rock_spawners.gd" type="Script" id=13]
+[ext_resource path="res://music/hunted.ogg" type="AudioStream" id=14]
 [ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=15]
 [ext_resource path="res://system/parts/level/arena/part_arena.tscn" type="PackedScene" id=16]
 [ext_resource path="res://system/parts/level/music_manager.tscn" type="PackedScene" id=17]
@@ -683,8 +684,8 @@ tile_data = PoolIntArray( -589818, 0, 0, -524285, 0, 0, -524284, 0, 0, -524283, 
 [node name="sound_streams" type="Node2D" parent="." groups=["sound_streams"]]
 
 [node name="music_manager" parent="." instance=ExtResource( 17 )]
-track_list = [ ExtResource( 9 ) ]
-stream_mode = 2
+track_list = [ ExtResource( 9 ), ExtResource( 14 ) ]
+stream_mode = 3
 
 [node name="objects" type="YSort" parent="."]
 

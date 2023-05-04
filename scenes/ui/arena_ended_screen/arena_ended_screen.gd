@@ -8,7 +8,6 @@ signal screen_visible
 onready var animation_player = $AnimationPlayer
 
 
-
 func _ready():
 	gui_events.connect("show_arena_ended_screen", self, "_on_arena_ended")
 	self.visible = false
@@ -32,6 +31,6 @@ func _on_any_button_pressed():
 func _on_arena_ended():
 	animation_player.play("fade_in")
 	emit_signal("screen_visible")
-	game_events.emit_signal("stop_music")
+	game_events.emit_signal("stop_music_fade_out")
 	player_events.emit_signal("freeze_player")
 	gui_events.emit_signal("hide_full_hud")
