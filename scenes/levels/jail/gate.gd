@@ -1,6 +1,8 @@
 extends StaticBody2D
 
 
+onready var interact_hint = $interact_hint
+onready var sprite = $Sprite
 
 var player_close: bool = false
 
@@ -12,8 +14,14 @@ func _ready():
 	player_events.connect("player_interacted", self, "on_player_interacted")
 	
 
-func _on_part_tag_detector_tag_detected(): player_close = true
-func _on_part_tag_detector_tag_exited(): player_close = false
+func _on_part_tag_detector_tag_detected(): 
+	interact_hint.show()
+	sprite.modulate = Color.yellow
+	player_close = true
+func _on_part_tag_detector_tag_exited(): 
+	interact_hint.hide()
+	sprite.modulate = Color.white
+	player_close = false
 	
 func on_request_accepted(id):
 	if id != "go_to_arena": return

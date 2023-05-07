@@ -52,6 +52,11 @@ func _ready():
 	player_events.connect("switch_projectile_request", self, "_on_switch_projectile_request")
 	
 	
+func _process(_delta):
+	if held_projectile == special_projectile and normal_projectile.empty():
+		player_events.emit_signal("no_projectiles")
+	
+	
 func _input(event):
 	if event is InputEventMouseMotion: set_target_direction(global_position.direction_to(get_global_mouse_position()))
 	if event is InputEventKey:
@@ -70,17 +75,22 @@ func shoot_projectile():
 	camera_events.emit_signal("camera_shake_request", 0.2, 1)
 	player_events.emit_signal("projectile_thrown")
 	emit_signal("projectile_thrown")
-	emit_signal("remove_tag_request", "has_special_projectile")
 	spawn_projectile()
+	
+	
 	
 	if held_projectile == special_projectile:
 		special_projectile = ""
+		emit_signal("remove_tag_request", "has_special_projectile")
 	elif held_projectile == normal_projectile:
+		emit_signal("remove_tag_request", normal_projectile)							
 		normal_projectile = ""
 	
 	set_projectile("")
 	
-	player_events.emit_signal("no_projectiles")
+	if normal_projectile.empty() and special_projectile.empty():
+		player_events.emit_signal("no_projectiles")
+	
 	
 func set_target_direction(value: Vector2): 
 	target_direction = value if value != Vector2.ZERO else Vector2.RIGHT
@@ -104,6 +114,7 @@ func set_projectile(new_projectile_type: String):
 	set_held_projectile(projectile_type)
 		
 		
+		
 func set_held_projectile(value: String):
 	held_projectile = value
 	player_events.emit_signal("held_projectile_updated", held_projectile)	
@@ -118,13 +129,18 @@ func spawn_projectile():
 
 func _on_projectile_collected(projectile):
 	if projectile == "stone_projectile":
-		set_projectile(projectile)
+		if held_projectile.empty(): set_projectile(projectile)
 		normal_projectile = "stone_projectile"
-		return
-	if special_projectile.empty():
+		emit_signal("add_tag_request", normal_projectile)
+						
+	elif special_projectile.empty():
 		special_projectile = projectile
-		emit_signal("add_tag_request", "has_special_projectile")		
-		print(self.name + ": special_projectile = ", special_projectile)
+		emit_signal("add_tag_request", "has_special_projectile")
+		
+	if (!special_projectile.empty() and !normal_projectile.empty()) or (held_projectile != special_projectile and !special_projectile.empty()):
+		player_events.emit_signal("has_projectiles")
+		
+		
 		
 		
 func _on_projectile_spawner_entity_spawned(ProjectileNode):
@@ -150,10 +166,15 @@ func hide_hand_overlay():
 		emit_signal("hide_hand_overlay")
 
 func _on_player_shooting_direction_updated(value):
+	if held_projectile.empty() and not normal_projectile.empty():
+		set_projectile(normal_projectile)
+	
 	if value == Vector2.ZERO and last_shooting_direction != Vector2.ZERO:
 		target_direction = last_shooting_direction
 	if value != last_shooting_direction:
 		last_shooting_direction = value
+
+
 
 func _on_player_shooting_joystick_released():
 	shoot_projectile()

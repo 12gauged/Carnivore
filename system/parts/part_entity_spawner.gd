@@ -36,7 +36,7 @@ func can_spawn() -> bool:
 
 func set_entity(value: String): entity_name = value
 
-func spawn_entity():
+func spawn_entity(_a = ""):
 	if !can_spawn(): return
 	
 	var Scene: PackedScene = resources.get_resource("entities", entity_name)

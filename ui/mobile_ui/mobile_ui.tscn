@@ -217,7 +217,7 @@ script = ExtResource( 11 )
 
 [node name="comp_method_caller" parent="special_attack/special_attack_vertical_container/button_anchor/interact_button/TouchScreenButton" instance=ExtResource( 4 )]
 method = {
-"args": [ "player_interacted_mobile" ],
+"args": [ "player_interacted" ],
 "caller": "player_events",
 "method": "emit_signal"
 }

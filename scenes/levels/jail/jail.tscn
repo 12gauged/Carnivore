@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/levels/jail/gate.gd" type="Script" id=5]
 [ext_resource path="res://system/parts/level/part_player_camera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world/jail/table_1.png" type="Texture" id=7]
+[ext_resource path="res://ui/hud/input_hints/interact_hint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://system/parts/part_tag_detector.tscn" type="PackedScene" id=9]
 [ext_resource path="res://world/gate.png" type="Texture" id=10]
 [ext_resource path="res://scenes/levels/jail/jail.gd" type="Script" id=11]
@@ -1097,6 +1098,10 @@ ACCEPT_TAGS = [ "PLAYER" ]
 position = Vector2( 0, 8 )
 shape = SubResource( 12 )
 
+[node name="interact_hint" parent="objects/gate" instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 0, -40 )
+
 [node name="barrels" type="YSort" parent="objects"]
 position = Vector2( -32, 0 )
 
@@ -1339,8 +1344,6 @@ texture = ExtResource( 12 )
 [node name="SpearStand" type="Sprite" parent="objects/spear_stands"]
 position = Vector2( 424, -88 )
 texture = ExtResource( 19 )
-
-[node name="Node2D" type="Node2D" parent="objects"]
 
 [node name="part_player_camera" parent="." instance=ExtResource( 6 )]
 visible = false

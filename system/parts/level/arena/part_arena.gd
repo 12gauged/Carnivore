@@ -85,6 +85,19 @@ func _ready():
 	enemy_counter = {FILLER_ENEMY: 0}
 	ENEMY_SPAWN_DATA_LEN = len(enemy_spawn_data) - 1
 	Spawners = get_node("spawners").get_children()
+	
+	
+	
+func _process(_delta):
+	if arena_state != RUNNING: return
+	if enemies_to_spawn > 0: return
+	if toolbox.get_node_in_group("enemies").get_child_count() > 0: return
+		
+	if game_data.current_arena_wave >= number_of_waves:
+		end_arena()
+		return
+	end_wave()
+	
 
 
 
@@ -176,10 +189,6 @@ func spawn_first_enemies():
 
 
 func end_wave():
-	if game_data.current_arena_wave == number_of_waves:
-		end_arena()
-		return
-	
 	game_data.current_arena_wave += 1
 	arena_state = IN_BETWEEN_WAVES
 	
@@ -208,12 +217,11 @@ func end_arena():
 	
 	
 	
-func _on_enemy_killed(_id): 
+func _on_enemy_killed(_id):
 	if enemies_to_spawn > 0:
 		enemies_to_spawn -= 1
 		spawn_new_enemy()
-	elif toolbox.get_node_in_group("enemies").get_child_count() == 1:
-		end_wave()
+	
 	
 	
 	
