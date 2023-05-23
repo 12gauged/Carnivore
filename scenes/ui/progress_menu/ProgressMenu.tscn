@@ -121,7 +121,7 @@ margin_right = 116.0
 margin_bottom = 221.0
 type = "ui.progress_menu.freedom"
 title = "ui.progress_menu.exit"
-NeededBounty = 6000
+NeededBounty = 15000
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 104.0

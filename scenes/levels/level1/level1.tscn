@@ -695,6 +695,10 @@ texture = ExtResource( 25 )
 [node name="show_capture_notification" parent="objects/entities/ending_cutscene" instance=ExtResource( 31 )]
 event = "show_plant_capture_notification"
 
+[node name="force_exit_from_eat_state" parent="objects/entities/ending_cutscene" instance=ExtResource( 31 )]
+caller = "player_events"
+event = "force_exit_from_eat_state"
+
 [node name="part_level_groups" parent="objects/entities" instance=ExtResource( 4 )]
 
 [node name="rock_spawners" type="YSort" parent="objects"]
@@ -846,6 +850,7 @@ anims/start = SubResource( 2 )
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/save_game" method="save_game"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_freeze_method" method="call_method"]
 [connection signal="arena_ended" from="objects/part_arena" to="objects/part_arena/ending_animation_player" method="play_anim"]
+[connection signal="arena_ended" from="objects/part_arena" to="objects/entities/ending_cutscene/force_exit_from_eat_state" method="call_event"]
 [connection signal="timeout" from="objects/part_arena/arena_start_delay" to="objects/part_arena" method="start_arena"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/end_level_method" method="call_method"]
 [connection signal="timeout" from="objects/part_arena/delay_for_level_ending" to="objects/part_arena/stop_slowmo_method" method="call_method"]
