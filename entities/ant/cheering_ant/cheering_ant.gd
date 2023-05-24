@@ -22,5 +22,5 @@ func _on_Timer_timeout():
 	timer.start()
 	animation_player.play("cheer")	
 
-func _on_cheer_intensity_updated(cheer_intensity: float):
+func _on_cheer_intensity_updated(_cheer_intensity: float):
 	_on_Timer_timeout()

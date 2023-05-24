@@ -218,6 +218,7 @@ func end_arena():
 	
 	
 func _on_enemy_killed(_id):
+	game_data.set_cheer_intensity(game_data.cheer_intensity + 1)
 	if enemies_to_spawn > 0:
 		enemies_to_spawn -= 1
 		spawn_new_enemy()

@@ -257,6 +257,8 @@ func apply_damage(damage: int):
 	start_invincibility()
 	start_blinking()
 	
+	game_data.set_cheer_intensity(game_data.cheer_intensity - 2)
+	
 	var new_shields = get_stat("shields")
 	var new_health = get_stat("health")
 	var damage_to_health = abs(min(new_shields - damage, 0))

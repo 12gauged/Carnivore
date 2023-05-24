@@ -1,6 +1,7 @@
 extends Node
 
 const DEFAULT_BOUNTY = 20
+const MAX_CHEER_INTENSITY = 25.0
 
 const default_player_data = {
 	"special_attack_tutorial_finished": false,
@@ -86,6 +87,7 @@ func override_player_data(value: Dictionary): player_data = value.duplicate(true
 
 func set_cheer_intensity(value: float):
 	cheer_intensity = value
+	cheer_intensity = clamp(cheer_intensity, 1.0, MAX_CHEER_INTENSITY)
 	game_events.emit_signal("cheer_intensity_updated", cheer_intensity)
 func get_cheer_intensity() -> float: return cheer_intensity
 
