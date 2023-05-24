@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/level/part_level_groups.tscn" type="PackedScene" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://world/jail/skill_tree_area/vines_end.png" type="Texture" id=17]
 [ext_resource path="res://world/jail/skill_tree_area/vines_repeat.png" type="Texture" id=18]
 [ext_resource path="res://world/jail/spear_stand.png" type="Texture" id=19]
+[ext_resource path="res://entities/ant_soldier/ant_soldier.png" type="Texture" id=20]
+[ext_resource path="res://projectiles/spear/spear.png" type="Texture" id=21]
 
 [sub_resource type="ConvexPolygonShape2D" id=15]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 5, 0, 5 )
@@ -1028,6 +1030,78 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 56/shapes = [  ]
 56/z_index = 0
 
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 20 )
+region = Rect2( 96, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 20 )
+region = Rect2( 120, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=42]
+animations = [ {
+"frames": [ SubResource( 40 ), SubResource( 41 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="Animation" id=43]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ) ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "fly"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ), Vector2( 0, -1 ), Vector2( 0, 1 ), Vector2( 0, -1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 2.5, 5.5 )
 
@@ -1066,6 +1140,24 @@ position = Vector2( -8, -24 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="objects/entities/player"]
 remote_path = NodePath("../../../../part_player_camera")
+
+[node name="ant_soldier" type="AnimatedSprite" parent="objects/entities"]
+position = Vector2( -57, -161 )
+frames = SubResource( 42 )
+frame = 1
+playing = true
+offset = Vector2( 0, -1 )
+
+[node name="fly_animation" type="AnimationPlayer" parent="objects/entities/ant_soldier"]
+autoplay = "fly"
+anims/RESET = SubResource( 43 )
+anims/fly = SubResource( 44 )
+
+[node name="spear" type="Sprite" parent="objects/entities/ant_soldier"]
+use_parent_material = true
+position = Vector2( 6, 0 )
+rotation = -1.20951
+texture = ExtResource( 21 )
 
 [node name="gate" type="StaticBody2D" parent="objects"]
 position = Vector2( 112, 8 )

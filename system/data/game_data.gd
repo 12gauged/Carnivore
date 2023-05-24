@@ -67,6 +67,7 @@ var progress_safe: bool = false
 var skills_disabled: bool = false
 var can_pause: bool = false
 var bounty_target: int = 0
+var cheer_intensity: float = 1.0 setget set_cheer_intensity, get_cheer_intensity
 
 var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_last_lowest_level_time
 
@@ -74,7 +75,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	# player_data.bounty = 300
+	player_data.bounty = 300
 	player_data.skill_points = 69
 	
 	#player_data.skills.hard_skin = true
@@ -83,21 +84,16 @@ func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN d
 func override_game_settings(value: Dictionary): game_settings = value.duplicate(true)
 func override_player_data(value: Dictionary): player_data = value.duplicate(true)
 
-
+func set_cheer_intensity(value: float):
+	cheer_intensity = value
+	game_events.emit_signal("cheer_intensity_updated", cheer_intensity)
+func get_cheer_intensity() -> float: return cheer_intensity
 
 func set_current_platform(platform_name: String): current_platform = platform_name
 func get_current_platform() -> String: return current_platform
 
-const STARTING_BOUNTY_TARGET = 200
-
 func set_player_bounty_target(value: int): bounty_target = value
 func get_player_bounty_target(): return bounty_target
-func update_player_bounty_target():
-	if player_data.bounty == DEFAULT_BOUNTY:
-		bounty_target = STARTING_BOUNTY_TARGET
-		return
-	game_data.player_data.skill_points += 1
-	set_player_bounty_target(bounty_target * 3)
 	
 
 func set_current_level(level_name: String): current_level = level_name

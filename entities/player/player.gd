@@ -27,7 +27,7 @@ onready var RootedSkillChargingTimer: Timer = $rooted_skill_charging_timer
 onready var AnimPlayer = $part_state_anim_handler/animation_player
 onready var ProjectileHandler: Node2D = $part_player_projectile_handler
 
-var last_time_TEMP:= 0
+onready var last_cheer_intensity: float = game_data.cheer_intensity
 
 func _ready():
 	add_tag("PLAYER")
@@ -183,6 +183,8 @@ func enter_eat_state():
 	reset_stat_decrease_timer("energy")
 	set_movement_direction(Vector2.LEFT)
 	input_events.emit_signal("player_movement_direction_updated", Vector2.LEFT)
+	last_cheer_intensity = game_data.cheer_intensity
+	game_data.set_cheer_intensity(25.0) # max value
 	
 	if not has_skill("bloodthirsty"): return
 	MAX_SPEED += (25.0 / float(DEFAULT_MAX_SPEED)) * 100.0
@@ -199,6 +201,7 @@ func exit_eat_state():
 	set_rotation_degrees(0.0)
 	set_movement_direction(Vector2.ZERO)
 	AnimPlayer.play("RESET")
+	game_data.set_cheer_intensity(last_cheer_intensity)
 	
 	# resets the speed because of the bloodthirsty skill
 	MAX_SPEED = DEFAULT_MAX_SPEED
