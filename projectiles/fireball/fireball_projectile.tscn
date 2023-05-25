@@ -41,7 +41,6 @@ max_lifetime = 5
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -3 )
 frames = SubResource( 2 )
-frame = 1
 playing = true
 
 [node name="part_hitbox" parent="." instance=ExtResource( 1 )]
