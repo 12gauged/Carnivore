@@ -17,7 +17,7 @@ export(int) var time_between_waves = 6
 
 onready var wave_start_delay: Timer = $wave_start_delay
 
-const WAVE_CAP: int = 15
+const WAVE_CAP: int = 12
 const MIN_WAVES: int = 10
 const MAX_DIFFICULTY: int = 16
 const MAX_HEAVY_ENEMY_SPAWN_CHANCE: int = 60

@@ -8,7 +8,7 @@ signal charging
 
 
 const HUNGER_DECREASE_DELAY_WHEN_FULL: float = 1.0
-const DEFAULT_HUNGER_DECREASE_DELAY: float = 1.5
+const DEFAULT_HUNGER_DECREASE_DELAY: float = 2.5
 var HUNGER_DECREASE_DELAY: float = DEFAULT_HUNGER_DECREASE_DELAY ## had to turn this bitch into a var because of the skill system
 var ENERGY_DECREASE_DELAY: float = 0.6 ## same as above
 const HUNGER_DECREASE_DELAY_TUTORIAL: float = 4.0

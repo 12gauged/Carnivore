@@ -3,23 +3,23 @@
 [ext_resource path="res://system/parts/entity/part_hitbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/part_entity_spawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://projectiles/projectile.gd" type="Script" id=3]
-[ext_resource path="res://projectiles/fireball/fireball_projectile.png" type="Texture" id=4]
+[ext_resource path="res://entities/drops/fireball/fireball_drop.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 10, 10 )
+region = Rect2( 0, 0, 12, 12 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
-region = Rect2( 10, 0, 10, 10 )
+region = Rect2( 12, 0, 12, 12 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
-region = Rect2( 20, 0, 10, 10 )
+region = Rect2( 24, 0, 12, 12 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
-region = Rect2( 30, 0, 10, 10 )
+region = Rect2( 36, 0, 12, 12 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -30,7 +30,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3.0
+radius = 5.0
 
 [node name="fireball_projectile" type="Node2D"]
 script = ExtResource( 3 )
@@ -41,13 +41,14 @@ max_lifetime = 5
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -3 )
 frames = SubResource( 2 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="part_hitbox" parent="." instance=ExtResource( 1 )]
 IGNORE_TAGS = [ "PLAYER" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hitbox"]
+position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 
 [node name="fire_spawner" parent="." instance=ExtResource( 2 )]
