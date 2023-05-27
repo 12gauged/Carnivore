@@ -87,6 +87,8 @@ func _ready():
 	Spawners = get_node("spawners").get_children()
 	
 	
+	number_of_waves = 2
+	
 	
 func _process(_delta):
 	if arena_state != RUNNING: return
@@ -213,7 +215,8 @@ func end_wave():
 func end_arena():
 	emit_signal("arena_ended")
 	game_events.emit_signal("arena_ended")
-	player_events.emit_signal("set_stat_value", "can_get_hungry", false)	
+	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
+	player_events.emit_signal("force_exit_from_eat_state")
 	arena_state = STOPPED
 	
 	
