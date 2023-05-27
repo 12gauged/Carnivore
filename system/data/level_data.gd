@@ -15,6 +15,7 @@ func _ready():
 	game_events.emit_signal("level_started")
 	
 	game_data.cheer_intensity = 1.0
+	
 	_on_level_start()
 	
 func _on_level_start(): pass

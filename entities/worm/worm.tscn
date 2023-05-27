@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://system/parts/entity/part_state_anim_handler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://system/parts/entity/part_state_handler.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://system/parts/part_sound_streamer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://system/parts/entity/enemy_loot_spawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://shaders/flash.tres" type="Material" id=13]
-[ext_resource path="res://system/random_scripts/timer_controller.gd" type="Script" id=14]
 [ext_resource path="res://particles/entity/entity_death_particle.tscn" type="PackedScene" id=15]
 [ext_resource path="res://system/parts/part_particle_emitter.tscn" type="PackedScene" id=16]
 [ext_resource path="res://projectiles/fire_area/fire_area_particle2.png" type="Texture" id=17]
@@ -40,13 +39,10 @@ colors = PoolColorArray( 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 7.5, 7.5 )
 
-[sub_resource type="CapsuleShape2D" id=9]
-radius = 6.0
-height = 6.0
+[sub_resource type="CircleShape2D" id=14]
+radius = 13.0
 
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 4.0
-height = 8.0
+[sub_resource type="CircleShape2D" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "ATTACK"
@@ -213,6 +209,7 @@ one_shot = true
 one_shot = true
 
 [node name="part_hurtbox" parent="." instance=ExtResource( 8 )]
+visible = false
 position = Vector2( -1, -4 )
 TAGS = [ "ENEMY", "WORM" ]
 IGNORE_TAGS = [ "ENEMY_PROJECTILE", "WORM" ]
@@ -222,7 +219,6 @@ position = Vector2( -0.5, 0.5 )
 shape = SubResource( 8 )
 
 [node name="part_hitbox" parent="." instance=ExtResource( 9 )]
-visible = false
 position = Vector2( 0, -2 )
 disabled = true
 TAGS = [ "WORM" ]
@@ -232,7 +228,7 @@ delete_on_hit = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_hitbox"]
 rotation = 1.5708
-shape = SubResource( 9 )
+shape = SubResource( 14 )
 
 [node name="part_state_handler" parent="." instance=ExtResource( 2 )]
 
@@ -245,21 +241,27 @@ target_node_group = "player"
 flip_texture = true
 
 [node name="part_tag_detector" parent="part_state_handler/MOVE" instance=ExtResource( 7 )]
+position = Vector2( 0, -2 )
 TAGS = [ "WORM_PLAYER_DETECTION" ]
 ACCEPT_TAGS = [ "PLAYER" ]
 mode = "or"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="part_state_handler/MOVE/part_tag_detector"]
 rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 13 )
 
 [node name="ATTACK" type="Node2D" parent="part_state_handler"]
 script = ExtResource( 3 )
 
-[node name="state_change_timer" type="Timer" parent="part_state_handler/ATTACK"]
-wait_time = 0.7
-one_shot = true
-script = ExtResource( 14 )
+[node name="part_tag_detector" parent="part_state_handler/ATTACK" instance=ExtResource( 7 )]
+position = Vector2( 0, -2 )
+TAGS = [ "WORM_PLAYER_DETECTION" ]
+ACCEPT_TAGS = [ "PLAYER" ]
+mode = "or"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="part_state_handler/ATTACK/part_tag_detector"]
+rotation = 1.5708
+shape = SubResource( 13 )
 
 [node name="part_state_anim_handler" parent="." instance=ExtResource( 1 )]
 states = [ "MOVE", "ATTACK" ]
@@ -294,5 +296,4 @@ particle_id = "bounty_indicator"
 [connection signal="start_state_pattern_request" from="part_state_handler" to="." method="start_state_pattern"]
 [connection signal="component_value_update" from="part_state_handler/MOVE/comp_movement_track_target" to="." method="set_movement_direction"]
 [connection signal="tag_detected" from="part_state_handler/MOVE/part_tag_detector" to="." method="go_to_next_state"]
-[connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/state_change_timer" method="start_timer"]
-[connection signal="timeout" from="part_state_handler/ATTACK/state_change_timer" to="." method="go_to_next_state"]
+[connection signal="tag_exited" from="part_state_handler/ATTACK/part_tag_detector" to="." method="go_to_next_state"]
