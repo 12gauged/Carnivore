@@ -155,7 +155,7 @@ func update_stat(id: String, value: int, animate: bool = true):
 	
 	if id != "can_get_hungry": return
 	var can_get_hungry: bool = bool(value)
-	if can_get_hungry:
+	if can_get_hungry or get_state() == "EAT":
 		start_stat_decrease_timer(get_stat("hunger"))
 		return
 	StatDecreaseTimer.stop()

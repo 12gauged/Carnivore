@@ -203,6 +203,7 @@ func end_wave():
 		enemies_per_wave = int(min(15.0, float(enemies_per_wave)))
 		max_enemy_number = int(min(2.0, float(max_enemy_number)))
 	
+	
 	player_events.emit_signal("set_stat_value", "can_get_hungry", false)
 	game_events.emit_signal("wave_finished")
 	wave_start_delay.start(time_between_waves)
