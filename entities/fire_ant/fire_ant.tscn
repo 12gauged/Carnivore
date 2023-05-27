@@ -271,7 +271,6 @@ visible_by_default = false
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 6 )
-frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -389,5 +388,5 @@ particle_id = "bounty_indicator"
 [connection signal="tag_detected" from="part_state_handler/MOVE/player_tag_detector" to="part_state_handler" method="go_to_next_state"]
 [connection signal="state_entered" from="part_state_handler/CHARGE" to="part_state_handler/CHARGE/charge_timer" method="start_timer"]
 [connection signal="timeout" from="part_state_handler/CHARGE/charge_timer" to="part_state_handler" method="go_to_next_state"]
-[connection signal="state_entered" from="part_state_handler/ATTACK" to="." method="die"]
+[connection signal="state_entered" from="part_state_handler/ATTACK" to="." method="die_anon_deletion"]
 [connection signal="state_entered" from="part_state_handler/ATTACK" to="part_state_handler/ATTACK/fire_spawner" method="spawn_entity"]

@@ -156,9 +156,9 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="victory_text" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 21.0
+margin_top = 16.0
 margin_right = 79.0
-margin_bottom = 31.0
+margin_bottom = 26.0
 theme = ExtResource( 1 )
 text = "ui.victory_text"
 align = 1
@@ -166,24 +166,24 @@ uppercase = true
 
 [node name="victory_subtitle" type="Label" parent="HBoxContainer/VBoxContainer"]
 modulate = Color( 0.5, 0.5, 0.5, 1 )
-margin_top = 31.0
+margin_top = 26.0
 margin_right = 79.0
-margin_bottom = 41.0
+margin_bottom = 36.0
 theme = ExtResource( 1 )
 text = "You win. damn you."
 align = 1
 script = ExtResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 41.0
+margin_top = 36.0
 margin_right = 79.0
-margin_bottom = 61.0
+margin_bottom = 56.0
 custom_constants/margin_top = 20
 
 [node name="bounty" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 61.0
+margin_top = 56.0
 margin_right = 79.0
-margin_bottom = 71.0
+margin_bottom = 66.0
 theme = ExtResource( 1 )
 text = "ui.bounty"
 align = 1
@@ -203,17 +203,25 @@ stream = ExtResource( 10 )
 bus = "gui_sounds"
 sample_type = "Normal"
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 71.0
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 66.0
 margin_right = 79.0
-margin_bottom = 91.0
+margin_bottom = 76.0
+theme = ExtResource( 1 )
+text = "skill points: +1"
+align = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 79.0
+margin_bottom = 96.0
 custom_constants/margin_top = 20
 
 [node name="h_button_container" type="GridContainer" parent="HBoxContainer/VBoxContainer"]
 margin_left = 28.0
-margin_top = 91.0
+margin_top = 96.0
 margin_right = 50.0
-margin_bottom = 113.0
+margin_bottom = 118.0
 size_flags_horizontal = 4
 columns = 3
 

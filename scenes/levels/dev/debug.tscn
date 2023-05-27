@@ -30,7 +30,7 @@ TAGS = [ "COMP_EXECUTER", "ENTITY", "DEBUG_GAMEPLAY_CHANGES" ]
 [node name="part_level_groups" parent="objects/entities" instance=ExtResource( 3 )]
 
 [node name="death_loot_spawner" parent="objects" instance=ExtResource( 6 )]
-position = Vector2( 62, 67 )
+position = Vector2( 10, 66 )
 entity_name = "fireball_drop"
 entity_group = "drops"
 deletion_signal = "interacted"
@@ -56,7 +56,7 @@ respawn = true
 
 [node name="part_enemy_spawner2" parent="objects" instance=ExtResource( 6 )]
 position = Vector2( 154, 65 )
-entity_name = "worm"
+entity_name = "fire_ant"
 entity_group = "enemies"
 deletion_signal = "deleted"
 auto_spawn = true

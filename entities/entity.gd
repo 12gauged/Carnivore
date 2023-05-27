@@ -107,6 +107,11 @@ func die():
 	emit_particle(DeathParticle)
 	queue_free()
 	
+func die_anon_deletion():
+	emit_signal("dead", ID)
+	emit_particle(DeathParticle)
+	queue_free()
+	
 func go_to_next_state():
 	state_id = state_id + 1 if state_id < len(state_execution_pattern) - 1 else 0
 	set_state(state_execution_pattern[state_id])
