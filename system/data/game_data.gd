@@ -29,7 +29,8 @@ var default_game_settings: Dictionary = {
 		"music": DEFAULT_VOLUME,
 		"entity_sounds": DEFAULT_VOLUME,
 		"player_sounds": DEFAULT_VOLUME,
-		"environment_sounds": DEFAULT_VOLUME
+		"environment_sounds": DEFAULT_VOLUME,
+		"gui_sounds": DEFAULT_VOLUME,
 	},
 	"video": {
 		"camera_shake": true

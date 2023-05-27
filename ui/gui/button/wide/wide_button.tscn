@@ -40,6 +40,7 @@ text = "text"
 
 [node name="click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+bus = "gui_sounds"
 script = ExtResource( 8 )
 
 [connection signal="pressed" from="." to="click_sound" method="play_sound"]

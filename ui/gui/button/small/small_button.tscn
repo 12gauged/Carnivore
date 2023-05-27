@@ -45,6 +45,7 @@ mouse_filter = 2
 
 [node name="click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "gui_sounds"
 script = ExtResource( 7 )
 
 [connection signal="pressed" from="." to="click_sound" method="play_sound"]
