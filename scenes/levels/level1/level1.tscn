@@ -786,7 +786,7 @@ script = ExtResource( 13 )
 
 [node name="end_level_method" parent="objects/part_arena" instance=ExtResource( 7 )]
 method = {
-"args": [ "change_scene_request", "jail", true, 0.1 ],
+"args": [ "change_scene_request", "post_tutorial_cutscene", true, 0.1 ],
 "caller": "game_events",
 "method": "emit_signal"
 }

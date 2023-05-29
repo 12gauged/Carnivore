@@ -172,6 +172,9 @@ func stop_invincibility():
 func enter_eat_state():
 	if get_state() == "EAT": return
 	if get_stat("energy") < MAX_ENERGY: return
+	
+	set_collision_mask_bit(0, true)
+	
 	add_tag("EAT")
 	set_state("EAT")
 	InvincibilityTimer.stop()
@@ -191,6 +194,9 @@ func enter_eat_state():
 	
 func exit_eat_state():
 	if get_state() != "EAT": return
+	
+	set_collision_mask_bit(0, false)
+	
 	start_invincibility()
 	remove_tag("EAT")
 	set_state("IDLE")

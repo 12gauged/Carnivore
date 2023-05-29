@@ -87,6 +87,7 @@ func _ready():
 	Spawners = get_node("spawners").get_children()
 	
 	
+	if !OS.is_debug_build(): return
 	number_of_waves = 2
 	
 	

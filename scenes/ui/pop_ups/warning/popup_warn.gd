@@ -30,6 +30,7 @@ func enable_requests(): can_receive_requests = true
 func _on_button_pressed(id): # id can either be "rejected" or "accepted"
 	gui_events.emit_signal("warning_request_%s" % id, last_request_id)
 	self.visible = false
+	game_data.can_pause = true # pausing is now controlled by this ui	
 	emit_signal("warn_invisible")
 	game_functions.resume_game()
 	
@@ -37,6 +38,9 @@ func _on_warning_requested(id: String, text: String, show_agree_button: bool, sh
 	if !can_receive_requests: return
 	
 	game_functions.pause_game()
+	
+	game_data.can_pause = false # pausing is now controlled by this ui
+	
 	emit_signal("warn_visible")
 	self.visible = true
 	DisagreeButton.visible = show_disagree_button

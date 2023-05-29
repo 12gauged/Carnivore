@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://system/parts/generic_camera.gd"
 }, {
+"base": "Sprite",
+"class": "Highlight",
+"language": "GDScript",
+"path": "res://scenes/levels/jail/highlight.gd"
+}, {
 "base": "Control",
 "class": "InputHint",
 "language": "GDScript",
@@ -94,6 +99,7 @@ _global_script_class_icons={
 "GenericButton": "",
 "GenericButtonIcon": "",
 "GenericCamera": "",
+"Highlight": "",
 "InputHint": "",
 "LevelData": "",
 "MenuScreen": "",
@@ -296,7 +302,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_5="hurtboxes"
 2d_physics/layer_6="drop_pickup"
 2d_physics/layer_7="healing_areas"
-2d_physics/layer_8="fences"
+2d_physics/layer_8="walls"
 
 [locale]
 

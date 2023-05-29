@@ -1,7 +1,7 @@
 extends Component
 
 signal projectile_collected
-signal projectile_thrown 
+signal projectile_thrown
 signal add_tag_request(tag)
 signal remove_tag_request(tag)
 signal show_hand_overlay

@@ -220,8 +220,6 @@ func _on_buy_button_pressed():
 	BuyButton.visible = false
 	
 	
-	print("skill_tree_menu.gd: buying: %s" % chosen_skill)
-	
 func unlock_skill(skill: String): 
 	if skill.empty(): return
 	get_skill_button(skill).modulate = Color.white

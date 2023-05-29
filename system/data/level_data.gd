@@ -6,8 +6,6 @@ export(bool) var progress_safe = false
 export(bool) var skills_disabled = false
 
 func _ready(): 
-	if on_tutorial(): game_data.update_player_bounty_target()
-	
 	game_data.initial_player_bounty = game_data.get_player_data("bounty")
 	game_data.progress_safe = progress_safe
 	game_data.skills_disabled = skills_disabled
@@ -17,6 +15,7 @@ func _ready():
 	game_data.cheer_intensity = 1.0
 	
 	_on_level_start()
+
 	
 func _on_level_start(): pass
 

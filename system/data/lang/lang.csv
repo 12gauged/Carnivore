@@ -23,6 +23,7 @@ ui.settings.controls_down,walk down,andar para baixo,untranslated,untranslated
 ui.settings.controls_left,walk left,andar para esquerda,untranslated,untranslated
 ui.settings.controls_interact,interact,interagir,untranslated,untranslated
 ui.settings.controls_pause,pause,pausar,untranslated,untranslated
+ui.settings.controls_switch_projectile,switch projectile,trocar projétil,untranslated,untranslated
 ui.settings.controls_throw,throw,atirar,untranslated,untranslated
 ui.settings.controls_special,special,especial,untranslated,untranslated
 ui.settings.edit_layout,edit buttons,editar botões,untranslated,untranslated
