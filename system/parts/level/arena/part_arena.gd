@@ -88,7 +88,7 @@ func _ready():
 	
 	
 	if !OS.is_debug_build(): return
-	number_of_waves = 2
+	#number_of_waves = 2
 	
 	
 func _process(_delta):

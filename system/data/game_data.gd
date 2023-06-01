@@ -78,7 +78,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	player_data.bounty = 600
+	#player_data.bounty = 300
 	player_data.skill_points = 69
 	
 	#player_data.skills.hard_skin = true
