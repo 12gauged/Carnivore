@@ -78,7 +78,7 @@ var last_lowest_level_time: Array = [] setget set_last_lowest_level_time, get_la
 
 func _ready(): # For debug values    REMEMBER THAT THE PLATFORM MUST BE SET IN device_manager.gd NOT HERE FELIPE YOU DUMB FUCK
 	if !OS.is_debug_build() or OS.get_name() == "Android": return
-	player_data.bounty = 300
+	player_data.bounty = 27000
 	player_data.skill_points = 69
 	
 	#player_data.skills.hard_skin = true
@@ -95,9 +95,6 @@ func get_cheer_intensity() -> float: return cheer_intensity
 
 func set_current_platform(platform_name: String): current_platform = platform_name
 func get_current_platform() -> String: return current_platform
-
-func set_player_bounty_target(value: int): bounty_target = value
-func get_player_bounty_target(): return bounty_target
 	
 
 func set_current_level(level_name: String): current_level = level_name
