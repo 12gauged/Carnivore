@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://system/components/callers/comp_event_caller.gd" type="Script" id=1]
-
-[node name="comp_event_caller" type="Node2D"]
-script = ExtResource( 1 )
-caller = "gui_events"
-event = "pause_request"

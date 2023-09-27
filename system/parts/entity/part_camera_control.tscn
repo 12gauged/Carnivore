@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://system/parts/part_camera_control.gd" type="Script" id=1]
-
-[node name="part_camera_control" type="RemoteTransform2D"]
-remote_path = NodePath("../../../../part_camera")
-update_rotation = false
-update_scale = false
-script = ExtResource( 1 )
