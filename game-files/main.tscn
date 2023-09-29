@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://01v2qdi30avs"]
+[gd_scene load_steps=3 format=3 uid="uid://01v2qdi30avs"]
 
-[ext_resource type="PackedScene" uid="uid://dqe5kefjivfux" path="res://ui/layouts/main_menu/main_menu.tscn" id="1_cx13t"]
+[ext_resource type="PackedScene" uid="uid://cydrtflrk5f44" path="res://components/ui/scene_manager/scene_manager.tscn" id="1_few8t"]
+[ext_resource type="PackedScene" uid="uid://dqe5kefjivfux" path="res://ui/layouts/main_menu/main_menu.tscn" id="2_5i6s2"]
 
 [node name="Main" type="Node"]
 
-[node name="CurrentScene" type="Node" parent="."]
-
-[node name="MainMenu" parent="CurrentScene" instance=ExtResource("1_cx13t")]
+[node name="SceneManager" parent="." instance=ExtResource("1_few8t")]
+default_scene = ExtResource("2_5i6s2")
+levels_dir = "res://levels"
+ui_dir = "res://ui/layouts"

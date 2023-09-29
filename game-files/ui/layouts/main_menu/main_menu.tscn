@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqe5kefjivfux"]
+[gd_scene load_steps=3 format=3 uid="uid://dqe5kefjivfux"]
 
 [ext_resource type="Theme" uid="uid://caabepflgaswg" path="res://ui/layouts/menu_theme.tres" id="1_bgqjc"]
+[ext_resource type="PackedScene" uid="uid://btihxruocg51f" path="res://components/general/change_scene/change_scene.tscn" id="2_4e5s7"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -24,11 +25,17 @@ alignment = 1
 layout_mode = 2
 text = "Carnivore"
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_bgqjc")
 text = "play"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="ChangeScene" parent="VBoxContainer/PlayButton" instance=ExtResource("2_4e5s7")]
+scene_name = "001_forest"
+scene_type = "levels"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "exit"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="VBoxContainer/PlayButton/ChangeScene" method="change_scene"]

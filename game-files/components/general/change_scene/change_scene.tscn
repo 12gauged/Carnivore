@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://btihxruocg51f"]
+
+[ext_resource type="Script" path="res://components/general/change_scene/change_scene.gd" id="1_hmjrn"]
+
+[node name="ChangeScene" type="Node"]
+script = ExtResource("1_hmjrn")
+scene_name = null
+scene_type = null
