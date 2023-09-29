@@ -2,7 +2,7 @@ extends Area2D
 class_name Hurtbox
 
 
-signal hurt(hitbox)
+signal hurt(hitbox: Hitbox)
 
 
 func _ready() -> void:
