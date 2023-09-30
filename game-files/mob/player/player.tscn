@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://dw3gj44eaixg5"]
+
+[ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
+[ext_resource type="PackedScene" uid="uid://8w5n50r30r27" path="res://components/entity/hurtbox/hurtbox.tscn" id="2_u7ufq"]
+[ext_resource type="PackedScene" uid="uid://dcq3s1vb65fd2" path="res://components/entity/motion_handler/keyboard_motion_handler.tscn" id="3_8odt8"]
+[ext_resource type="PackedScene" uid="uid://char25ehhl3hu" path="res://components/entity/pickup_area/pickup_area.tscn" id="3_vpde3"]
+[ext_resource type="PackedScene" uid="uid://bkjod4h7v8sup" path="res://components/entity/projectile_handler/projectile_handler.tscn" id="4_vltxv"]
+[ext_resource type="Script" path="res://components/entity/projectile_handler/projectile_handler.gd" id="5_trllm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv3tx"]
+radius = 3.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3phsl"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_06b0o"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_6hcnx")
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tv3tx")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_u7ufq")]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_3phsl")
+
+[node name="PickupArea" parent="." instance=ExtResource("3_vpde3")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_06b0o")
+
+[node name="ProjectileHandler" parent="." instance=ExtResource("4_vltxv")]
+script = ExtResource("5_trllm")
+
+[node name="KeyboardMotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_8odt8")]
+target_node = NodePath("..")

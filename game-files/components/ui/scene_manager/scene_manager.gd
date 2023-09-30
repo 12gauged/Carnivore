@@ -2,7 +2,6 @@ extends Node
 
 
 signal scene_changed(old: String, new: String)
-@export var default_scene: PackedScene
 @export_dir var levels_dir: String
 @export_dir var ui_dir: String
 var scenes: Dictionary = {}
@@ -12,8 +11,6 @@ func _ready() -> void:
 	scenes["levels"] = get_files(levels_dir)
 	scenes["ui"] = get_files(ui_dir)
 	Game.change_scene_request.connect(change_scene)
-	
-	self.add_child(default_scene.instantiate())
 	
 	
 func get_files(path: String) -> Dictionary:

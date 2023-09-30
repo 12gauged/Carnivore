@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpm3gam0p5rie"]
+[gd_scene load_steps=4 format=3 uid="uid://dpm3gam0p5rie"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_ygaap"]
-[ext_resource type="PackedScene" uid="uid://yxt55gi24hta" path="res://player/player.tscn" id="2_20vkg"]
+[ext_resource type="PackedScene" uid="uid://dw3gj44eaixg5" path="res://mob/player/player.tscn" id="2_20vkg"]
+[ext_resource type="PackedScene" uid="uid://ch28gicrjkou6" path="res://objects/drops/stone_drop/stone_drop.tscn" id="3_wvtof"]
 
 [node name="001ForestLevel" type="Node2D"]
 script = ExtResource("1_ygaap")
 
 [node name="Player" parent="." instance=ExtResource("2_20vkg")]
 position = Vector2(169, 78)
+
+[node name="StoneDrop" parent="." instance=ExtResource("3_wvtof")]
+position = Vector2(156, 94)
