@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch28gicrjkou6"]
+[gd_scene load_steps=8 format=3 uid="uid://ch28gicrjkou6"]
 
-[ext_resource type="Script" path="res://objects/drops/projectile_drop.gd" id="1_wnoog"]
+[ext_resource type="Script" path="res://objects/drops/drop.gd" id="1_ofvii"]
+[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/projectile_data/stone_data.tres" id="2_5fhic"]
 [ext_resource type="Texture2D" uid="uid://7dtlx3vb1iyk" path="res://objects/drops/stone_drop/stone_drop.png" id="2_ls8vd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsmyj"]
-radius = 6.08276
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_5lc3a"]
 length = 0.001
@@ -47,8 +48,8 @@ _data = {
 [node name="StoneDrop" type="Area2D"]
 collision_layer = 64
 collision_mask = 0
-script = ExtResource("1_wnoog")
-type = null
+script = ExtResource("1_ofvii")
+data = ExtResource("2_5fhic")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ls8vd")

@@ -2,8 +2,8 @@
 extends Drop
 
 
-@export var data: ProjectileResource
 
 
-func get_data() -> ProjectileResource:
+
+func get_data() -> ProjectileData:
 	return data

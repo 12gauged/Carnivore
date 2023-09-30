@@ -3,7 +3,7 @@ extends Area2D
 class_name Drop
 
 
-@export_enum("consumable", "projectile") var type: String = "consumable"
+@export var data: Resource
 
 
 func _ready() -> void:
@@ -14,4 +14,5 @@ func _ready() -> void:
 		
 		
 func get_data():
-	return null
+	return data
+

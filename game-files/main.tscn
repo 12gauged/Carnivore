@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://01v2qdi30avs"]
+[gd_scene load_steps=4 format=3 uid="uid://01v2qdi30avs"]
 
 [ext_resource type="PackedScene" uid="uid://cydrtflrk5f44" path="res://components/ui/scene_manager/scene_manager.tscn" id="1_few8t"]
+[ext_resource type="PackedScene" uid="uid://7o3lkdebfkd" path="res://components/ui/scene_loader/scene_loader.tscn" id="1_fjkla"]
 [ext_resource type="PackedScene" uid="uid://dqe5kefjivfux" path="res://ui/layouts/main_menu/main_menu.tscn" id="2_5i6s2"]
 
 [node name="Main" type="Node"]
 
-[node name="SceneManager" parent="." instance=ExtResource("1_few8t")]
+[node name="SceneLoader" parent="." instance=ExtResource("1_fjkla")]
 levels_dir = "res://levels"
 ui_dir = "res://ui/layouts"
 
+[node name="SceneManager" parent="." instance=ExtResource("1_few8t")]
+
 [node name="MainMenu" parent="SceneManager" instance=ExtResource("2_5i6s2")]
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 12.0
+
+[connection signal="scenes_loaded" from="SceneLoader" to="SceneManager" method="_on_scene_loader_scenes_loaded"]

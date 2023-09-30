@@ -5,6 +5,7 @@ class_name Hurtbox
 signal hurt(hitbox: Hitbox)
 
 
+
 func _ready() -> void:
 	area_entered.connect(on_area_entered)
 

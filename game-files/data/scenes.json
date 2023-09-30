@@ -1,0 +1,8 @@
+{
+	"levels": {
+		"001_forest": "Resource(\"res://levels/001_forest/001_forest.tscn\")"
+	},
+	"ui": {
+		"main_menu": "Resource(\"res://ui/layouts/main_menu/main_menu.tscn\")"
+	}
+}
