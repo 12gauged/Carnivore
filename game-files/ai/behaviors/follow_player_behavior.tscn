@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c78woswr8vxva"]
+
+[ext_resource type="Script" path="res://ai/behaviors/follow_player_behavior.gd" id="1_uhxlp"]
+
+[node name="FollowPlayerBehavior" type="Node"]
+script = ExtResource("1_uhxlp")

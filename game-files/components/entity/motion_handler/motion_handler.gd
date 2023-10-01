@@ -2,6 +2,7 @@ extends Node
 class_name MotionHandler
 
 
+signal direction_vector_updated(direction)
 @export var target_node: CharacterBody2D
 @export var friction: int = 400
 @export var acceleration: int = 400
@@ -29,8 +30,13 @@ func update_direction_vector() -> void:
 	pass
 	
 	
+func stop_moving() -> void:
+	set_direction_vector(Vector2.ZERO)
+	
+	
 func set_direction_vector(value: Vector2) -> void:
 	direction_vector = value
+	direction_vector_updated.emit(direction_vector)
 	
 	
 func get_direction_vector() -> Vector2:
