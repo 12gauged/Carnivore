@@ -15,4 +15,13 @@ func collect_drop(drop_data: DropData = null) -> void:
 
 func on_drop_collided(drop: Drop) -> void:
 	collect_drop(drop.get_data())
+	stop_monitoring()
 	drop.queue_free()
+	
+	
+func start_monitoring() -> void:
+	set_deferred("monitoring", true)
+	
+	
+func stop_monitoring() -> void:
+	set_deferred("monitoring", false)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfnqass5bqnwt"]
+
+[ext_resource type="Texture2D" uid="uid://c6vu7edbo54j8" path="res://mob/ant/ant.png" id="1_2n7wv"]
+[ext_resource type="PackedScene" uid="uid://bmtkghlvxqv2l" path="res://components/entity/state_machine/state_machine.tscn" id="1_nprko"]
+[ext_resource type="Script" path="res://components/entity/state_machine/state.gd" id="3_eq3ke"]
+[ext_resource type="PackedScene" uid="uid://c78woswr8vxva" path="res://ai/behaviors/follow_player_behavior.tscn" id="4_c35f6"]
+[ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="5_wq7gr"]
+
+[node name="Ant" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2n7wv")
+hframes = 3
+vframes = 4
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("parent_node") instance=ExtResource("1_nprko")]
+parent_node = NodePath("..")
+
+[node name="Move" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_eq3ke")
+
+[node name="FollowPlayerBehavior" parent="StateMachine/Move" node_paths=PackedStringArray("motion_handler") instance=ExtResource("4_c35f6")]
+motion_handler = NodePath("../../../MotionHandler")
+
+[node name="Timer" type="Timer" parent="StateMachine/Move"]
+one_shot = true
+
+[node name="DigForStone" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_eq3ke")
+
+[node name="Timer" type="Timer" parent="StateMachine/DigForStone"]
+wait_time = 2.0
+
+[node name="MotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_wq7gr")]
+target_node = NodePath("..")
+max_speed = 50
+
+[connection signal="state_exited" from="StateMachine/Move" to="StateMachine/Move/FollowPlayerBehavior" method="stop_following"]
+[connection signal="timeout" from="StateMachine/Move/Timer" to="StateMachine" method="move_to_next_state"]

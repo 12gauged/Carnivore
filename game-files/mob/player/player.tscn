@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=31 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
 [ext_resource type="Script" path="res://mob/player/sprite_handler.gd" id="2_8c1nj"]
@@ -11,6 +11,115 @@
 [ext_resource type="PackedScene" uid="uid://bkjod4h7v8sup" path="res://components/entity/projectile_handler/projectile_handler.tscn" id="4_vltxv"]
 [ext_resource type="Script" path="res://components/entity/projectile_handler/projectile_handler.gd" id="5_trllm"]
 
+[sub_resource type="Animation" id="Animation_ql7jf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_p12ec"]
+resource_name = "eat"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_ye2dg"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5o1gy"]
+resource_name = "walk"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xsl2x"]
+_data = {
+"RESET": SubResource("Animation_ql7jf"),
+"eat": SubResource("Animation_p12ec"),
+"idle": SubResource("Animation_ye2dg"),
+"walk": SubResource("Animation_5o1gy")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qlxv6"]
+animation = &"eat"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vmo73"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sutq5"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_52735"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_84bto"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_12sgp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bf1l2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ra3tf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qgwrs"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q366g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x3d1f"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bol3l"]
+states/eat/node = SubResource("AnimationNodeAnimation_qlxv6")
+states/eat/position = Vector2(477, 201)
+states/idle/node = SubResource("AnimationNodeAnimation_vmo73")
+states/idle/position = Vector2(342, 100)
+states/walk/node = SubResource("AnimationNodeAnimation_sutq5")
+states/walk/position = Vector2(622, 100)
+transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_52735"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_84bto"), "walk", "End", SubResource("AnimationNodeStateMachineTransition_12sgp"), "idle", "eat", SubResource("AnimationNodeStateMachineTransition_bf1l2"), "eat", "idle", SubResource("AnimationNodeStateMachineTransition_ra3tf"), "walk", "eat", SubResource("AnimationNodeStateMachineTransition_qgwrs"), "eat", "walk", SubResource("AnimationNodeStateMachineTransition_q366g"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x3d1f")]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv3tx"]
 radius = 3.0
 height = 18.0
@@ -21,17 +130,20 @@ height = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06b0o"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 
-[node name="PlayerSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("Hands", "HandsHolding", "HeldItem")]
+[node name="PlayerSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("hands", "hands_holding", "held_item", "animation_player", "animation_tree")]
 position = Vector2(0, -8)
 texture = ExtResource("1_6hcnx")
 hframes = 3
 vframes = 2
+frame = 2
 script = ExtResource("2_8c1nj")
-Hands = NodePath("Hands")
-HandsHolding = NodePath("HandsHolding")
-HeldItem = NodePath("HandsHolding/HeldItem")
+hands = NodePath("Hands")
+hands_holding = NodePath("HandsHolding")
+held_item = NodePath("HandsHolding/HeldItem")
+animation_player = NodePath("AnimationPlayer")
+animation_tree = NodePath("AnimationPlayer/AnimationTree")
 
 [node name="Hands" type="Sprite2D" parent="PlayerSprite" node_paths=PackedStringArray("Parent")]
 texture = ExtResource("2_s36cy")
@@ -46,6 +158,17 @@ texture = ExtResource("4_cyw85")
 
 [node name="HeldItem" type="Sprite2D" parent="PlayerSprite/HandsHolding"]
 position = Vector2(0, -11)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_xsl2x")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="PlayerSprite/AnimationPlayer"]
+tree_root = SubResource("AnimationNodeStateMachine_bol3l")
+anim_player = NodePath("..")
+active = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -77,3 +200,5 @@ target_node = NodePath("..")
 [connection signal="drop_collected" from="PickupArea" to="ProjectileHandler" method="_on_pickup_area_drop_collected"]
 [connection signal="projectile_being_held" from="ProjectileHandler" to="PlayerSprite" method="hands_holding_projectile"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="PlayerSprite" method="projectile_used"]
+[connection signal="projectile_thrown" from="ProjectileHandler" to="PickupArea" method="start_monitoring"]
+[connection signal="direction_vector_updated" from="KeyboardMotionHandler" to="PlayerSprite" method="_on_keyboard_motion_handler_direction_vector_updated"]
