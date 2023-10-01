@@ -2,11 +2,17 @@ extends Node2D
 class_name Projectile
 
 
+@export var damage: int = 1
 @export var speed: int = 1
-@export var hurtbox: Hitbox
+@export var face_direction: bool = false
+@export var hitbox: Hitbox
 var direction: Vector2:
 	set = set_direction,
 	get = get_direction
+	
+	
+func _ready() -> void:
+	hitbox.set_damage(damage)
 
 
 func _physics_process(delta):
@@ -17,6 +23,8 @@ func _physics_process(delta):
 	if not direction.is_normalized():
 		push_warning("direction not normalized")
 	self.global_position += direction * speed * delta
+	if face_direction: 
+		look_at(self.global_position + direction)
 	
 	
 func set_direction(value: Vector2) -> void:

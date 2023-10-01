@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=4 format=3 uid="uid://t4qw8yn5xcfm"]
+
+[ext_resource type="Texture2D" uid="uid://cig8s6wufvffp" path="res://projectiles/spear_projectile/spear.png" id="1_7ctlm"]
+[ext_resource type="Script" path="res://resources/projectile_data.gd" id="1_sg03t"]
+[ext_resource type="PackedScene" uid="uid://trr2w0vikd64" path="res://projectiles/spear_projectile/spear_projectile.tscn" id="2_822qe"]
+
+[resource]
+script = ExtResource("1_sg03t")
+on_hand_sprite = ExtResource("1_7ctlm")
+projectile_scene = ExtResource("2_822qe")
+type = "projectile"

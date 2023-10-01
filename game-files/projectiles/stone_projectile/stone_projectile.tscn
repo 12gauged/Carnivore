@@ -4,9 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://l4t3h1rk4vb7" path="res://projectiles/stone_projectile/stone_projectile.png" id="2_n5644"]
 [ext_resource type="Script" path="res://components/entity/hitbox/hitbox.gd" id="3_uu6c0"]
 
-[node name="StoneProjectile" type="Node2D"]
+[node name="StoneProjectile" type="Node2D" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_euheu")
+damage = 2
 speed = 400
+hitbox = NodePath("Hitbox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_n5644")
