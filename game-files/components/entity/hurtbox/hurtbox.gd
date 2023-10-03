@@ -2,8 +2,9 @@ extends Area2D
 class_name Hurtbox
 
 
-signal hurt(hitbox: Hitbox)
-
+signal hurt(damage: int)
+signal hitbox_collided(hitbox: Hitbox)
+@export var ignore_groups: Array[String]
 
 
 func _ready() -> void:
@@ -11,4 +12,12 @@ func _ready() -> void:
 
 
 func on_area_entered(hitbox: Hitbox) -> void:
-	hurt.emit(hitbox)
+	for group in hitbox.get_groups():
+		if group in ignore_groups: 
+			return
+	hurt.emit(hitbox.damage)
+	hitbox_collided.emit(hitbox)
+	
+	
+func add_ignore_group(group) -> void:
+	ignore_groups.append(group)

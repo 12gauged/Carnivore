@@ -1,22 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpm3gam0p5rie"]
+[gd_scene load_steps=5 format=3 uid="uid://dpm3gam0p5rie"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_ygaap"]
 [ext_resource type="PackedScene" uid="uid://dw3gj44eaixg5" path="res://mob/player/player.tscn" id="2_20vkg"]
-[ext_resource type="PackedScene" uid="uid://ch28gicrjkou6" path="res://objects/drops/stone_drop/stone_drop.tscn" id="3_wvtof"]
-[ext_resource type="PackedScene" uid="uid://ca4llhqacqxuq" path="res://objects/drops/spear_drop/spear_drop.tscn" id="4_pp6y6"]
-[ext_resource type="PackedScene" uid="uid://bfnqass5bqnwt" path="res://mob/ant/ant.tscn" id="5_cx4wd"]
+[ext_resource type="PackedScene" uid="uid://d0wqd4toiq2ag" path="res://levels/001_forest/tilemap/forest_tilemap.tscn" id="2_n2ax5"]
+[ext_resource type="PackedScene" uid="uid://dcikd5pptjnyu" path="res://objects/forest_tree/forest_tree.tscn" id="4_1uan7"]
 
-[node name="001ForestLevel" type="Node2D"]
+[node name="001ForestLevel" type="Node2D" groups=["levels"]]
 script = ExtResource("1_ygaap")
 
-[node name="Player" parent="." instance=ExtResource("2_20vkg")]
+[node name="ForestTilemap" parent="." instance=ExtResource("2_n2ax5")]
+layer_0/tile_data = PackedInt32Array(3, 65536, 0, 4, 131072, 0, 5, 131072, 0, 6, 131072, 0, 7, 131072, 0, 8, 131072, 0, 9, 131072, 0, 10, 131072, 0, 11, 196608, 0, 131085, 655360, 0, 131073, 0, 1, 196609, 458752, 0, 196608, 0, 0, 262144, 0, 1, 131086, 131072, 0, 12, 262144, 0, 65548, 786432, 0, 65538, 720896, 0, 65537, 0, 0, 2, 0, 0, 65549, 262144, 0, 131087, 196608, 0, 196624, 786432, 0, 327697, 524288, 0, 458770, 262144, 2, 524306, 262144, 2, 589842, 262144, 2, 655378, 262144, 2, 458750, 0, 1, 524286, 0, 2, 589822, 0, 2, 655358, 0, 2, 720894, 0, 2, 786430, 0, 2, 327680, 327680, 0, 393215, 65536, 0, 393214, 0, 0, 851967, 327680, 2, 851968, 327680, 2, 917505, 131072, 3, 917506, 327680, 2, 983043, 131072, 3, 983044, 131072, 3, 983045, 131072, 3, 983046, 131072, 3, 983047, 131072, 3, 983048, 131072, 3, 983049, 131072, 3, 983050, 131072, 3, 983051, 131072, 3, 983052, 131072, 3, 917517, 393216, 2, 851982, 393216, 2, 851983, 131072, 3, 786448, 393216, 2, 720913, 393216, 2, 720914, 262144, 3, 786449, 262144, 3, 851984, 262144, 3, 917518, 262144, 3, 393234, 262144, 1, 262161, 262144, 1, 196625, 262144, 0, 327698, 262144, 0, 131088, 262144, 0, 983053, 262144, 3, 983042, 0, 3, 917504, 0, 3, 917503, 0, 3, 851966, 0, 3, 262149, 0, 4, 14, 0, 4, 131090, 0, 4, 0, 0, 4, 196605, 0, 4, -131070, 0, 4, -131062, 0, 4, 524291, 0, 4, 720888, 0, 4, 655369, 0, 4, 393240, 0, 4, 786454, 0, 4, 458771, 0, 4, 917520, 0, 4, 1048584, 0, 4, 983040, 0, 4, 917501, 0, 4, 1048570, 0, 4, 458747, 0, 4, 196601, 0, 4, -65518, 0, 4, 196629, 0, 4, 720922, 0, 4, 1179664, 0, 4, 1048587, 0, 4, 1245190, 0, 4, 1114114, 0, 4, 1245182, 0, 4, 851961, 0, 4, 983030, 0, 4, 458744, 0, 4, 655366, 65536, 4, 851971, 65536, 4, 393225, 65536, 4, 524301, 65536, 4, 196615, 65536, 4, 393218, 65536, 4, 393230, 65536, 4, 720910, 65536, 4, 851978, 65536, 4, 1048590, 65536, 4, 655380, 65536, 4, -131059, 65536, 4, -65530, 65536, 4, 262143, 65536, 4, 262139, 65536, 4, 655355, 65536, 4, 1048573, 65536, 4, 1179641, 65536, 4, 1310723, 65536, 4, 1114117, 65536, 4, 1245195, 65536, 4)
+
+[node name="Objects" type="Node2D" parent="." groups=["objects"]]
+
+[node name="Player" parent="Objects" instance=ExtResource("2_20vkg")]
 position = Vector2(169, 78)
 
-[node name="StoneDrop" parent="." instance=ExtResource("3_wvtof")]
-position = Vector2(156, 94)
+[node name="Tree" parent="Objects" instance=ExtResource("4_1uan7")]
 
-[node name="SpearDrop" parent="." instance=ExtResource("4_pp6y6")]
-position = Vector2(127, 68)
+[node name="Tree2" parent="Objects" instance=ExtResource("4_1uan7")]
+position = Vector2(126, -21)
 
-[node name="Ant" parent="." instance=ExtResource("5_cx4wd")]
-position = Vector2(94, 70)
+[node name="Tree3" parent="Objects" instance=ExtResource("4_1uan7")]
+position = Vector2(251, -10)
+
+[node name="Tree4" parent="Objects" instance=ExtResource("4_1uan7")]
+position = Vector2(338, 24)
+
+[node name="Tree5" parent="Objects" instance=ExtResource("4_1uan7")]
+position = Vector2(56, -41)
+
+[node name="Tree6" parent="Objects" instance=ExtResource("4_1uan7")]
+position = Vector2(-87, 24)
+
+[node name="Projectiles" type="Node2D" parent="." groups=["projectiles"]]
+
+[node name="Particles" type="Node2D" parent="." groups=["particles"]]

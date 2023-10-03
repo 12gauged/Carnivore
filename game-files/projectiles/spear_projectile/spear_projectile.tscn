@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://trr2w0vikd64"]
+[gd_scene load_steps=5 format=3 uid="uid://trr2w0vikd64"]
 
 [ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_2svc0"]
 [ext_resource type="Texture2D" uid="uid://cig8s6wufvffp" path="res://projectiles/spear_projectile/spear.png" id="2_fbv8o"]
-[ext_resource type="Script" path="res://components/entity/hitbox/hitbox.gd" id="3_bd8sj"]
+[ext_resource type="PackedScene" uid="uid://dg7wh84880ejx" path="res://components/entity/hitbox/hitbox.tscn" id="3_txdu6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8l74g"]
+size = Vector2(20, 8)
 
 [node name="SpearProjectile" type="Node2D" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_2svc0")
@@ -14,5 +17,7 @@ hitbox = NodePath("Hitbox")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_fbv8o")
 
-[node name="Hitbox" type="Area2D" parent="."]
-script = ExtResource("3_bd8sj")
+[node name="Hitbox" parent="." instance=ExtResource("3_txdu6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_8l74g")

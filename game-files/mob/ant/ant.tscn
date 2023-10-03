@@ -1,20 +1,137 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfnqass5bqnwt"]
+[gd_scene load_steps=28 format=3 uid="uid://bfnqass5bqnwt"]
 
 [ext_resource type="Texture2D" uid="uid://c6vu7edbo54j8" path="res://mob/ant/ant.png" id="1_2n7wv"]
+[ext_resource type="Script" path="res://mob/mob.gd" id="1_250jc"]
+[ext_resource type="Material" uid="uid://crtjppcnt1llg" path="res://components/entity/entity_sprite/entity_sprite_material.tres" id="1_loxyh"]
 [ext_resource type="PackedScene" uid="uid://bmtkghlvxqv2l" path="res://components/entity/state_machine/state_machine.tscn" id="1_nprko"]
+[ext_resource type="PackedScene" uid="uid://8w5n50r30r27" path="res://components/entity/hurtbox/hurtbox.tscn" id="2_2pibf"]
 [ext_resource type="Script" path="res://components/entity/state_machine/state.gd" id="3_eq3ke"]
+[ext_resource type="Script" path="res://components/entity/entity_sprite/entity_sprite.gd" id="3_qio5a"]
 [ext_resource type="PackedScene" uid="uid://c78woswr8vxva" path="res://ai/behaviors/follow_player_behavior.tscn" id="4_c35f6"]
+[ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="5_sirfd"]
 [ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="5_wq7gr"]
+[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/projectile_data/stone_data.tres" id="6_wi4pa"]
+[ext_resource type="PackedScene" uid="uid://ckjn2c4feotis" path="res://components/entity/health/health.tscn" id="9_tfjf4"]
+[ext_resource type="PackedScene" uid="uid://b4xh6v8082xjt" path="res://components/entity/player_tracker/player_tracker.tscn" id="11_dxjnv"]
 
-[node name="Ant" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nwiw2"]
+radius = 3.16228
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwbvj"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uwa8w"]
+animation = &"dig_for_stone"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0b8c"]
+animation = &"hold_stone"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nlbbc"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1oa14"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mpnyk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sdo52"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pqgi0"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ahubt"]
+states/dig_for_stone/node = SubResource("AnimationNodeAnimation_uwa8w")
+states/dig_for_stone/position = Vector2(537, 48)
+states/hold_stone/node = SubResource("AnimationNodeAnimation_y0b8c")
+states/hold_stone/position = Vector2(710, 100)
+states/move/node = SubResource("AnimationNodeAnimation_nlbbc")
+states/move/position = Vector2(341, 100)
+transitions = ["hold_stone", "move", SubResource("AnimationNodeStateMachineTransition_1oa14"), "dig_for_stone", "hold_stone", SubResource("AnimationNodeStateMachineTransition_mpnyk"), "Start", "move", SubResource("AnimationNodeStateMachineTransition_sdo52"), "move", "dig_for_stone", SubResource("AnimationNodeStateMachineTransition_pqgi0")]
+
+[sub_resource type="Animation" id="Animation_qmn3j"]
+resource_name = "dig_for_stone"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_3omjf"]
+resource_name = "hold_stone"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_47dno"]
+resource_name = "move"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yety5"]
+_data = {
+"dig_for_stone": SubResource("Animation_qmn3j"),
+"hold_stone": SubResource("Animation_3omjf"),
+"move": SubResource("Animation_47dno")
+}
+
+[node name="Ant" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_250jc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_loxyh")
+position = Vector2(0, -5)
 texture = ExtResource("1_2n7wv")
+offset = Vector2(0.5, 0)
 hframes = 3
 vframes = 4
+frame = 2
+script = ExtResource("3_qio5a")
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("parent_node") instance=ExtResource("1_nprko")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_nwiw2")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_2pibf")]
+ignore_groups = Array[String](["enemy_projectiles"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_fwbvj")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("parent_node", "animation_tree") instance=ExtResource("1_nprko")]
 parent_node = NodePath("..")
+animation_tree = NodePath("AnimationTree")
 
 [node name="Move" type="Node2D" parent="StateMachine"]
 script = ExtResource("3_eq3ke")
@@ -30,10 +147,44 @@ script = ExtResource("3_eq3ke")
 
 [node name="Timer" type="Timer" parent="StateMachine/DigForStone"]
 wait_time = 2.0
+one_shot = true
+
+[node name="HoldStone" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_eq3ke")
+
+[node name="Timer" type="Timer" parent="StateMachine/HoldStone"]
+one_shot = true
+
+[node name="AnimationTree" type="AnimationTree" parent="StateMachine"]
+tree_root = SubResource("AnimationNodeStateMachine_ahubt")
+anim_player = NodePath("AnimationPlayer")
+active = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StateMachine/AnimationTree"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_yety5")
+}
+
+[node name="Shooter" parent="." instance=ExtResource("5_sirfd")]
+projectile_data = ExtResource("6_wi4pa")
+
+[node name="PlayerTracker" parent="Shooter" node_paths=PackedStringArray("parent") instance=ExtResource("11_dxjnv")]
+parent = NodePath("../..")
 
 [node name="MotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_wq7gr")]
 target_node = NodePath("..")
 max_speed = 50
 
+[node name="Health" parent="." instance=ExtResource("9_tfjf4")]
+max_health = 2
+
+[connection signal="hurt" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="state_exited" from="StateMachine/Move" to="StateMachine/Move/FollowPlayerBehavior" method="stop_following"]
 [connection signal="timeout" from="StateMachine/Move/Timer" to="StateMachine" method="move_to_next_state"]
+[connection signal="timeout" from="StateMachine/DigForStone/Timer" to="StateMachine" method="move_to_next_state"]
+[connection signal="state_exited" from="StateMachine/HoldStone" to="Shooter" method="shoot"]
+[connection signal="timeout" from="StateMachine/HoldStone/Timer" to="StateMachine" method="move_to_next_state"]
+[connection signal="direction_to_player_updated" from="Shooter/PlayerTracker" to="Shooter" method="set_direction"]
+[connection signal="dead" from="Health" to="." method="die"]
+[connection signal="taken_damage" from="Health" to="Sprite2D" method="show_damage_flash"]

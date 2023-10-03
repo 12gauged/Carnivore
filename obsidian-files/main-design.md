@@ -6,6 +6,10 @@
 	Walk over them to collect them;
 	Can only hold one at a time;
 
+- Special Attack
+	Eating a meat with a full Hunger Bar fills your Energy Bar, which allows you to use a special attack when full.
+	The special attack consists of a "Pac Man" mode, where you have to eat enemies on the arena. Consuming any enemy will restore 1 HP.
+
 - Can pick different Power-Ups inside the level
 	A screen will appear every 5 waves asking the player to select a Power-Up;
 	The screen will offer 2 different Power-Ups in different areas, like a Power-Up that increases health(stat increase) or one that gives you a special ability;

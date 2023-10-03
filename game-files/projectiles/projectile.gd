@@ -5,7 +5,8 @@ class_name Projectile
 @export var damage: int = 1
 @export var speed: int = 1
 @export var face_direction: bool = false
-@export var hitbox: Hitbox
+@export var hitbox: Hitbox:
+	get = get_hitbox
 var direction: Vector2:
 	set = set_direction,
 	get = get_direction
@@ -33,3 +34,7 @@ func set_direction(value: Vector2) -> void:
 	
 func get_direction() -> Vector2:
 	return direction
+	
+	
+func get_hitbox() -> Hitbox:
+	return hitbox

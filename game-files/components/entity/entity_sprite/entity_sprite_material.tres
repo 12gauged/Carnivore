@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://crtjppcnt1llg"]
+
+[ext_resource type="Shader" path="res://components/entity/entity_sprite/entity_sprite.gdshader" id="1_j0g4x"]
+
+[resource]
+shader = ExtResource("1_j0g4x")
+shader_parameter/flashing = false

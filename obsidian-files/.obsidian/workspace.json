@@ -45,7 +45,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "main-design.md",
+                "file": "levels.md",
                 "mode": "source",
                 "source": false
               }
@@ -118,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "main-design.md",
+                "file": "levels.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -135,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "main-design.md",
+                "file": "levels.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -158,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "main-design.md"
+                "file": "levels.md"
               }
             }
           }
@@ -181,10 +181,11 @@
   },
   "active": "9861dda36c99b183",
   "lastOpenFiles": [
-    "enemies.md",
-    "levels.md",
+    "Pasted image 20231002172900.png",
     "main-design.md",
+    "levels.md",
     "Pasted image 20230927212756.png",
+    "enemies.md",
     "Untitled"
   ]
 }

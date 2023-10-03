@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=33 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
 [ext_resource type="Script" path="res://mob/player/sprite_handler.gd" id="2_8c1nj"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://c0kspuyj6tjro" path="res://mob/player/player_hands_holding.png" id="4_cyw85"]
 [ext_resource type="PackedScene" uid="uid://bkjod4h7v8sup" path="res://components/entity/projectile_handler/projectile_handler.tscn" id="4_vltxv"]
 [ext_resource type="Script" path="res://components/entity/projectile_handler/projectile_handler.gd" id="5_trllm"]
+[ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="10_j7ksm"]
+[ext_resource type="PackedScene" uid="uid://ckjn2c4feotis" path="res://components/entity/health/health.tscn" id="12_fgb2e"]
 
 [sub_resource type="Animation" id="Animation_ql7jf"]
 length = 0.001
@@ -121,8 +123,8 @@ states/walk/position = Vector2(622, 100)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_52735"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_84bto"), "walk", "End", SubResource("AnimationNodeStateMachineTransition_12sgp"), "idle", "eat", SubResource("AnimationNodeStateMachineTransition_bf1l2"), "eat", "idle", SubResource("AnimationNodeStateMachineTransition_ra3tf"), "walk", "eat", SubResource("AnimationNodeStateMachineTransition_qgwrs"), "eat", "walk", SubResource("AnimationNodeStateMachineTransition_q366g"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x3d1f")]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv3tx"]
-radius = 3.0
-height = 18.0
+radius = 1.0
+height = 9.99999
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3phsl"]
 radius = 6.0
@@ -175,9 +177,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tv3tx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.8, 0.8)
+zoom = Vector2(0.6, 0.6)
 position_smoothing_enabled = true
-position_smoothing_speed = 10.0
+position_smoothing_speed = 6.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_u7ufq")]
 position = Vector2(0, -8)
@@ -190,15 +192,23 @@ shape = SubResource("CapsuleShape2D_3phsl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_06b0o")
 
-[node name="ProjectileHandler" parent="." instance=ExtResource("4_vltxv")]
+[node name="ProjectileHandler" parent="." node_paths=PackedStringArray("shooter") instance=ExtResource("4_vltxv")]
 position = Vector2(0, -3)
 script = ExtResource("5_trllm")
+shooter = NodePath("Shooter")
+
+[node name="Shooter" parent="ProjectileHandler" instance=ExtResource("10_j7ksm")]
+projectile_group = "player_projectiles"
 
 [node name="KeyboardMotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_8odt8")]
 target_node = NodePath("..")
+
+[node name="Health" parent="." instance=ExtResource("12_fgb2e")]
+max_health = 6
 
 [connection signal="drop_collected" from="PickupArea" to="ProjectileHandler" method="_on_pickup_area_drop_collected"]
 [connection signal="projectile_being_held" from="ProjectileHandler" to="PlayerSprite" method="hands_holding_projectile"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="PlayerSprite" method="projectile_used"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="PickupArea" method="start_monitoring"]
+[connection signal="projectile_spawned" from="ProjectileHandler/Shooter" to="ProjectileHandler" method="_on_shooter_projectile_spawned"]
 [connection signal="direction_vector_updated" from="KeyboardMotionHandler" to="PlayerSprite" method="_on_keyboard_motion_handler_direction_vector_updated"]
