@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7dtlx3vb1iyk"
-path="res://.godot/imported/stone_drop.png-ffb8e2339df894880dc37534521866db.ctex"
+uid="uid://dnrqn2g74cnbt"
+path="res://.godot/imported/button_pressed.png-063d089b02a5b2d405e9f8ac9dd47818.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/drops/stone_drop/stone_drop.png"
-dest_files=["res://.godot/imported/stone_drop.png-ffb8e2339df894880dc37534521866db.ctex"]
+source_file="res://ui/themes/default/button/button_pressed.png"
+dest_files=["res://.godot/imported/button_pressed.png-063d089b02a5b2d405e9f8ac9dd47818.ctex"]
 
 [params]
 

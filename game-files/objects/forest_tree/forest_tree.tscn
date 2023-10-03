@@ -7,7 +7,6 @@
 [node name="Tree" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -57)
 texture = ExtResource("1_726cy")
 script = ExtResource("2_xl8ac")
 SpriteList = Array[Texture]([ExtResource("1_726cy"), ExtResource("4_7yiek")])

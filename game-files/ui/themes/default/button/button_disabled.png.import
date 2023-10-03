@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bod4uty3mr1de"
-path="res://.godot/imported/meat_drop.png-2a05d824da358d21da36c4ea468ce40e.ctex"
+uid="uid://dcgiov0v4m3xk"
+path="res://.godot/imported/button_disabled.png-b571fe7596d70b938f6a5118e7d4cd39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/drops/meat_drop/meat_drop.png"
-dest_files=["res://.godot/imported/meat_drop.png-2a05d824da358d21da36c4ea468ce40e.ctex"]
+source_file="res://ui/themes/default/button/button_disabled.png"
+dest_files=["res://.godot/imported/button_disabled.png-b571fe7596d70b938f6a5118e7d4cd39.ctex"]
 
 [params]
 

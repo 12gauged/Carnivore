@@ -10,8 +10,8 @@ func _ready():
 		create_node_group("projectiles")
 		create_node_group("particles")
 		return
-		
-	
+
+
 func create_node_group(group_name: String, ysort: bool = false) -> void:
 	var group_name_pascal = group_name.to_pascal_case()	
 	if has_node(group_name_pascal): return

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuiahr1gygfgo"
-path="res://.godot/imported/spear_drop.png-818302e7191138d2cf6eb4643d804f31.ctex"
+uid="uid://c0134a7vp2wof"
+path="res://.godot/imported/button_hover.png-c4eecad3e4cf937ac05993df88635c61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/drops/spear_drop/spear_drop.png"
-dest_files=["res://.godot/imported/spear_drop.png-818302e7191138d2cf6eb4643d804f31.ctex"]
+source_file="res://ui/themes/default/button/button_hover.png"
+dest_files=["res://.godot/imported/button_hover.png-c4eecad3e4cf937ac05993df88635c61.ctex"]
 
 [params]
 

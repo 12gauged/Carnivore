@@ -1,10 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch28gicrjkou6"]
+[gd_scene load_steps=6 format=3 uid="uid://cqr5ppt4l2yvv"]
 
-[ext_resource type="Script" path="res://objects/drops/drop.gd" id="1_ofvii"]
-[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/projectile_data/stone_data.tres" id="2_5fhic"]
-[ext_resource type="Texture2D" uid="uid://7dtlx3vb1iyk" path="res://objects/drops/stone_drop/stone_drop.png" id="2_ls8vd"]
+[ext_resource type="Script" path="res://objects/drop/drop.gd" id="1_getis"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wsmyj"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_b8cyi"]
 radius = 3.0
 
 [sub_resource type="Animation" id="Animation_5lc3a"]
@@ -45,17 +43,17 @@ _data = {
 "float": SubResource("Animation_my7k6")
 }
 
-[node name="StoneDrop" type="Area2D"]
+[node name="Drop" type="Area2D" node_paths=PackedStringArray("sprite", "collision_shape")]
 collision_layer = 64
 collision_mask = 0
-script = ExtResource("1_ofvii")
-data = ExtResource("2_5fhic")
+script = ExtResource("1_getis")
+sprite = NodePath("Sprite2D")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ls8vd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_wsmyj")
+shape = SubResource("CircleShape2D_b8cyi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "float"
