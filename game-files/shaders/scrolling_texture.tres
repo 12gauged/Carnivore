@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c2a0mu8j2m5it"]
+
+[sub_resource type="Shader" id="Shader_t3ksg"]
+code = "shader_type canvas_item;
+
+
+uniform float speed = 1;
+
+
+void fragment() {
+	vec4 pixel_color = texture(TEXTURE, vec2(UV.x - TIME * speed / 100.0, UV.y));
+	
+	COLOR = pixel_color;
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource("Shader_t3ksg")
+shader_parameter/speed = 1.2

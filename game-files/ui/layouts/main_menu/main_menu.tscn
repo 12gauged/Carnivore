@@ -1,7 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqe5kefjivfux"]
+[gd_scene load_steps=9 format=3 uid="uid://dqe5kefjivfux"]
 
+[ext_resource type="Material" uid="uid://c2a0mu8j2m5it" path="res://shaders/scrolling_texture.tres" id="1_6nsai"]
 [ext_resource type="Theme" uid="uid://caabepflgaswg" path="res://ui/layouts/menu_theme.tres" id="1_bgqjc"]
+[ext_resource type="Texture2D" uid="uid://bxp34n6fm6i6x" path="res://ui/layouts/main_menu/background.png" id="1_qpi7h"]
+[ext_resource type="Texture2D" uid="uid://c6a3ugph27ecv" path="res://ui/logos/carnivore.png" id="1_r6d0a"]
 [ext_resource type="PackedScene" uid="uid://btihxruocg51f" path="res://components/general/change_scene/change_scene.tscn" id="2_4e5s7"]
+[ext_resource type="Texture2D" uid="uid://cloqq4idbsetl" path="res://ui/layouts/main_menu/background_mountains.png" id="2_mdinr"]
+
+[sub_resource type="Shader" id="Shader_t3ksg"]
+code = "shader_type canvas_item;
+
+
+uniform float speed = 1;
+
+
+void fragment() {
+	vec4 pixel_color = texture(TEXTURE, vec2(UV.x - TIME * speed / 100.0, UV.y));
+	
+	COLOR = pixel_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gflb"]
+resource_local_to_scene = true
+shader = SubResource("Shader_t3ksg")
+shader_parameter/speed = 0.5
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,19 +33,55 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BackgroundMountains" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_1gflb")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -67.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mdinr")
+stretch_mode = 1
+
+[node name="Background" type="TextureRect" parent="."]
+material = ExtResource("1_6nsai")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -67.0
+offset_right = 160.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qpi7h")
+stretch_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 13
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-text = "Carnivore"
+texture = ExtResource("1_r6d0a")
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
