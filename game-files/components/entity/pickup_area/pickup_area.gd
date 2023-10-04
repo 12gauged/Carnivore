@@ -16,6 +16,7 @@ func collect_drop(drop_data: DropData = null) -> void:
 func on_drop_collided(drop: Drop) -> void:
 	collect_drop(drop.get_data())
 	stop_monitoring()
+	drop.on_collection()
 	drop.queue_free()
 	
 	

@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b73q70jgccqw3"]
+[gd_scene load_steps=3 format=3 uid="uid://b73q70jgccqw3"]
 
 [ext_resource type="Script" path="res://components/general/drop_spawn/drop_spawner.gd" id="1_43t6s"]
+[ext_resource type="PackedScene" uid="uid://cqr5ppt4l2yvv" path="res://objects/drop/drop.tscn" id="2_gtf83"]
 
 [node name="DropSpawner" type="Node2D"]
 script = ExtResource("1_43t6s")
+drop_scene = ExtResource("2_gtf83")
+
+[node name="SpawnDelay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="SpawnDelay" to="." method="_on_spawn_delay_timeout"]
