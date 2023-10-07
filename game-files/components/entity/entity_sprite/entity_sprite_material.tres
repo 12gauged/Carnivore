@@ -3,5 +3,6 @@
 [ext_resource type="Shader" path="res://components/entity/entity_sprite/entity_sprite.gdshader" id="1_j0g4x"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_j0g4x")
 shader_parameter/flashing = false
