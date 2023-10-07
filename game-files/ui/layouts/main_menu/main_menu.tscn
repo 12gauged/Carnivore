@@ -63,7 +63,7 @@ grow_vertical = 2
 texture = ExtResource("1_qpi7h")
 stretch_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,43 +78,65 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Main"]
 layout_mode = 2
 texture = ExtResource("1_r6d0a")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Main"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
+[node name="PlayButton" type="Button" parent="Main"]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 text = "PLAY"
 
-[node name="ChangeScene" parent="VBoxContainer/PlayButton" instance=ExtResource("2_4e5s7")]
+[node name="ChangeScene" parent="Main/PlayButton" instance=ExtResource("2_4e5s7")]
 scene_name = "001_forest"
 scene_type = "levels"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Main"]
 layout_mode = 2
 alignment = 1
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 icon = ExtResource("7_yab4q")
 icon_alignment = 1
 
-[node name="CreditsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="CreditsButton" type="Button" parent="Main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 icon = ExtResource("7_drflm")
 icon_alignment = 1
 
-[node name="ExitButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ExitButton" type="Button" parent="Main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 icon = ExtResource("6_r100i")
 icon_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="VBoxContainer/PlayButton/ChangeScene" method="change_scene"]
+[node name="VersionLabelContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VersionLabelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VersionLabelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VersionLabelContainer/HBoxContainer"]
+layout_mode = 2
+text = "0.1"
+
+[connection signal="pressed" from="Main/PlayButton" to="Main/PlayButton/ChangeScene" method="change_scene"]
