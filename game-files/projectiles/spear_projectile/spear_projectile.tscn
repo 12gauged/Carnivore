@@ -12,6 +12,7 @@ script = ExtResource("1_2svc0")
 damage = 4
 speed = 400
 face_direction = true
+destroy_when_hit = false
 hitbox = NodePath("Hitbox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
