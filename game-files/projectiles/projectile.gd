@@ -6,6 +6,7 @@ class_name Projectile
 @export var speed: int = 1
 @export var face_direction: bool = false
 @export var destroy_when_hit: bool = true
+@export var lifetime: float = 2.0
 @export var hitbox: Hitbox:
 	get = get_hitbox
 var direction: Vector2:
@@ -16,6 +17,7 @@ var direction: Vector2:
 func _ready() -> void:
 	hitbox.set_damage(damage)
 	hitbox.set_destroy_when_hit(destroy_when_hit)
+	get_tree().create_timer(lifetime).timeout.connect(on_lifetime_timeout)
 
 
 func _physics_process(delta):
@@ -40,3 +42,7 @@ func get_direction() -> Vector2:
 	
 func get_hitbox() -> Hitbox:
 	return hitbox
+	
+	
+func on_lifetime_timeout() -> void:
+	queue_free()
