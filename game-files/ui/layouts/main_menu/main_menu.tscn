@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqe5kefjivfux"]
+[gd_scene load_steps=8 format=3 uid="uid://dqe5kefjivfux"]
 
 [ext_resource type="Material" uid="uid://c2a0mu8j2m5it" path="res://shaders/scrolling_texture.tres" id="1_6nsai"]
-[ext_resource type="Theme" uid="uid://caabepflgaswg" path="res://ui/layouts/menu_theme.tres" id="1_bgqjc"]
 [ext_resource type="Texture2D" uid="uid://bxp34n6fm6i6x" path="res://ui/layouts/main_menu/background.png" id="1_qpi7h"]
 [ext_resource type="Texture2D" uid="uid://c6a3ugph27ecv" path="res://ui/logos/carnivore.png" id="1_r6d0a"]
 [ext_resource type="PackedScene" uid="uid://btihxruocg51f" path="res://components/general/change_scene/change_scene.tscn" id="2_4e5s7"]
@@ -83,10 +82,13 @@ alignment = 1
 layout_mode = 2
 texture = ExtResource("1_r6d0a")
 
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("1_bgqjc")
-text = "play"
+text = "PLAY"
 
 [node name="ChangeScene" parent="VBoxContainer/PlayButton" instance=ExtResource("2_4e5s7")]
 scene_name = "001_forest"
@@ -94,6 +96,6 @@ scene_type = "levels"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "exit"
+text = "EXIT"
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="VBoxContainer/PlayButton/ChangeScene" method="change_scene"]
