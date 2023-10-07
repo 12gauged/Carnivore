@@ -18,6 +18,9 @@ func on_area_entered(hitbox: Hitbox) -> void:
 	hurt.emit(hitbox.damage)
 	hitbox_collided.emit(hitbox)
 	
+	if hitbox.destroy_when_hit:
+		hitbox.parent.queue_free()
+	
 	
 func add_ignore_group(group) -> void:
 	ignore_groups.append(group)

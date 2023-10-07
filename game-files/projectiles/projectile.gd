@@ -5,6 +5,7 @@ class_name Projectile
 @export var damage: int = 1
 @export var speed: int = 1
 @export var face_direction: bool = false
+@export var destroy_when_hit: bool = true
 @export var hitbox: Hitbox:
 	get = get_hitbox
 var direction: Vector2:
@@ -14,6 +15,7 @@ var direction: Vector2:
 	
 func _ready() -> void:
 	hitbox.set_damage(damage)
+	hitbox.set_destroy_when_hit(destroy_when_hit)
 
 
 func _physics_process(delta):

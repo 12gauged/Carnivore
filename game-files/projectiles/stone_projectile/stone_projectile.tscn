@@ -16,7 +16,8 @@ hitbox = NodePath("Hitbox")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_n5644")
 
-[node name="Hitbox" parent="." instance=ExtResource("3_76evp")]
+[node name="Hitbox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_76evp")]
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_uec4g")

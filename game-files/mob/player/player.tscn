@@ -187,6 +187,7 @@ position_smoothing_speed = 6.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_u7ufq")]
 position = Vector2(0, -8)
+ignore_groups = Array[String](["player_projectiles"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_3phsl")
