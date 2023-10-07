@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5oumxtboxj23"]
+
+[ext_resource type="Script" path="res://components/level/arena/arena.gd" id="1_gjfb0"]
+[ext_resource type="PackedScene" uid="uid://yul3yoo3hrc3" path="res://components/level/spawner/spawner.tscn" id="2_6pbek"]
+
+[node name="Arena" type="Node"]
+script = ExtResource("1_gjfb0")
+enemies_per_wave = 4
+
+[node name="Spawner" parent="." instance=ExtResource("2_6pbek")]
+spawn_point = "specific_position"
+
+[node name="IntermissionDelay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="IntermissionDelay" to="." method="_on_intermission_delay_timeout"]

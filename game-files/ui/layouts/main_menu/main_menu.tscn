@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqe5kefjivfux"]
+[gd_scene load_steps=11 format=3 uid="uid://dqe5kefjivfux"]
 
 [ext_resource type="Material" uid="uid://c2a0mu8j2m5it" path="res://shaders/scrolling_texture.tres" id="1_6nsai"]
 [ext_resource type="Texture2D" uid="uid://bxp34n6fm6i6x" path="res://ui/layouts/main_menu/background.png" id="1_qpi7h"]
 [ext_resource type="Texture2D" uid="uid://c6a3ugph27ecv" path="res://ui/logos/carnivore.png" id="1_r6d0a"]
 [ext_resource type="PackedScene" uid="uid://btihxruocg51f" path="res://components/general/change_scene/change_scene.tscn" id="2_4e5s7"]
 [ext_resource type="Texture2D" uid="uid://cloqq4idbsetl" path="res://ui/layouts/main_menu/background_mountains.png" id="2_mdinr"]
+[ext_resource type="Texture2D" uid="uid://dblxsv4s7mgiy" path="res://ui/themes/menu_theme/icons/exit_icon.png" id="6_r100i"]
+[ext_resource type="Texture2D" uid="uid://bcujrcpmcgn8m" path="res://ui/themes/menu_theme/icons/information_icon.png" id="7_drflm"]
+[ext_resource type="Texture2D" uid="uid://bxufvec63cp0v" path="res://ui/themes/menu_theme/icons/settings_icon.png" id="7_yab4q"]
 
 [sub_resource type="Shader" id="Shader_t3ksg"]
 code = "shader_type canvas_item;
@@ -84,6 +87,7 @@ layout_mode = 2
 theme_override_constants/margin_top = 10
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 text = "PLAY"
 
@@ -91,8 +95,26 @@ text = "PLAY"
 scene_name = "001_forest"
 scene_type = "levels"
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-text = "EXIT"
+alignment = 1
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("7_yab4q")
+icon_alignment = 1
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("7_drflm")
+icon_alignment = 1
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("6_r100i")
+icon_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="VBoxContainer/PlayButton/ChangeScene" method="change_scene"]

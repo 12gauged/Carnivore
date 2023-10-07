@@ -31,7 +31,7 @@ window/stretch/aspect="expand"
 
 [gui]
 
-theme/custom="res://ui/layouts/menu_theme.tres"
+theme/custom="res://ui/themes/menu_theme/menu_theme.tres"
 
 [input]
 
@@ -66,6 +66,7 @@ action_down={
 2d_physics/layer_6="hurtbox"
 2d_physics/layer_7="drops"
 2d_physics/layer_8="drop_sensor"
+2d_physics/layer_9="soft_collisions"
 
 [rendering]
 

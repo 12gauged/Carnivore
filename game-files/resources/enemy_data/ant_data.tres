@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://dtp5vakxawdqi"]
+
+[ext_resource type="Script" path="res://resources/enemy_data/enemy_data.gd" id="1_juddc"]
+[ext_resource type="PackedScene" uid="uid://bfnqass5bqnwt" path="res://mob/ant/ant.tscn" id="1_vv1su"]
+
+[resource]
+script = ExtResource("1_juddc")
+enemy_scene = ExtResource("1_vv1su")
+spawn_wave = 1
