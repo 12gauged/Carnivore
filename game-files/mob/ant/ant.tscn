@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bfnqass5bqnwt"]
+[gd_scene load_steps=30 format=3 uid="uid://bfnqass5bqnwt"]
 
 [ext_resource type="Texture2D" uid="uid://c6vu7edbo54j8" path="res://mob/ant/ant.png" id="1_2n7wv"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_250jc"]
@@ -10,9 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://c78woswr8vxva" path="res://ai/behaviors/follow_player_behavior.tscn" id="4_c35f6"]
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="5_sirfd"]
 [ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="5_wq7gr"]
-[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/projectile_data/stone_data.tres" id="6_wi4pa"]
+[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/drop_data/projectile_data/stone_data.tres" id="6_wi4pa"]
 [ext_resource type="PackedScene" uid="uid://ckjn2c4feotis" path="res://components/entity/health/health.tscn" id="9_tfjf4"]
 [ext_resource type="PackedScene" uid="uid://b4xh6v8082xjt" path="res://components/entity/player_tracker/player_tracker.tscn" id="11_dxjnv"]
+[ext_resource type="PackedScene" uid="uid://x5d8hhgjpcvf" path="res://components/entity/soft_collision/soft_collision.tscn" id="14_ubgot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nwiw2"]
 radius = 3.16228
@@ -105,6 +106,9 @@ _data = {
 "move": SubResource("Animation_47dno")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2hxj4"]
+radius = 4.0
+
 [node name="Ant" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_250jc")
 
@@ -115,7 +119,7 @@ texture = ExtResource("1_2n7wv")
 offset = Vector2(0.5, 0)
 hframes = 3
 vframes = 4
-frame = 2
+frame = 1
 script = ExtResource("3_qio5a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -178,6 +182,13 @@ max_speed = 50
 
 [node name="Health" parent="." instance=ExtResource("9_tfjf4")]
 max_health = 2
+
+[node name="SoftCollision" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("14_ubgot")]
+position = Vector2(0, -1)
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoftCollision"]
+shape = SubResource("CircleShape2D_2hxj4")
 
 [connection signal="hurt" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="state_exited" from="StateMachine/Move" to="StateMachine/Move/FollowPlayerBehavior" method="stop_following"]
