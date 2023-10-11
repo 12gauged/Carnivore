@@ -34,12 +34,17 @@ func spawn_enemies() -> void:
 		if living_enemies == 0:
 			wave_ended.emit()
 		return
+		
 	for _i in range(max_living_enemies):
 		if living_enemies == max_living_enemies:
 			return
 		var chosen_enemy_scene: PackedScene = wave_enemies.back()
 		var spawnpoint: Vector2 = get_spawnpoint()
 		spawner.set_node_scene(chosen_enemy_scene)
+		
+		var spawn_delay: float = randf_range(0.5, 1.0)
+		await get_tree().create_timer(spawn_delay).timeout
+		
 		var new_enemy: Mob = spawner.spawn(spawnpoint)
 		wave_enemies.pop_back()
 		new_enemy.deleted.connect(on_enemy_dead)
