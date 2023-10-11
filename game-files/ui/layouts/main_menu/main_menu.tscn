@@ -89,6 +89,7 @@ theme_override_constants/margin_top = 10
 [node name="PlayButton" type="Button" parent="Main"]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "PLAY"
 
 [node name="ChangeScene" parent="Main/PlayButton" instance=ExtResource("2_4e5s7")]
@@ -116,6 +117,7 @@ icon_alignment = 1
 [node name="ExitButton" type="Button" parent="Main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 icon = ExtResource("6_r100i")
 icon_alignment = 1
 

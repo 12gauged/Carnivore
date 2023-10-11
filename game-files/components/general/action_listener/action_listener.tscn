@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8cyyl7ftabgv"]
+
+[ext_resource type="Script" path="res://components/general/action_listener/action_listener.gd" id="1_50dl5"]
+
+[node name="ActionListener" type="Node"]
+script = ExtResource("1_50dl5")

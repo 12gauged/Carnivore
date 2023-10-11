@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://x8p3s66fowjv"]
+
+[ext_resource type="PackedScene" uid="uid://dg7u2d8p823ew" path="res://ui/layouts/ingame/ingame_ui.tscn" id="1_o0pqb"]
+
+[node name="PlayerCamera" type="Camera2D"]
+zoom = Vector2(0.6, 0.6)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
+[node name="IngameUI" parent="." instance=ExtResource("1_o0pqb")]

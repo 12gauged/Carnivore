@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy3ytowwb64wf"]
+
+[ext_resource type="Script" path="res://components/general/event_emitter/event_emitter.gd" id="1_skj2p"]
+
+[node name="EventEmitter" type="Node"]
+script = ExtResource("1_skj2p")

@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1ndpnsmqyw3k"]
+
+[ext_resource type="Texture2D" uid="uid://cuiamqos2ig7b" path="res://ui/themes/menu_theme/icons/home_icon.png" id="1_2iq36"]
+[ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="1_mrb3v"]
+[ext_resource type="Texture2D" uid="uid://bxufvec63cp0v" path="res://ui/themes/menu_theme/icons/settings_icon.png" id="2_57eq1"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(88, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 2.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+text = "RESUME"
+
+[node name="EventEmitter" parent="VBoxContainer/Resume" instance=ExtResource("1_mrb3v")]
+event_name = "close_ingame_ui"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("1_2iq36")
+
+[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_57eq1")
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="VBoxContainer/Resume/EventEmitter" method="emit"]
