@@ -212,6 +212,8 @@ projectile_group = "player_projectiles"
 
 [node name="KeyboardMotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_8odt8")]
 target_node = NodePath("..")
+friction = 800
+acceleration = 500
 
 [node name="Health" parent="." instance=ExtResource("12_fgb2e")]
 max_health = 6

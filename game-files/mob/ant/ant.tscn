@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bfnqass5bqnwt"]
+[gd_scene load_steps=32 format=3 uid="uid://bfnqass5bqnwt"]
 
 [ext_resource type="Texture2D" uid="uid://c6vu7edbo54j8" path="res://mob/ant/ant.png" id="1_2n7wv"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_250jc"]
@@ -21,6 +21,9 @@ radius = 3.16228
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwbvj"]
 radius = 4.0
 height = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2hxj4"]
+radius = 4.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uwa8w"]
 animation = &"dig_for_stone"
@@ -99,15 +102,59 @@ tracks/0/keys = {
 "values": [1, 2]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yety5"]
-_data = {
-"dig_for_stone": SubResource("Animation_qmn3j"),
-"hold_stone": SubResource("Animation_3omjf"),
-"move": SubResource("Animation_47dno")
+[sub_resource type="Animation" id="Animation_i0clx"]
+resource_name = "spawn"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2hxj4"]
-radius = 4.0
+[sub_resource type="Animation" id="Animation_2esem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yety5"]
+_data = {
+"RESET": SubResource("Animation_2esem"),
+"dig_for_stone": SubResource("Animation_qmn3j"),
+"hold_stone": SubResource("Animation_3omjf"),
+"move": SubResource("Animation_47dno"),
+"spawn": SubResource("Animation_i0clx")
+}
 
 [node name="Ant" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_250jc")
@@ -119,7 +166,7 @@ texture = ExtResource("1_2n7wv")
 offset = Vector2(0.5, 0)
 hframes = 3
 vframes = 4
-frame = 1
+frame = 7
 script = ExtResource("3_qio5a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -132,6 +179,13 @@ ignore_groups = Array[String](["enemy_projectiles"])
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_fwbvj")
+
+[node name="SoftCollision" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("14_ubgot")]
+position = Vector2(0, -1)
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoftCollision"]
+shape = SubResource("CircleShape2D_2hxj4")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("parent_node", "animation_tree") instance=ExtResource("1_nprko")]
 parent_node = NodePath("..")
@@ -162,10 +216,10 @@ one_shot = true
 [node name="AnimationTree" type="AnimationTree" parent="StateMachine"]
 tree_root = SubResource("AnimationNodeStateMachine_ahubt")
 anim_player = NodePath("AnimationPlayer")
-active = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StateMachine/AnimationTree"]
 root_node = NodePath("../..")
+autoplay = "spawn"
 libraries = {
 "": SubResource("AnimationLibrary_yety5")
 }
@@ -182,13 +236,6 @@ max_speed = 50
 
 [node name="Health" parent="." instance=ExtResource("9_tfjf4")]
 max_health = 2
-
-[node name="SoftCollision" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("14_ubgot")]
-position = Vector2(0, -1)
-parent = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SoftCollision"]
-shape = SubResource("CircleShape2D_2hxj4")
 
 [connection signal="hurt" from="Hurtbox" to="Health" method="take_damage"]
 [connection signal="state_exited" from="StateMachine/Move" to="StateMachine/Move/FollowPlayerBehavior" method="stop_following"]

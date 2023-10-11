@@ -3,6 +3,7 @@ extends Node2D
 
 @export var parent_node: CharacterBody2D
 @export var animation_tree: AnimationTree
+@export var auto_start: bool = false
 var states: Dictionary = {}
 var current_state: State
 var current_state_name: String
@@ -10,6 +11,12 @@ var current_state_name: String
 
 
 func _ready() -> void:
+	if auto_start:
+		start()
+	
+	
+func start() -> void:
+	animation_tree.active = true
 	for child in get_children():
 		if not child is State: continue
 		var state_name = child.name.to_snake_case()
