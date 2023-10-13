@@ -1,6 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=38 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
+[ext_resource type="Script" path="res://mob/mob.gd" id="1_gbqbw"]
 [ext_resource type="Script" path="res://mob/player/sprite_handler.gd" id="2_8c1nj"]
 [ext_resource type="Texture2D" uid="uid://snqxtjr1pmlx" path="res://mob/player/player_hands.png" id="2_s36cy"]
 [ext_resource type="PackedScene" uid="uid://8w5n50r30r27" path="res://components/entity/hurtbox/hurtbox.tscn" id="2_u7ufq"]
@@ -13,7 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://x8p3s66fowjv" path="res://components/entity/player_camera/player_camera.tscn" id="6_uryga"]
 [ext_resource type="PackedScene" uid="uid://x5d8hhgjpcvf" path="res://components/entity/soft_collision/soft_collision.tscn" id="8_pod1a"]
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="10_j7ksm"]
-[ext_resource type="PackedScene" uid="uid://ckjn2c4feotis" path="res://components/entity/health/health.tscn" id="12_fgb2e"]
+[ext_resource type="PackedScene" uid="uid://cr4pkeq2xd3js" path="res://components/entity/consumable_handler/consumable_handler.tscn" id="14_2m003"]
+[ext_resource type="Script" path="res://components/entity/stat/stat.gd" id="15_r7mew"]
 
 [sub_resource type="Animation" id="Animation_ql7jf"]
 length = 0.001
@@ -138,6 +140,7 @@ height = 18.0
 radius = 6.08276
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_gbqbw")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("hands", "hands_holding", "held_item", "animation_player", "animation_tree")]
 position = Vector2(0, -8)
@@ -210,17 +213,37 @@ shooter = NodePath("Shooter")
 [node name="Shooter" parent="ProjectileHandler" instance=ExtResource("10_j7ksm")]
 projectile_group = "player_projectiles"
 
+[node name="ConsumableHandler" parent="." instance=ExtResource("14_2m003")]
+
 [node name="KeyboardMotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_8odt8")]
 target_node = NodePath("..")
 friction = 800
 acceleration = 500
 
-[node name="Health" parent="." instance=ExtResource("12_fgb2e")]
-max_health = 6
+[node name="Health" type="Node" parent="."]
+script = ExtResource("15_r7mew")
+max_value = 6
+value = 6
 
+[node name="Hunger" type="Node" parent="."]
+script = ExtResource("15_r7mew")
+max_value = 6
+value = 3
+
+[node name="Timer" type="Timer" parent="Hunger"]
+wait_time = 4.0
+autostart = true
+
+[node name="Energy" type="Node" parent="."]
+script = ExtResource("15_r7mew")
+max_value = 6
+
+[connection signal="hurt" from="Hurtbox" to="Health" method="decrease_value"]
 [connection signal="drop_collected" from="PickupArea" to="ProjectileHandler" method="_on_pickup_area_drop_collected"]
 [connection signal="projectile_being_held" from="ProjectileHandler" to="PlayerSprite" method="hands_holding_projectile"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="PlayerSprite" method="projectile_used"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="PickupArea" method="start_monitoring"]
 [connection signal="projectile_spawned" from="ProjectileHandler/Shooter" to="ProjectileHandler" method="_on_shooter_projectile_spawned"]
 [connection signal="direction_vector_updated" from="KeyboardMotionHandler" to="PlayerSprite" method="_on_keyboard_motion_handler_direction_vector_updated"]
+[connection signal="reached_max_value" from="Hunger" to="Energy" method="increase_value"]
+[connection signal="timeout" from="Hunger/Timer" to="Hunger" method="decrease_value"]
