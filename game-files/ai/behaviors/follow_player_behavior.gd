@@ -6,6 +6,9 @@ extends Behavior
 
 
 func execute_physics(_delta) -> void:
+	if not is_instance_valid(player):
+		return
+	
 	var parent_position: Vector2 = parent_node.get_global_position()
 	var player_position: Vector2 = player.get_global_position()
 	var direction_to_player: Vector2 = parent_position.direction_to(player_position)
