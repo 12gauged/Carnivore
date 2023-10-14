@@ -22,8 +22,6 @@ func update_button_groups() -> void:
 	button_group = get_tree().get_nodes_in_group("buttons")
 	special_button_group = get_tree().get_nodes_in_group("special_buttons")
 	
-	print(button_group)
-	
 	for button in button_group:
 		button.pressed.connect(play_button_click)
 	for special_button in special_button_group:

@@ -19,6 +19,7 @@ mouse_filter = 2
 script = ExtResource("1_dn1fo")
 
 [node name="ColorRect" type="ColorRect" parent="IngameUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +30,7 @@ color = Color(0, 0, 0, 0.65098)
 
 [node name="PauseMenu" parent="IngameUI" instance=ExtResource("1_yqqbw")]
 process_mode = 3
+visible = false
 layout_mode = 1
 
 [node name="ActionListener" parent="IngameUI/PauseMenu" instance=ExtResource("3_y1s7n")]

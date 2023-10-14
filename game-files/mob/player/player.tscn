@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=42 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_gbqbw"]
@@ -15,7 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://dxr55c1ta5n1o" path="res://components/entity/pickup_area/pickup_area.tscn" id="10_fyhwh"]
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="10_j7ksm"]
 [ext_resource type="PackedScene" uid="uid://cr4pkeq2xd3js" path="res://components/entity/consumable_handler/consumable_handler.tscn" id="14_2m003"]
+[ext_resource type="PackedScene" uid="uid://bva6p0jihi7hp" path="res://components/level/level_sound_player/level_sound_player.tscn" id="14_g1olw"]
+[ext_resource type="AudioStream" uid="uid://b5elerbyug84u" path="res://mob/player/sfx/collect_projectile.ogg" id="15_jei33"]
 [ext_resource type="Script" path="res://components/entity/stat/stat.gd" id="15_r7mew"]
+[ext_resource type="AudioStream" uid="uid://cw72bo2048a57" path="res://mob/player/sfx/throw_projectile.ogg" id="16_fnksd"]
 
 [sub_resource type="Animation" id="Animation_ql7jf"]
 length = 0.001
@@ -197,6 +200,8 @@ ignore_groups = Array[String](["player_projectiles"])
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_3phsl")
 
+[node name="HitSFX" parent="Hurtbox" instance=ExtResource("14_g1olw")]
+
 [node name="SoftCollision" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_pod1a")]
 parent = NodePath("..")
 
@@ -209,6 +214,9 @@ tracked_drop_type = "projectile"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectilePickupArea"]
 shape = SubResource("CircleShape2D_qu5nf")
+
+[node name="CollectProjectileSFX" parent="ProjectilePickupArea" instance=ExtResource("14_g1olw")]
+stream = ExtResource("15_jei33")
 
 [node name="MeatPickupArea" parent="." instance=ExtResource("10_fyhwh")]
 position = Vector2(0, -8)
@@ -223,6 +231,9 @@ shooter = NodePath("Shooter")
 
 [node name="Shooter" parent="ProjectileHandler" instance=ExtResource("10_j7ksm")]
 projectile_group = "player_projectiles"
+
+[node name="ThrowProjectileSFX" parent="ProjectileHandler" instance=ExtResource("14_g1olw")]
+stream = ExtResource("16_fnksd")
 
 [node name="ConsumableHandler" parent="." instance=ExtResource("14_2m003")]
 
@@ -251,11 +262,13 @@ max_value = 6
 
 [connection signal="hurt" from="Hurtbox" to="Health" method="decrease_value"]
 [connection signal="drop_collected" from="ProjectilePickupArea" to="ProjectilePickupArea" method="disable"]
+[connection signal="drop_collected" from="ProjectilePickupArea" to="ProjectilePickupArea/CollectProjectileSFX" method="play_sound"]
 [connection signal="projectile_collected" from="ProjectilePickupArea" to="ProjectileHandler" method="_on_pickup_area_drop_collected"]
 [connection signal="consumable_collected" from="MeatPickupArea" to="ConsumableHandler" method="on_drop_collected"]
 [connection signal="projectile_being_held" from="ProjectileHandler" to="PlayerSprite" method="hands_holding_projectile"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="PlayerSprite" method="projectile_used"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="ProjectilePickupArea" method="enable"]
+[connection signal="projectile_thrown" from="ProjectileHandler" to="ProjectileHandler/ThrowProjectileSFX" method="play_sound"]
 [connection signal="projectile_spawned" from="ProjectileHandler/Shooter" to="ProjectileHandler" method="_on_shooter_projectile_spawned"]
 [connection signal="energy_restored" from="ConsumableHandler" to="Energy" method="increase_value"]
 [connection signal="health_restored" from="ConsumableHandler" to="Health" method="increase_value"]

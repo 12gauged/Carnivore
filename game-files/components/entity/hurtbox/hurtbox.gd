@@ -4,6 +4,7 @@ class_name Hurtbox
 
 signal hurt(damage: int)
 signal hitbox_collided(hitbox: Hitbox)
+signal collided
 @export var ignore_groups: Array[String]
 
 
@@ -17,6 +18,7 @@ func on_area_entered(hitbox: Hitbox) -> void:
 			return
 	hurt.emit(hitbox.damage)
 	hitbox_collided.emit(hitbox)
+	collided.emit()
 	
 	if hitbox.destroy_when_hit:
 		hitbox.parent.queue_free()

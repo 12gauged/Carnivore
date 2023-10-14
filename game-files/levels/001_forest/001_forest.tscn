@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpm3gam0p5rie"]
+[gd_scene load_steps=9 format=3 uid="uid://dpm3gam0p5rie"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_ygaap"]
 [ext_resource type="PackedScene" uid="uid://dw3gj44eaixg5" path="res://mob/player/player.tscn" id="2_20vkg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b73q70jgccqw3" path="res://components/general/drop_spawn/drop_spawner.tscn" id="4_nhj31"]
 [ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/drop_data/projectiles/stone_data.tres" id="5_2bce7"]
 [ext_resource type="PackedScene" uid="uid://b5oumxtboxj23" path="res://components/level/arena/arena.tscn" id="6_wo4ag"]
+[ext_resource type="PackedScene" uid="uid://36a0dsgxb34o" path="res://components/level/level_sound_manager/level_sound_manager.tscn" id="6_x1fpl"]
 [ext_resource type="Resource" uid="uid://dtp5vakxawdqi" path="res://resources/enemy_data/ant_data.tres" id="7_7brj3"]
 
 [node name="001ForestLevel" type="Node2D" groups=["levels"]]
@@ -48,6 +49,8 @@ spawn_drop_data = ExtResource("5_2bce7")
 [node name="Projectiles" type="Node2D" parent="." groups=["projectiles"]]
 
 [node name="Particles" type="Node2D" parent="." groups=["particles"]]
+
+[node name="LevelSoundManager" parent="." instance=ExtResource("6_x1fpl")]
 
 [node name="Arena" parent="." instance=ExtResource("6_wo4ag")]
 enemy_datas = Array[Resource("res://resources/enemy_data/enemy_data.gd")]([ExtResource("7_7brj3")])

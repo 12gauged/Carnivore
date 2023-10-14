@@ -7,7 +7,6 @@ signal projectile_collected(projectile_data: ProjectileData)
 @export_enum("consumable", "projectile") var tracked_drop_type: String = "consumable"
 
 
-
 func _on_area_entered(area: Drop) -> void:
 	if area.get_data().type != tracked_drop_type: 
 		return

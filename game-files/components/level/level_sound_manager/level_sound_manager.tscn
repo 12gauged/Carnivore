@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://36a0dsgxb34o"]
+
+[ext_resource type="Script" path="res://components/level/level_sound_manager/level_sound_manager.gd" id="1_xbwvi"]
+
+[node name="LevelSoundManager" type="Node2D"]
+script = ExtResource("1_xbwvi")

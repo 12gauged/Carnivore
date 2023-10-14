@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bfnqass5bqnwt"]
+[gd_scene load_steps=36 format=3 uid="uid://bfnqass5bqnwt"]
 
 [ext_resource type="Texture2D" uid="uid://c6vu7edbo54j8" path="res://mob/ant/ant.png" id="1_2n7wv"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_250jc"]
@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://c78woswr8vxva" path="res://ai/behaviors/follow_player_behavior.tscn" id="4_c35f6"]
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="5_sirfd"]
 [ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="5_wq7gr"]
+[ext_resource type="PackedScene" uid="uid://bva6p0jihi7hp" path="res://components/level/level_sound_player/level_sound_player.tscn" id="6_1wiy5"]
 [ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/drop_data/projectiles/stone_data.tres" id="6_wi4pa"]
+[ext_resource type="AudioStream" uid="uid://b8xslf2vtqp17" path="res://projectiles/sfx/hit.ogg" id="7_82kcj"]
 [ext_resource type="PackedScene" uid="uid://b4xh6v8082xjt" path="res://components/entity/player_tracker/player_tracker.tscn" id="11_dxjnv"]
 [ext_resource type="PackedScene" uid="uid://b73q70jgccqw3" path="res://components/general/drop_spawn/drop_spawner.tscn" id="13_3tkjy"]
 [ext_resource type="Resource" uid="uid://43goojygcbni" path="res://resources/drop_data/consumables/meat_data.tres" id="14_ok7xe"]
@@ -182,6 +184,9 @@ ignore_groups = Array[String](["enemy_projectiles"])
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_fwbvj")
 
+[node name="HitSFX" parent="Hurtbox" instance=ExtResource("6_1wiy5")]
+stream = ExtResource("7_82kcj")
+
 [node name="SoftCollision" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("14_ubgot")]
 position = Vector2(0, -1)
 parent = NodePath("..")
@@ -246,6 +251,7 @@ max_value = 2
 value = 2
 
 [connection signal="deleted" from="." to="DropSpawner" method="spawn_drop"]
+[connection signal="collided" from="Hurtbox" to="Hurtbox/HitSFX" method="play_sound"]
 [connection signal="hurt" from="Hurtbox" to="Health" method="decrease_value"]
 [connection signal="state_exited" from="StateMachine/Move" to="StateMachine/Move/FollowPlayerBehavior" method="stop_following"]
 [connection signal="timeout" from="StateMachine/Move/Timer" to="StateMachine" method="move_to_next_state"]

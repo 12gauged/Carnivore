@@ -10,7 +10,7 @@ size = Vector2(6, 6)
 [node name="StoneProjectile" type="Node2D" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_euheu")
 damage = 2
-speed = 400
+speed = 500
 hitbox = NodePath("Hitbox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
