@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpm3gam0p5rie"]
+[gd_scene load_steps=10 format=3 uid="uid://dpm3gam0p5rie"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_ygaap"]
 [ext_resource type="PackedScene" uid="uid://dw3gj44eaixg5" path="res://mob/player/player.tscn" id="2_20vkg"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b5oumxtboxj23" path="res://components/level/arena/arena.tscn" id="6_wo4ag"]
 [ext_resource type="PackedScene" uid="uid://36a0dsgxb34o" path="res://components/level/level_sound_manager/level_sound_manager.tscn" id="6_x1fpl"]
 [ext_resource type="Resource" uid="uid://dtp5vakxawdqi" path="res://resources/enemy_data/ant_data.tres" id="7_7brj3"]
+[ext_resource type="Script" path="res://components/level/level_sound_manager/level_sound_manager.gd" id="9_uvhvj"]
 
 [node name="001ForestLevel" type="Node2D" groups=["levels"]]
 script = ExtResource("1_ygaap")
@@ -63,3 +64,6 @@ position = Vector2(96, 176)
 
 [node name="Marker2D3" type="Marker2D" parent="Arena"]
 position = Vector2(272, 96)
+
+[node name="@Node2D@124746" type="Node2D" parent="." instance=ExtResource("6_x1fpl")]
+script = ExtResource("9_uvhvj")

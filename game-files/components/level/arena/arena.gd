@@ -6,13 +6,15 @@ signal wave_ended
 @export_category("Arena Configuration")
 @export var intermission_duration: float = 4.0
 @export var waves: int = 6
-@export var enemies_per_wave: int = 10
+@export var initial_enemies_per_wave: int = 10
 @export var max_living_enemies: int = 2
 @export var auto_start: bool = true
 @export_category("Enemy Configuration")
 @export var enemy_datas: Array[EnemyData]
 var wave: int = 1
 var living_enemies: int = 0
+var enemies_per_wave: int = 10
+var max_enemies_per_wave: int = 28
 var wave_enemies: Array[PackedScene]
 var spawnpoints: Array[Marker2D]
 @onready var spawner: Spawner = $Spawner
@@ -24,8 +26,13 @@ func _ready() -> void:
 	if not auto_start:
 		return
 	start_wave()
-	
-	
+
+
+func increase_wave_enemies() -> void:
+	enemies_per_wave += pow(wave, 0.75)
+	enemies_per_wave = clamp(enemies_per_wave, 0, max_enemies_per_wave)
+
+
 func start_wave() -> void:
 	spawnpoints = get_spawnpoints()
 	wave_enemies = generate_wave_enemies()
@@ -59,7 +66,7 @@ func generate_wave_enemies() -> Array[PackedScene]:
 	var result: Array[PackedScene] = []
 	
 	for enemy_data in enemy_datas:
-		if enemy_data.spawn_wave < wave:
+		if enemy_data.spawn_wave > wave:
 			continue
 		candidates.append(enemy_data)
 		
@@ -70,7 +77,6 @@ func generate_wave_enemies() -> Array[PackedScene]:
 		result.append(chosen_enemy)
 	
 	result.reverse()
-	
 	return result
 	
 	
@@ -93,6 +99,8 @@ func get_spawnpoints() -> Array[Marker2D]:
 	
 	
 func on_wave_ended() -> void:
+	wave += 1
+	increase_wave_enemies()
 	intermission_delay.start(intermission_duration)
 	
 	
