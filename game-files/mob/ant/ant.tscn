@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="5_sirfd"]
 [ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="5_wq7gr"]
 [ext_resource type="PackedScene" uid="uid://bva6p0jihi7hp" path="res://components/level/level_sound_player/level_sound_player.tscn" id="6_1wiy5"]
-[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/drop_data/projectiles/stone_data.tres" id="6_wi4pa"]
 [ext_resource type="AudioStream" uid="uid://b8xslf2vtqp17" path="res://projectiles/sfx/hit.ogg" id="7_82kcj"]
 [ext_resource type="PackedScene" uid="uid://b4xh6v8082xjt" path="res://components/entity/player_tracker/player_tracker.tscn" id="11_dxjnv"]
 [ext_resource type="PackedScene" uid="uid://b73q70jgccqw3" path="res://components/general/drop_spawn/drop_spawner.tscn" id="13_3tkjy"]
+[ext_resource type="Resource" uid="uid://cj0g14u8b727a" path="res://resources/drop_data/projectiles/slow_stone_data.tres" id="13_yyb8j"]
 [ext_resource type="Resource" uid="uid://43goojygcbni" path="res://resources/drop_data/consumables/meat_data.tres" id="14_ok7xe"]
 [ext_resource type="PackedScene" uid="uid://x5d8hhgjpcvf" path="res://components/entity/soft_collision/soft_collision.tscn" id="14_ubgot"]
 [ext_resource type="Script" path="res://components/entity/stat/stat.gd" id="16_gf74i"]
@@ -232,7 +232,7 @@ libraries = {
 }
 
 [node name="Shooter" parent="." instance=ExtResource("5_sirfd")]
-projectile_data = ExtResource("6_wi4pa")
+projectile_data = ExtResource("13_yyb8j")
 
 [node name="PlayerTracker" parent="Shooter" node_paths=PackedStringArray("parent") instance=ExtResource("11_dxjnv")]
 parent = NodePath("../..")

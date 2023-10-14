@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcr4xtu4u6y4t"]
+
+[ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_pki70"]
+[ext_resource type="Texture2D" uid="uid://l4t3h1rk4vb7" path="res://projectiles/stone_projectile/stone_projectile.png" id="2_vcbuq"]
+[ext_resource type="PackedScene" uid="uid://dg7wh84880ejx" path="res://components/entity/hitbox/hitbox.tscn" id="3_oeunv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uec4g"]
+size = Vector2(6, 6)
+
+[node name="StoneProjectile" type="Node2D" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("1_pki70")
+damage = 2
+speed = 300
+hitbox = NodePath("Hitbox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_vcbuq")
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_oeunv")]
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_uec4g")

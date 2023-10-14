@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=4 format=3 uid="uid://cj0g14u8b727a"]
+
+[ext_resource type="Script" path="res://resources/drop_data/projectile_data.gd" id="1_8t8iq"]
+[ext_resource type="Texture2D" uid="uid://l4t3h1rk4vb7" path="res://projectiles/stone_projectile/stone_projectile.png" id="1_n4qpc"]
+[ext_resource type="PackedScene" uid="uid://dcr4xtu4u6y4t" path="res://projectiles/stone_projectile/slow_stone_projectile.tscn" id="2_ytoec"]
+
+[resource]
+script = ExtResource("1_8t8iq")
+on_hand_sprite = ExtResource("1_n4qpc")
+projectile_scene = ExtResource("2_ytoec")
+type = "consumable"
