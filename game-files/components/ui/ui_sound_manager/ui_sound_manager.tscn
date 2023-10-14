@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b562cuuibmcpd"]
+
+[ext_resource type="Script" path="res://components/ui/ui_sound_manager/ui_sound_manager.gd" id="1_xiw2i"]
+
+[node name="UISoundManager" type="Node"]
+script = ExtResource("1_xiw2i")

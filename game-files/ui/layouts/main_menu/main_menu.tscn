@@ -25,7 +25,7 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1gflb"]
 resource_local_to_scene = true
 shader = SubResource("Shader_t3ksg")
-shader_parameter/speed = 0.5
+shader_parameter/speed = 0.25
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -86,7 +86,7 @@ texture = ExtResource("1_r6d0a")
 layout_mode = 2
 theme_override_constants/margin_top = 10
 
-[node name="PlayButton" type="Button" parent="Main"]
+[node name="PlayButton" type="Button" parent="Main" groups=["special_buttons"]]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -94,27 +94,26 @@ text = "PLAY"
 
 [node name="ChangeScene" parent="Main/PlayButton" instance=ExtResource("2_4e5s7")]
 scene_name = "001_forest"
-scene_type = "levels"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main"]
 layout_mode = 2
 alignment = 1
 
-[node name="SettingsButton" type="Button" parent="Main/HBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Main/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 icon = ExtResource("7_yab4q")
 icon_alignment = 1
 
-[node name="CreditsButton" type="Button" parent="Main/HBoxContainer"]
+[node name="CreditsButton" type="Button" parent="Main/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 icon = ExtResource("7_drflm")
 icon_alignment = 1
 
-[node name="ExitButton" type="Button" parent="Main/HBoxContainer"]
+[node name="ExitButton" type="Button" parent="Main/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2

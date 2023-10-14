@@ -16,4 +16,4 @@ void fragment() {
 [resource]
 resource_local_to_scene = true
 shader = SubResource("Shader_t3ksg")
-shader_parameter/speed = 1.2
+shader_parameter/speed = 1.4

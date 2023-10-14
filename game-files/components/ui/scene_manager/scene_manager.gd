@@ -19,7 +19,12 @@ func change_scene(new_scene: String, scene_type: String) -> void:
 func add_scene(scene_name, scene_type) -> void:
 	var new_scene_packed: PackedScene = str_to_var(scenes[scene_type][scene_name])
 	var new_scene = new_scene_packed.instantiate()
+	new_scene.ready.connect(on_scene_ready)
 	self.add_child(new_scene)
+	
+	
+func on_scene_ready() -> void:
+	GameEvents.scene_finished_changing.emit()
 
 
 func _on_scene_loader_scenes_loaded(loaded_scenes):

@@ -40,7 +40,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="Resume" type="Button" parent="VBoxContainer"]
+[node name="Resume" type="Button" parent="VBoxContainer" groups=["special_buttons"]]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 text = "RESUME"
@@ -53,7 +53,7 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="HomeButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="HomeButton" type="Button" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 icon = ExtResource("1_2iq36")
 
@@ -61,7 +61,7 @@ icon = ExtResource("1_2iq36")
 scene_name = "main_menu"
 scene_type = "ui"
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 disabled = true
 icon = ExtResource("2_57eq1")
