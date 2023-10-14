@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ConsumableData" load_steps=3 format=3 uid="uid://43goojygcbni"]
+
+[ext_resource type="Script" path="res://resources/drop_data/consumable_data.gd" id="1_blsig"]
+[ext_resource type="Texture2D" uid="uid://bod4uty3mr1de" path="res://objects/drop/meat_drop.png" id="1_umf3n"]
+
+[resource]
+script = ExtResource("1_blsig")
+restore = "hunger"
+restore_amount = 1
+type = "consumable"
+drop_texture = ExtResource("1_umf3n")
