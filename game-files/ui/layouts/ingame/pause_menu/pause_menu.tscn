@@ -53,6 +53,11 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
+[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
+layout_mode = 2
+disabled = true
+icon = ExtResource("2_57eq1")
+
 [node name="HomeButton" type="Button" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 icon = ExtResource("1_2iq36")
@@ -60,11 +65,6 @@ icon = ExtResource("1_2iq36")
 [node name="ChangeScene" parent="VBoxContainer/HBoxContainer/HomeButton" instance=ExtResource("3_8fl5w")]
 scene_name = "main_menu"
 scene_type = "ui"
-
-[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
-layout_mode = 2
-disabled = true
-icon = ExtResource("2_57eq1")
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="VBoxContainer/Resume/EventEmitter" method="emit"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HomeButton" to="VBoxContainer/HBoxContainer/HomeButton/ChangeScene" method="change_scene"]

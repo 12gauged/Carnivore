@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="4_1hq4k"]
 
 [node name="IngameUI" type="CanvasLayer"]
+layer = 2
 
 [node name="IngameUI" type="Control" parent="."]
 layout_mode = 3
@@ -17,19 +18,17 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_dn1fo")
 
-[node name="BlackOverlay" type="ColorRect" parent="IngameUI"]
-visible = false
+[node name="ColorRect" type="ColorRect" parent="IngameUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.768627)
+color = Color(0, 0, 0, 0.65098)
 
 [node name="PauseMenu" parent="IngameUI" instance=ExtResource("1_yqqbw")]
 process_mode = 3
-visible = false
 layout_mode = 1
 
 [node name="ActionListener" parent="IngameUI/PauseMenu" instance=ExtResource("3_y1s7n")]

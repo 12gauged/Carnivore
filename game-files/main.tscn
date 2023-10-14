@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://01v2qdi30avs"]
+[gd_scene load_steps=8 format=3 uid="uid://01v2qdi30avs"]
 
 [ext_resource type="PackedScene" uid="uid://cydrtflrk5f44" path="res://components/ui/scene_manager/scene_manager.tscn" id="1_few8t"]
 [ext_resource type="PackedScene" uid="uid://7o3lkdebfkd" path="res://components/ui/scene_loader/scene_loader.tscn" id="1_fjkla"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://0qrd4ib1vros" path="res://ui/sfx/button/special_button_click.ogg" id="4_nkf0i"]
 [ext_resource type="PackedScene" uid="uid://b562cuuibmcpd" path="res://components/ui/ui_sound_manager/ui_sound_manager.tscn" id="4_sfb11"]
 [ext_resource type="AudioStream" uid="uid://bsb6128gn7krb" path="res://ui/sfx/button/button_click.ogg" id="5_mv350"]
+[ext_resource type="PackedScene" uid="uid://bqb6sc4hw7pb3" path="res://components/ui/black_overlay/black_overlay.tscn" id="7_tpvns"]
 
 [node name="Main" type="Node"]
 
@@ -21,11 +22,11 @@ sounds = {
 }
 
 [node name="SceneManager" parent="." instance=ExtResource("1_few8t")]
+process_mode = 3
 
 [node name="MainMenu" parent="SceneManager" instance=ExtResource("2_5i6s2")]
 
-[node name="StatusLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 12.0
+[node name="BlackOverlay" parent="." instance=ExtResource("7_tpvns")]
+process_mode = 3
 
 [connection signal="scenes_loaded" from="SceneLoader" to="SceneManager" method="_on_scene_loader_scenes_loaded"]
