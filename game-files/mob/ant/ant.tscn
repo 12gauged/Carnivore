@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bfnqass5bqnwt"]
+[gd_scene load_steps=34 format=3 uid="uid://bfnqass5bqnwt"]
 
 [ext_resource type="Texture2D" uid="uid://c6vu7edbo54j8" path="res://mob/ant/ant.png" id="1_2n7wv"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_250jc"]
@@ -10,10 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://c78woswr8vxva" path="res://ai/behaviors/follow_player_behavior.tscn" id="4_c35f6"]
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="5_sirfd"]
 [ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="5_wq7gr"]
-[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/drop_data/projectile_data/stone_data.tres" id="6_wi4pa"]
-[ext_resource type="PackedScene" uid="uid://ckjn2c4feotis" path="res://components/entity/health/health.tscn" id="9_tfjf4"]
+[ext_resource type="Resource" uid="uid://c3pm4xoaqmkjx" path="res://resources/drop_data/projectiles/stone_data.tres" id="6_wi4pa"]
 [ext_resource type="PackedScene" uid="uid://b4xh6v8082xjt" path="res://components/entity/player_tracker/player_tracker.tscn" id="11_dxjnv"]
+[ext_resource type="PackedScene" uid="uid://b73q70jgccqw3" path="res://components/general/drop_spawn/drop_spawner.tscn" id="13_3tkjy"]
+[ext_resource type="Resource" uid="uid://43goojygcbni" path="res://resources/drop_data/consumables/meat_data.tres" id="14_ok7xe"]
 [ext_resource type="PackedScene" uid="uid://x5d8hhgjpcvf" path="res://components/entity/soft_collision/soft_collision.tscn" id="14_ubgot"]
+[ext_resource type="Script" path="res://components/entity/stat/stat.gd" id="16_gf74i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nwiw2"]
 radius = 3.16228
@@ -51,6 +53,21 @@ states/hold_stone/position = Vector2(710, 100)
 states/move/node = SubResource("AnimationNodeAnimation_nlbbc")
 states/move/position = Vector2(341, 100)
 transitions = ["hold_stone", "move", SubResource("AnimationNodeStateMachineTransition_1oa14"), "dig_for_stone", "hold_stone", SubResource("AnimationNodeStateMachineTransition_mpnyk"), "Start", "move", SubResource("AnimationNodeStateMachineTransition_sdo52"), "move", "dig_for_stone", SubResource("AnimationNodeStateMachineTransition_pqgi0")]
+
+[sub_resource type="Animation" id="Animation_2esem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
 
 [sub_resource type="Animation" id="Animation_qmn3j"]
 resource_name = "dig_for_stone"
@@ -130,21 +147,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"start"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_2esem"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yety5"]
@@ -230,19 +232,25 @@ projectile_data = ExtResource("6_wi4pa")
 [node name="PlayerTracker" parent="Shooter" node_paths=PackedStringArray("parent") instance=ExtResource("11_dxjnv")]
 parent = NodePath("../..")
 
+[node name="DropSpawner" parent="." instance=ExtResource("13_3tkjy")]
+spawn_radius = 1.0
+spawn_drop_data = ExtResource("14_ok7xe")
+
 [node name="MotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_wq7gr")]
 target_node = NodePath("..")
 max_speed = 50
 
-[node name="Health" parent="." instance=ExtResource("9_tfjf4")]
-max_health = 2
+[node name="Health" type="Node" parent="."]
+script = ExtResource("16_gf74i")
+max_value = 2
+value = 2
 
-[connection signal="hurt" from="Hurtbox" to="Health" method="take_damage"]
+[connection signal="deleted" from="." to="DropSpawner" method="spawn_drop"]
+[connection signal="hurt" from="Hurtbox" to="Health" method="decrease_value"]
 [connection signal="state_exited" from="StateMachine/Move" to="StateMachine/Move/FollowPlayerBehavior" method="stop_following"]
 [connection signal="timeout" from="StateMachine/Move/Timer" to="StateMachine" method="move_to_next_state"]
 [connection signal="timeout" from="StateMachine/DigForStone/Timer" to="StateMachine" method="move_to_next_state"]
 [connection signal="state_exited" from="StateMachine/HoldStone" to="Shooter" method="shoot"]
 [connection signal="timeout" from="StateMachine/HoldStone/Timer" to="StateMachine" method="move_to_next_state"]
 [connection signal="direction_to_player_updated" from="Shooter/PlayerTracker" to="Shooter" method="set_direction"]
-[connection signal="dead" from="Health" to="." method="die"]
-[connection signal="taken_damage" from="Health" to="Sprite2D" method="show_damage_flash"]
+[connection signal="reached_min_value" from="Health" to="." method="die"]

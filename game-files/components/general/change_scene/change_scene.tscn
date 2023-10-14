@@ -4,5 +4,3 @@
 
 [node name="ChangeScene" type="Node"]
 script = ExtResource("1_hmjrn")
-scene_name = null
-scene_type = null

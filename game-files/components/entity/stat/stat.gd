@@ -25,14 +25,12 @@ func decrease_value(amount: int = 1) -> void:
 func increase_value(amount: int = 1) -> void:
 	set_value(value + amount)
 	if get_value() < max_value: return
-	print_debug("%s at max value." % self.name)
 	reached_max_value.emit()
 	
 	
 func set_value(new_value: int) -> void: 
 	value = clamp(new_value, min_value, max_value)
 	value_updated.emit(value)
-	print_debug("%s new_value: %s" % [self.name, new_value])
 	
 
 func get_value() -> int: 

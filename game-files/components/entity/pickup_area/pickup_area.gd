@@ -1,28 +1,25 @@
 extends Area2D
-class_name PickupArea
 
 
-signal drop_collected(drop_data)
+signal drop_collected
+signal consumable_collected(consumable_data: ConsumableData)
+signal projectile_collected(projectile_data: ProjectileData)
+@export_enum("consumable", "projectile") var tracked_drop_type: String = "consumable"
 
 
-func _ready() -> void:
-	area_entered.connect(on_drop_collided)
 
-
-func collect_drop(drop_data: DropData = null) -> void:
-	drop_collected.emit(drop_data)
-
-
-func on_drop_collided(drop: Drop) -> void:
-	collect_drop(drop.get_data())
-	stop_monitoring()
-	drop.on_collection()
-	drop.queue_free()
+func _on_area_entered(area: Drop) -> void:
+	if area.get_data().type != tracked_drop_type: 
+		return
+	self.get("%s_collected" % tracked_drop_type).emit(area.get_data())
+	drop_collected.emit()
+	area.collected.emit()
+	area.queue_free()
 	
 	
-func start_monitoring() -> void:
-	set_deferred("monitoring", true)
+func disable() -> void:
+	set_monitoring.call_deferred(false)
 	
 	
-func stop_monitoring() -> void:
-	set_deferred("monitoring", false)
+func enable() -> void:
+	set_monitoring.call_deferred(true)

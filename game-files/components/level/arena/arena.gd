@@ -8,6 +8,7 @@ signal wave_ended
 @export var waves: int = 6
 @export var enemies_per_wave: int = 10
 @export var max_living_enemies: int = 2
+@export var auto_start: bool = true
 @export_category("Enemy Configuration")
 @export var enemy_datas: Array[EnemyData]
 var wave: int = 1
@@ -20,6 +21,8 @@ var spawnpoints: Array[Marker2D]
 
 func _ready() -> void:
 	wave_ended.connect(on_wave_ended)
+	if not auto_start:
+		return
 	start_wave()
 	
 	

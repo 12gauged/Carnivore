@@ -6,4 +6,5 @@ extends Node
 
 
 func change_scene() -> void:
+	get_tree().paused = false
 	Game.change_scene(scene_name, scene_type)

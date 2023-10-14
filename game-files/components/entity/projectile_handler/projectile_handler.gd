@@ -16,7 +16,8 @@ func _unhandled_input(event) -> void:
 
 
 func _on_pickup_area_drop_collected(drop_data: DropData) -> void:
-	if drop_data.type != "projectile": return
+	if drop_data.type != "projectile": 
+		return
 	current_projectile_data = drop_data
 	projectile_being_held.emit(current_projectile_data)
 	shooter.set_projectile_data(drop_data)
