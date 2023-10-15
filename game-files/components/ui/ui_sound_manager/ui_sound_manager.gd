@@ -41,6 +41,7 @@ func play_sound(sound_key: String) -> void:
 	var new_sound_stream: AudioStreamPlayer = create_sound_stream()
 	
 	new_sound_stream.stream = sound_file
+	new_sound_stream.bus = "UI"
 	new_sound_stream.play()
 	
 	

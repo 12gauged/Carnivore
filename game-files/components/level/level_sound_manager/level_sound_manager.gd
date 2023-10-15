@@ -6,9 +6,10 @@ func _ready() -> void:
 	Game.play_sound_request.connect(play_sound)
 
 
-func play_sound(stream: AudioStream) -> void:
+func play_sound(stream: AudioStream, bus: String) -> void:
 	var new_sound_stream: AudioStreamPlayer = create_sound_stream()
 	new_sound_stream.stream = stream
+	new_sound_stream.bus = bus
 	new_sound_stream.play()
 	
 	

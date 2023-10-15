@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c2a0mu8j2m5it"]
 
-[sub_resource type="Shader" id="Shader_t3ksg"]
+[sub_resource type="Shader" id="Shader_yar7p"]
 code = "shader_type canvas_item;
 
 
@@ -15,5 +15,5 @@ void fragment() {
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource("Shader_t3ksg")
+shader = SubResource("Shader_yar7p")
 shader_parameter/speed = 1.4
