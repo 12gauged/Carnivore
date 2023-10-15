@@ -33,6 +33,10 @@ func increase_wave_enemies() -> void:
 	enemies_per_wave = clamp(enemies_per_wave, 0, max_enemies_per_wave)
 
 
+func end_arena() -> void:
+	pass
+
+
 func start_wave() -> void:
 	spawnpoints = get_spawnpoints()
 	wave_enemies = generate_wave_enemies()
@@ -99,6 +103,10 @@ func get_spawnpoints() -> Array[Marker2D]:
 	
 	
 func on_wave_ended() -> void:
+	if wave == waves:
+		end_arena()
+		return
+	
 	wave += 1
 	increase_wave_enemies()
 	intermission_delay.start(intermission_duration)
