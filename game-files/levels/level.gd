@@ -29,5 +29,9 @@ func create_node_group(group_name: String, ysort: bool = false) -> void:
 	
 func create_custom_node(node_scene: PackedScene) -> void:
 	var new_node = node_scene.instantiate()
+	var node_name = new_node.name
+	if has_node(node_name):
+		new_node.queue_free()
+		return
 	self.add_child(new_node)
 	new_node.set_owner(get_tree().get_edited_scene_root())
