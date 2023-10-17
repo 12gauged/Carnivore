@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://caabepflgaswg"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://caabepflgaswg"]
 
 [ext_resource type="Texture2D" uid="uid://dcgiov0v4m3xk" path="res://ui/themes/menu_theme/button/button_disabled.png" id="1_qm4ph"]
 [ext_resource type="Texture2D" uid="uid://cvawlvfmexdcr" path="res://ui/themes/menu_theme/button/button_normal.png" id="2_8xpmb"]
@@ -40,15 +40,23 @@ texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 region_rect = Rect2(0, 0, 16, 16)
 
+[sub_resource type="FontVariation" id="FontVariation_afii7"]
+base_font = ExtResource("3_reuc5")
+spacing_top = 2
+
 [resource]
-default_font = ExtResource("3_reuc5")
+default_font = SubResource("FontVariation_afii7")
 default_font_size = 8
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_disabled_color = Color(0.25098, 0.25098, 0.25098, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(0.25098, 0.25098, 0.25098, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
 Button/styles/disabled = SubResource("StyleBoxTexture_1mpyq")
 Button/styles/focus = SubResource("StyleBoxEmpty_he1oc")
 Button/styles/hover = SubResource("StyleBoxTexture_vwg44")

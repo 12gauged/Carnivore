@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1ndpnsmqyw3k"]
+[gd_scene load_steps=7 format=3 uid="uid://d1ndpnsmqyw3k"]
 
 [ext_resource type="Texture2D" uid="uid://cuiamqos2ig7b" path="res://ui/themes/menu_theme/icons/home_icon.png" id="1_2iq36"]
 [ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="1_mrb3v"]
 [ext_resource type="Texture2D" uid="uid://bxufvec63cp0v" path="res://ui/themes/menu_theme/icons/settings_icon.png" id="2_57eq1"]
 [ext_resource type="PackedScene" uid="uid://btihxruocg51f" path="res://components/general/change_scene/change_scene.tscn" id="3_8fl5w"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_pmfkq"]
+pressed = true
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ayv6t"]
+events = [SubResource("InputEventKey_pmfkq")]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -40,9 +47,11 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/margin_bottom = 20
 
-[node name="Resume" type="Button" parent="VBoxContainer" groups=["special_buttons"]]
+[node name="Resume" type="Button" parent="VBoxContainer" groups=["buttons"]]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_ayv6t")
 text = "RESUME"
 
 [node name="EventEmitter" parent="VBoxContainer/Resume" instance=ExtResource("1_mrb3v")]
@@ -63,6 +72,7 @@ icon_alignment = 1
 [node name="HomeButton" type="Button" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 icon = ExtResource("1_2iq36")
 icon_alignment = 1
 
