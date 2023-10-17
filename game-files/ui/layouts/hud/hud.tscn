@@ -1,4 +1,28 @@
-[gd_scene format=3 uid="uid://coj78aqewaafn"]
+[gd_scene load_steps=9 format=3 uid="uid://coj78aqewaafn"]
+
+[ext_resource type="Shader" path="res://ui/components/status_bar/status_bar.gdshader" id="1_bb5bc"]
+[ext_resource type="Texture2D" uid="uid://blxjyppenj111" path="res://ui/components/status_bar/status_bar_empty.png" id="1_qndr5"]
+[ext_resource type="PackedScene" uid="uid://b302b5pnoaw0f" path="res://ui/components/status_bar/status_bar.tscn" id="1_ymop5"]
+[ext_resource type="Texture2D" uid="uid://bu3allj5y4pw1" path="res://ui/components/status_bar/health_bar/health_icon.png" id="2_1n5t3"]
+[ext_resource type="Texture2D" uid="uid://bolb2t81mdfio" path="res://ui/components/status_bar/hunger_bar/hunger_icon.png" id="5_40efy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2dps"]
+bg_color = Color(0, 0, 0, 0.501961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c7iyk"]
+resource_local_to_scene = true
+shader = ExtResource("1_bb5bc")
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sx0ew"]
+resource_local_to_scene = true
+shader = ExtResource("1_bb5bc")
+shader_parameter/mode = 0
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -10,3 +34,68 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StatusBarPanel" type="PanelContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r2dps")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/StatusBarPanel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HealthBar" parent="HUD/VBoxContainer/StatusBarPanel/HBoxContainer" instance=ExtResource("1_ymop5")]
+material = SubResource("ShaderMaterial_c7iyk")
+layout_mode = 2
+max_value = 6.0
+value = 6.0
+texture_under = ExtResource("1_qndr5")
+texture_progress = ExtResource("2_1n5t3")
+id = "health"
+event_name = "status_bar_updated"
+
+[node name="HungerBar" parent="HUD/VBoxContainer/StatusBarPanel/HBoxContainer" instance=ExtResource("1_ymop5")]
+material = SubResource("ShaderMaterial_sx0ew")
+layout_mode = 2
+max_value = 6.0
+value = 6.0
+texture_under = ExtResource("1_qndr5")
+texture_progress = ExtResource("5_40efy")
+id = "hunger"
+event_name = "status_bar_updated"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="WaveTextPanel" type="PanelContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r2dps")
+
+[node name="WaveText" type="RichTextLabel" parent="HUD/VBoxContainer/WaveTextPanel"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]WAVE[/center]"
+fit_content = true
+autowrap_mode = 2
+
+[connection signal="decreased" from="HUD/VBoxContainer/StatusBarPanel/HBoxContainer/HealthBar" to="HUD/VBoxContainer/StatusBarPanel/HBoxContainer/HealthBar" method="flash_red"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b302b5pnoaw0f"]
+
+[ext_resource type="Shader" path="res://ui/components/status_bar/status_bar.gdshader" id="1_bnq12"]
+[ext_resource type="Script" path="res://ui/components/status_bar/status_bar.gd" id="1_gv7ov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cv5ly"]
+resource_local_to_scene = true
+shader = ExtResource("1_bnq12")
+shader_parameter/mode = 0
+
+[node name="StatusBar" type="TextureProgressBar"]
+material = SubResource("ShaderMaterial_cv5ly")
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gv7ov")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=44 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_gbqbw"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://b5elerbyug84u" path="res://mob/player/sfx/collect_projectile.ogg" id="15_jei33"]
 [ext_resource type="Script" path="res://components/entity/stat/stat.gd" id="15_r7mew"]
 [ext_resource type="AudioStream" uid="uid://cw72bo2048a57" path="res://mob/player/sfx/throw_projectile.ogg" id="16_fnksd"]
+[ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="21_26iwo"]
 
 [sub_resource type="Animation" id="Animation_ql7jf"]
 length = 0.001
@@ -252,6 +253,11 @@ script = ExtResource("15_r7mew")
 max_value = 6
 value = 6
 
+[node name="HealthUpdatedEventEmitter" parent="Health" instance=ExtResource("21_26iwo")]
+event_type = "hud_events"
+event_name = "status_bar_updated"
+args = [null, "health"]
+
 [node name="Hunger" type="Node" parent="."]
 script = ExtResource("15_r7mew")
 max_value = 6
@@ -260,6 +266,11 @@ value = 3
 [node name="Timer" type="Timer" parent="Hunger"]
 wait_time = 4.0
 autostart = true
+
+[node name="HungerUpdatedEventEmitter" parent="Hunger" instance=ExtResource("21_26iwo")]
+event_type = "hud_events"
+event_name = "status_bar_updated"
+args = [null, "hunger"]
 
 [node name="Energy" type="Node" parent="."]
 script = ExtResource("15_r7mew")
@@ -280,5 +291,9 @@ max_value = 6
 [connection signal="health_restored" from="ConsumableHandler" to="Health" method="increase_value"]
 [connection signal="hunger_restored" from="ConsumableHandler" to="Hunger" method="increase_value"]
 [connection signal="direction_vector_updated" from="KeyboardMotionHandler" to="PlayerSprite" method="_on_keyboard_motion_handler_direction_vector_updated"]
+[connection signal="value_updated" from="Health" to="Health/HealthUpdatedEventEmitter" method="set_arg"]
+[connection signal="value_updated" from="Health" to="Health/HealthUpdatedEventEmitter" method="emit" unbinds=1]
 [connection signal="reached_max_value" from="Hunger" to="Energy" method="increase_value"]
+[connection signal="value_updated" from="Hunger" to="Hunger/HungerUpdatedEventEmitter" method="set_arg"]
+[connection signal="value_updated" from="Hunger" to="Hunger/HungerUpdatedEventEmitter" method="emit" unbinds=1]
 [connection signal="timeout" from="Hunger/Timer" to="Hunger" method="decrease_value"]
