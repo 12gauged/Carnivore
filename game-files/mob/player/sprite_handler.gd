@@ -31,7 +31,7 @@ func projectile_used() -> void:
 	hands_holding.hide()
 
 
-func _on_keyboard_motion_handler_direction_vector_updated(direction: Vector2) -> void:
+func on_player_moved(direction: Vector2) -> void:
 	var animation_tree_playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 	if direction == Vector2.ZERO:
 		animation_tree_playback.travel("idle")

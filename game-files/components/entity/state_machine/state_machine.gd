@@ -7,10 +7,13 @@ extends Node2D
 var states: Dictionary = {}
 var current_state: State
 var current_state_name: String
-@onready var animation_tree_playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+var animation_tree_playback: AnimationNodeStateMachinePlayback
 
 
 func _ready() -> void:
+	if is_instance_valid(animation_tree):
+		animation_tree_playback = animation_tree.get("parameters/playback")
+	
 	if auto_start:
 		start()
 	
@@ -18,7 +21,8 @@ func _ready() -> void:
 func start() -> void:
 	animation_tree.active = true
 	for child in get_children():
-		if not child is State: continue
+		if not child is State: 
+			continue
 		var state_name = child.name.to_snake_case()
 		if current_state_name == "": 
 			current_state_name = state_name
