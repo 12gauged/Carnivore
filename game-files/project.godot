@@ -35,6 +35,7 @@ window/stretch/aspect="expand"
 
 [gui]
 
+common/snap_controls_to_pixels=false
 theme/custom="res://ui/themes/menu_theme/menu_theme.tres"
 
 [input]

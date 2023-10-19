@@ -2,7 +2,7 @@ extends Node
 class_name Arena
 
 
-signal wave_ended
+signal wave_ended(new_wave: int)
 @export_category("Arena Configuration")
 @export var intermission_duration: float = 4.0
 @export var waves: int = 6
@@ -22,7 +22,6 @@ var spawnpoints: Array[Marker2D]
 
 
 func _ready() -> void:
-	wave_ended.connect(on_wave_ended)
 	if not auto_start:
 		return
 	start_wave()
@@ -41,12 +40,23 @@ func start_wave() -> void:
 	spawnpoints = get_spawnpoints()
 	wave_enemies = generate_wave_enemies()
 	spawn_enemies()
+	
+
+func end_wave() -> void:
+	if wave == waves:
+		end_arena()
+		return
+	
+	wave += 1
+	increase_wave_enemies()
+	intermission_delay.start(intermission_duration)
+	wave_ended.emit(wave)
 
 
 func spawn_enemies() -> void:
 	if wave_enemies.is_empty():
 		if living_enemies == 0:
-			wave_ended.emit()
+			end_wave()
 		return
 		
 	for _i in range(max_living_enemies):
@@ -100,16 +110,6 @@ func get_spawnpoints() -> Array[Marker2D]:
 		if not child is Marker2D: continue
 		result.append(child)
 	return result
-	
-	
-func on_wave_ended() -> void:
-	if wave == waves:
-		end_arena()
-		return
-	
-	wave += 1
-	increase_wave_enemies()
-	intermission_delay.start(intermission_duration)
 	
 	
 func on_enemy_dead() -> void:

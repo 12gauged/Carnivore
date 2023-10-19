@@ -1,12 +1,13 @@
 extends Node
 
 
-@export_enum("ui_events", "hud_events") var event_type: String = "ui_events"
+@export_enum("ui_events", "hud_events", "game_events") var event_type: String = "ui_events"
 @export var event_name: String
 @export var args: Array
 @onready var event_singletons: Dictionary = {
 	"ui_events": UIEvents,
-	"hud_events": HUDEvents
+	"hud_events": HUDEvents,
+	"game_events": GameEvents
 }
 
 

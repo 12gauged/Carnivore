@@ -42,6 +42,9 @@ region_rect = Rect2(0, 0, 16, 16)
 
 [sub_resource type="FontVariation" id="FontVariation_afii7"]
 base_font = ExtResource("3_reuc5")
+opentype_features = {
+1667329140: 0
+}
 spacing_top = 2
 
 [resource]

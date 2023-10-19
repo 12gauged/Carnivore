@@ -21,7 +21,7 @@ void fragment() {
 			operator = -1.0;
 		}
 		
-		final_color = texture(TEXTURE, vec2(UV.x, UV.y + sin(TIME * 40.0) * 0.04 * operator));
+		final_color = texture(TEXTURE, vec2(UV.x, UV.y + sin(TIME) * 0.2));
 	}
 
 

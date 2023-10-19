@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5oumxtboxj23"]
+[gd_scene load_steps=4 format=3 uid="uid://b5oumxtboxj23"]
 
 [ext_resource type="Script" path="res://components/level/arena/arena.gd" id="1_gjfb0"]
 [ext_resource type="PackedScene" uid="uid://yul3yoo3hrc3" path="res://components/level/spawner/spawner.tscn" id="2_6pbek"]
+[ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="3_u2mvr"]
 
 [node name="Arena" type="Node"]
 script = ExtResource("1_gjfb0")
@@ -12,4 +13,11 @@ spawn_point = "specific_position"
 [node name="IntermissionDelay" type="Timer" parent="."]
 one_shot = true
 
+[node name="EventEmitter" parent="." instance=ExtResource("3_u2mvr")]
+event_type = "game_events"
+event_name = "wave_ended"
+args = [0]
+
+[connection signal="wave_ended" from="." to="EventEmitter" method="set_arg"]
+[connection signal="wave_ended" from="." to="EventEmitter" method="emit" unbinds=1]
 [connection signal="timeout" from="IntermissionDelay" to="." method="_on_intermission_delay_timeout"]
