@@ -3,6 +3,8 @@ extends Node
 
 
 signal scene_changed(old: String, new: String)
+signal started_changing_scenes
+signal finished_changing_scenes
 var scenes: Dictionary = {}
 var new_scene_key: String
 var new_scene_type: String
@@ -17,6 +19,7 @@ func change_scene(new_scene: String, scene_type: String) -> void:
 	Game.show_black_overlay("fade_in")
 	new_scene_key = new_scene
 	new_scene_type = scene_type
+	started_changing_scenes.emit()
 	
 	
 func add_scene(scene_name, scene_type) -> void:
@@ -33,6 +36,7 @@ func on_black_overlay_faded_in() -> void:
 	add_scene(new_scene_key, new_scene_type)
 	Game.show_black_overlay("fade_out")
 	get_tree().paused = false
+	finished_changing_scenes.emit()	
 	
 	
 func on_scene_ready() -> void:
