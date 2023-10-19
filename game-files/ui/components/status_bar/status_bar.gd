@@ -7,7 +7,7 @@ signal increased
 signal updated(val: int)
 @export var id: String = ""
 @export var event_name: String = ""
-@export var critial_value: int = 3
+@export var critical_value: int = 3
 var red_amount: float = 0.0
 var flashing_red: bool = true
 @onready var shader_material: ShaderMaterial = get_material()
@@ -41,7 +41,7 @@ func set_value_request(args) -> void:
 	value = val
 	updated.emit(value)
 	
-	if value <= critial_value:
+	if value <= critical_value:
 		turn_red()
 	
 	
