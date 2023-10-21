@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnjcu377c3rte"]
+
+[ext_resource type="Script" path="res://components/entity/mouse_tracker/mouse_tracker.gd" id="1_crxcb"]
+
+[node name="MouseTracker" type="Node2D"]
+script = ExtResource("1_crxcb")
