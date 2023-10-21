@@ -2,6 +2,7 @@ extends Node
 class_name Arena
 
 
+signal arena_ended
 signal wave_ended(new_wave: int)
 @export_category("Arena Configuration")
 @export var intermission_duration: float = 4.0
@@ -33,7 +34,7 @@ func increase_wave_enemies() -> void:
 
 
 func end_arena() -> void:
-	pass
+	arena_ended.emit()
 
 
 func start_wave() -> void:
@@ -61,6 +62,8 @@ func spawn_enemies() -> void:
 		
 	for _i in range(max_living_enemies):
 		if living_enemies == max_living_enemies:
+			return
+		if wave_enemies.is_empty():
 			return
 		var chosen_enemy_scene: PackedScene = wave_enemies.back()
 		var spawnpoint: Vector2 = get_spawnpoint()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpm3gam0p5rie"]
+[gd_scene load_steps=12 format=3 uid="uid://dpm3gam0p5rie"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_ygaap"]
 [ext_resource type="PackedScene" uid="uid://dw3gj44eaixg5" path="res://mob/player/player.tscn" id="2_20vkg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://dtp5vakxawdqi" path="res://resources/enemy_data/ant_data.tres" id="7_7brj3"]
 [ext_resource type="PackedScene" uid="uid://b0k8nxbor7i5i" path="res://components/level/music_manager/music_manager.tscn" id="7_gldim"]
 [ext_resource type="AudioStream" uid="uid://bf6wdjbf02o27" path="res://levels/001_forest/music/hunted.ogg" id="8_yocal"]
+[ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="11_5lhfv"]
 
 [node name="001ForestLevel" type="Node2D" groups=["levels"]]
 script = ExtResource("1_ygaap")
@@ -68,3 +69,9 @@ position = Vector2(96, 176)
 
 [node name="Marker2D3" type="Marker2D" parent="Arena"]
 position = Vector2(272, 96)
+
+[node name="ShowVictoryScreen" parent="Arena" instance=ExtResource("11_5lhfv")]
+event_name = "open_ingame_ui"
+args = ["victory_screen"]
+
+[connection signal="arena_ended" from="Arena" to="Arena/ShowVictoryScreen" method="emit"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dg7u2d8p823ew"]
+[gd_scene load_steps=6 format=3 uid="uid://dg7u2d8p823ew"]
 
 [ext_resource type="Script" path="res://ui/layouts/ingame/ingame_ui.gd" id="1_dn1fo"]
 [ext_resource type="PackedScene" uid="uid://d1ndpnsmqyw3k" path="res://ui/layouts/ingame/pause_menu/pause_menu.tscn" id="1_yqqbw"]
 [ext_resource type="PackedScene" uid="uid://c8cyyl7ftabgv" path="res://components/general/action_listener/action_listener.tscn" id="3_y1s7n"]
 [ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="4_1hq4k"]
+[ext_resource type="PackedScene" uid="uid://dq6jcgcvwk5fr" path="res://ui/layouts/ingame/victory_screen/victory_screen.tscn" id="5_iu664"]
 
 [node name="IngameUI" type="CanvasLayer"]
 layer = 2
@@ -39,5 +40,9 @@ action_name = "ui_cancel"
 [node name="EventEmitter" parent="IngameUI/PauseMenu/ActionListener" instance=ExtResource("4_1hq4k")]
 event_name = "open_ingame_ui"
 args = ["pause_menu"]
+
+[node name="VictoryScreen" parent="IngameUI" instance=ExtResource("5_iu664")]
+visible = false
+layout_mode = 1
 
 [connection signal="action_pressed" from="IngameUI/PauseMenu/ActionListener" to="IngameUI/PauseMenu/ActionListener/EventEmitter" method="emit"]

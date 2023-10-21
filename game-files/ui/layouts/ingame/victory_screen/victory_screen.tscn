@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq6jcgcvwk5fr"]
+
+[ext_resource type="Texture2D" uid="uid://cuiamqos2ig7b" path="res://ui/themes/menu_theme/icons/home_icon.png" id="1_wk422"]
+[ext_resource type="PackedScene" uid="uid://btihxruocg51f" path="res://components/general/change_scene/change_scene.tscn" id="2_qtxmh"]
+
+[node name="VictoryScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VictoryLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "VICTORY!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HomeButton" type="Button" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
+layout_mode = 2
+icon = ExtResource("1_wk422")
+
+[node name="ChangeScene" parent="VBoxContainer/HBoxContainer/HomeButton" instance=ExtResource("2_qtxmh")]
+scene_name = "main_menu"
+scene_type = "ui"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HomeButton" to="VBoxContainer/HBoxContainer/HomeButton/ChangeScene" method="change_scene"]
