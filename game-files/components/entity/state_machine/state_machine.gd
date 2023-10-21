@@ -1,55 +1,44 @@
 extends Node2D
 
 
-@export var parent_node: CharacterBody2D
-@export var animation_tree: AnimationTree
+signal started()
+signal state_changed(new_state)
 @export var auto_start: bool = false
-var states: Dictionary = {}
+var states: Array[State]
 var current_state: State
-var current_state_name: String
-var animation_tree_playback: AnimationNodeStateMachinePlayback
+var current_state_id: int = 0
 
 
 func _ready() -> void:
-	if is_instance_valid(animation_tree):
-		animation_tree_playback = animation_tree.get("parameters/playback")
-	
+	states = get_available_states()
 	if auto_start:
 		start()
 	
 	
-func start() -> void:
-	animation_tree.active = true
+func get_available_states() -> Array[State]:
+	var result: Array[State]
 	for child in get_children():
-		if not child is State: 
+		if not child is State:
 			continue
-		var state_name = child.name.to_snake_case()
-		if current_state_name == "": 
-			current_state_name = state_name
-			current_state = child
-		child.set_parent_node(parent_node)
-		states[state_name] = child
-	current_state._on_state_entered()
-
-
-func _process(delta) -> void:
-	if not is_instance_valid(current_state): return
-	current_state.execute(delta)
-
-
-func _physics_process(delta):
-	if not is_instance_valid(current_state): return
-	current_state.execute_physics(delta)
-
-
-func move_to_next_state() -> void:
-	if is_instance_valid(current_state):
-		current_state._on_state_exited()
-		
-	var next_state = (states.keys().find(current_state_name) + 1)
-	var next_state_id = next_state % len(states)
-	current_state_name = states.keys()[next_state_id]
-	current_state = states[current_state_name]
-	current_state._on_state_entered()
+		result.append(child)
+	return result
 	
-	animation_tree_playback.travel(current_state_name)
+	
+func set_current_state(state: State) -> void:
+	current_state = state
+	current_state.enter_state()
+	state_changed.emit(current_state.name.to_snake_case())
+	
+	
+func start() -> void:
+	set_current_state(states[current_state_id])
+	started.emit()
+	
+	
+func move_to_next_state() -> void:
+	if current_state:
+		current_state.leave_state()
+	
+	# Swaps to new state
+	current_state_id = (current_state_id + 1) % len(states)
+	set_current_state(states[current_state_id])

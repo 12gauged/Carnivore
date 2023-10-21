@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=48 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_gbqbw"]
@@ -10,10 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://bkjod4h7v8sup" path="res://components/entity/projectile_handler/projectile_handler.tscn" id="4_vltxv"]
 [ext_resource type="Script" path="res://components/entity/projectile_handler/projectile_handler.gd" id="5_trllm"]
 [ext_resource type="PackedScene" uid="uid://x8p3s66fowjv" path="res://components/entity/player_camera/player_camera.tscn" id="6_uryga"]
+[ext_resource type="PackedScene" uid="uid://bmtkghlvxqv2l" path="res://components/entity/state_machine/state_machine.tscn" id="8_g2oi7"]
 [ext_resource type="PackedScene" uid="uid://x5d8hhgjpcvf" path="res://components/entity/soft_collision/soft_collision.tscn" id="8_pod1a"]
+[ext_resource type="Script" path="res://components/entity/state_machine/state.gd" id="9_aa7gw"]
 [ext_resource type="PackedScene" uid="uid://dxr55c1ta5n1o" path="res://components/entity/pickup_area/pickup_area.tscn" id="10_fyhwh"]
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="10_j7ksm"]
 [ext_resource type="AudioStream" uid="uid://bqxk7bdf72hun" path="res://mob/sfx/hit.ogg" id="10_u0v0g"]
+[ext_resource type="PackedScene" uid="uid://c8cyyl7ftabgv" path="res://components/general/action_listener/action_listener.tscn" id="12_hwlrq"]
 [ext_resource type="PackedScene" uid="uid://cr4pkeq2xd3js" path="res://components/entity/consumable_handler/consumable_handler.tscn" id="14_2m003"]
 [ext_resource type="PackedScene" uid="uid://bva6p0jihi7hp" path="res://components/level/level_sound_player/level_sound_player.tscn" id="14_g1olw"]
 [ext_resource type="AudioStream" uid="uid://b5elerbyug84u" path="res://mob/player/sfx/collect_projectile.ogg" id="15_jei33"]
@@ -157,6 +160,7 @@ position = Vector2(0, -8)
 texture = ExtResource("1_6hcnx")
 hframes = 3
 vframes = 2
+frame = 2
 script = ExtResource("2_8c1nj")
 hands = NodePath("Hands")
 hands_holding = NodePath("HandsHolding")
@@ -194,6 +198,26 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tv3tx")
 
 [node name="PlayerCamera" parent="." instance=ExtResource("6_uryga")]
+
+[node name="StateMachine" parent="." instance=ExtResource("8_g2oi7")]
+auto_start = true
+
+[node name="NormalState" type="Node2D" parent="StateMachine"]
+script = ExtResource("9_aa7gw")
+
+[node name="MotionHandler" parent="StateMachine/NormalState" node_paths=PackedStringArray("target_node") instance=ExtResource("21_cgfww")]
+target_node = NodePath("../../..")
+friction = 800
+acceleration = 500
+
+[node name="KeyboardMotionListener" parent="StateMachine/NormalState/MotionHandler" instance=ExtResource("19_1e312")]
+action_left = "action_left"
+action_right = "action_right"
+action_up = "action_up"
+action_down = "action_down"
+
+[node name="ActionListener" parent="StateMachine/NormalState" instance=ExtResource("12_hwlrq")]
+action_name = "action_special"
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_u7ufq")]
 position = Vector2(0, -8)
@@ -241,17 +265,6 @@ projectile_group = "player_projectiles"
 stream = ExtResource("16_fnksd")
 bus = "Actions"
 
-[node name="MotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("21_cgfww")]
-target_node = NodePath("..")
-friction = 800
-acceleration = 500
-
-[node name="KeyboardMotionListener" parent="MotionHandler" instance=ExtResource("19_1e312")]
-action_left = "action_left"
-action_right = "action_right"
-action_up = "action_up"
-action_down = "action_down"
-
 [node name="ConsumableHandler" parent="." instance=ExtResource("14_2m003")]
 
 [node name="Health" type="Node" parent="."]
@@ -287,6 +300,9 @@ event_type = "hud_events"
 event_name = "status_bar_updated"
 args = [null, "energy"]
 
+[connection signal="direction_vector_updated" from="StateMachine/NormalState/MotionHandler" to="PlayerSprite" method="on_player_moved"]
+[connection signal="vector_updated" from="StateMachine/NormalState/MotionHandler/KeyboardMotionListener" to="StateMachine/NormalState/MotionHandler" method="set_direction_vector"]
+[connection signal="action_pressed" from="StateMachine/NormalState/ActionListener" to="StateMachine" method="move_to_next_state"]
 [connection signal="collided" from="Hurtbox" to="Hurtbox/HitSFX" method="play_sound"]
 [connection signal="hurt" from="Hurtbox" to="Health" method="decrease_value"]
 [connection signal="drop_collected" from="ProjectilePickupArea" to="ProjectilePickupArea" method="disable"]
@@ -298,8 +314,6 @@ args = [null, "energy"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="ProjectilePickupArea" method="enable"]
 [connection signal="projectile_thrown" from="ProjectileHandler" to="ProjectileHandler/ThrowProjectileSFX" method="play_sound"]
 [connection signal="projectile_spawned" from="ProjectileHandler/Shooter" to="ProjectileHandler" method="_on_shooter_projectile_spawned"]
-[connection signal="direction_vector_updated" from="MotionHandler" to="PlayerSprite" method="on_player_moved"]
-[connection signal="vector_updated" from="MotionHandler/KeyboardMotionListener" to="MotionHandler" method="set_direction_vector"]
 [connection signal="energy_restored" from="ConsumableHandler" to="Energy" method="increase_value"]
 [connection signal="health_restored" from="ConsumableHandler" to="Health" method="increase_value"]
 [connection signal="hunger_restored" from="ConsumableHandler" to="Hunger" method="increase_value"]
