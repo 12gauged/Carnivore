@@ -27,6 +27,9 @@ func spawn(pos = null) -> Node:
 	if spawn_point == "here" and pos != null:
 		push_warning("trying to spawn at specific position when spawn_point is set to 'here'")
 		
+	if not parent:
+		return
+		
 	var new_node = node_scene.instantiate()
 	parent.add_child.call_deferred(new_node)
 	

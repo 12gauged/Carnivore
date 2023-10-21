@@ -16,7 +16,7 @@ func _ready() -> void:
 	
 	
 func get_available_states() -> Array[State]:
-	var result: Array[State]
+	var result: Array[State] = []
 	for child in get_children():
 		if not child is State:
 			continue

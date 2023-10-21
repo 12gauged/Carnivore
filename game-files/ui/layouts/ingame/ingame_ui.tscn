@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dg7u2d8p823ew"]
+[gd_scene load_steps=7 format=3 uid="uid://dg7u2d8p823ew"]
 
 [ext_resource type="Script" path="res://ui/layouts/ingame/ingame_ui.gd" id="1_dn1fo"]
 [ext_resource type="PackedScene" uid="uid://d1ndpnsmqyw3k" path="res://ui/layouts/ingame/pause_menu/pause_menu.tscn" id="1_yqqbw"]
 [ext_resource type="PackedScene" uid="uid://c8cyyl7ftabgv" path="res://components/general/action_listener/action_listener.tscn" id="3_y1s7n"]
 [ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="4_1hq4k"]
 [ext_resource type="PackedScene" uid="uid://dq6jcgcvwk5fr" path="res://ui/layouts/ingame/victory_screen/victory_screen.tscn" id="5_iu664"]
+[ext_resource type="PackedScene" uid="uid://jc1ewdo3fhlr" path="res://ui/layouts/game_over_screen/game_over_screen.tscn" id="6_40mmn"]
 
 [node name="IngameUI" type="CanvasLayer"]
 layer = 2
 
 [node name="IngameUI" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +32,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.65098)
 
 [node name="PauseMenu" parent="IngameUI" instance=ExtResource("1_yqqbw")]
-process_mode = 3
 visible = false
 layout_mode = 1
 
@@ -44,5 +45,10 @@ args = ["pause_menu"]
 [node name="VictoryScreen" parent="IngameUI" instance=ExtResource("5_iu664")]
 visible = false
 layout_mode = 1
+
+[node name="GameOverScreen" parent="IngameUI" instance=ExtResource("6_40mmn")]
+visible = false
+layout_mode = 1
+mouse_filter = 2
 
 [connection signal="action_pressed" from="IngameUI/PauseMenu/ActionListener" to="IngameUI/PauseMenu/ActionListener/EventEmitter" method="emit"]

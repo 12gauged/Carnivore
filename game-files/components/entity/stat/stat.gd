@@ -17,6 +17,10 @@ signal value_updated(new_value)
 	get = get_value
 	
 	
+func _ready() -> void:
+	set_value(value)
+	
+	
 func decrease_value(amount: int = 1) -> void:
 	set_value(value - amount)
 	if get_value() > min_value: return

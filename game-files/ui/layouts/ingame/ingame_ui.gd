@@ -36,5 +36,5 @@ func close_ingame_ui(_args) -> void:
 	color_rect.hide()
 	
 	
-func on_scene_changing(_scene_name, _scene_type) -> void:
+func on_scene_changing(_scene_name, _scene_type, _fade) -> void:
 	get_parent().set_layer(0)

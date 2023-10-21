@@ -14,7 +14,7 @@ func _ready() -> void:
 		return
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var overlaps: Array[Area2D] = get_overlapping_areas()
 	var push_direction: Vector2 = Vector2.ZERO
 	

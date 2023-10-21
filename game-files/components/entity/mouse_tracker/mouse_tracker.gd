@@ -10,8 +10,8 @@ var direction_to_mouse: Vector2:
 
 
 func _process(_delta) -> void:
-	var mouse_position: Vector2 = get_global_mouse_position()
-	var direction_to_mouse: Vector2 = get_global_position().direction_to(mouse_position)
+	mouse_position = get_global_mouse_position()
+	direction_to_mouse = get_global_position().direction_to(mouse_position)
 	mouse_position_updated.emit(mouse_position)
 	direction_to_mouse_updated.emit(direction_to_mouse)
 	

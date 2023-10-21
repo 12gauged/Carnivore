@@ -11,7 +11,7 @@ var direction_to_player: Vector2
 @onready var player = get_tree().get_first_node_in_group("player")
 
 
-func _process(delta):
+func _process(_delta):
 	if not is_instance_valid(player):
 		return
 	

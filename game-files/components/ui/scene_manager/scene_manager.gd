@@ -15,10 +15,15 @@ func _ready() -> void:
 	UIEvents.black_overlay_faded_in.connect(on_black_overlay_faded_in)
 
 
-func change_scene(new_scene: String, scene_type: String) -> void:
-	Game.show_black_overlay("fade_in")
+func change_scene(new_scene: String, scene_type: String, fade: bool) -> void:
 	new_scene_key = new_scene
 	new_scene_type = scene_type
+	
+	if not fade:
+		swap_scene_nodes()
+		return
+	
+	Game.show_black_overlay("fade_in")
 	started_changing_scenes.emit()
 	
 	
@@ -27,14 +32,20 @@ func add_scene(scene_name, scene_type) -> void:
 	var new_scene: Node = new_scene_packed.instantiate()
 	new_scene.ready.connect(on_scene_ready)
 	new_scene.set_process_mode(new_scene.PROCESS_MODE_PAUSABLE)
-	self.add_child(new_scene)
+	self.add_child.call_deferred(new_scene)
 	
 	
 func on_black_overlay_faded_in() -> void:
+	swap_scene_nodes()
+	Game.show_black_overlay("fade_out")
+	
+
+# removes the old scene and replaces it
+# with the new one.
+func swap_scene_nodes() -> void:
 	if get_child_count() > 0:
 		get_child(0).queue_free()
 	add_scene(new_scene_key, new_scene_type)
-	Game.show_black_overlay("fade_out")
 	get_tree().paused = false
 	finished_changing_scenes.emit()	
 	

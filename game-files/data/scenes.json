@@ -3,6 +3,7 @@
 		"001_forest": "Resource(\"res://levels/001_forest/001_forest.tscn\")"
 	},
 	"ui": {
+		"game_over_screen": "Resource(\"res://ui/layouts/game_over_screen/game_over_screen.tscn\")",
 		"hud": "Resource(\"res://ui/layouts/hud/hud.tscn\")",
 		"ingame_ui": "Resource(\"res://ui/layouts/ingame/ingame_ui.tscn\")",
 		"main_menu": "Resource(\"res://ui/layouts/main_menu/main_menu.tscn\")"

@@ -29,7 +29,7 @@ func _ready() -> void:
 
 
 func increase_wave_enemies() -> void:
-	enemies_per_wave += pow(wave, 0.75)
+	enemies_per_wave += int(pow(wave, 0.75))
 	enemies_per_wave = clamp(enemies_per_wave, 0, max_enemies_per_wave)
 
 
@@ -108,7 +108,7 @@ func get_spawnpoint() -> Vector2:
 	
 	
 func get_spawnpoints() -> Array[Marker2D]:
-	var result: Array[Marker2D]
+	var result: Array[Marker2D] = []
 	for child in get_children():
 		if not child is Marker2D: continue
 		result.append(child)
