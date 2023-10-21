@@ -4,6 +4,7 @@ class_name Stat
 
 signal reached_min_value
 signal reached_max_value
+signal overflowing
 signal value_updated(new_value)
 @export var max_value: int:
 	set = set_max_value,
@@ -23,8 +24,12 @@ func decrease_value(amount: int = 1) -> void:
 	
 	
 func increase_value(amount: int = 1) -> void:
+	if get_value() == max_value:
+		overflowing.emit()
+		return
 	set_value(value + amount)
-	if get_value() < max_value: return
+	if get_value() < max_value: 
+		return
 	reached_max_value.emit()
 	
 	
