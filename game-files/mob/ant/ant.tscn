@@ -213,6 +213,15 @@ one_shot = true
 [node name="DigState" type="Node2D" parent="StateMachine"]
 script = ExtResource("3_eq3ke")
 
+[node name="StateDuration" type="Timer" parent="StateMachine/DigState"]
+one_shot = true
+
+[node name="HoldStoneState" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_eq3ke")
+
+[node name="StateDuration" type="Timer" parent="StateMachine/HoldStoneState"]
+one_shot = true
+
 [node name="StateAnimationTree" parent="." instance=ExtResource("13_u3l4a")]
 tree_root = SubResource("AnimationNodeStateMachine_baryk")
 anim_player = NodePath("AnimationPlayer")
@@ -225,6 +234,7 @@ libraries = {
 }
 
 [node name="Shooter" parent="." instance=ExtResource("5_sirfd")]
+position = Vector2(0, -10)
 projectile_data = ExtResource("13_yyb8j")
 
 [node name="PlayerTracker" parent="Shooter" node_paths=PackedStringArray("parent") instance=ExtResource("11_dxjnv")]
@@ -247,5 +257,10 @@ value = 2
 [connection signal="state_entered" from="StateMachine/MoveState" to="StateMachine/MoveState/StateDuration" method="start"]
 [connection signal="direction_to_player_updated" from="StateMachine/MoveState/MotionHandler/PlayerTracker" to="StateMachine/MoveState/MotionHandler" method="set_direction_vector"]
 [connection signal="timeout" from="StateMachine/MoveState/StateDuration" to="StateMachine" method="move_to_next_state"]
+[connection signal="state_entered" from="StateMachine/DigState" to="StateMachine/DigState/StateDuration" method="start"]
+[connection signal="timeout" from="StateMachine/DigState/StateDuration" to="StateMachine" method="move_to_next_state"]
+[connection signal="state_entered" from="StateMachine/HoldStoneState" to="StateMachine/HoldStoneState/StateDuration" method="start"]
+[connection signal="state_exited" from="StateMachine/HoldStoneState" to="Shooter" method="spawn_projectile"]
+[connection signal="timeout" from="StateMachine/HoldStoneState/StateDuration" to="StateMachine" method="move_to_next_state"]
 [connection signal="direction_to_player_updated" from="Shooter/PlayerTracker" to="Shooter" method="set_direction"]
 [connection signal="reached_min_value" from="Health" to="." method="die"]
