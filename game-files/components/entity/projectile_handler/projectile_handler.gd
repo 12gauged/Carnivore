@@ -24,8 +24,6 @@ func _on_pickup_area_drop_collected(drop_data: DropData) -> void:
 	
 	
 func throw_projectile() -> void:
-	var direction = self.global_position.direction_to(get_global_mouse_position())
-	shooter.set_direction(direction)
 	shooter.shoot()
 	shooter.set_projectile_data(null)
 	

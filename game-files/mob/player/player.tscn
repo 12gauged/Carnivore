@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=49 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_gbqbw"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dvkig5m4c25ym" path="res://components/general/keyboard_motion_listener/keyboard_motion_listener.tscn" id="19_1e312"]
 [ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="21_26iwo"]
 [ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="21_cgfww"]
+[ext_resource type="PackedScene" uid="uid://dnjcu377c3rte" path="res://components/entity/mouse_tracker/mouse_tracker.tscn" id="22_crrri"]
 
 [sub_resource type="Animation" id="Animation_ql7jf"]
 length = 0.001
@@ -260,6 +261,8 @@ shooter = NodePath("Shooter")
 
 [node name="Shooter" parent="ProjectileHandler" instance=ExtResource("10_j7ksm")]
 projectile_group = "player_projectiles"
+
+[node name="MouseTracker" parent="ProjectileHandler/Shooter" instance=ExtResource("22_crrri")]
 
 [node name="ThrowProjectileSFX" parent="ProjectileHandler" instance=ExtResource("14_g1olw")]
 stream = ExtResource("16_fnksd")
