@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwvxsk1vn4dua"]
+
+[ext_resource type="Script" path="res://components/entity/state_animation_tree/state_animation_tree.gd" id="1_0kp75"]
+
+[node name="AnimationTree" type="AnimationTree"]
+advance_expression_base_node = NodePath("")
+script = ExtResource("1_0kp75")

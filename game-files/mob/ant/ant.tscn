@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://8w5n50r30r27" path="res://components/entity/hurtbox/hurtbox.tscn" id="2_2pibf"]
 [ext_resource type="Script" path="res://components/entity/state_machine/state.gd" id="3_eq3ke"]
 [ext_resource type="Script" path="res://components/entity/entity_sprite/entity_sprite.gd" id="3_qio5a"]
-[ext_resource type="PackedScene" uid="uid://c78woswr8vxva" path="res://ai/behaviors/follow_player_behavior.tscn" id="4_c35f6"]
 [ext_resource type="PackedScene" uid="uid://b8usu17g8b1x6" path="res://components/entity/shooter/shooter.tscn" id="5_sirfd"]
 [ext_resource type="PackedScene" uid="uid://wfsrbo3y25dy" path="res://components/entity/motion_handler/motion_handler.tscn" id="5_wq7gr"]
 [ext_resource type="PackedScene" uid="uid://bva6p0jihi7hp" path="res://components/level/level_sound_player/level_sound_player.tscn" id="6_1wiy5"]
 [ext_resource type="AudioStream" uid="uid://bqxk7bdf72hun" path="res://mob/sfx/hit.ogg" id="7_x648j"]
 [ext_resource type="PackedScene" uid="uid://b4xh6v8082xjt" path="res://components/entity/player_tracker/player_tracker.tscn" id="11_dxjnv"]
 [ext_resource type="PackedScene" uid="uid://b73q70jgccqw3" path="res://components/general/drop_spawn/drop_spawner.tscn" id="13_3tkjy"]
+[ext_resource type="PackedScene" uid="uid://dwvxsk1vn4dua" path="res://components/entity/state_animation_tree/state_animation_tree.tscn" id="13_u3l4a"]
 [ext_resource type="Resource" uid="uid://cj0g14u8b727a" path="res://resources/drop_data/projectiles/slow_stone_data.tres" id="13_yyb8j"]
 [ext_resource type="Resource" uid="uid://43goojygcbni" path="res://resources/drop_data/consumables/meat_data.tres" id="14_ok7xe"]
 [ext_resource type="PackedScene" uid="uid://x5d8hhgjpcvf" path="res://components/entity/soft_collision/soft_collision.tscn" id="14_ubgot"]
@@ -29,32 +29,32 @@ height = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_2hxj4"]
 radius = 4.0
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uwa8w"]
-animation = &"dig_for_stone"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cg5y6"]
+animation = &"dig_state"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0b8c"]
-animation = &"hold_stone"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gg8g0"]
+animation = &"hold_stone_state"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nlbbc"]
-animation = &"move"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xmff0"]
+animation = &"move_state"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1oa14"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e08ql"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mpnyk"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sdo52"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kp6vb"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pqgi0"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kg1dm"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ahubt"]
-states/dig_for_stone/node = SubResource("AnimationNodeAnimation_uwa8w")
-states/dig_for_stone/position = Vector2(537, 48)
-states/hold_stone/node = SubResource("AnimationNodeAnimation_y0b8c")
-states/hold_stone/position = Vector2(710, 100)
-states/move/node = SubResource("AnimationNodeAnimation_nlbbc")
-states/move/position = Vector2(341, 100)
-transitions = ["hold_stone", "move", SubResource("AnimationNodeStateMachineTransition_1oa14"), "dig_for_stone", "hold_stone", SubResource("AnimationNodeStateMachineTransition_mpnyk"), "Start", "move", SubResource("AnimationNodeStateMachineTransition_sdo52"), "move", "dig_for_stone", SubResource("AnimationNodeStateMachineTransition_pqgi0")]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vh2pw"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_baryk"]
+states/dig_state/node = SubResource("AnimationNodeAnimation_cg5y6")
+states/dig_state/position = Vector2(531, 42)
+states/hold_stone_state/node = SubResource("AnimationNodeAnimation_gg8g0")
+states/hold_stone_state/position = Vector2(694, 100)
+states/move_state/node = SubResource("AnimationNodeAnimation_xmff0")
+states/move_state/position = Vector2(379, 100)
+transitions = ["move_state", "dig_state", SubResource("AnimationNodeStateMachineTransition_e08ql"), "Start", "move_state", SubResource("AnimationNodeStateMachineTransition_kp6vb"), "dig_state", "hold_stone_state", SubResource("AnimationNodeStateMachineTransition_kg1dm"), "hold_stone_state", "move_state", SubResource("AnimationNodeStateMachineTransition_vh2pw")]
 
 [sub_resource type="Animation" id="Animation_2esem"]
 length = 0.001
@@ -69,56 +69,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [7]
-}
-
-[sub_resource type="Animation" id="Animation_qmn3j"]
-resource_name = "dig_for_stone"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3, 4]
-}
-
-[sub_resource type="Animation" id="Animation_3omjf"]
-resource_name = "hold_stone"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-
-[sub_resource type="Animation" id="Animation_47dno"]
-resource_name = "move"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_i0clx"]
@@ -151,12 +101,62 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_qmn3j"]
+resource_name = "dig_state"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_3omjf"]
+resource_name = "hold_stone_state"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_47dno"]
+resource_name = "move_state"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yety5"]
 _data = {
 "RESET": SubResource("Animation_2esem"),
-"dig_for_stone": SubResource("Animation_qmn3j"),
-"hold_stone": SubResource("Animation_3omjf"),
-"move": SubResource("Animation_47dno"),
+"dig_state": SubResource("Animation_qmn3j"),
+"hold_stone_state": SubResource("Animation_3omjf"),
+"move_state": SubResource("Animation_47dno"),
 "spawn": SubResource("Animation_i0clx")
 }
 
@@ -195,38 +195,30 @@ parent = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SoftCollision"]
 shape = SubResource("CircleShape2D_2hxj4")
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("parent_node", "animation_tree") instance=ExtResource("1_nprko")]
-parent_node = NodePath("..")
-animation_tree = NodePath("AnimationTree")
+[node name="StateMachine" parent="." instance=ExtResource("1_nprko")]
 
-[node name="Move" type="Node2D" parent="StateMachine"]
+[node name="MoveState" type="Node2D" parent="StateMachine"]
 script = ExtResource("3_eq3ke")
 
-[node name="FollowPlayerBehavior" parent="StateMachine/Move" node_paths=PackedStringArray("motion_handler") instance=ExtResource("4_c35f6")]
-motion_handler = NodePath("../../../MotionHandler")
+[node name="MotionHandler" parent="StateMachine/MoveState" node_paths=PackedStringArray("target_node") instance=ExtResource("5_wq7gr")]
+target_node = NodePath("../../..")
+max_speed = 50
 
-[node name="Timer" type="Timer" parent="StateMachine/Move"]
+[node name="PlayerTracker" parent="StateMachine/MoveState/MotionHandler" node_paths=PackedStringArray("parent") instance=ExtResource("11_dxjnv")]
+parent = NodePath("../../../..")
+
+[node name="StateDuration" type="Timer" parent="StateMachine/MoveState"]
 one_shot = true
 
-[node name="DigForStone" type="Node2D" parent="StateMachine"]
+[node name="DigState" type="Node2D" parent="StateMachine"]
 script = ExtResource("3_eq3ke")
 
-[node name="Timer" type="Timer" parent="StateMachine/DigForStone"]
-wait_time = 2.0
-one_shot = true
-
-[node name="HoldStone" type="Node2D" parent="StateMachine"]
-script = ExtResource("3_eq3ke")
-
-[node name="Timer" type="Timer" parent="StateMachine/HoldStone"]
-one_shot = true
-
-[node name="AnimationTree" type="AnimationTree" parent="StateMachine"]
-tree_root = SubResource("AnimationNodeStateMachine_ahubt")
+[node name="StateAnimationTree" parent="." instance=ExtResource("13_u3l4a")]
+tree_root = SubResource("AnimationNodeStateMachine_baryk")
 anim_player = NodePath("AnimationPlayer")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="StateMachine/AnimationTree"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StateAnimationTree"]
+root_node = NodePath("../../StateMachine")
 autoplay = "spawn"
 libraries = {
 "": SubResource("AnimationLibrary_yety5")
@@ -242,10 +234,6 @@ parent = NodePath("../..")
 spawn_radius = 1.0
 spawn_drop_data = ExtResource("14_ok7xe")
 
-[node name="MotionHandler" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_wq7gr")]
-target_node = NodePath("..")
-max_speed = 50
-
 [node name="Health" type="Node" parent="."]
 script = ExtResource("16_gf74i")
 max_value = 2
@@ -254,10 +242,10 @@ value = 2
 [connection signal="deleted" from="." to="DropSpawner" method="spawn_drop"]
 [connection signal="collided" from="Hurtbox" to="Hurtbox/HitSFX" method="play_sound"]
 [connection signal="hurt" from="Hurtbox" to="Health" method="decrease_value"]
-[connection signal="state_exited" from="StateMachine/Move" to="StateMachine/Move/FollowPlayerBehavior" method="stop_following"]
-[connection signal="timeout" from="StateMachine/Move/Timer" to="StateMachine" method="move_to_next_state"]
-[connection signal="timeout" from="StateMachine/DigForStone/Timer" to="StateMachine" method="move_to_next_state"]
-[connection signal="state_exited" from="StateMachine/HoldStone" to="Shooter" method="shoot"]
-[connection signal="timeout" from="StateMachine/HoldStone/Timer" to="StateMachine" method="move_to_next_state"]
+[connection signal="started" from="StateMachine" to="StateAnimationTree" method="activate"]
+[connection signal="state_changed" from="StateMachine" to="StateAnimationTree" method="go_to_animation"]
+[connection signal="state_entered" from="StateMachine/MoveState" to="StateMachine/MoveState/StateDuration" method="start"]
+[connection signal="direction_to_player_updated" from="StateMachine/MoveState/MotionHandler/PlayerTracker" to="StateMachine/MoveState/MotionHandler" method="set_direction_vector"]
+[connection signal="timeout" from="StateMachine/MoveState/StateDuration" to="StateMachine" method="move_to_next_state"]
 [connection signal="direction_to_player_updated" from="Shooter/PlayerTracker" to="Shooter" method="set_direction"]
 [connection signal="reached_min_value" from="Health" to="." method="die"]
