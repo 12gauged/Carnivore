@@ -3,6 +3,7 @@ extends Node2D
 
 signal started()
 signal state_changed(new_state)
+@export var auto_start: bool = false
 var states: Array[State]
 var current_state: State
 var current_state_id: int = 0
@@ -10,6 +11,8 @@ var current_state_id: int = 0
 
 func _ready() -> void:
 	states = get_available_states()
+	if auto_start:
+		start()
 	
 	
 func get_available_states() -> Array[State]:
@@ -39,6 +42,3 @@ func move_to_next_state() -> void:
 	# Swaps to new state
 	current_state_id = (current_state_id + 1) % len(states)
 	set_current_state(states[current_state_id])
-	
-	print_debug("current_state_id = %s\ncurrent_state.name = %s\n" % [current_state_id, current_state.name])
-	
