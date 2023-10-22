@@ -11,12 +11,12 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_604tw"]
 bg_color = Color(0, 0, 0, 0.501961)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ana7d"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oroqf"]
 resource_local_to_scene = true
 shader = ExtResource("1_bb5bc")
 shader_parameter/mode = 0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmyk4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t63je"]
 resource_local_to_scene = true
 shader = ExtResource("1_bb5bc")
 shader_parameter/mode = 0
@@ -29,7 +29,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 0.501961)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i24i8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rhl6m"]
 resource_local_to_scene = true
 shader = ExtResource("1_bb5bc")
 shader_parameter/mode = 0
@@ -71,7 +71,7 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="HealthBar" parent="HUD/VBoxContainer/StatusBarPanel/HBoxContainer" instance=ExtResource("1_ymop5")]
-material = SubResource("ShaderMaterial_ana7d")
+material = SubResource("ShaderMaterial_oroqf")
 layout_mode = 2
 max_value = 6.0
 value = 6.0
@@ -81,7 +81,7 @@ id = "health"
 event_name = "status_bar_updated"
 
 [node name="HungerBar" parent="HUD/VBoxContainer/StatusBarPanel/HBoxContainer" instance=ExtResource("1_ymop5")]
-material = SubResource("ShaderMaterial_nmyk4")
+material = SubResource("ShaderMaterial_t63je")
 layout_mode = 2
 max_value = 6.0
 value = 3.0
@@ -139,14 +139,14 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_604tw")
 
 [node name="EnergyBar" parent="HUD/VBoxContainer2/EnergyBarPanel" instance=ExtResource("1_ymop5")]
-material = SubResource("ShaderMaterial_i24i8")
+material = SubResource("ShaderMaterial_rhl6m")
 layout_mode = 2
 max_value = 6.0
 texture_under = ExtResource("1_qndr5")
 texture_progress = ExtResource("7_h6kfg")
 id = "energy"
 event_name = "status_bar_updated"
-critical_value = 0
+critical_value = -1
 
 [connection signal="decreased" from="HUD/VBoxContainer/StatusBarPanel/HBoxContainer/HealthBar" to="HUD/VBoxContainer/StatusBarPanel/HBoxContainer/HealthBar" method="flash_red"]
 [connection signal="timeout" from="HUD/VBoxContainer/WaveText/ShowDuration" to="HUD/VBoxContainer/WaveText" method="hide"]
