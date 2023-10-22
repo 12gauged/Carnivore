@@ -72,6 +72,6 @@ position = Vector2(272, 96)
 
 [node name="ShowVictoryScreen" parent="Arena" instance=ExtResource("11_5lhfv")]
 event_name = "open_ingame_ui"
-args = ["victory_screen"]
+args = ["victory_screen", true]
 
 [connection signal="arena_ended" from="Arena" to="Arena/ShowVictoryScreen" method="emit"]
