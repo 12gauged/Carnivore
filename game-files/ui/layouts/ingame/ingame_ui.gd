@@ -47,13 +47,13 @@ func open_ingame_ui(args: Array) -> void:
 	
 func fade_in(menu: Control, fade_duration: float = 1.0) -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(menu, "modulate", Color.WHITE, 1.0)
+	tween.tween_property(menu, "modulate", Color.WHITE, fade_duration)
 	tween.parallel().tween_property(color_rect, "modulate", Color.WHITE, fade_duration)
 	
 	
 func fade_out(menu: Control, fade_duration: float = 1.0) -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(menu, "modulate", Color.TRANSPARENT, 1.0)
+	tween.tween_property(menu, "modulate", Color.TRANSPARENT, fade_duration)
 	tween.parallel().tween_property(color_rect, "modulate", Color.TRANSPARENT, fade_duration)
 	tween.tween_callback(color_rect.hide)
 	tween.tween_callback(menu.hide)
