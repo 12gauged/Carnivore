@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dw3gj44eaixg5"]
+[gd_scene load_steps=50 format=3 uid="uid://dw3gj44eaixg5"]
 
 [ext_resource type="Texture2D" uid="uid://cpcdycg7yfu3a" path="res://mob/player/player.png" id="1_6hcnx"]
 [ext_resource type="Script" path="res://mob/mob.gd" id="1_gbqbw"]
@@ -29,18 +29,6 @@
 
 [sub_resource type="Animation" id="Animation_ql7jf"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
 
 [sub_resource type="Animation" id="Animation_p12ec"]
 resource_name = "eat"
@@ -76,6 +64,62 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_kh54m"]
+resource_name = "spawn"
+length = 1.31
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite/AnimationPlayer/AnimationTree:active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_5o1gy"]
 resource_name = "walk"
 length = 0.2
@@ -98,6 +142,7 @@ _data = {
 "RESET": SubResource("Animation_ql7jf"),
 "eat": SubResource("Animation_p12ec"),
 "idle": SubResource("Animation_ye2dg"),
+"spawn": SubResource("Animation_kh54m"),
 "walk": SubResource("Animation_5o1gy")
 }
 
@@ -160,8 +205,7 @@ script = ExtResource("1_gbqbw")
 position = Vector2(0, -8)
 texture = ExtResource("1_6hcnx")
 hframes = 3
-vframes = 2
-frame = 2
+vframes = 7
 script = ExtResource("2_8c1nj")
 hands = NodePath("Hands")
 hands_holding = NodePath("HandsHolding")
@@ -172,7 +216,7 @@ animation_tree = NodePath("AnimationPlayer/AnimationTree")
 [node name="Hands" type="Sprite2D" parent="PlayerSprite" node_paths=PackedStringArray("Parent")]
 texture = ExtResource("2_s36cy")
 hframes = 3
-vframes = 2
+vframes = 7
 script = ExtResource("3_7h2d6")
 Parent = NodePath("..")
 
@@ -185,6 +229,7 @@ position = Vector2(0, -11)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerSprite"]
 root_node = NodePath("../..")
+autoplay = "spawn"
 libraries = {
 "": SubResource("AnimationLibrary_xsl2x")
 }
@@ -201,7 +246,6 @@ shape = SubResource("CapsuleShape2D_tv3tx")
 [node name="PlayerCamera" parent="." instance=ExtResource("6_uryga")]
 
 [node name="StateMachine" parent="." instance=ExtResource("8_g2oi7")]
-auto_start = true
 
 [node name="NormalState" type="Node2D" parent="StateMachine"]
 script = ExtResource("9_aa7gw")
@@ -273,7 +317,7 @@ bus = "Actions"
 [node name="Health" type="Node" parent="."]
 script = ExtResource("15_r7mew")
 max_value = 6
-value = 2
+value = 6
 
 [node name="HealthUpdatedEventEmitter" parent="Health" instance=ExtResource("21_26iwo")]
 event_type = "hud_events"

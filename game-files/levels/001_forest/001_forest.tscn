@@ -59,6 +59,7 @@ spawn_drop_data = ExtResource("5_2bce7")
 stream = ExtResource("8_yocal")
 
 [node name="Arena" parent="." instance=ExtResource("6_wo4ag")]
+auto_start = false
 enemy_datas = Array[Resource("res://resources/enemy_data/enemy_data.gd")]([ExtResource("7_7brj3")])
 
 [node name="Marker2D" type="Marker2D" parent="Arena"]
@@ -74,4 +75,5 @@ position = Vector2(272, 96)
 event_name = "open_ingame_ui"
 args = ["victory_screen", true]
 
+[connection signal="spawned" from="Objects/Player" to="Arena" method="start_wave"]
 [connection signal="arena_ended" from="Arena" to="Arena/ShowVictoryScreen" method="emit"]

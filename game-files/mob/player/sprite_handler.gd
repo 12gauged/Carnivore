@@ -14,6 +14,7 @@ extends Sprite2D
 func _ready() -> void:
 	hands.show()
 	hands_holding.hide()
+	animation_tree.active = false
 
 
 func set_held_item(data: Resource) -> void:
@@ -32,6 +33,8 @@ func projectile_used() -> void:
 
 
 func on_player_moved(direction: Vector2) -> void:
+	if not animation_tree.active:
+		return
 	var animation_tree_playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 	if direction == Vector2.ZERO:
 		animation_tree_playback.travel("idle")

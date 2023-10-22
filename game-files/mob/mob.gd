@@ -3,10 +3,15 @@ class_name Mob
 
 
 signal deleted
+signal spawned
 
 
 func die() -> void:
 	delete()
+	
+	
+func spawn() -> void:
+	spawned.emit()
 
 
 func delete() -> void:
