@@ -37,4 +37,5 @@ func close_ingame_ui(_args) -> void:
 	
 	
 func on_scene_changing(_scene_name, _scene_type, _fade) -> void:
+	return
 	get_parent().set_layer(0)

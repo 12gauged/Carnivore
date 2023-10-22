@@ -11,12 +11,12 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_604tw"]
 bg_color = Color(0, 0, 0, 0.501961)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wepcw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ana7d"]
 resource_local_to_scene = true
 shader = ExtResource("1_bb5bc")
 shader_parameter/mode = 0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlnsk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmyk4"]
 resource_local_to_scene = true
 shader = ExtResource("1_bb5bc")
 shader_parameter/mode = 0
@@ -29,7 +29,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 0.501961)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_377bm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i24i8"]
 resource_local_to_scene = true
 shader = ExtResource("1_bb5bc")
 shader_parameter/mode = 0
@@ -71,7 +71,7 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="HealthBar" parent="HUD/VBoxContainer/StatusBarPanel/HBoxContainer" instance=ExtResource("1_ymop5")]
-material = SubResource("ShaderMaterial_wepcw")
+material = SubResource("ShaderMaterial_ana7d")
 layout_mode = 2
 max_value = 6.0
 value = 6.0
@@ -81,7 +81,7 @@ id = "health"
 event_name = "status_bar_updated"
 
 [node name="HungerBar" parent="HUD/VBoxContainer/StatusBarPanel/HBoxContainer" instance=ExtResource("1_ymop5")]
-material = SubResource("ShaderMaterial_wlnsk")
+material = SubResource("ShaderMaterial_nmyk4")
 layout_mode = 2
 max_value = 6.0
 value = 3.0
@@ -139,7 +139,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_604tw")
 
 [node name="EnergyBar" parent="HUD/VBoxContainer2/EnergyBarPanel" instance=ExtResource("1_ymop5")]
-material = SubResource("ShaderMaterial_377bm")
+material = SubResource("ShaderMaterial_i24i8")
 layout_mode = 2
 max_value = 6.0
 texture_under = ExtResource("1_qndr5")

@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://jc1ewdo3fhlr" path="res://ui/layouts/game_over_screen/game_over_screen.tscn" id="6_40mmn"]
 
 [node name="IngameUI" type="CanvasLayer"]
-layer = 2
 
 [node name="IngameUI" type="Control" parent="."]
 process_mode = 3
